@@ -3,7 +3,7 @@ title: AARCH64交叉编译笔记
 date: 2021-07-07 13:38:27
 tags: [ 'Cross Compile', 'Cmake', 'Python' ]
 ---
-# [AARCH64交叉编译笔记](https://github.com/XayahSuSuSu/Notes-Cross-Compile)
+# [Github地址](https://github.com/XayahSuSuSu/Notes-Cross-Compile)
 
 > Android NDK 版本：r22b (22.1.7171670)
 >
