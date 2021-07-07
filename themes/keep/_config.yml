@@ -70,8 +70,8 @@ social_contact:
 # Navigation menu
 # ---------------------------------------------------------------------------------------
 menu:
-  首页: /
-  归档: /archives
+  Home: /
+  Archives: /archives
   # Categories: /categories
   # Tags: /tags
   # Links: /links
