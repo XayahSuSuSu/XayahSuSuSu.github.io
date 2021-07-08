@@ -11,14 +11,13 @@ tags: [ 'Hexo', 'HTML', 'CSS' ]
    skip_render: /unlock-music**
    ```
 3. 重新部署：
-
-   本地部署：
    ```
+   # 本地部署
    hexo g
    hexo s 
    ```
-   上行部署：
    ```
+   # 上行部署
    hexo g -d
    ```
 4. 访问静态页面（以 **AcmeZone** 为例）：
