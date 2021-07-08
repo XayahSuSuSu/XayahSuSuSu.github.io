@@ -134,7 +134,7 @@ toc:
   expand_all: true
 
   # If true, open TOC every time when you enter the article page
-  init_open: true
+  init_open: false
 
 
 # ---------------------------------------------------------------------------------------
