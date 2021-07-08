@@ -56,14 +56,8 @@ style:
 social_contact:
   enable: true
   links:
-    github: https://github.com/XayahSuSuSu?tab=repositories          # your GitHub URL
-    weixin:          # your WeChat QR-Code URL
-    qq:              # your QQ QR-Code URL
-    weibo:           # your WeiBo URL
-    zhihu:           # your ZhiHu URL
-    twitter:         # your twitter URL
-    facebook:        # your facebook URL
-    email:           # your email
+    github: https://github.com/XayahSuSuSu?tab=repositories
+    telegram: https://t.me/XayahSuSuSu
 
 
 # ---------------------------------------------------------------------------------------
