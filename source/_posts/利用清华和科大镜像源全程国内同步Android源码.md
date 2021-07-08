@@ -1,7 +1,7 @@
 ---
 title: 利用清华和科大镜像源全程国内同步Android源码
 date: 2021-07-08 22:36:46
-tags:
+tags: [ 'Android', 'Ubuntu', 'Git' ]
 ---
 # [原CSDN博客地址](https://blog.csdn.net/weixin_43267515/article/details/112528652?spm=1001.2014.3001.5501)
 

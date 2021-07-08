@@ -1,7 +1,7 @@
 ---
 title: Eclipse/Idea(Android Studio) 最舒服的字体配置
 date: 2021-07-08 20:07:39
-tags:
+tags: [ 'IDE', 'Jetbrains', '美化' ]
 ---
 ## [原CSDN博客地址](https://blog.csdn.net/weixin_43267515/article/details/83043555?spm=1001.2014.3001.5501)
 

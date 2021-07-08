@@ -1,7 +1,7 @@
 ---
 title: Android 6.0+ 动态权限获取(包含对Android 10+Android11+的支持)
 date: 2021-07-08 22:11:07
-tags:
+tags: [ 'Android', '权限' ]
 ---
 # [原CSDN博客地址](https://blog.csdn.net/weixin_43267515/article/details/111239279?spm=1001.2014.3001.5501)
 从 **Android6.0** 开始，权限获取不再是简单地在 **AndroidManifest.xml** 添加几行代码了， **Google** 引入了 **动态权限** 的概念，需要在代码中添加。
