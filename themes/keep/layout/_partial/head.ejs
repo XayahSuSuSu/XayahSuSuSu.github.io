@@ -4,11 +4,6 @@
     <meta name="keywords" content="<%= config.keywords || 'Hexo Theme Keep' %>">
     <meta name="description" content="<%= config.description || 'Hexo Theme Keep' %>">
     <meta name="author" content="<%= theme.base_info.author || config.author || 'Keep Team' %>">
-    <!-- 爆炸红心效果 -->
-    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
-    <script type="text/javascript" src="/js/firework.js"></script>
-
     <%
     let title = page.title;
     if (is_archive()) {
@@ -36,5 +31,9 @@
     <%- favicon_tag(theme.style.favicon) %>
     <%- __css('css/font-awesome.min.css') %>
     <%- export_config() %>
+    <!-- 爆炸红心效果 -->
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/firework.js"></script>
 </head>
 
