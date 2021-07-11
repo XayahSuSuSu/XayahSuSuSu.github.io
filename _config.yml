@@ -126,7 +126,7 @@ live2d:
   tagMode: false
   log: false
   model:
-    use: ./live2d_models/hijiki
+    use: hijiki
   display:
     position: right
     width: 150
