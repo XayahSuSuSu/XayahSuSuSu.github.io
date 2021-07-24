@@ -49,6 +49,8 @@ pages:
 那么此时访问``${你的GitLab ID}.gitlab.io``就可以看到 **构建成功** 后的 **博客页面** 。
 {% asset_img blog.png 博客页面 %}
 
+以后每次在本地**创建文章**、**修改文章**，**Push**到**远程仓库**后**GitLab CI**将会**自动**为你**构建**，**几分钟后即可生效**。
+
 ### 四、绑定域名
 如果购买了 **自己的域名** ，那么可以在 **仓库左侧 - Settings - Pages** 配置自己的 **域名** 。
 {% asset_img domain.png PagesDomain %}
