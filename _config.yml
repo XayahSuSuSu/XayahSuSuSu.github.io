@@ -135,3 +135,7 @@ live2d:
     show: true
   react:
     opacity: 1.0
+
+# 百度sitemap
+baidusitemap:
+path: baidusitemap.xml
