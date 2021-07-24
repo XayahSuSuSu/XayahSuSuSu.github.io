@@ -5,7 +5,7 @@ tags: [ 'Hexo', 'GitHub', 'GitLab' ]
 ---
 
 ## 源起
-GitHub Page国内访问实在是太慢了！早就有了换地的想法，正好 **[noionion](https://noionion.top/)** 提醒了我， **[GitLab](https://gitlab.com/)** 和 **[Gitee](https://gitee.com/)** 在国内的访问速度都不错，但是我实在不喜欢 **Gitee** 的UI，索性就换 **[GitLab](https://gitlab.com/)** 吧！
+GitHub Page国内访问实在是太慢了！早就有了换地的想法，正好 **[B1ue1nWh1te](https://www.seaeye.cn/)** 提醒了我， **[GitLab](https://gitlab.com/)** 和 **[Gitee](https://gitee.com/)** 在国内的访问速度都不错，但是我实在不喜欢 **Gitee** 的UI，索性就换 **[GitLab](https://gitlab.com/)** 吧！
 
 ### 一、在GitLab创建一个仓库
 如果你没有自己的域名，那么可以创建一个名为`${你的GitLab ID}.gitlab.io`的仓库，比如我的ID是 **Xayah** ：
