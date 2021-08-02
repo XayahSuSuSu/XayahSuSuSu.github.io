@@ -10,13 +10,13 @@ tags: [ 'Python', '交叉编译', 'Android' ]
 
 本次笔记将使用NDK的交叉编译链，为**AArch64**平台交叉编译**Python3.9**。
 
-> Android NDK 版本：android-ndk-r21e-linux-x86_64
+> Android NDK 版本：r21e
 >
 > 编译环境：Ubuntu 21.04
 
 # 步骤
 
-### 一、下载所需交叉编译所需源码
+### 一、下载交叉编译所需源码
 
 [Python3.9](https://www.python.org/downloads/release/python-396/)
 
