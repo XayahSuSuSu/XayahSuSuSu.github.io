@@ -1,7 +1,7 @@
 ---
-title: Golang Gin后端开发学习笔记
-date: 2021-08-18 10:36:47
-tags: [ 'Golang', 'Gin', '后端' ] 
+title: Golang+Gin+Gorm后端开发学习笔记
+date: 2021-08-18 14:13:47
+tags: [ 'Golang', 'Gin', 'Gorm' ] 
 ---
 
 # 前言
