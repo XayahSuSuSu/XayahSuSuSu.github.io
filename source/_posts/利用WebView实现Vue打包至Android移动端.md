@@ -65,9 +65,9 @@ webView.loadUrl("file:////android_asset/dist/index.html")
 ```
 webView.settings.javaScriptEnabled = true
 ```
-{% asset_img INTERNET.png INTERNET %}
-打开AndroidManifest.xml：
 {% asset_img code.png code %}
+打开AndroidManifest.xml：
+{% asset_img AndroidManifest.png AndroidManifest %}
 **添加INTERNET权限**：
 ```
     <uses-permission android:name="android.permission.INTERNET" />
