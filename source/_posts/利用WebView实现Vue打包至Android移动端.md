@@ -58,17 +58,20 @@ Vue打包至移动端目前已经有许多解决方案，例如**HBuilder**、**
 val webView: WebView = findViewById(R.id.web_view)
 ```
 **本地加载HTML**：
+
 ```
 webView.loadUrl("file:////android_asset/dist/index.html")
 ```
 **允许JS交互**：
+
 ```
 webView.settings.javaScriptEnabled = true
 ```
 {% asset_img code.png code %}
-打开AndroidManifest.xml：
+**打开`AndroidManifest.xml`**：
 {% asset_img AndroidManifest.png AndroidManifest %}
 **添加INTERNET权限**：
+
 ```
     <uses-permission android:name="android.permission.INTERNET" />
 ```
@@ -89,6 +92,8 @@ Next - Finish
 {% asset_img icon_8.png icon_8 %}
 
 #### 7. 调试
+
+##### 1) Android调试
 以**真机调试**为例，当然也可以使用**模拟器**。
 真机调试需要在**开发者模式**开启**USB调试**模式。
 点击右上方**绿色三角形**运行。
@@ -96,6 +101,17 @@ Next - Finish
 稍等片刻，会自动启动APP：
 {% asset_img app_0.png app_0 %}
 {% asset_img app_1.png app_1 %}
+
+##### 2) WebView调试
+需要在**开发者模式**开启**USB调试**模式。
+在`MainActivity.kt`中添加以下代码：
+```
+WebView.setWebContentsDebuggingEnabled(true)
+```
+{% asset_img debug.png debug %}
+重新在AS中调试运行App，打开谷歌浏览器，地址栏输入：`chrome://inspect/#devices`进入远程调试工具。
+稍等片刻工具会自动载入已运行的WebView程序，点击`inspect`进入调试模式。
+{% asset_img devices.png devices %}
 
 #### 8. 编译并签名
 点击工具栏 **Build - Generate Signed Bundle / APK ...**
@@ -112,3 +128,30 @@ Next - Finish
 **项目目录**下`app\release`即是**编译完成**的apk文件。
 {% asset_img successfully.png successfully %}
 {% asset_img release.png release %}
+
+#### 9. 常见问题
+
+##### 1) 跨域
+建议从后端解决跨域问题，以Flask为例：
+```
+pip3 install flask-cors
+```
+```
+from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
+# 允许全局跨域
+CORS(app, supports_credentials=True)
+```
+##### 2) WebView调试出现ERR_CLEARTEXT_NOT_PERMITTED
+{% asset_img ERR_CLEARTEXT_NOT_PERMITTED.png ERR_CLEARTEXT_NOT_PERMITTED %}
+打开`AndroidManifest.xml`，在`application`标签下配置：
+```
+    <application
+        ······
+        android:usesCleartextTraffic="true"
+        ······
+    </application>
+```
