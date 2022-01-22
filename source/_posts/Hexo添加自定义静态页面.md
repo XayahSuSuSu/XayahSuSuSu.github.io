@@ -22,5 +22,5 @@ tags: [ 'Hexo', 'HTML', 'CSS' ]
    ```
 4. 访问静态页面（以 **AcmeZone** 为例）：
    ```
-   http://acmezone.tk/unlock-music/
+   http://acmezone.top/unlock-music/
    ```
