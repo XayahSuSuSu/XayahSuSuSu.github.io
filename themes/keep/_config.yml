@@ -2,22 +2,21 @@
 #  Your basic info
 # ---------------------------------------------------------------------------------------
 base_info:
-  title: AcmeZone
-  author: Xayah
-  url: http://acmezone.top/
+  title: Keep Theme
+  author: Keep Team
+  url: https://keep.xpoet.cn/
   # Logo image (You can use local image, image external link or don’t fill)
   logo_img:
-
 
 # ---------------------------------------------------------------------------------------
 # Theme style settings
 # ---------------------------------------------------------------------------------------
 style:
   # Theme primary color
-  primary_color: '#0066CC'
+  primary_color: "#0066CC"
 
   # Avatar (You can use local image or image external link)
-  avatar: /images/Xayah.jpg
+  avatar: /images/avatar.svg
 
   # Favicon (You can use local image or image external link)
   favicon: /images/logo.svg
@@ -33,32 +32,36 @@ style:
 
   # Mouse hover
   hover:
-    shadow: true   # shadow effect when the mouse hover
-    scale: true    # scale effect when the mouse hover
+    shadow: false # shadow effect when the mouse hover
+    scale: false # scale effect when the mouse hover
 
   # First screen
   first_screen:
-    enable: true
-    background_img: /images/bg.svg   # You can use local image or image external link
-    description: "这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。生如长河，渡船千艘，唯自渡方是真渡。"
+    enable: false
+    background_img: /images/bg.svg # You can use local image or image external link
+    description: Keep writing and Keep loving.
 
   # Scroll style settings
   scroll:
     progress_bar:
-      enable: true
+      enable: false
     percent:
-      enable: true
-
+      enable: false
 
 # ---------------------------------------------------------------------------------------
 # Social contact link
 # ---------------------------------------------------------------------------------------
 social_contact:
-  enable: true
+  enable: false
   links:
-    github: https://github.com/XayahSuSuSu?tab=repositories
-    telegram: https://t.me/XayahSuSuSu
-
+    github: # your GitHub URL
+    weixin: # your WeChat QR-Code URL
+    qq: # your QQ QR-Code URL
+    weibo: # your WeiBo URL
+    zhihu: # your ZhiHu URL
+    twitter: # your twitter URL
+    facebook: # your facebook URL
+    email: # your email
 
 # ---------------------------------------------------------------------------------------
 # Navigation menu
@@ -66,27 +69,23 @@ social_contact:
 menu:
   Home: /
   Archives: /archives
-  Links: /links
-  Unlock-Music: /unlock-music
-  Boot-Repacker: /boot-repacker
   # Categories: /categories
   # Tags: /tags
+  # Links: /links
   # About: /about
   # Changelog: /changelog
   # ......
-
 
 # ---------------------------------------------------------------------------------------
 # Home page article block display settings
 # ---------------------------------------------------------------------------------------
 home_article:
   category:
-    enable: true     # show category in home page article block
-    limit: 3          # max number of categories shown in home page article block
+    enable: false # show category in home page article block
+    limit: 3 # max number of categories shown in home page article block
   tag:
-    enable: true     # show tags in home page article block
-    limit: 5          # max number of tags shown in home page article block
-
+    enable: false # show tags in home page article block
+    limit: 5 # max number of tags shown in home page article block
 
 # ---------------------------------------------------------------------------------------
 # Post page Settings
@@ -96,48 +95,44 @@ post:
   # Dependencies: hexo-wordcount (npm install hexo-wordcount)
   # See: https://github.com/willin/hexo-wordcount
   word_count:
-    enable: true
-    wordcount: true  # word count, one article
-    min2read: true   # time to read, one article
+    enable: false
+    wordcount: false # word count, one article
+    min2read: false # time to read, one article
 
   # Author label
   author_label:
-    enable: false
-    auto: true  # if true, show Lv1, Lv2, Lv3... , If false, show custom label
+    enable: true
+    auto: true # if true, show Lv1, Lv2, Lv3... , If false, show custom label
     # label array item can be one or more
-    custom_label_list: [ "Trainee", "Engineer", "Architect", "CTO", "BOSS" ]
-
+    custom_label_list: ["Trainee", "Engineer", "Architect", "CTO", "BOSS"]
 
 # ---------------------------------------------------------------------------------------
 # Code copy
 # ---------------------------------------------------------------------------------------
 code_copy:
-  enable: true
-  style: default        # values: default | mac
-
+  enable: false
+  style: default # values: default | mac
 
 # ---------------------------------------------------------------------------------------
 # Table of Contents in the Sidebar
 # ---------------------------------------------------------------------------------------
 toc:
-  enable: true
+  enable: false
 
   # Automatically add list number to toc.
   number: false
 
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
-  expand_all: true
+  expand_all: false
 
   # If true, open TOC every time when you enter the article page
-  init_open: true
-
+  init_open: false
 
 # ---------------------------------------------------------------------------------------
 # Post copyright info
 # ---------------------------------------------------------------------------------------
 copyright_info:
-  enable: true
-
+  enable: false
 
 # ---------------------------------------------------------------------------------------
 # Website count
@@ -151,45 +146,42 @@ website_count:
     site_pv: false
     page_pv: false
 
-
 # ---------------------------------------------------------------------------------------
 # Local Search
 # Dependencies: hexo-generator-searchdb
 # See: https://github.com/theme-next/hexo-generator-searchdb
 # ---------------------------------------------------------------------------------------
 local_search:
-  enable: true
-  preload: true     # Preload the search data when the page loads
-
+  enable: false
+  preload: false # Preload the search data when the page loads
 
 # ---------------------------------------------------------------------------------------
 # Comment plugin
 # ---------------------------------------------------------------------------------------
 comment:
   enable: false
-  use: valine  # values: valine | gitalk | twikoo
+  use: valine # values: valine | gitalk | twikoo
 
   # Valine
   # See: https://github.com/xCss/Valine
   valine:
-    appid:                # your leancloud application appid
-    appkey:               # your leancloud application appkey
-    placeholder:          # your placeholder
+    appid: # your leancloud application appid
+    appkey: # your leancloud application appkey
+    placeholder: # your placeholder
 
   # Gitalk
   # See: https://github.com/gitalk/gitalk
   gitalk:
-    github_id:             # GitHub repo owner
-    repository:            # Repository name to store issues
-    client_id:             # GitHub Application Client ID
-    client_secret:         # GitHub Application Client Secret
+    github_id: # GitHub repo owner
+    repository: # Repository name to store issues
+    client_id: # GitHub Application Client ID
+    client_secret: # GitHub Application Client Secret
 
   # Twikoo
   # See: https://github.com/imaegoo/twikoo
   twikoo:
-    env_id:                # Tencent Cloud environment id
-    region:                # environment region. If select Guangzhou, fill in "ap-guangzhou".
-
+    env_id: # Tencent Cloud environment id
+    region: # environment region. If select Guangzhou, fill in "ap-guangzhou".
 
 # ---------------------------------------------------------------------------------------
 # RSS
@@ -197,14 +189,7 @@ comment:
 # See: https://github.com/hexojs/hexo-generator-feed
 # ---------------------------------------------------------------------------------------
 rss:
-  enable: true
-
-# Feed Atom
-# npm install hexo-generator-feed
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
+  enable: false
 
 # ---------------------------------------------------------------------------------------
 # Lazyload image
@@ -212,30 +197,27 @@ feed:
 lazyload:
   enable: false
 
-
 # ---------------------------------------------------------------------------------------
 # CDN
 # ---------------------------------------------------------------------------------------
 cdn:
-  enable: true
-
+  enable: false
 
 # ---------------------------------------------------------------------------------------
 # PJAX
 # ---------------------------------------------------------------------------------------
 pjax:
-  enable: true
-
+  enable: false
 
 # ---------------------------------------------------------------------------------------
 # Footer settings
 # ---------------------------------------------------------------------------------------
 footer:
-  since: 2020      # the starting year of your website, Can be null
-  icp:             # ICP record number of your website, Can be null
-
+  since: 2020 # the starting year of your website, Can be null
+  icp: # ICP record number of your website, Can be null
+  upyun: # url
 
 # ---------------------------------------------------------------------------------------
 # Keep version (Please don't modify)
 # ---------------------------------------------------------------------------------------
-version: 3.4.3
+version: 3.4.5

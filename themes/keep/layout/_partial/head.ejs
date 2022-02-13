@@ -1,8 +1,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="<%= config.keywords || 'Hexo Theme Keep' %>">
-    <meta name="description" content="<%= config.description || 'Hexo Theme Keep' %>">
+    <meta name="keywords" content="<%= page.keywords || config.keywords || 'Hexo Theme Keep' %>">
+    <meta name="description" content="<%= page.description || config.description || 'Hexo Theme Keep' %>">
     <meta name="author" content="<%= theme.base_info.author || config.author || 'Keep Team' %>">
     <%
     let title = page.title;
@@ -31,23 +31,5 @@
     <%- favicon_tag(theme.style.favicon) %>
     <%- __css('css/font-awesome.min.css') %>
     <%- export_config() %>
-    <!-- 爆炸红心效果 -->
-    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
-    <script type="text/javascript" src="/js/firework.js"></script>
-    <meta name="baidu-site-verification" content="code-bAlXO8IRdJ" />
-    <meta name="baidu-site-verification" content="code-E3y6vfP9sJ" />
-    <!-- require APlayer -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    <!-- require MetingJS -->
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-    <meting-js
-        server="netease"
-        type="song"
-        id="1891619161"
-        fixed="true"
-        autoplay="true">
-    </meting-js>
 </head>
 
