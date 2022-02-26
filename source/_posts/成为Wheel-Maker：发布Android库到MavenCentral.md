@@ -210,3 +210,6 @@ implementation '$PUBLISH_GROUP_ID:$PUBLISH_ARTIFACT_ID:$PUBLISH_VERSION'
 ```
 implementation 'io.github.xayahsususu:materialyoufileexplorer:1.0.0'
 ```
+
+# 三、参考文章
+- [Android库发布到Maven Central全攻略](https://juejin.cn/post/6932485276124233735)
