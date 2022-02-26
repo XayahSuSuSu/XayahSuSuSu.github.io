@@ -68,7 +68,7 @@ webView.loadUrl("file:////android_asset/dist/index.html")
 webView.settings.javaScriptEnabled = true
 ```
 {% asset_img code.png code %}
-**打开`AndroidManifest.xml`**：
+**打开`AndroidManifest.xml`** ：
 {% asset_img AndroidManifest.png AndroidManifest %}
 **添加INTERNET权限**：
 
