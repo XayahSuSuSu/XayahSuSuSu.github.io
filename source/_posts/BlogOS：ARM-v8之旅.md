@@ -262,9 +262,16 @@ qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel ta
 
 ### 调试
 > QEMU进入调试，启动调试服务器，默认端口1234
+
+**关闭**之前运行的**终端**，打开一个**新的终端**，进入`rui_armv8_os`目录
+```
+cd rui_armv8_os
+```
+**启动调试**
 ```
 qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -S -s
 ```
+{% asset_img GDB调试.png GDB调试 %}
 
 **重新打开**一个**终端**，进入`rui_armv8_os`目录
 ```
@@ -279,7 +286,7 @@ export PATH=/home/xayah/ToolChain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/b
 aarch64-none-elf-gdb target/aarch64-unknown-none-softfloat/debug/rui_armv8_os
 ```
 设置**调试参数**，开始**调试**
-{% asset_img GDB调试.png GDB调试 %}
+{% asset_img GDB调试2.png GDB调试2 %}
 连接**调试客户端**
 ```
 target remote localhost:1234
@@ -292,4 +299,18 @@ disassemble
 ```
 n
 ```
-{% asset_img GDB调试2.png GDB调试2 %}
+{% asset_img GDB调试3.png GDB调试3 %}
+
+#  二、Hello World
+
+#  三、设备树（可选）
+
+#  四、中断
+
+#  五、输入
+
+#  六、GPIO关机
+
+#  七、死锁与简单处理
+
+#  八、内存管理
