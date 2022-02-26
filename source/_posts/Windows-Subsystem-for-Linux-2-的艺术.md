@@ -82,6 +82,12 @@ wsl --import Ubuntu-20.04 D:\WSL2\WSL-Ubuntu20.04 D:\WSL2\WSL-Ubuntu20.04.tar --
 ubuntu2004 config --default-user $USERNAME
 ```
 
+### * Windows Terminal设置默认启动目录
+```
+\\wsl.localhost\Ubuntu-20.04\home\$USERNAME
+```
+{% asset_img WT.png WT %}
+
 ### 6) 登录到WSL2
 {% asset_img Ubuntu3.png Ubuntu3 %}
 
