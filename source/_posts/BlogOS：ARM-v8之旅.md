@@ -289,7 +289,7 @@ qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel ta
 ```
 cd rui_armv8_os
 ```
-配置**临时工具链环境**（这里的$ToolChainPath即是刚刚导出的临时变量）
+配置**临时工具链环境**（这里的`$ToolChainPath`即是刚刚导出的临时变量）
 ```
 export PATH=$ToolChainPath:$PATH
 ```
