@@ -33,6 +33,7 @@ rustc -V
 ```
 {% asset_img 查看版本.png 查看版本 %}
 根据**文档**，实验需要用到**Nightly版本**
+
 ```
 rustup default nightly
 ```
@@ -41,6 +42,9 @@ rustup default nightly
 ```
 sudo apt-get install gcc
 ```
+
+> 若安装GCC后仍无法正常cargo-binutils rustfilt，请尝试将软件源更换为阿里源（参见**[Windows Subsystem for Linux 2 的艺术](https://acmezone.top/2022/02/12/Windows-Subsystem-for-Linux-2-%E7%9A%84%E8%89%BA%E6%9C%AF/)**），再重新安装一次GCC。
+
 安装**相关工具**
 ```
 cargo install cargo-binutils rustfilt
