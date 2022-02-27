@@ -79,6 +79,14 @@ axel -n 32 -a https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.
 ```
 tar -xf gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf.tar.xz
 ```
+进入**工具链**`bin`目录
+```
+cd gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin
+```
+导出**工具链路径**变量（配置**临时工具链环境**时会用到）
+```
+export ToolChainPath=`pwd`
+```
 
 ## 5. 创建裸机(Bare Metal)程序
 > 由于我们的目标是编写一个操作系统，所以我们需要创建一个独立于操作系统的可执行程序，又称独立式可执行程序（Freestanding Executable）或裸机程序（Bare-metal Executable）。
@@ -281,9 +289,9 @@ qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel ta
 ```
 cd rui_armv8_os
 ```
-配置**临时工具链环境**
+配置**临时工具链环境**（这里的$ToolChainPath即是刚刚导出的临时变量）
 ```
-export PATH=/home/xayah/ToolChain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin:$PATH
+export PATH=$ToolChainPath:$PATH
 ```
 启用**GDB调试客户端**
 ```
