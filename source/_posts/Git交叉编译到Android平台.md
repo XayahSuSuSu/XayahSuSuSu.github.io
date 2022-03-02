@@ -10,21 +10,48 @@ tags: [ 'Git', '交叉编译', 'Android' ]
 
 这两天仔细研究了下，证明还是可行的。
 
-> Android NDK 版本：r21e
+> Android NDK 版本：r23b
 >
-> 编译环境：Ubuntu 21.04
+> 编译环境：Ubuntu 20.04
+> 
+> NDK目录：`~/NDK`
 
-### 步骤
+# 步骤
 
-#### 一、下载交叉编译所需源码
+## 一、下载交叉编译所需源码
 
 想要交叉编译**Git**，需要先**交叉编译Curl**和**Zlib**，**新版本**的**NDK**已经包含**预编译Zlib**，所以我们**只需要交叉编译Curl**即可。
 
 至于为什么要交叉编译**Curl**，是因为**git clone**命令在**clone https等仓库**时，需要**依赖该库创建的git-remote-https等EFL文件**。否则，在**clone**时会发生**找不到remote-https等错误**。
 
-下载 **[Git](https://github.com/git/git)** 和 **[Curl](https://curl.se/download.html)** 的源码并**解压**。
+而若**Curl**依赖**OpenSSL**，因此还得先交叉编译**OpenSSL**。
 
-#### 二、交叉编译Curl
+下载 **[Git](https://github.com/git/git)** 、 **[Curl](https://curl.se/download.html)** 和 **[OpenSSL](https://github.com/openssl/openssl)** 的源码并**解压**。
+
+## 二、交叉编译OpenSSL并安装到NDK
+在**OpenSSL**官方仓库中，可以找到编译到**Android**平台的 **[文档](https://github.com/openssl/openssl/blob/master/NOTES-ANDROID.md)** 。
+导出**NDK**临时变量
+```
+export ANDROID_NDK_ROOT=~/NDK
+```
+导出**PATH**临时变量
+```
+export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin:$PATH
+```
+配置`Makefile`
+```
+./Configure android-arm64 -D__ANDROID_API__=26 --prefix=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+```
+编译
+```
+make -j128
+```
+安装到`prefix`目录
+```
+make install -j128
+```
+
+## 三、交叉编译Curl并安装到NDK
 
 打开**Curl**的源码，我们可以发现它提供了两种编译方式，**Autoconf Makefile** 和 **Cmake**。
 
@@ -60,84 +87,31 @@ Current flaws in the curl CMake build
 ```
 mkdir out && cd out
 
-export NDK=/home/xayah/NDK             # NDK根目录绝对路径
+export NDK=~/NDK                     # NDK根目录绝对路径
 
 export ABI=arm64-v8a                           # ABI配置(arm64-v8a 即为 AArch64)
 
-export MINSDKVERSION=24                        # 最小目标SDK版本配置(24 即为 Android 7.0)
+export MINSDKVERSION=26                        # 最小目标SDK版本配置(26 即为 Android 8.0)
 
 cmake \
    -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \
    -DANDROID_ABI=$ABI \
    -DANDROID_NATIVE_API_LEVEL=$MINSDKVERSION \
-   -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./installed ..
+   -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot ..
 
 cmake --build . --config Release
 make install
 ```
 
-**成功**后**编译产物**可见于`out/installed`。
-
-我们将其**移动**到`/home/xayah/curl/installed`**备份**。
-
-#### 三、交叉编译Git
+## 四、交叉编译Git
 
 接下来是我们的**重头戏**了。
 
 进入**Git源码解压后的根目录**，可以发现**Git**有两种编译方式，一是**非Autoconf Makefile**，二是**Autoconf Makefile**，**前者**我尝试过多次，皆以**失败**告终。所以这次我们尝试**后者**。
 
-观察源码结构，可以发现并没有`configure`文件，但存在`configure.ac`，所以我们可以**make**一个`configure`。
-
-**cd**到源码**根目录**，输入：
-
-```
-make configure
-```
-
-此时即可生成`configure`。
-
-让我们试试：
-
-```
-export NDK=/home/xayah/NDK                              # NDK根目录绝对路径
-
-export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64     # 交叉编译链路径
-
-export TARGET=aarch64-linux-android                             # 交叉编译目标
-
-export API=24                                                   # 最小目标SDK版本配置(24 即为 Android 7.0)
-
-export AR=$TOOLCHAIN/bin/llvm-ar
-
-export CC=$TOOLCHAIN/bin/$TARGET$API-clang
-
-export AS=$CC
-
-export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
-
-export LD=$TOOLCHAIN/bin/ld
-
-export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
-
-export READELF=$TOOLCHAIN/bin/readelf
-
-export STRIP=$TOOLCHAIN/bin/llvm-strip
-
-./configure --host=$TARGET --with-curl=/home/xayah/curl/installed --prefix=/home/xayah/git/install
-```
-
-可惜出现了**错误**：
-
-```
-checking whether system succeeds to read fopen'ed directory... configure: error: in `/home/xayah/下载/git-2.32.0':
-configure: error: cannot run test program while cross compiling
-See `config.log' for more details
-```
-
-原来是**交叉编译测试程序**出了问题，我们的**宿主机**当然**无法测试Android平台上的二进制文件**，所以我们把这段**测试代码**删掉。
+我们的**宿主机**因为**无法测试Android平台上的二进制文件**，所以我们把**测试代码**删掉。
 
 进入`configure.ac`，**删除**：
-
 ```
 #
 # Define FREAD_READS_DIRECTORIES if your are on a system which succeeds
@@ -160,26 +134,7 @@ else
 fi
 GIT_CONF_SUBST([FREAD_READS_DIRECTORIES])
 ```
-
-再
-
-```
-make configure
-./configure --host=$TARGET --with-curl=/home/xayah/curl/installed --prefix=/home/xayah/git/install
-```
-
-一次试试？
-
-遇到了**类似**的**问题**：
-
-```
-checking whether snprintf() and/or vsnprintf() return bogus value... configure: error: in `/home/xayah/下载/git-2.32.0':
-configure: error: cannot run test program while cross compiling
-See `config.log' for more details
-```
-
-**删掉**：
-
+**再删除**：
 ```
 #
 # Define SNPRINTF_RETURNS_BOGUS if your are on a system which snprintf()
@@ -217,108 +172,25 @@ fi
 GIT_CONF_SUBST([SNPRINTF_RETURNS_BOGUS])
 ```
 
-再
+观察源码结构，可以发现并没有`configure`文件，但存在`configure.ac`，所以我们可以**make**一个`configure`。
 
+**cd**到源码**根目录**，输入：
 ```
 make configure
-./configure --host=$TARGET --with-curl=/home/xayah/curl/installed --prefix=/home/xayah/git/install
 ```
 
-一次试试？
+此时即可生成`configure`。
 
-**Nice！**这次**成功**了：
+**git**编译时会默认编译**pthread**，而**Android由于性能及安全原因**，放弃了**glibc**在其平台上的支持，所以相应地交叉编译链也不含有这个库。
 
+**Android**有其**替代方案**，所以我们在`make`时将`NEEDS_LIBRT`赋值为空从而不编译它即可。
 ```
-configure: creating ./config.status
-config.status: creating config.mak.autogen
-config.status: executing config.mak.autogen commands
-```
-
-接着我们：
-
-```
-make -j128
-```
-
-**很不幸**：
-
-```
-run-command.c:520:35: error: use of undeclared identifier 'PTHREAD_CANCEL_DISABLE'
-        CHECK_BUG(pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &as->cs),
-```
-
-这里有**两种解决办法**。
-
-##### 方案一
-
-通过**查阅资料**可知， **PTHREAD_CANCEL_DISABLE** 是 **glibc** 下 **pthread** 的一个**常量**，**值**为 **0** ，因此我们将这里**直接赋值为0**即可。
-
-继续**编译**：
-
-```
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [Makefile:2566：git-shell] 错误 1
-/home/xayah/NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x/../../../../aarch64-linux-android/bin/ld: cannot find -lrt: cannot find -lrt
-```
-
-又是他！**Android由于性能及安全原因**，放弃了**glibc**在其平台上的支持，所以相应地交叉编译链也不含有这个库，但是**Android**有其**替代方案**，所以我们这里**直接**把它**去掉**即可。
-
-打开**源码根目录**的`Makefile`，找到 **NEEDS_LIBRT** ，这里是一个 **ifdef** 判断，我们**反其道行之**，将其改为 **ifndef** 即可。
-
-```
-ifndef NEEDS_LIBRT
+ifdef NEEDS_LIBRT
 	EXTLIBS += -lrt
 endif
 ```
 
-又遇到了一个问题！
-
-```
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_prepare':
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_prepare':
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_prepare':
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_prepare':
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_prepare':
-/home/xayah/下载/git-2.32.0/run-command.c:520: undefined reference to `pthread_setcancelstate'
-libgit.a(run-command.o): In function `atfork_parent':
-/home/xayah/下载/git-2.32.0/run-command.c:531: undefined reference to `pthread_setcancelstate'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-```
-
-还是因为 **pthread** 的问题，这里我们把`run-command.c`所有的 **pthread_setcancelstate** 删掉：
-
-```
-	CHECK_BUG(pthread_setcancelstate(0, &as->cs),
-		"disabling cancellation");
-```
-
-```
-	CHECK_BUG(pthread_setcancelstate(as->cs, NULL),
-		"re-enabling cancellation");
-```
-
-这次终于**编译成功**了！
-
-##### 方案二
-
-实际上我们可以不使用 **pthread**。
-
-在`configure.ac`中可以发现：
+而在`configure.ac`中可以发现：
 
 ```
 AC_ARG_ENABLE([pthreads],
@@ -345,14 +217,16 @@ fi],
 
 所以我们可以使用 **--disable-pthreads** 参数来**取消**编译 **phread** 相关部分。
 
+于是接下来我们输入以下命令
+
 ```
-export NDK=/home/xayah/NDK                              # NDK根目录绝对路径
+export NDK=~/NDK                                      # NDK根目录绝对路径
 
 export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64     # 交叉编译链路径
 
 export TARGET=aarch64-linux-android                             # 交叉编译目标
 
-export API=24                                                   # 最小目标SDK版本配置(24 即为 Android 7.0)
+export API=26                                                   # 最小目标SDK版本配置(26 即为 Android 8.0)
 
 export AR=$TOOLCHAIN/bin/llvm-ar
 
@@ -370,52 +244,30 @@ export READELF=$TOOLCHAIN/bin/readelf
 
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
-./configure --host=$TARGET --with-curl=/home/xayah/curl/installed --prefix=/home/xayah/git/install --disable-pthreads
+./configure --host=$TARGET --prefix=/data/local/tmp --disable-pthreads
 ```
 
-再修改**源码根目录** `Makefile`：
-
-```
-ifndef NEEDS_LIBRT
-	EXTLIBS += -lrt
-endif
-```
+注意这里的`--prefix`，需要定义为**Android**环境下**git运行目录**，否则会出现**找不到templates**等问题。
 
 然后**编译**：
 
 ```
-make -j128
+make NEEDS_LIBRT= NO_TCLTK=1 -j128
 ```
 
-同样可以**编译成功**。
+注意这里的`NO_TCLTK`，如果不定义它的话，会默认编译`git-gui`，这不是我们需要的，所以将其定义为`1`。
 
-##### 安装
-
-接下来我们把它安装到`/home/xayah/git/install`。
-
+## 五、推送并测试
+先安装到宿主机`~/git/install`
 ```
-make install -j128
+make install NEEDS_LIBRT= NO_TCLTK=1 DESTDIR=~/git/install -j128
 ```
-
-安装**成功**后：
-
+可得如下**产物**
 ```
-xayah@xayah-virtual-machine:~/git/install$ pwd
-/home/xayah/git/install
-xayah@xayah-virtual-machine:~/git/install$ ls
+xayah@xayah-virtual-machine:~/git/install/data/local/tmp$ ls
 bin  libexec  share
-xayah@xayah-virtual-machine:~/git/install$ cd bin
-xayah@xayah-virtual-machine:~/git/install/bin$ ls
-git            gitk              git-shell           git-upload-pack
-git-cvsserver  git-receive-pack  git-upload-archive
 ```
-
-接下来我们推送到**Android**试试吧！
-
-
-
-### 测试
-
+将`~/git/install/data/local/tmp` **打包**并**推送**到**Android** `/data/local/tmp`目录
 由于一些**魔法因素**，**打包**为**zip**竟足足有**200M+**！可能是因为**压缩算法**不同，**打包**为**tar.xz**就会**小很多**，大概**10M**左右。
 
 ```
@@ -427,28 +279,11 @@ cas:/data/local/tmp $ unzip git.zip >/dev/null
 cas:/data/local/tmp $ cd bin
 cas:/data/local/tmp/bin $ ls
 git  git-cvsserver  git-receive-pack  git-shell  git-upload-archive  git-upload-pack  gitk
-cas:/data/local/tmp/bin $ ./git clone https://github.com/git/git
-fatal: destination path 'git' already exists and is not an empty directory.
-128|cas:/data/local/tmp/bin $ ./git clone https://github.com/git/git mGit
-Cloning into 'mGit'...
-warning: templates not found in /home/xayah/git/install/share/git-core/templates
-fatal: unable to find remote helper for 'https'
-128|cas:/data/local/tmp/bin $
 ```
-
-竟然**报错**了...通过**查阅资料**发现，这是找不到**环境变量**，所以我们设置一下：
-
+让我们`git clone`试试
 ```
-export PATH=$PATH:/data/local/tmp/libexec/git-core
-```
-
-输出如下：
-
-```
-cas:/data/local/tmp/bin $ export PATH=$PATH:/data/local/tmp/libexec/git-core
 cas:/data/local/tmp/bin $ ./git clone https://github.com/git/git mGit
 Cloning into 'mGit'...
-warning: templates not found in /home/xayah/git/install/share/git-core/templates
 remote: Enumerating objects: 311108, done.
 remote: Counting objects: 100% (72/72), done.
 remote: Compressing objects: 100% (32/32), done.
@@ -460,14 +295,10 @@ Segmentation fault
 
 **Segmentation fault**！这可是个头疼的事。不过没有关系，我们可以使用 **gdbserver** 调试，看看到底是**哪里**出了**问题**。
 
-### 调试
-
-首先将**NDK**中相应的**gdbserver**推送到**Android平台**，我的手机是**aarch64**（现在**大多数安卓手机都是这个平台**），也就是**arm64**，所以推送**该文件夹**下的**gdbserver**并**赋予权限**即可。
+首先将**NDK**中相应的**gdbserver**推送到**Android平台**，我的手机是**aarch64**（现在**大多数安卓手机都是这个平台**），也就是**arm64**，所以推送**该文件夹**下的**gdbserver**即可。
 
 ```
-PS C:\Users\Xayah\Desktop> adb push gdbserver /data/local/tmp/bin
-gdbserver: 1 file pushed, 0 skipped. 120.6 MB/s (1343712 bytes in 0.011s)
-PS C:\Users\Xayah\Desktop> adb shell chmod 777 /data/local/tmp/bin/gdbserver
+adb push gdbserver /data/local/tmp/bin
 ```
 
 接下来**新建**一个**终端**并**forward**一个**自定义端口**：
@@ -479,44 +310,46 @@ adb forward tcp:12345 tcp:12345
 接下来在另一个**终端**中进入**adb shell**：
 
 ```
-PS C:\Users\Xayah\Desktop> adb shell
-cas:/ $ cd data/local/tmp/bin
-cas:/data/local/tmp/bin $ export PATH=$PATH:/data/local/tmp/libexec/git-core
-cas:/data/local/tmp/bin $ ./gdbserver 0.0.0.0:12345 ./git clone https://github.com/git/git mGit
-Process ./git created; pid = 31451
-Listening on port 12345
+./gdbserver 0.0.0.0:12345 ./git clone https://github.com/git/git mGit
 ```
 
-现在**gdbserver**已经启动了，我们转向另一个**终端**，**cd**到**ndk**的**gdb目录**：
-
-```
-PS C:\Users\Xayah> cd D:\Downloads\Compressed\android-ndk-r21e-windows-x86_64\android-ndk-r21e\prebuilt\windows-x86_64\bin
-```
-
-启动**gdb**：
-
-```
-PS D:\Downloads\Compressed\android-ndk-r21e-windows-x86_64\android-ndk-r21e\prebuilt\windows-x86_64\bin> ./gdb
-D:\Downloads\Compressed\android-ndk-r21e-windows-x86_64\android-ndk-r21e\prebuilt\windows-x86_64\bin\gdb-orig.exe: warning: Couldn't determine a path for the index cache directory.
-GNU gdb (GDB) 8.3
-Copyright (C) 2019 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-Type "show copying" and "show warranty" for details.
-This GDB was configured as "x86_64-w64-mingw32".
-Type "show configuration" for configuration details.
-For bug reporting instructions, please see:
-<http://www.gnu.org/software/gdb/bugs/>.
-Find the GDB manual and other documentation resources online at:
-    <http://www.gnu.org/software/gdb/documentation/>.
-
-For help, type "help".
-Type "apropos word" to search for commands related to "word".
-(gdb)
-```
+现在**gdbserver**已经启动了，我们转向另一个**终端**，启动**gdb**：
+{% asset_img gdb.png gdb %}
 
 现在**gdb**和**gdbserver**均已启动，我们**指定目标端口**：
+{% asset_img remote.png remote %}
 
-未完待续....
+输入`c`继续运行
+{% asset_img sigsegv.png sigsegv %}
+段错误出现了！可以看出错误是出在`copy_gecos()`这个函数。
+在源码中搜索这个函数，可以在`ident.c`中找到。
+定位至相应位置
+{% asset_img copy_gecos.png copy_gecos %}
+这个函数看起来貌似和`git config`有一丝关系，难道是因为我们没有定义**git用户信息**？
+让我们试试
+```
+./git config --global user.name "Xayah"
+```
+{% asset_img config.png config %}
 
+果然报错了！看来是`.gitconfig`没有创建成功，在源码中搜索`.gitconfig`，可以发现**git**获取`.gitconfig`的路径是`$HOME/.gitconfig`
+
+那么我们试试把`$HOME`定义为**当前目录**
+```
+export HOME=/data/local/tmp/bin
+```
+再配置用户信息
+```
+./git config --global user.name "Xayah"
+./git config --global user.email zds1249475336@gmail.com
+```
+这次没有报错了，并且当前目录也成功生成了`.gitconfig`
+{% asset_img config2.png config2 %}
+
+这次我们再试试`git clone`
+```
+./git clone https://github.com/git/git mGit
+```
+
+{% asset_img success.png success %}
+成功！
