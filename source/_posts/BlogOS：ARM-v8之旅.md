@@ -594,7 +594,7 @@ pub fn _print(args: fmt::Arguments) {
     WRITER.lock().write_fmt(args).unwrap();
 }
 ```
-在`main.rs`中测试`println!`宏
+在`main.rs`中**注释或删除之前的`print_something()`函数及其调用**，测试`println!`宏
 ```
 // ······
 mod uart_console;
@@ -612,6 +612,7 @@ cargo build && qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nogra
 {% asset_img println.png println %}
 
 #  三、设备树（可选）
+> 参考[湖南大学2022年操作系统课程实验 - 实验三 设备树（可选）](https://os2022exps-doc.readthedocs.io/zh_CN/latest/exp3/index.html)
 
 #  四、中断
 
