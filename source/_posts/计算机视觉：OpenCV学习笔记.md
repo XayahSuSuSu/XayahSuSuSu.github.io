@@ -2,6 +2,7 @@
 title: 计算机视觉：OpenCV学习笔记
 date: 2022-03-10 13:54:59
 tags: [ 'OpenCV', 'Linux' ]
+mathjax: true
 ---
 
 # 一、前言
