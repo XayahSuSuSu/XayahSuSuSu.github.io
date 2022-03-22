@@ -63,11 +63,11 @@ social_contact:
 menu:
   Home: /
   Archives: /archives
+  Tags: /tags
   Links: /links
   Unlock-Music: /unlock-music
   Boot-Repacker: /boot-repacker
   # Categories: /categories
-  # Tags: /tags
   # About: /about
   # Changelog: /changelog
   # ......
