@@ -1289,10 +1289,12 @@ pub fn enable(interrupt: u32) {
 ```
 由此可知，该函数对`GICD_ISENABLER + interrupt / GICD_ISENABLER_SIZE`对应的地址**易失性**写入`1 << (interrupt % GICD_ISENABLER_SIZE)`。
 
-我们之前在`src/interrupts.rs`中定义`GICD`寄存器内存映射`GICD_BASE`的起始地址为`0x08000000`，而`GICD_ISENABLER`的地址为`GICD_BASE + 0x0100 = 0x08000100`
+我们之前在`src/interrupts.rs`中定义`GICD`寄存器内存映射`GICD_BASE`的起始地址为`0x08000000`，而`GICD_ISENABLER`的地址为`GICD_BASE + 0x0100 = 0x08000100`，`GICD_ISENABLER_SIZE`为`32`，`TIMER_IRQ`为`30`。
 ```
 const GICD_BASE: u64 = 0x08000000;
 const GICD_ISENABLER: *mut u32 = (GICD_BASE + 0x0100) as *mut u32;
+const GICD_ISENABLER_SIZE: u32 = 32;
+const TIMER_IRQ: u32 = 30;
 ```
 
 因此，对于`enable(TIMER_IRQ);`，我们可以理解为在`0x08000100`中**易失性**写入**1左移30位**后的**二进制数**。
