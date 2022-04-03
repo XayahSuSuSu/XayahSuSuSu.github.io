@@ -615,6 +615,695 @@ cargo build && qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nogra
 > 参考[湖南大学2022年操作系统课程实验 - 实验三 设备树（可选）](https://os2022exps-doc.readthedocs.io/zh_CN/latest/exp3/index.html)
 
 #  四、中断
+> 参考代码：{% asset_link ScienceFour.tar.gz 下载 %}
+> 
+> **中断**、**异常**和**陷阱**指令是**操作系统**的**基石**，现代操作系统就是由**中断驱动**的。本实验的目的在于**深刻理解中断的原理和机制**，**掌握CPU访问设备控制器的方法**，**掌握ARM体系结构的中断机制和规范**，**实现时钟中断服务和部分异常处理**等。
+
+## 1. 概念
+### 1) 陷入操作系统
+> 如下图所示，**操作系统**是一个**多入口**的**程序**，执行**陷阱（Trap）指令**，出现**异常**、**发生中断**时都会**陷入**到**操作系统**。
+> 
+> {% asset_img enter_into_os.png enter_into_os %}
+
+### 2) ARM的中断系统
+> **中断**是一种**硬件机制**。借助于**中断**，**CPU**可以不必再采用**轮询**这种**低效**的方式**访问外部设备**。将所有的**外部设备**与**CPU直接相连**是**不现实**的，**外部设备**的**中断请求**一般经由**中断控制器**，由**中断控制器**仲裁后再转发给**CPU**。如下图所示**ARM**的**中断系统**。
+> 
+> {% asset_img ARMGIC.png ARMGIC %}
+> 
+> 其中**nIRQ**是**普通中断**，**nFIQ**是**快速中断**。**ARM**采用的**中断控制器**叫做**GIC**，即**General Interrupt Controller**。**GIC**包括多个版本，如**GICv1（已弃用）**，**GICv2**，**GICv3**，**GICv4**。简单起见，我们实验将选用**GICv2**版本。
+> 
+> 为了配置好**GICv2中断控制器**，与**pl011串口**一样，我们需要阅读其**技术参考手册**。
+> 
+> 访问**ARM**官网下载[ARM Generic Interrupt Controller Architecture version 2.0 - Architecture Specification](https://developer.arm.com/documentation/ihi0048/latest)。
+> 
+> {% asset_img gicv2-logic.png gicv2-logic %}
+> 
+> 从上图（来源于[ARM Generic Interrupt Controller Architecture version 2.0 - Architecture Specification](https://developer.arm.com/documentation/ihi0048/latest)中的**Chapter 2 GIC Partitioning**）可以看出：
+> - **GICv2**最多支持**8核**的**中断管理**。
+> - **GIC**包括**两大主要部分**（由图中**蓝色虚竖线**分隔，**Distributor**和**CPU Interface**由**蓝色虚矩形框**标示），分别是：
+> 	- **Distributor**，其通过`GICD_`开头的寄存器进行控制（**蓝色实矩形框**标示）
+> 	- **CPU Interface**，其通过`GICC_`开头的寄存器进行控制（**蓝色实矩形框**标示）
+> -  **中断类型**分为以下几类（由图中**红色虚线椭圆**标示）：
+> 	- **SPI：（Shared Peripheral Interrupt）**，**共享外设中断**。该**中断**来源于**外设**，通过**Distributor**分发给特定的**Core**，其**中断编号**为**32-1019**。从图中可以看到所有核**共享SPI**。
+> 	- **PPI：（Private Peripheral Interrupt）**，**私有外设中断**。该**中断**来源于**外设**，但只对指定的**Core**有效，**中断信号**只会发送给**指定的Core**，其**中断编号**为**16-31**。从图中可以看到每个**Core**都有自己的**PPI**。
+> 	- **SGI：（Software-Generated Interrupt）**，**软中断**。**软件产生**的**中断**，用于给其他的**Core**发送**中断信号**，其**中断编号**为**0-15**。
+> 	- **Virtual Interrupt**，**虚拟中断**，用于支持**虚拟机**。图中也可以看到，因为我们**暂时不关心**，所以没有标注。
+> 	- 此外可以看到**（FIQ，IRQ）**可通过**b**进行**旁路**，我们也不关心。如感兴趣可以查看**技术手册**了解细节。
+> 
+> 此外，由[ARM Generic Interrupt Controller Architecture version 2.0 - Architecture Specification](https://developer.arm.com/documentation/ihi0048/latest)(Section 1.4.2)可知，**外设中断**可由**两种方式**触发：
+> - **Edge-Triggered**：**边沿触发**，当检测到**中断信号上升沿**时**中断有效**。
+> - **Level-Sensitive**：**电平触发**，当**中断源**为**指定电平**时**中断有效**。
+> 因为**SOC**中**中断**有很多，为了方便对**中断的管理**，对每个**中断**附加了**中断优先级**。在**中断仲裁**时，**高优先级的中断**，会**优于低优先级的中断**，发送给**CPU处理**。当**CPU**在**响应低优先级中断**时，如果此时来了**高优先级中断**，那么**高优先级中断**会**抢占低优先级中断**，而被**处理器响应**。
+> 由[ARM Generic Interrupt Controller Architecture version 2.0 - Architecture Specification](https://developer.arm.com/documentation/ihi0048/latest)(Section 3.3)可知，**GICv2**最多支持**256**个**中断优先级**。**GICv2**中规定，所支持的**中断优先级别数**与**GIC**的具体实现有关，如果支持的**中断优先级数**比**256**少（最少为**16**），则**8位优先级**的**低位**为**0**，且遵循**RAZ/WI（Read-As-Zero, Writes Ignored）**原则。
+
+
+### 3) GICv2初始化
+```
+/* ······ */
+intc@8000000 {
+    phandle = <0x8001>;
+    reg = <0x00 0x8000000 0x00 0x10000 0x00 0x8010000 0x00 0x10000>;
+    compatible = "arm,cortex-a15-gic";
+    ranges;
+    #size-cells = <0x02>;
+    #address-cells = <0x02>;
+    interrupt-controller;
+    #interrupt-cells = <0x03>;
+
+    v2m@8020000 {
+        phandle = <0x8002>;
+        reg = <0x00 0x8020000 0x00 0x1000>;
+        msi-controller;
+        compatible = "arm,gic-v2m-frame";
+    };
+};
+/* ······ */
+timer {
+    interrupts = <0x01 0x0d 0x104 0x01 0x0e 0x104 0x01 0x0b 0x104 0x01 0x0a 0x104>;
+    always-on;
+    compatible = "arm,armv8-timer\0arm,armv7-timer";
+};
+```
+> 由`virt.dts`中`intc`和`timer`的部分并结合**kernel.org**中关于[ARM Generic Interrupt Controller](https://www.kernel.org/doc/Documentation/devicetree/bindings/interrupt-controller/arm%2Cgic.txt)和[ARM architected timer](https://www.kernel.org/doc/Documentation/devicetree/bindings/arm/arch_timer.txt)的**DeviceTree**的说明可知：
+> - `intc`中的`reg`指明**GICD寄存器**映射到内存的位置为`0x8000000`，长度为`0x10000`，**GICC寄存器**映射到内存的位置为`0x8010000`，长度为`0x10000`。
+> - `intc`中的`#interrupt-cells`指明**interrupts**包括**3**个**cells**。[第一个文档](https://www.kernel.org/doc/Documentation/devicetree/bindings/interrupt-controller/arm%2Cgic.txt)指明：第一个**cell**为**中断类型**，**0**表示**SPI**，**1**表示**PPI**；第二个**cell**为**中断号**，**SPI**范围为**[0-987]**，**PPI**为**[0-15]**；第三个**cell**为**flags**，其中**[3:0]**位表示**触发类型**，**[4]**表示**高电平触发**，**[15:8]**为**PPI**的**CPU中断掩码**，每**1**位对应一个**CPU**，为**1**表示该**中断**会连接到对应的**CPU**。
+> - 以`timer`设备为例，其中包括**4**个**中断**。以第**2**个**中断**的参数`0x01 0x0e 0x104`为例，其指明该**中断**为**PPI**类型的**中断**，**中断号14**， 路由到第一个**CPU**，且**高电平触发**。但注意到**PPI**的**起始中断号**为**16**，所以实际上该**中断**在**GICv2**中的**中断号**应为**16 + 14 = 30**。
+> 阅读[ARM Generic Interrupt Controller Architecture version 2.0 - Architecture Specification](https://developer.arm.com/documentation/ihi0048/latest)，在**Chapter 4 Programmers’ Model**部分有关于**GICD**和**GICC寄存器**的**描述，以及如何使能**Distributor**和**CPU Interfaces**的方法。
+
+### 4) ARMv8的中断与异常处理
+> 访问**ARM官网**下载并阅读[ARM Cortex-A Series Programmer's Guide for ARMv8-A](https://developer.arm.com/documentation/den0024/a/AArch64-Exception-Handling/Exception-handling-registers)和[AArch64 Exception and Interrupt Handling](https://developer.arm.com/documentation/100933/0100/AArch64-exception-vector-table)等**技术参考手册**。
+> **ARMv8架构**定义了**两种执行状态([Execution States](https://developer.arm.com/documentation/den0024/a/Fundamentals-of-ARMv8/Execution-states))**：**AArch64**和**AArch32**。分别对应使用**64位宽通用寄存器**或**32位宽通用寄存器**的执行。
+> {% asset_img aarch64_exception_levels_2.png aarch64_exception_levels_2 %}
+> 上图所示为**AArch64**中的**异常级别(Exception levels)**的组织。可见**AArch64**中共有**4**个**异常级别**，分别为**EL0**，**EL1**，**EL2**和**EL3**。在**AArch64**中，**Interrupt**是**Exception**的**子类型**，称为**异常**。**AArch64**中有**四种类型**的**异常**：
+> - **Sync（Synchronous exceptions，同步异常）**。在**执行时触发**的**异常**，例如在尝试**访问不存在**的**内存地址**时。
+> - **IRQ （Interrupt requests，中断请求）**。由**外部设备**产生的**中断**。
+> - **FIQ （Fast Interrupt Requests，快速中断请求）**。类似于**IRQ**，但具有**更高**的**优先级**，因此**FIQ**中断服务程序不能被其他**IRQ**或**FIQ**中断。
+> - **SError （System Error，系统错误）**。用于**外部数据**中止的**异步中断**。
+> 当**异常**发生时，**处理器**将执行与该**异常**对应的**异常处理代码**。在**ARM架构**中，这些**异常处理代码**将会被保存在**内存**的**异常向量表**中。每一个**异常级别（EL0，EL1，EL2和EL3）**都有其对应的**异常向量表**。需要注意的是，与**x86等架构**不同，该表包含的是要执行的**指令**，而不是**函数地址**。
+> **异常向量表**的**基地址**由`VBAR_ELn`给出，然后每个表项都有一个从该**基地址**定义的**偏移量**。 每个表有**16**个表项，每个表项的大小为**128（0x80）**字节（**32**条**指令**）。 该表实际上有**4**组，每组**4**个表项。 分别是：
+> - 发生于**当前异常级别**的**异常**且**SPSel寄存器**选择**SP0**，**Sync**、**IRQ**、**FIQ**、**SError**对应的**4个异常处理**。
+> - 发生于**当前异常级别**的**异常**且**SPSel寄存器**选择**SPx**，**Sync**、**IRQ**、**FIQ**、**SError**对应的**4个异常处理**。
+> - 发生于**较低异常级别**的**异常**且**执行状态**为**AArch64**，**Sync**、**IRQ**、**FIQ**、**SError**对应的**4个异常处理**。
+> - 发生于**较低异常级别**的**异常**且**执行状态**为**AArch32**，**Sync**、**IRQ**、**FIQ**、**SError**对应的**4个异常处理**。
+
+
+## 2. 实现
+### 1) 编写代码
+新建`src/interrupts.rs`，`src/exceptions.s`
+```
+touch src/interrupts.rs src/exceptions.s
+```
+编辑`src/interrupts.rs`，定义各种**常量**，如**寄存器地址**和**寄存器值**等，然后定义`init_gicv2`函数对**GICD**和**GICC**进行**初始化**，最后定义若干**辅助函数**用于**中断配置**。
+```
+use core::ptr;
+
+// GICD和GICC寄存器内存映射后的起始地址
+const GICD_BASE: u64 = 0x08000000;
+const GICC_BASE: u64 = 0x08010000;
+
+// Distributor
+const GICD_CTLR: *mut u32 = (GICD_BASE + 0x0) as *mut u32;
+const GICD_ISENABLER: *mut u32 = (GICD_BASE + 0x0100) as *mut u32;
+const GICD_ICENABLER: *mut u32 = (GICD_BASE + 0x0180) as *mut u32;
+const GICD_ICPENDR: *mut u32 = (GICD_BASE + 0x0280) as *mut u32;
+const GICD_IPRIORITYR: *mut u32 = (GICD_BASE + 0x0400) as *mut u32;
+const GICD_ICFGR: *mut u32 = (GICD_BASE + 0x0c00) as *mut u32;
+
+const GICD_CTLR_ENABLE: u32 = 1;  /* Enable GICD */
+const GICD_CTLR_DISABLE: u32 = 0;     /* Disable GICD */
+const GICD_ISENABLER_SIZE: u32 = 32;
+const GICD_ICENABLER_SIZE: u32 = 32;
+const GICD_ICPENDR_SIZE: u32 = 32;
+const GICD_IPRIORITY_SIZE: u32 = 4;
+const GICD_IPRIORITY_BITS: u32 = 8;
+const GICD_ICFGR_SIZE: u32 = 16;
+const GICD_ICFGR_BITS: u32 = 2;
+
+
+// CPU Interface
+const GICC_CTLR: *mut u32 = (GICC_BASE + 0x0) as *mut u32;
+const GICC_PMR: *mut u32 = (GICC_BASE + 0x0004) as *mut u32;
+const GICC_BPR: *mut u32 = (GICC_BASE + 0x0008) as *mut u32;
+
+const GICC_CTLR_ENABLE: u32 = 1;
+const GICC_CTLR_DISABLE: u32 = 0;
+// Priority Mask Register. interrupt priority filter, Higher priority corresponds to a lower Priority field value.
+const GICC_PMR_PRIO_LOW: u32 = 0xff;
+// The register defines the point at which the priority value fields split into two parts,
+// the group priority field and the subpriority field. The group priority field is used to
+// determine interrupt preemption. NO GROUP.
+const GICC_BPR_NO_GROUP: u32 = 0x00;
+
+pub fn init_gicv2() {
+    // 初始化Gicv2的distributor和cpu interface
+    // 禁用distributor和cpu interface后进行相应配置
+    unsafe {
+        ptr::write_volatile(GICD_CTLR, GICD_CTLR_DISABLE);
+        ptr::write_volatile(GICC_CTLR, GICC_CTLR_DISABLE);
+        ptr::write_volatile(GICC_PMR, GICC_PMR_PRIO_LOW);
+        ptr::write_volatile(GICC_BPR, GICC_BPR_NO_GROUP);
+    }
+
+    // 启用distributor和cpu interface
+    unsafe {
+        ptr::write_volatile(GICD_CTLR, GICD_CTLR_ENABLE);
+        ptr::write_volatile(GICC_CTLR, GICC_CTLR_ENABLE);
+    }
+
+}
+
+// 使能中断号为interrupt的中断
+pub fn enable(interrupt: u32) {
+    unsafe {
+        ptr::write_volatile(
+            GICD_ISENABLER.add((interrupt / GICD_ISENABLER_SIZE) as usize),
+            1 << (interrupt % GICD_ISENABLER_SIZE)
+        );
+    }
+}
+
+// 禁用中断号为interrupt的中断
+pub fn disable(interrupt: u32) {
+    unsafe {
+        ptr::write_volatile(
+            GICD_ICENABLER.add((interrupt / GICD_ICENABLER_SIZE) as usize),
+            1 << (interrupt % GICD_ICENABLER_SIZE)
+        );
+    }
+}
+
+// 清除中断号为interrupt的中断
+pub fn clear(interrupt: u32) {
+    unsafe {
+        ptr::write_volatile(
+            GICD_ICPENDR.add((interrupt / GICD_ICPENDR_SIZE) as usize),
+            1 << (interrupt % GICD_ICPENDR_SIZE)
+        );
+    }
+}
+
+// 设置中断号为interrupt的中断的优先级为priority
+pub fn set_priority(interrupt: u32, priority: u32) {
+    let shift = (interrupt % GICD_IPRIORITY_SIZE) * GICD_IPRIORITY_BITS;
+    unsafe {
+        let addr: *mut u32 = GICD_IPRIORITYR.add((interrupt / GICD_IPRIORITY_SIZE) as usize);
+        let mut value: u32 = ptr::read_volatile(addr);
+        value &= !(0xff << shift);
+        value |= priority << shift;
+        ptr::write_volatile(addr, value);
+    }
+}
+
+// 设置中断号为interrupt的中断的属性为config
+pub fn set_config(interrupt: u32, config: u32) {
+    let shift = (interrupt % GICD_ICFGR_SIZE) * GICD_ICFGR_BITS;
+    unsafe {
+        let addr: *mut u32 = GICD_ICFGR.add((interrupt / GICD_ICFGR_SIZE) as usize);
+        let mut value: u32 = ptr::read_volatile(addr);
+        value &= !(0x03 << shift);
+        value |= config << shift;
+        ptr::write_volatile(addr, value);
+    }
+}
+```
+编辑`src/exceptions.s`，参照[AArch64 exception table](https://developer.arm.com/documentation/den0024/a/AArch64-Exception-Handling/AArch64-exception-table)定义异常向量表。
+```
+// SPDX-License-Identifier: MIT OR Apache-2.0
+//
+// Copyright (c) 2018-2021 Andre Richter <andre.o.richter@gmail.com>
+
+.extern el1_sp0_sync
+.extern el1_sp0_irq
+.extern el1_sp0_fiq
+.extern el1_sp0_error
+.extern el1_sync
+.extern el1_irq
+.extern el1_fiq
+.extern el1_error
+.extern el0_sync
+.extern el0_irq
+.extern el0_fiq
+.extern el0_error
+.extern el0_32_sync
+.extern el0_32_irq
+.extern el0_32_fiq
+.extern el0_32_error
+
+//--------------------------------------------------------------------------------------------------
+// Definitions
+//--------------------------------------------------------------------------------------------------
+
+/// Call the function provided by parameter `\handler` after saving the exception context. Provide
+/// the context as the first parameter to '\handler'.
+.equ CONTEXT_SIZE, 264
+
+.section .text.exceptions
+
+.macro EXCEPTION_VECTOR handler
+    sub sp, sp, #CONTEXT_SIZE
+
+// store general purpose registers
+    stp x0, x1, [sp, #16 * 0]
+    stp x2, x3, [sp, #16 * 1]
+    stp x4, x5, [sp, #16 * 2]
+    stp x6, x7, [sp, #16 * 3]
+    stp x8, x9, [sp, #16 * 4]
+    stp x10, x11, [sp, #16 * 5]
+    stp x12, x13, [sp, #16 * 6]
+    stp x14, x15, [sp, #16 * 7]
+    stp x16, x17, [sp, #16 * 8]
+    stp x18, x19, [sp, #16 * 9]
+    stp x20, x21, [sp, #16 * 10]
+    stp x22, x23, [sp, #16 * 11]
+    stp x24, x25, [sp, #16 * 12]
+    stp x26, x27, [sp, #16 * 13]
+    stp x28, x29, [sp, #16 * 14]
+
+// store exception link register and saved processor state register
+    mrs x0, elr_el1
+    mrs x1, spsr_el1
+    stp x0, x1, [sp, #16 * 15]
+
+// store link register which is x30
+    str x30, [sp, #16 * 16]
+    mov x0, sp
+
+// call exception handler
+    bl \handler
+
+// exit exception
+    b .exit_exception
+.endm
+
+
+//--------------------------------------------------------------------------------------------------
+// Private Code
+//--------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// The exception vector table.
+//------------------------------------------------------------------------------
+/** When an exception occurs, the processor must execute handler code that corresponds to the exception.
+The location in memory where the handler is stored is called the exception vector. In the ARM architecture,
+exception vectors are stored in a table, called the exception vector table.
+
+Each Exception level has its own vector table, that is, there is one for each of EL3, EL2, and EL1. The table contains
+instructions to be executed, rather than a set of addresses. These would normally be branch instructions that direct the
+core to the full exception handler.
+
+The exception vector table for EL1, for example, holds instructions for handling all types of exception that can occur at EL1,
+Vectors for individual exceptions are at fixed offsets from the beginning of the table. The virtual address of each table base
+is set by the Vector Based Address Registers: VBAR_EL3, VBAR_EL2 and VBAR_EL1.
+
+Each entry in the vector table is 16 instructions long (in ARMv7-A and AArch32, each entry is only 4 bytes). This means that in
+AArch64 the top-level handler can be written directly in the vector table.
+
+The base address is given by VBAR_ELn and each entry has a defined offset from this base address. Each table has 16 entries,
+with each entry being 128 bytes (32 instructions) in size. The table effectively consists of 4 sets of 4 entries. Which entry
+is used depends on several factors:
+
+The type of exception (SError, FIQ, IRQ, or Synchronous)
+If the exception is being taken at the same Exception level, the stack pointer to be used (SP0 or SPn)
+If the exception is being taken at a lower Exception level, the Execution state of the next lower level (AArch64 or AArch32).
+*/
+
+
+
+.section .text.exceptions_vector_table
+// Export a symbol for the Rust code to use.
+.globl exception_vector_table
+exception_vector_table:
+
+.org 0x0000
+    EXCEPTION_VECTOR el1_sp0_sync
+
+.org 0x0080
+    EXCEPTION_VECTOR el1_sp0_irq
+
+.org 0x0100
+    EXCEPTION_VECTOR el1_sp0_fiq
+
+.org 0x0180
+    EXCEPTION_VECTOR el1_sp0_error
+
+.org 0x0200
+    EXCEPTION_VECTOR el1_sync
+
+.org 0x0280
+    EXCEPTION_VECTOR el1_irq
+
+.org 0x0300
+    EXCEPTION_VECTOR el1_fiq
+
+.org 0x0380
+    EXCEPTION_VECTOR el1_error
+
+.org 0x0400
+    EXCEPTION_VECTOR el0_sync
+
+.org 0x0480
+    EXCEPTION_VECTOR el0_irq
+
+.org 0x0500
+    EXCEPTION_VECTOR el0_fiq
+
+.org 0x0580
+    EXCEPTION_VECTOR el0_error
+
+.org 0x0600
+    EXCEPTION_VECTOR el0_32_sync
+
+.org 0x0680
+    EXCEPTION_VECTOR el0_32_irq
+
+.org 0x0700
+    EXCEPTION_VECTOR el0_32_fiq
+
+.org 0x0780
+    EXCEPTION_VECTOR el0_32_error
+
+.org 0x0800
+
+.exit_exception:
+// restore link register
+    ldr x30, [sp, #16 * 16]
+
+// restore exception link register and saved processor state register
+    ldp x0, x1, [sp, #16 * 15]
+    msr elr_el1, x0
+    msr spsr_el1, x1
+
+// restore general purpose registers
+    ldp x28, x29, [sp, #16 * 14]
+    ldp x26, x27, [sp, #16 * 13]
+    ldp x24, x25, [sp, #16 * 12]
+    ldp x22, x23, [sp, #16 * 11]
+    ldp x20, x21, [sp, #16 * 10]
+    ldp x18, x19, [sp, #16 * 9]
+    ldp x16, x17, [sp, #16 * 8]
+    ldp x14, x15, [sp, #16 * 7]
+    ldp x12, x13, [sp, #16 * 6]
+    ldp x10, x11, [sp, #16 * 5]
+    ldp x8, x9, [sp, #16 * 4]
+    ldp x6, x7, [sp, #16 * 3]
+    ldp x4, x5, [sp, #16 * 2]
+    ldp x2, x3, [sp, #16 * 1]
+    ldp x0, x1, [sp, #16 * 0]
+
+// restore stack pointer
+    add sp, sp, #CONTEXT_SIZE
+    eret
+```
+
+编辑`src/interrupts.rs`，文末引入`exceptions.s`，同时定义结构`ExceptionCtx`，与`src/exceptions.s`中`EXCEPTION_VECTOR`宏保存的**寄存器数据**对应。
+```
+// ······
+// 注意：这里的······代表承接并省略上文代码
+use core::arch::global_asm;
+global_asm!(include_str!("exceptions.s"));
+
+#[repr(C)]
+pub struct ExceptionCtx {
+    regs: [u64; 30],
+    elr_el1: u64,
+    spsr_el1: u64,
+    lr: u64,
+}
+```
+继续编辑`src/interrupts.rs`，在`EXCEPTION_VECTOR`宏中，每一类**中断**都对应一个**处理函数**。
+```
+// ······
+const EL1_SP0_SYNC: &'static str = "EL1_SP0_SYNC";
+const EL1_SP0_IRQ: &'static str = "EL1_SP0_IRQ";
+const EL1_SP0_FIQ: &'static str = "EL1_SP0_FIQ";
+const EL1_SP0_ERROR: &'static str = "EL1_SP0_ERROR";
+const EL1_SYNC: &'static str = "EL1_SYNC";
+const EL1_IRQ: &'static str = "EL1_IRQ";
+const EL1_FIQ: &'static str = "EL1_FIQ";
+const EL1_ERROR: &'static str = "EL1_ERROR";
+const EL0_SYNC: &'static str = "EL0_SYNC";
+const EL0_IRQ: &'static str = "EL0_IRQ";
+const EL0_FIQ: &'static str = "EL0_FIQ";
+const EL0_ERROR: &'static str = "EL0_ERROR";
+const EL0_32_SYNC: &'static str = "EL0_32_SYNC";
+const EL0_32_IRQ: &'static str = "EL0_32_IRQ";
+const EL0_32_FIQ: &'static str = "EL0_32_FIQ";
+const EL0_32_ERROR: &'static str = "EL0_32_ERROR";
+
+// 调用我们的print!宏打印异常信息，你也可以选择打印异常发生时所有寄存器的信息
+fn catch(ctx: &mut ExceptionCtx, name: &str) {
+    crate::print!(
+        "\n  \
+        {} @ 0x{:016x}\n\n ",
+        name,
+        ctx.elr_el1,
+    );
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_sp0_sync(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_SP0_SYNC);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_sp0_irq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_SP0_IRQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_sp0_fiq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_SP0_FIQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_sp0_error(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_SP0_ERROR);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_sync(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_SYNC);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_irq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_IRQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_fiq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_FIQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el1_error(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL1_ERROR);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_sync(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_SYNC);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_irq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_IRQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_fiq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_FIQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_error(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_ERROR);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_32_sync(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_32_SYNC);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_32_irq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_32_IRQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_32_fiq(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_32_FIQ);
+}
+
+#[no_mangle]
+unsafe extern "C" fn el0_32_error(ctx: &mut ExceptionCtx) {
+    catch(ctx, EL0_32_ERROR);
+}
+```
+
+编辑`src/start.s`，载入**异常向量表**`exception_vector_table`
+```
+// ······
+        mov     sp, x30
+
+        // Initialize exceptions
+        ldr     x0, =exception_vector_table
+        msr     vbar_el1, x0
+        isb
+
+        bl      not_main
+// ······
+```
+{% asset_img start.s.png start.s %}
+
+编辑`aarch64-qemu.ld`，处理链接脚本，为`exceptions.s`中定义的`exceptions_vector_table`选择位置，同时满足**4K对齐**。
+```
+// ······
+    .text.boot : { *(.text.boot) }
+    .text :
+    {
+        KEEP(*(.text.boot))
+        *(.text.exceptions)
+        . = ALIGN(4096); /* align for exceptions_vector_table*/
+        *(.text.exceptions_vector_table)
+        *(.text)
+    }
+    .data : { *(.data) }
+// ······
+```
+{% asset_img aarch64-qemu.ld.png aarch64-qemu.ld %}
+
+编辑`src/main.rs`，引入`interrupts.rs`模块，并在`not_main()`函数中注释掉之前的输出代码，调用`init_gicv2()`函数
+```
+// ······
+mod panic;
+mod uart_console;
+mod interrupts;
+
+global_asm!(include_str!("start.s"));
+// ······
+#[no_mangle] // 不修改函数名
+pub extern "C" fn not_main() {
+    // const UART0: *mut u8 = 0x0900_0000 as *mut u8;
+    // let out_str = b"AArch64 Bare Metal";
+    // for byte in out_str {
+    //     unsafe {
+    //         ptr::write_volatile(UART0, *byte);
+    //     }
+    // }
+    // // print_something(); // 调用测试函数
+    // println!("\n[0] Hello from Rust!");
+    interrupts::init_gicv2();
+}
+// ······
+```
+{% asset_img main.rs.png main.rs %}
+至此，我们已经在**EL1级别**定义了完整的**中断处理框架**，可以开始处理实际的**中断**了。
+
+### 2) 使能时钟中断
+编辑`src/interrupts.rs`，在`init_gicv2`函数中添加**使能时钟中断**，同时配置**时钟**每秒产生一次**中断**。
+```
+// ······
+use core::arch::asm;
+pub fn init_gicv2() {
+    // ······
+    // 启用distributor和cpu interface
+    unsafe {
+        ptr::write_volatile(GICD_CTLR, GICD_CTLR_ENABLE);
+        ptr::write_volatile(GICC_CTLR, GICC_CTLR_ENABLE);
+    }
+    
+    // 电平触发
+    const ICFGR_LEVEL: u32 = 0;
+    // 时钟中断号30
+    const TIMER_IRQ: u32 = 30;
+    set_config(TIMER_IRQ, ICFGR_LEVEL); //电平触发
+    set_priority(TIMER_IRQ, 0); //优先级设定
+    clear(TIMER_IRQ); //清除中断请求
+    enable(TIMER_IRQ); //使能中断
+    
+    //配置timer
+    unsafe {
+        asm!("mrs x1, CNTFRQ_EL0"); //读取系统频率
+        asm!("msr CNTP_TVAL_EL0, x1");  //设置定时寄存器
+        asm!("mov x0, 1");
+        asm!("msr CNTP_CTL_EL0, x0"); //enable=1, imask=0, istatus= 0,
+        asm!("msr daifclr, #2");
+    }
+}
+// ······
+```
+{% asset_img interrupts.rs.png interrupts.rs %}
+
+### 3) 调试
+**编译**并以**调试模式**运行
+```
+cargo build && qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -S -s
+```
+**保持**此**终端会话**，**新开一个终端**，配置**GDB环境**
+```
+cd ~/ToolChain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin
+export ToolChainPath=`pwd`
+cd ~/rui_armv8_os
+export PATH=$ToolChainPath:$PATH
+```
+启动**GDB调试客户端**
+```
+aarch64-none-elf-gdb target/aarch64-unknown-none-softfloat/debug/rui_armv8_os
+```
+连接**远程客户端**
+```
+target remote localhost:1234
+```
+在`not_main()`函数处**设置断点**
+```
+b not_main
+```
+运行到`interrupts::init_gicv2();`语句之前。
+```
+n
+```
+{% asset_img init_gicv2().png init_gicv2() %}
+我们之前在`init_gicv2()`函数中加入了以下代码
+```
+// 电平触发
+const ICFGR_LEVEL: u32 = 0;
+// 时钟中断号30
+const TIMER_IRQ: u32 = 30;
+set_config(TIMER_IRQ, ICFGR_LEVEL); //电平触发
+set_priority(TIMER_IRQ, 0); //优先级设定
+clear(TIMER_IRQ); //清除中断请求
+enable(TIMER_IRQ); //使能中断
+```
+因此，当我们运行`init_gicv2()`函数后，其中的`enable(TIMER_IRQ);`会产生**使能中断**。我们查看`enable()`函数的代码
+```
+// 使能中断号为interrupt的中断
+pub fn enable(interrupt: u32) {
+    unsafe {
+        ptr::write_volatile(
+            GICD_ISENABLER.add((interrupt / GICD_ISENABLER_SIZE) as usize),
+            1 << (interrupt % GICD_ISENABLER_SIZE)
+        );
+    }
+}
+```
+由此可知，该函数对`GICD_ISENABLER + interrupt / GICD_ISENABLER_SIZE`对应的地址**易失性**写入`1 << (interrupt % GICD_ISENABLER_SIZE)`。
+
+我们之前在`src/interrupts.rs`中定义`GICD`寄存器内存映射`GICD_BASE`的起始地址为`0x08000000`，而`GICD_ISENABLER`的地址为`GICD_BASE + 0x0100 = 0x08000100`
+```
+const GICD_BASE: u64 = 0x08000000;
+const GICD_ISENABLER: *mut u32 = (GICD_BASE + 0x0100) as *mut u32;
+```
+
+因此，对于`enable(TIMER_IRQ);`，我们可以理解为在`0x08000100`中**易失性**写入**1左移30位**后的**二进制数**。
+
+查看`0x08000100`地址中的值
+```
+x/t 0x08000100
+```
+我们得到了`0000000000000000111111111111111`，继续运行，执行`interrupts::init_gicv2();`，再次查看`0x08000100`地址中的值，此时变为了`0100000000000000111111111111111`
+{% asset_img init_gicv2()2.png init_gicv2()2 %}
+由此证明**中断**产生了。
 
 #  五、输入
 
