@@ -1322,7 +1322,7 @@ x/t 0x08000100
 {% asset_img 4.1.3.png 4.1.3 %}
 `not_main()`函数中**移除不需要的代码**
 {% asset_img 4.1.4.png 4.1.4 %}
-只保留一个``println!宏``以及**中断初始化函数**``init_gicv2()`即可。
+只保留一个`println!宏`以及**中断初始化函数**`init_gicv2()`即可。
 `print_something()`函数我们亦不再用到，**移除其相关代码**。
 {% asset_img 4.1.5.png 4.1.5 %}
 现在看起来就**清爽**多了~
@@ -1416,6 +1416,8 @@ asm!("msr CNTP_TVAL_EL0, x1");
 {% asset_img 每一秒触发一次.png 每一秒触发一次 %}
 
 #  五、输入
+> 参考代码：{% asset_link ScienceFive.tar.gz 下载 %}
+> 
 > **QEMU**的**virt机器**默认没有**键盘**作为**输入设备**，但当我们执行**QEMU**使用`-nographic`参数（Disable graphical output and redirect serial I/Os to console）时**QEMU**会将**串口重定向**到**控制台**，因此我们可以使用**UART**作为**输入设备**。
 > 
 
