@@ -1217,17 +1217,17 @@ pub fn init_gicv2() {
     const ICFGR_LEVEL: u32 = 0;
     // 时钟中断号30
     const TIMER_IRQ: u32 = 30;
-    set_config(TIMER_IRQ, ICFGR_LEVEL); //电平触发
-    set_priority(TIMER_IRQ, 0); //优先级设定
-    clear(TIMER_IRQ); //清除中断请求
-    enable(TIMER_IRQ); //使能中断
+    set_config(TIMER_IRQ, ICFGR_LEVEL); // 电平触发
+    set_priority(TIMER_IRQ, 0); // 优先级设定
+    clear(TIMER_IRQ); // 清除中断请求
+    enable(TIMER_IRQ); // 使能中断
     
     //配置timer
     unsafe {
-        asm!("mrs x1, CNTFRQ_EL0"); //读取系统频率
-        asm!("msr CNTP_TVAL_EL0, x1");  //设置定时寄存器
+        asm!("mrs x1, CNTFRQ_EL0"); // 读取系统频率
+        asm!("msr CNTP_TVAL_EL0, x1");  // 设置定时寄存器
         asm!("mov x0, 1");
-        asm!("msr CNTP_CTL_EL0, x0"); //enable=1, imask=0, istatus= 0,
+        asm!("msr CNTP_CTL_EL0, x0"); // enable=1, imask=0, istatus= 0,
         asm!("msr daifclr, #2");
     }
 }
@@ -1305,7 +1305,119 @@ x/t 0x08000100
 ```
 我们得到了`0000000000000000111111111111111`，继续运行，执行`interrupts::init_gicv2();`，再次查看`0x08000100`地址中的值，此时变为了`0100000000000000111111111111111`
 {% asset_img init_gicv2()2.png init_gicv2()2 %}
-由此证明**中断**产生了。
+~~由此证明**中断**产生了。~~
+实际上这里**并没有产生中断**！我们只是**初始化**了**GICV2**并且写入**TIMER_IRQ中断号**，如果**时钟中断**生效了，那么理论上来说**每隔一秒**都会**调用一次**`el1_irq()`回调函数并且**打印相应的中断信息**，**哪里出问题了呢？**
+
+# 四*、实现真正的时钟中断
+## 1. 整理代码
+> 参考代码：{% asset_link ScienceFourClean.tar.gz 下载 %}
+> 
+
+在实现真正的**时钟中断**之前，我们的**代码**已经有**亿**点乱了，并且还会有很多**恼人**的**unused warnings**，因此我们先**整理**一下**代码**。
+首先打开`src/main.rs`：
+{% asset_img 4.1.1.png 4.1.1 %}
+注意到这里的`core::ptr`并没有被使用。
+{% asset_img 4.1.2.png 4.1.2 %}
+因此我们将其**移除**。
+{% asset_img 4.1.3.png 4.1.3 %}
+`not_main()`函数中**移除不需要的代码**
+{% asset_img 4.1.4.png 4.1.4 %}
+只保留一个``println!宏``以及**中断初始化函数**``init_gicv2()`即可。
+`print_something()`函数我们亦不再用到，**移除其相关代码**。
+{% asset_img 4.1.5.png 4.1.5 %}
+现在看起来就**清爽**多了~
+接下来在`src/interrupts.rs`中有很多**没有用到的常量和函数**，通常称为`dead_code`，但是为了**保证完整性**我们**不选择删除它们**，而是**忽略**掉。
+在`src/main.rs`中加入
+```
+#![allow(dead_code)] // 忽略dead_code
+```
+{% asset_img 4.2.1.png 4.2.1 %}
+最后一个**warning**在`aarch64-unknown-none-softfloat.json`中
+```
+"abi-blacklist": [
+      "stdcall",
+      "fastcall",
+      "vectorcall",
+      "thiscall",
+      "win64",
+      "sysv64"
+    ],
+```
+这个`abi-blacklist`推测是**屏蔽一些接口**，我们**并没有调用这些接口**，所以**直接移除**。
+{% asset_img 4.3.1.png 4.3.1 %}
+至此我们的**warnings**已经 **全部处理(忽略)** 完了。
+{% asset_img 4.3.2.png 4.3.2 %}
+
+
+
+## 2. 实现
+> 参考代码：{% asset_link ScienceFourPlus.tar.gz 下载 %}
+> 
+在**查阅大量的资料**后，我找到了本次实验的**原型(?)**[LeOS](https://github.com/lowenware/leos-kernel)以及其对应的**时钟中断**部分的[博客](https://lowenware.com/blog/osdev/aarch64-gic-and-timer-interrupt/)。仔细阅读可以发现他实现**时钟中断**的[Commit](https://github.com/lowenware/leos-kernel/commit/7e89a52f91a98bdcbc1357091159e9391aff2d8d#diff-b02a7b840232145efa38636f47d5c4e8e2ea0cd3d98b449ffd3908e38d2dadc1L1)。
+在与[noionion](https://noionion.top/)的**合作**及其**帮助**下，我们发现了**LeOS**关于**时钟中断**的实现与[实验四 中断](https://os2022exps-doc.readthedocs.io/zh_CN/latest/exp4/index.html)中有一些**不一样**的地方：
+
+在**初始化中断**时，**LeOS**还多了以下**代码**:
+{% asset_img Loop.png Loop %}
+因此我们在`src/interrupts.rs`下的`init_gicv2()`函数**尾部**添加以下代码：
+```
+loop {
+    unsafe {
+        asm!("mrs x0, CNTPCT_EL0"); // 系统计数器
+        asm!("mrs x0, CNTP_CTL_EL0"); // 控制计数器
+        asm!("mrs x0, CNTP_TVAL_EL0"); // 定时计数器
+        asm!("mrs x0, CNTP_CVAL_EL0"); // 比较计数器
+        asm!("wfi"); // Wait for Interrupt 等待中断，下一次中断发生前都停止在此处
+    }
+}
+```
+{% asset_img 开启中断回调.png 开启中断回调 %}
+**编译**并**运行**
+```
+cargo build && qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os
+```
+{% asset_img 第一次触发.png 第一次触发 %}
+在**运行**后，首先会**输出**
+```
+[0] Hello from Rust!
+```
+大约**1s**后会**输出**
+```
+EL1_IRQ @ 0x
+```
+说明这次我们**成功**调用了`el1_irq()`**回调函数**！
+但**问题**是，**时钟中断**的**理想状态**应是每隔**1s**就会调用一次`el1_irq()`**回调函数**，这里调用一次后却**不再变化**了。
+这里其实是因为`catch()`函数在调用第一个参数`ctx`时会**发生阻塞**，**具体原因不详**。
+因此我们**修改该函数**，编辑`interrupts.rs`：
+```
+// ······
+// 调用我们的print!宏打印异常信息，你也可以选择打印异常发生时所有寄存器的信息
+fn catch(ctx: &mut ExceptionCtx, name: &str) {
+    crate::print!("{}\n", name);
+}
+// ······
+```
+{% asset_img 修改catch.png 修改catch %}
+然后**编译运行**
+{% asset_img 不停输出.png 不停输出 %}
+可以发现现在确实能够**一直触发中断**并且**输出回调函数名**了。但这每次**输出间隔**的**时间太短**了吧！
+这里我们需要了解一些**概念**：
+- 在**ARM体系结构**中，**处理器内部**有**通用计时器**，**通用计时器**包含一组**比较器**，用来与**系统计数器(CNTPCT_EL0)**进行比较，一旦**通用计时器**的值**小于等于系统计数器**时便会产生**时钟中断**。
+- **比较寄存器(CNTP_CVAL_EL0)** 有64位，如果**设置**了之后，当**系统计数器达到或超过**了这个**值**之后，就会**触发定时器中断**。
+- **定时寄存器(CNTP_TVAL_EL0)** 有32位，如果**设置**了之后，会将**比较寄存器**设置成当前**系统计数器**加上设置的**定时寄存器**的值。
+>> 详见[此处](https://github.com/2X-ercha/blogOS-armV8/blob/44d7bf5b7296be0e01398459456b265fa68e4e6d/src/main.rs#L64)
+
+因此我们若想要有**延时效果**，需要在调用`el1_irq()`**回调函数**时**再次写入定时寄存器**。
+```
+asm!("mrs x1, CNTFRQ_EL0");
+asm!("msr CNTP_TVAL_EL0, x1");
+```
+{% asset_img 写入定时寄存器.png 写入定时寄存器 %}
+此时再**编译运行**，我们就已经**成功**做到**每1s**处理一次**时钟中断**了！
+{% asset_img 每一秒触发一次.png 每一秒触发一次 %}
+
+
+
+
 
 #  五、输入
 
