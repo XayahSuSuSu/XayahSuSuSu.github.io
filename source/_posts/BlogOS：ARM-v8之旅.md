@@ -1392,9 +1392,12 @@ EL1_IRQ @ 0x
 这里其实是因为`catch()`函数在调用第一个参数`ctx`时会**发生阻塞**，~~**具体原因不详**。~~
 > 若想**修复**这个**问题**，可以编辑`.cargo/config.toml`，**清空**然后改为**以下内容**
 > ```
+> [unstable]
+> build-std = ["core", "compiler_builtins"] 
+> 
 > [build]
 > target = "aarch64-unknown-none-softfloat"
-> rustflags = ["-C","link-arg=-Taarch64-qemu.ld", "-C", "target-> cpu=cortex-a53", "-D", "warnings"]
+> rustflags = ["-C","link-arg=-Taarch64-qemu.ld", "-C", "target-cpu=cortex-a53", "-D", "warnings"]
 > ```
 > 
 
