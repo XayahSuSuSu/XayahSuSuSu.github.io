@@ -25,13 +25,14 @@ tags: [ 'PyTorch', 'OpenVINO', '深度学习' ]
 nvidia-smi
 ```
 {% asset_img CUDA11.6.png CUDA11.6 %}
-- 安装**CUDA版本**
+* 安装**CUDA版本**
 ```
 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 ```
+
 ### 2) CPU版本
 若没有NVIDIA系显卡或其不支持CUDA加速，则可选择安装仅CPU版本。
-- 安装**仅CPU版本**
+* 安装**仅CPU版本**
 ```
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ```
@@ -112,6 +113,38 @@ tensor([[2., 3.],
         [4., 5.]]) torch.float32
 ```
 其中`torch.tensor()`默认的**数据类型**是**flaot32**，这点从`a.dtype`的**打印结果**上也得了**印证**。
+
+#### b. 转换声明
+`torch.tensor`函数支持从**NumPy数组**直接转换为**张量数据**。
+```
+import numpy as np
+import torch
+
+a = torch.tensor(np.array([[1, 2], [3, 4], [5, 6], [7, 8]]))
+print(a, a.dtype)
+```
+输出
+```
+tensor([[1, 2],
+        [3, 4],
+        [5, 6],
+        [7, 8]], dtype=torch.int32) torch.int32
+```
+函数返回的**数据类型**将会根据**NumPy数组**自动识别。
+
+#### c. 初始化声明
+**PyTorch框架**支持类似**MATLAB**的**数组初始化方式**，可以定义数组的**维度**，然后**初始化为零**。
+```
+import torch
+
+a = torch.zeros([2, 4], dtype=torch.float32)
+print(a, a.dtype)
+```
+输出
+```
+tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]]) torch.float32
+```
 
 未完待续...
 
