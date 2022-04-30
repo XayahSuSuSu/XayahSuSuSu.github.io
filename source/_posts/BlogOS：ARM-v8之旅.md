@@ -1822,6 +1822,197 @@ cargo build && qemu-system-aarch64 -machine virt -m 1024M -cpu cortex-a53 -nogra
 {% asset_img 输入中断.png 输入中断 %}
 
 #  六、GPIO关机
+> 参考代码：{% asset_link ScienceSix.tar.gz 下载 %}
+
+## 1. 原理
+查看`virt.dts`，可以**发现**：
+```
+gpio-keys {
+	#address-cells = <0x01>;
+	#size-cells = <0x00>;
+	compatible = "gpio-keys";
+
+	poweroff {
+		gpios = <0x8003 0x03 0x00>;
+		linux,code = <0x74>;
+		label = "GPIO Key Poweroff";
+	};
+};
+
+pl061@9030000 {
+	phandle = <0x8003>;
+	clock-names = "apb_pclk";
+	clocks = <0x8000>;
+	interrupts = <0x00 0x07 0x04>;
+	gpio-controller;
+	#gpio-cells = <0x02>;
+	compatible = "arm,pl061\0arm,primecell";
+	reg = <0x00 0x9030000 0x00 0x1000>;
+};
+```
+> 其中**gpio-keys**中定义了一个**poweroff**键， **gpios = <0x8003 0x03 0x00>** 中的第一项**0x8003**表示它的**phandle**是**0x8003**， 即**pl061@9030000**，也即**gpio-keys**是设备**pl061**的组成部分，第二项**0x03**表示该键是**pl061**的**第三根GPIO线**，第三项是**flag**，且**pl061**的寄存器映射到了内存**0x9030000**开始的位置。如下图所示。
+> {% asset_img gpio-poweroff.png gpio-poweroff %}
+
+## 2. 实现
+新建`src/pl061.rs`
+```
+touch src/pl061.rs
+```
+编辑`src/pl061.rs`，通过**tock-registers**描述**寄存器**
+```
+use tock_registers::{registers::{ReadWrite, WriteOnly}, register_bitfields, register_structs};
+
+pub const PL061REGS: *mut PL061Regs = (0x0903_0000) as *mut PL061Regs;
+
+register_bitfields![
+    u32,
+    pub GPIOIE [
+        IO3 OFFSET(3) NUMBITS(1) [
+            Disabled = 0,
+            Enabled = 1
+        ]
+    ],
+];
+
+register_structs! {
+    pub PL061Regs {
+        (0x000 => __reserved_0),                                               // 0x000
+        (0x410 => pub ie: ReadWrite<u32, GPIOIE::Register>),                   // 0x410
+        (0x414 => __reserved_1),                                               // 0x414
+        (0x41C => pub ic: WriteOnly<u32>),                                     // 0x41C
+        (0x420 => @END),                                                       // 0x420
+    }
+}
+```
+编辑`src/main.rs`，引入**pl061**模块。
+```
+// ······
+use core::arch::global_asm; // 导入需要的Module
+
+mod panic;
+mod uart_console;
+mod interrupts;
+mod pl061;
+
+global_asm!(include_str!("start.s"));
+// ······
+```
+{% asset_img mod_pl061.png mod_pl061 %}
+编辑`src/interrupts.rs`，在`init_gicv2`函数中**初始化pl061的GPIO中断**
+```
+// ······
+// 时钟中断号
+const TIMER_IRQ: u32 = 30;
+// 设备中断号
+const UART0_IRQ: u32 = 33;
+
+const GPIO_IRQ: u32 = 39; // virt.dts interrupts = <0x00 0x07 0x04>; 32 + 0x07 = 39
+
+pub fn init_gicv2() {
+    // 初始化Gicv2的distributor和cpu interface
+    // 禁用distributor和cpu interface后进行相应配置
+    // ······
+
+    // 初始化GPIO中断
+    set_config(GPIO_IRQ, ICFGR_LEVEL); //电平触发
+    set_priority(GPIO_IRQ, 0); //优先级设定
+    // set_core(TIMER_IRQ, 0x1); // 单核实现无需设置中断目标核
+    clear(GPIO_IRQ); //清除中断请求
+    enable(GPIO_IRQ); //使能中断
+
+    // 使能GPIO的poweroff key中断
+    use crate::pl061::*;
+    unsafe{
+        let pl061r: &PL061Regs = &*PL061REGS;
+
+        // 启用pl061 gpio中的3号线中断
+        pl061r.ie.write(GPIOIE::IO3::Enabled);
+    }
+
+    loop {
+        // ······
+    }
+}
+// ······
+```
+{% asset_img 初始化关机中断.png 初始化关机中断 %}
+编辑`src/interrupts.rs`，引入`tock_registers::interfaces::Writeable`
+```
+// ······
+use tock_registers::interfaces::Readable;
+use tock_registers::interfaces::Writeable;
+fn handle_irq_lines(ctx: &mut ExceptionCtx, _core_num: u32, irq_num: u32) {
+    // ······
+}
+// ······
+```
+{% asset_img 引入Writeable.png 引入Writeable %}
+编辑`src/interrupts.rs`，处理`pl061`**3号GPIO线**引发的**中断**
+```
+// ······
+fn handle_irq_lines(ctx: &mut ExceptionCtx, _core_num: u32, irq_num: u32) {
+    if irq_num == TIMER_IRQ {
+        handle_timer_irq(ctx);
+    }else if irq_num == UART0_IRQ {
+        handle_uart0_rx_irq(ctx);
+    }else if irq_num == GPIO_IRQ {
+        handle_gpio_irq(ctx);
+    }
+    else{
+        catch(ctx, EL1_IRQ);
+    }
+}
+
+fn handle_timer_irq(_ctx: &mut ExceptionCtx){
+    // ······
+}
+// ······
+fn handle_gpio_irq(_ctx: &mut ExceptionCtx){
+    use crate::pl061::*;
+    crate::println!("Power off!\n");
+    unsafe {
+        let pl061r: &PL061Regs = &*PL061REGS;
+
+        // 清除中断信号
+        pl061r.ic.set(pl061r.ie.get());
+        // 关机
+        asm!("mov w0, #0x18");
+        asm!("hlt #0xF000");
+    }
+}
+```
+{% asset_img 关机中断处理1.png 关机中断处理1 %}
+{% asset_img 关机中断处理2.png 关机中断处理2 %}
+> 在 **handle_gpio_irq()** 函数里通过**内联汇编**执行了指令**hlt #0xF000**，这里用到了**ARM**的**Semihosting**功能。
+> 
+> - **Semihosting**的作用：能够让**bare-metal**的**ARM**设备通过**拦截指定的SVC指令**，在连**操作系统**都没有的环境中实现**POSIX**中的许多**标准函数**，比如**printf**、**scanf**、**open**、**read**、**write**等等。这些**IO**操作将被**Semihosting**协议转发到**Host主机**上，然后由**主机代为执行**。
+
+编辑`src/interrupts.rs`，停止打点，方便后续测试观察
+```
+// ······
+fn handle_timer_irq(_ctx: &mut ExceptionCtx){
+
+    // crate::print!(".");
+
+    // 每2秒产生一次中断
+    unsafe {
+        asm!("mrs x1, CNTFRQ_EL0");
+        asm!("add x1, x1, x1");
+        asm!("msr CNTP_TVAL_EL0, x1");
+    }
+
+}
+// ······
+```
+{% asset_img 停止打点.png 停止打点 %}
+
+## 3. 执行
+> 为了启用**Semihosting**功能，在**QEMU**执行时需要加入 **-semihosting** 参数
+```
+cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+先按`Ctrl + A`，松手再按`C`，然后输入`system_powerdown`执行关机。
+{% asset_img 执行关机.png 执行关机 %}
 
 #  七、死锁与简单处理
 
