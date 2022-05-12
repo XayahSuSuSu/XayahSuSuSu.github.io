@@ -2015,5 +2015,121 @@ cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -
 {% asset_img 执行关机.png 执行关机 %}
 
 #  七、死锁与简单处理
+> 参考代码：{% asset_link ScienceSeven.tar.gz 下载 %}
+> 
+> 当**多个任务**访问**同一个资源（数据）**时就会引发**竞争条件问题**，这不仅在**进程间**会出现，在**操作系统**和**进程间**也会出现。由**竞争条件**引发的问题很难**复现**和**调试**，这也是其**最困难**的地方。本**实验**的目的在于**了解竞争条件**和**死锁现象**，并**掌握**处理这些问题的**初步方法**等。
+
+## 勘误
+> 在**src/interrupts.rs**的**init_gicv2()**函数中，我们之前使用了一个**循环**并使用**内联汇编asm!("wfi")**来**等待中断**，实际上在之前的实验中，这里所有的**内联汇编**都是没有必要的。当去掉这个**循环**，我们的**OS**会**串行执行完成**然后**自动关机**，从而导致后续的测试**无效**。因此我们**需要且仅需要**一个**空循环**来**使OS持续运行**，以便后续的**中断测试**。
+
+编辑`src/interrupts.rs`，在`init_gicv2()`函数中移除`loop{}`循环。
+{% asset_img 去除无效内联汇编.png 去除无效内联汇编 %}
+
+编辑`src/main.rs`，在`not_main()`函数尾部添加`loop{}`空循环。
+```
+// ······
+#[no_mangle] // 不修改函数名
+pub extern "C" fn not_main() {
+    println!("\n[0] Hello from Rust!\n");
+    interrupts::init_gicv2();
+    loop {}
+}
+```
+{% asset_img 添加空循环.png 添加空循环 %}
+
+## 死锁的复现
+首先编辑`src/main.rs`，在`not_main()`函数的空循环中调用`print!`宏
+```
+// ······
+global_asm!(include_str!("start.s"));
+
+#[no_mangle] // 不修改函数名
+pub extern "C" fn not_main() {
+    println!("\n[0] Hello from Rust!\n");
+    interrupts::init_gicv2();
+    loop {
+        print!("-");
+    }
+}
+```
+{% asset_img loop1.png loop1 %}
+
+这里有两种方式复现死锁现象。
+
+### 1. loop{}中`print!`宏与`handle_uart0_rx_irq()`中`print!`宏竞争
+检查`src/interrupts.rs`中的`handle_uart0_rx_irq()`函数，可以看到我们之前写了一个输入中断回调函数，在函数中调用了`print!`宏输出信息。
+{% asset_img 输入中断函数.png 输入中断函数 %}
+
+直接编译并运行，预期在输入时触发死锁。
+```
+cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+
+不停地乱序敲击键盘，此时有概率出现卡死，按键无法再次输入内容，即触发死锁现象。
+{% asset_img 死锁.png 死锁 %}
+
+### 2. loop{}中`print!`宏与`handle_timer_irq()`中`print!`宏竞争
+检查`src/interrupts.rs`中的`handle_timer_irq()`函数，可以看到我们之前写了一个时间中断回调函数，在函数中调用了`print!`宏打点。
+
+但它之前被我们注释掉了，因此我们取消注释
+{% asset_img 重新打点.png 重新打点 %}
+
+然后我们编译并运行，预期在打第一个点时会触发死锁。
+```
+cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+
+实验按预期触发了死锁。
+{% asset_img 打点死锁.png 打点死锁 %}
+有时会在打第二个点时触发死锁。
+{% asset_img 打点死锁2.png 打点死锁2 %}
+
+## 死锁的简单处理
+编辑`src/uart_console/mod.rs`，引入`asm!`宏
+```
+// ······
+impl core::fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        // ······
+    }
+}
+
+use core::{fmt, arch::asm};
+
+use lazy_static::lazy_static;
+use spin::Mutex;
+
+use tock_registers::interfaces::Writeable;
+
+pub mod pl011;
+use pl011::*;
+// ······
+```
+{% asset_img 引入asm.png 引入asm %}
+
+编辑`src/uart_console/mod.rs`中的`_print()`函数，在处理输入时先关闭中断，再打开。
+```
+// ······
+/// Prints the given formatted string to the VGA text buffer through the global `WRITER` instance.
+#[doc(hidden)]
+pub fn _print(args: fmt::Arguments) {
+    use core::fmt::Write;
+    unsafe {
+        // 关闭d a i f类型的中断
+        asm!("msr daifset, #0xf");
+    }
+
+    WRITER.lock().write_fmt(args).unwrap();
+
+    unsafe {
+        // 仅打开i类型的中断，不支持嵌套，嵌套应该保存状态，然后再恢复之前的状态
+        asm!("msr daifclr, #2");
+    }
+}
+```
+{% asset_img 修复死锁.png 修复死锁 %}
+
+## 验证
+此时再用上述两种方式测试死锁，发现死锁现象消失了~
 
 #  八、内存管理
