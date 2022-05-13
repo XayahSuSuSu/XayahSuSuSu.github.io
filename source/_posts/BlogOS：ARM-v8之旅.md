@@ -8,6 +8,7 @@ tags: [ 'BlogOS', '移植' ]
 **BlogOS**是**Philipp Oppermann**用**Rust语言**编写的**面向x86架构**的**简单操作系统**。
 
 **《ARM v8之旅》**将作为 **[湖南大学2022年操作系统课程实验](https://os2022exps-doc.readthedocs.io/zh_CN/latest/index.html)** 个人参考**笔记**。
+更**详细的解析**请参考 **[rust写个操作系统：课程实验blogos移至armV8深度解析](https://noionion.top/16433.html)** 。
 
 # 参考文章
 - [libncursesw.so.5 is installed but a program that needs it says "No such file or directory"](https://stackoverflow.com/questions/64491112/libncursesw-so-5-is-installed-but-a-program-that-needs-it-says-no-such-file-or)
