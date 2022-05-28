@@ -2134,3 +2134,406 @@ pub fn _print(args: fmt::Arguments) {
 此时再用上述两种方式测试死锁，发现死锁现象消失了~
 
 #  八、内存管理
+> 分页内存管理是内存管理的基本方法之一。本实验的目的在于全面理解分页式内存管理的基本方法以及访问页表，完成地址转换等的方法。
+
+## ARM v8的地址转换
+> **[ARM Cortex-A Series Programmer's Guide for ARMv8-A](https://developer.arm.com/documentation/den0024/a/The-Memory-Management-Unit/Context-switching)** 中提到：
+> 
+> For EL0 and EL1, there are two translation tables. TTBR0_EL1 provides translations for the bottom of Virtual Address space, which is typically application space and TTBR1_EL1 covers the top of Virtual Address space, typically kernel space. This split means that the OS mappings do not have to be replicated in the translation tables of each task.
+> 
+> 即**TTBR0**指向**虚拟空间下半部分**通常用于**应用程序**的空间，**TTBR1**指向**虚拟空间上半部分**通常用于**内核**的空间。其中**TTBR0**除了在**EL1**中存在外，也在**EL2**和**EL3**中存在，但**TTBR1**只在**EL1**中存在。
+> 
+> **TTBR0_ELn**和**TTBR1_ELn**是页表**基地址寄存器**，**地址转换**的过程如下所示 
+> {% asset_img v2p-translate.svg v2p-translate %}
+
+## 一、使用Identity Mapping映射
+> 参考代码：{% asset_link ScienceEight1.tar.gz 下载 %}
+> 
+> **虚拟地址转换**很**容易出错**也**很难调试**，所以我们从**最简单的方式**开始，即采用**Identity Mapping**，将**虚拟地址**映射到**相同**的**物理地址**。
+
+编辑`src/start.s`，初始化MMU、页表以及启用页表。
+```
+.globl _start
+.extern LD_STACK_PTR
+.section ".text.boot"
+
+_start:
+        ldr     x30, =LD_STACK_PTR
+        mov     sp, x30
+
+        // Initialize exceptions
+        ldr     x0, =exception_vector_table
+        msr     vbar_el1, x0
+        isb
+
+_setup_mmu:
+        // 初始化TCR控制寄存器
+        ldr     x0, =TCR_EL1_VALUE
+        msr     tcr_el1, x0
+        ldr     x0, =MAIR_EL1_VALUE
+        msr     mair_el1, x0            // 内存属性间接寄存器，作用是预先定义好属性，然后通过索引来访问这些预定义的属性
+
+_setup_pagetable:
+        // 因为采用的36位地址空间，所以是一级页表
+        ldr     x1, =LD_TTBR0_BASE
+        msr     ttbr0_el1, x1           //页表基地址TTBR0
+        ldr     x2, =LD_TTBR1_BASE
+        msr     ttbr1_el1, x2           //页表基地址TTBR1
+
+        // 一级页表部分
+        // 虚拟地址空间的下半部分采用Identity Mapping
+        // 第一项 虚拟地址0 - 1G，根据virt的定义为flash和外设，参见virt.c
+        ldr     x3, =0x0
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =PERIPHERALS_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+        // 第二项 虚拟地址1G - 2G，_start部分
+        ldr     x3, =_start
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =IDENTITY_MAP_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+
+_enable_mmu:
+        // 启用MMU.
+        mrs     x0, sctlr_el1
+        orr     x0, x0, #0x1
+        msr     sctlr_el1, x0
+        dsb     sy                      // Programmer’s Guide for ARMv8-A chapter13.2 Barriers
+        isb
+
+_start_main:
+        bl      not_main
+
+.equ PSCI_SYSTEM_OFF, 0x84000002
+.globl system_off
+system_off:
+        ldr     x0, =PSCI_SYSTEM_OFF
+        hvc     #0
+
+.equ TCR_EL1_VALUE, 0x1B55C351C
+// ---------------------------------------------
+// IPS   | b001    << 32 | 36bits address space - 64GB
+// TG1   | b10     << 30 | 4KB granule size for TTBR1_EL1
+// SH1   | b11     << 28 | 页表所在memory: Inner shareable
+// ORGN1 | b01     << 26 | 页表所在memory: Normal, Outer Wr.Back Rd.alloc Wr.alloc Cacheble
+// IRGN1 | b01     << 24 | 页表所在memory: Normal, Inner Wr.Back Rd.alloc Wr.alloc Cacheble
+// EPD   | b0      << 23 | Perform translation table walk using TTBR1_EL1
+// A1    | b1      << 22 | TTBR1_EL1.ASID defined the ASID
+// T1SZ  | b011100 << 16 | Memory region 2^(64-28) -> 0xffffffexxxxxxxxx
+// TG0   | b00     << 14 | 4KB granule size
+// SH0   | b11     << 12 | 页表所在memory: Inner Sharebale
+// ORGN0 | b01     << 10 | 页表所在memory: Normal, Outer Wr.Back Rd.alloc Wr.alloc Cacheble
+// IRGN0 | b01     << 8  | 页表所在memory: Normal, Inner Wr.Back Rd.alloc Wr.alloc Cacheble
+// EPD0  | b0      << 7  | Perform translation table walk using TTBR0_EL1
+// 0     | b0      << 6  | Zero field (reserve)
+// T0SZ  | b011100 << 0  | Memory region 2^(64-28)
+
+.equ MAIR_EL1_VALUE, 0xFF440C0400
+// ---------------------------------------------
+//                   INDX         MAIR
+// DEVICE_nGnRnE    b000(0)     b00000000
+// DEVICE_nGnRE         b001(1)         b00000100
+// DEVICE_GRE               b010(2)     b00001100
+// NORMAL_NC                b011(3)     b01000100
+// NORMAL               b100(4)         b11111111
+
+.equ PERIPHERALS_ATTR, 0x60000000000601
+// -------------------------------------
+// UXN   | b1      << 54 | Unprivileged eXecute Never
+// PXN   | b1      << 53 | Privileged eXecute Never
+// AF    | b1      << 10 | Access Flag
+// SH    | b10     << 8  | Outer shareable
+// AP    | b01     << 6  | R/W, EL0 access denied
+// NS    | b0      << 5  | Security bit (EL3 and Secure EL1 only)
+// INDX  | b000    << 2  | Attribute index in MAIR_ELn，参见MAIR_EL1_VALUE
+// ENTRY | b01     << 0  | Block entry
+
+.equ IDENTITY_MAP_ATTR, 0x40000000000711
+// ------------------------------------
+// UXN   | b1      << 54 | Unprivileged eXecute Never
+// PXN   | b0      << 53 | Privileged eXecute Never
+// AF    | b1      << 10 | Access Flag
+// SH    | b11     << 8  | Inner shareable
+// AP    | b00     << 6  | R/W, EL0 access denied
+// NS    | b0      << 5  | Security bit (EL3 and Secure EL1 only)
+// INDX  | b100    << 2  | Attribute index in MAIR_ELn，参见MAIR_EL1_VALUE
+// ENTRY | b01     << 0  | Block entry
+```
+{% asset_img 编辑start.png 编辑start %}
+(如果预览不清晰，可以在新标签页中打开图片，或者下载图片，然后放大)
+
+编辑`aarch64-qemu.ld`，定义前文中用到的LD_TTBR0_BASE和LD_TTBR1_BASE符号
+```
+ENTRY(_start)
+SECTIONS
+{
+    . = 0x40080000;
+    .text.boot : { *(.text.boot) }
+    .text :
+    {
+        KEEP(*(.text.boot))
+        *(.text.exceptions)
+        . = ALIGN(4096); /* align for exceptions_vector_table*/
+        *(.text.exceptions_vector_table)
+        *(.text)
+    }
+    .data : { *(.data) }
+    .rodata : { *(.rodata) }
+    .bss : { *(.bss) }
+
+    . = ALIGN(8);
+    . = . + 0x4000;
+    LD_STACK_PTR = .;
+
+    . = ALIGN(4096);
+    /*页表基地址TTBR0*/
+    LD_TTBR0_BASE = .;
+    . = . + 0x1000;
+
+    /*页表基地址TTBR1*/
+    LD_TTBR1_BASE = .;
+    . = . + 0x1000;
+}
+```
+{% asset_img 编辑ld.png 编辑ld %}
+
+编译并运行，测试能否正常工作。
+```
+cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+{% asset_img 第一次测试.png 第一次测试 %}
+正常运行！
+
+## 二、使用Identity Mapping映射 - 偏移映射与页面共享
+> 参考代码：{% asset_link ScienceEight2.tar.gz 下载 %}
+> 
+> 修改代码，将**虚拟地址**2G - 3G处映射到**物理地址**0 - 1G，从而对**0x89000000**地址的写入将通过**pl011**串口输出，因为此时**0x89000000**映射到了**物理地址pl011@9000000**。
+
+编辑`src/start.s`，空白映射**虚拟地址**0 - 1G，将**虚拟地址**2G - 3G处映射到**物理地址**0 - 1G。
+```
+// ······
+_setup_pagetable:
+        // 因为采用的36位地址空间，所以是一级页表
+        ldr     x1, =LD_TTBR0_BASE
+        msr     ttbr0_el1, x1           //页表基地址TTBR0
+        ldr     x2, =LD_TTBR1_BASE
+        msr     ttbr1_el1, x2           //页表基地址TTBR1
+
+        // 一级页表部分
+        // 虚拟地址空间的下半部分采用Identity Mapping
+        // 第一项 虚拟地址0 - 1G
+        ldr     x5, =0x0
+        str     x5, [x1], #8
+        // 第二项 虚拟地址1G - 2G，_start部分
+        ldr     x3, =_start
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =IDENTITY_MAP_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+        // 第三项 虚拟地址2 - 3G，根据virt的定义为flash和外设，参见virt.c
+        ldr     x3, =0x0
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =PERIPHERALS_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+// ······
+```
+{% asset_img 映射23G.png 映射23G %}
+
+编辑`src/interrupts.rs`，修改其基址（2G+原基址）
+```
+use core::ptr;
+
+// GICD和GICC寄存器内存映射后的起始地址
+const GICD_BASE: u64 = 0x8000_0000 + 0x08000000;
+const GICC_BASE: u64 = 0x8000_0000 + 0x08010000;
+
+// Distributor
+// ······
+```
+{% asset_img 修改中断.png 修改中断 %}
+
+编辑`src/pl061.rs`，修改其基址（2G+原基址）
+```
+use tock_registers::{registers::{ReadWrite, WriteOnly}, register_bitfields, register_structs};
+
+pub const PL061REGS: *mut PL061Regs = (0x8000_0000u32 + 0x0903_0000) as *mut PL061Regs;
+// ······
+```
+{% asset_img 修改pl061.png 修改pl061 %}
+
+编辑`src/uart_console/pl011.rs`，修改其基址（2G+原基址）
+```
+use tock_registers::{registers::{ReadOnly, ReadWrite, WriteOnly}, register_bitfields, register_structs};
+
+pub const PL011REGS: *mut PL011Regs = (0x8000_0000u32 +0x0900_0000) as *mut PL011Regs;
+// ······
+```
+{% asset_img 修改pl011.png 修改pl011 %}
+
+编译并运行，测试能否正常工作。
+```
+cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+{% asset_img 第二次测试.png 第二次测试 %}
+正常运行！
+
+## 三、使用非Identity Mapping映射 - 块级映射
+> 参考代码：{% asset_link ScienceEight3.tar.gz 下载 %}
+
+编辑`src/start.s`，处理虚拟地址空间的上半部分。
+```
+// ······
+_setup_pagetable:
+        // 因为采用的36位地址空间，所以是一级页表
+        ldr     x1, =LD_TTBR0_BASE
+        msr     ttbr0_el1, x1           //页表基地址TTBR0
+        ldr     x2, =LD_TTBR1_BASE
+        msr     ttbr1_el1, x2           //页表基地址TTBR1
+
+        // 一级页表部分
+        // 虚拟地址空间的下半部分采用Identity Mapping
+        // 第一项 虚拟地址0 - 1G
+        ldr     x5, =0x0
+        str     x5, [x1], #8
+        // 第二项 虚拟地址1G - 2G，_start部分
+        ldr     x3, =0x40010000
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =IDENTITY_MAP_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+
+        // 虚拟地址空间的上半部分采用非Identity Mapping
+        // 第一项 虚拟地址0 - 1G，根据virt的定义为flash和外设，参见virt.c
+        ldr     x3, =0x0 //
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =PERIPHERALS_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x2], #8
+
+        // 第二项， 映射到内存（块级映射）
+        ldr     x3, =0x40010000
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =KERNEL_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x2], #8
+
+_enable_mmu:
+// ······
+
+.equ KERNEL_ATTR, 0x40000000000711
+// -------------------------------------
+// UXN   | b1      << 54 | Unprivileged eXecute Never
+// PXN   | b0      << 53 | Privileged eXecute Never
+// AF    | b1      << 10 | Access Flag
+// SH    | b11     << 8  | Inner shareable
+// AP    | b00     << 6  | R/W, EL0 access denied
+// NS    | b0      << 5  | Security bit (EL3 and Secure EL1 only)
+// INDX  | b100    << 2  | Attribute index in MAIR_ELn，参见MAIR_EL1_VALUE
+// ENTRY | b01     << 0  | Block entry
+```
+{% asset_img start1.png start1 %}
+
+重构`aarch64-qemu.ld`
+```
+__KERN_VMA_BASE = 0xfffffff000000000;
+__PHY_DRAM_START_ADDR = 0x40000000;
+__PHY_START_LOAD_ADDR = 0x40010000;
+
+ENTRY(__PHY_START_LOAD_ADDR)
+SECTIONS
+{
+    . = __KERN_VMA_BASE + __PHY_START_LOAD_ADDR;
+    .text.boot : AT(__PHY_START_LOAD_ADDR) { KEEP(*(.text.boot)) }
+    .text :
+    {
+        *(.text*)
+    }
+    . = ALIGN(0x1000);
+
+    LD_DATA_BASE = .;
+    .data : { *(.data*) }
+    . = ALIGN(0x1000);
+
+    LD_RODATA_BASE = .;
+    .rodata : { *(.rodata*) }
+    . = ALIGN(0x1000);
+
+    LD_BSS_BASE = .;
+    .bss :
+    { 
+        *(.bss*)
+        . = ALIGN(4096);
+        . += (4096 * 100); /* 栈的大小 */
+        stack_top = .;
+        LD_STACK_PTR = .;
+    }
+
+    /* 页表 */
+    .pt :
+        {
+        . = ALIGN(4096);
+
+        /* 页表基地址TTBR0 */
+        LD_TTBR0_BASE = . - __KERN_VMA_BASE;
+        . = . + 0x1000;
+
+        /* 页表基地址TTBR1 */
+        LD_TTBR1_BASE = . - __KERN_VMA_BASE;
+        . = . + 0x1000;
+        }
+
+    . = . + 0x1000;
+    LD_KERNEL_END = . - __KERN_VMA_BASE;
+}
+```
+
+编辑`src/interrupts.rs`，修改其基址（0xfffffff000000000+原基址）
+```
+use core::ptr;
+
+// GICD和GICC寄存器内存映射后的起始地址
+const GICD_BASE: u64 = 0xfffffff000000000 + 0x08000000;
+const GICC_BASE: u64 = 0xfffffff000000000 + 0x08010000;
+
+// Distributor
+// ······
+```
+{% asset_img 修改中断3.png 修改中断3 %}
+
+编辑`src/pl061.rs`，修改其基址（0xfffffff000000000+原基址）
+```
+use tock_registers::{registers::{ReadWrite, WriteOnly}, register_bitfields, register_structs};
+
+pub const PL061REGS: *mut PL061Regs = (0xfffffff000000000u64 + 0x0903_0000) as *mut PL061Regs;
+// ······
+```
+{% asset_img 修改pl0613.png 修改pl0613 %}
+
+编辑`src/uart_console/pl011.rs`，修改其基址（0xfffffff000000000+原基址）
+```
+use tock_registers::{registers::{ReadOnly, ReadWrite, WriteOnly}, register_bitfields, register_structs};
+
+pub const PL011REGS: *mut PL011Regs = (0xfffffff000000000u64 + 0x0900_0000) as *mut PL011Regs;
+// ······
+```
+{% asset_img 修改pl0113.png 修改pl0113 %}
+
+编译并运行，测试能否正常工作。
+```
+cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+{% asset_img 第三次测试.png 第三次测试 %}
+正常运行！
+
+## 四、使用非Identity Mapping映射 - 页表映射
+> 未完待续。
