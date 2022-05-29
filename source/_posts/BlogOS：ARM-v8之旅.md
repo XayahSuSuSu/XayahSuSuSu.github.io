@@ -2604,6 +2604,13 @@ _setup_pagetable:
         orr     x5, x5, x6              // 添加符号
         str     x5, [x2], #8
 
+        // 第二项，映射到页表
+        ldr     x3, =LD_TTBR1_L2TBL
+        ldr     x4, =0xFFFFF000
+        and     x5, x3, x4             // NSTable=0 APTable=0 XNTable=0 PXNTable=0.
+        orr     x5, x5, 0x3            // Valid page table entry
+        str     x5, [x2], #8           //TTBR1
+
         // 二级页表，内核总共16M，参见aarch64-qemu.ld文件
         ldr     x3, =LD_TTBR1_L2TBL
         mov     x4, #8                  // 8个二级页表项
@@ -2613,7 +2620,7 @@ _setup_pagetable:
         ldr     x6, =0x00200000         // 每次增加2M
 
 _build_2nd_pgtbl:
-        str     x5, [x2], #8            // 填入内容到页表项
+        str     x5, [x3], #8            // 填入内容到页表项
         add     x5, x5, x6              // 下一项的地址增加2M
         subs    x4, x4, #1              // 项数减少1
         bne     _build_2nd_pgtbl
