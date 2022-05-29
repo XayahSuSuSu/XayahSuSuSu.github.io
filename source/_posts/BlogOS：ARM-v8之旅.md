@@ -2533,6 +2533,37 @@ pub const PL011REGS: *mut PL011Regs = (0xfffffff000000000u64 + 0x0900_0000) as *
 cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
 ```
 {% asset_img 第三次测试.png 第三次测试 %}
+~~正常运行！~~
+
+### 修复异常现象
+> 参考代码：{% asset_link ScienceEight3Fix.tar.gz 下载 %}
+
+乍一看能正常运行，但是运行一段时间后居然卡死了！这是为什么呢？
+第一时间想到的是互斥锁可能出问题了，但是仔细看互斥锁的代码发现和内存映射关系应该不大。
+仔细观察输出发现打点是正常的，而且在没有卡死之前如果触发输入中断则会立刻卡死，因此判断是输入中断出了问题，[noionion](https://noionion.top/)认为是链接脚本的问题，而事实也如他所说。
+
+编辑`aarch64-qemu.ld`，修改.text : {}部分：
+```
+/* ······ */
+.text.boot : AT(__PHY_START_LOAD_ADDR) { KEEP(*(.text.boot)) }
+.text :
+{
+    KEEP(*(.text.boot))
+    *(.text.exceptions)
+    . = ALIGN(4096); /* align for exceptions_vector_table*/
+    *(.text.exceptions_vector_table)
+    *(.text)
+}
+. = ALIGN(0x1000);
+/* ······ */
+```
+{% asset_img 修复ld.png 修复ld %}
+
+编译并运行，测试能否正常工作。
+```
+cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+{% asset_img 第三点五次测试.png 第三点五次测试 %}
 正常运行！
 
 ## 四、使用非Identity Mapping映射 - 页表映射
