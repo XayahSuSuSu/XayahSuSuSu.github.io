@@ -2134,12 +2134,12 @@ pub fn _print(args: fmt::Arguments) {
 此时再用上述两种方式测试死锁，发现死锁现象消失了~
 
 #  八、内存管理
-> 分页内存管理是内存管理的基本方法之一。本实验的目的在于全面理解分页式内存管理的基本方法以及访问页表，完成地址转换等的方法。
+> **分页内存管理**是**内存管理**的**基本方法之一**。本实验的目的在于**全面理解分页式内存管理**的**基本方法**以及**访问页表**，**完成地址转换**等的方法。
 
 ## ARM v8的地址转换
 > **[ARM Cortex-A Series Programmer's Guide for ARMv8-A](https://developer.arm.com/documentation/den0024/a/The-Memory-Management-Unit/Context-switching)** 中提到：
 > 
-> For EL0 and EL1, there are two translation tables. TTBR0_EL1 provides translations for the bottom of Virtual Address space, which is typically application space and TTBR1_EL1 covers the top of Virtual Address space, typically kernel space. This split means that the OS mappings do not have to be replicated in the translation tables of each task.
+> For **EL0** and **EL1**, there are **two translation tables**. **TTBR0_EL1** provides translations for **the bottom of Virtual Address space**, which is **typically application space** and **TTBR1_EL1** covers **the top of Virtual Address space**, **typically kernel space**. This split means that the OS mappings do not have to be replicated in the translation tables of each task.
 > 
 > 即**TTBR0**指向**虚拟空间下半部分**通常用于**应用程序**的空间，**TTBR1**指向**虚拟空间上半部分**通常用于**内核**的空间。其中**TTBR0**除了在**EL1**中存在外，也在**EL2**和**EL3**中存在，但**TTBR1**只在**EL1**中存在。
 > 
@@ -2151,7 +2151,7 @@ pub fn _print(args: fmt::Arguments) {
 > 
 > **虚拟地址转换**很**容易出错**也**很难调试**，所以我们从**最简单的方式**开始，即采用**Identity Mapping**，将**虚拟地址**映射到**相同**的**物理地址**。
 
-编辑`src/start.s`，初始化MMU、页表以及启用页表。
+编辑`src/start.s`，初始化**MMU**、**页表**以及**启用页表**。
 ```
 .globl _start
 .extern LD_STACK_PTR
@@ -2264,9 +2264,9 @@ system_off:
 // ENTRY | b01     << 0  | Block entry
 ```
 {% asset_img 编辑start.png 编辑start %}
-(如果预览不清晰，可以在新标签页中打开图片，或者下载图片，然后放大)
+(如果**预览不清晰**，可以在**新标签页**中**打开图片**，或者**下载图片**，然后**放大**)
 
-编辑`aarch64-qemu.ld`，定义前文中用到的LD_TTBR0_BASE和LD_TTBR1_BASE符号
+编辑`aarch64-qemu.ld`，定义前文中用到的`LD_TTBR0_BASE`和`LD_TTBR1_BASE`符号
 ```
 ENTRY(_start)
 SECTIONS
@@ -2301,12 +2301,12 @@ SECTIONS
 ```
 {% asset_img 编辑ld.png 编辑ld %}
 
-编译并运行，测试能否正常工作。
+**编译**并**运行**，**测试**能否**正常工作**。
 ```
 cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
 ```
 {% asset_img 第一次测试.png 第一次测试 %}
-正常运行！
+**正常运行！**
 
 ## 二、使用Identity Mapping映射 - 偏移映射与页面共享
 > 参考代码：{% asset_link ScienceEight2.tar.gz 下载 %}
@@ -2346,7 +2346,7 @@ _setup_pagetable:
 ```
 {% asset_img 映射23G.png 映射23G %}
 
-编辑`src/interrupts.rs`，修改其基址（2G+原基址）
+编辑`src/interrupts.rs`，修改其**基址（2G+原基址）**
 ```
 use core::ptr;
 
@@ -2359,7 +2359,7 @@ const GICC_BASE: u64 = 0x8000_0000 + 0x08010000;
 ```
 {% asset_img 修改中断.png 修改中断 %}
 
-编辑`src/pl061.rs`，修改其基址（2G+原基址）
+编辑`src/pl061.rs`，修改其**基址（2G+原基址）**
 ```
 use tock_registers::{registers::{ReadWrite, WriteOnly}, register_bitfields, register_structs};
 
@@ -2368,7 +2368,7 @@ pub const PL061REGS: *mut PL061Regs = (0x8000_0000u32 + 0x0903_0000) as *mut PL0
 ```
 {% asset_img 修改pl061.png 修改pl061 %}
 
-编辑`src/uart_console/pl011.rs`，修改其基址（2G+原基址）
+编辑`src/uart_console/pl011.rs`，修改其**基址（2G+原基址）**
 ```
 use tock_registers::{registers::{ReadOnly, ReadWrite, WriteOnly}, register_bitfields, register_structs};
 
@@ -2377,17 +2377,17 @@ pub const PL011REGS: *mut PL011Regs = (0x8000_0000u32 +0x0900_0000) as *mut PL01
 ```
 {% asset_img 修改pl011.png 修改pl011 %}
 
-编译并运行，测试能否正常工作。
+**编译**并**运行**，**测试**能否**正常工作**。
 ```
 cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
 ```
 {% asset_img 第二次测试.png 第二次测试 %}
-正常运行！
+**正常运行！**
 
 ## 三、使用非Identity Mapping映射 - 块级映射
 > 参考代码：{% asset_link ScienceEight3.tar.gz 下载 %}
 
-编辑`src/start.s`，处理虚拟地址空间的上半部分。
+编辑`src/start.s`，处理**虚拟地址空间**的**上半部分**。
 ```
 // ······
 _setup_pagetable:
@@ -2443,7 +2443,7 @@ _enable_mmu:
 ```
 {% asset_img start1.png start1 %}
 
-重构`aarch64-qemu.ld`
+**重构**`aarch64-qemu.ld`
 ```
 __KERN_VMA_BASE = 0xfffffff000000000;
 __PHY_DRAM_START_ADDR = 0x40000000;
@@ -2497,7 +2497,7 @@ SECTIONS
 }
 ```
 
-编辑`src/interrupts.rs`，修改其基址（0xfffffff000000000+原基址）
+编辑`src/interrupts.rs`，修改其**基址（0xfffffff000000000+原基址）**
 ```
 use core::ptr;
 
@@ -2510,7 +2510,7 @@ const GICC_BASE: u64 = 0xfffffff000000000 + 0x08010000;
 ```
 {% asset_img 修改中断3.png 修改中断3 %}
 
-编辑`src/pl061.rs`，修改其基址（0xfffffff000000000+原基址）
+编辑`src/pl061.rs`，修改其**基址（0xfffffff000000000+原基址）**
 ```
 use tock_registers::{registers::{ReadWrite, WriteOnly}, register_bitfields, register_structs};
 
@@ -2519,7 +2519,7 @@ pub const PL061REGS: *mut PL061Regs = (0xfffffff000000000u64 + 0x0903_0000) as *
 ```
 {% asset_img 修改pl0613.png 修改pl0613 %}
 
-编辑`src/uart_console/pl011.rs`，修改其基址（0xfffffff000000000+原基址）
+编辑`src/uart_console/pl011.rs`，修改其**基址（0xfffffff000000000+原基址）**
 ```
 use tock_registers::{registers::{ReadOnly, ReadWrite, WriteOnly}, register_bitfields, register_structs};
 
@@ -2528,21 +2528,23 @@ pub const PL011REGS: *mut PL011Regs = (0xfffffff000000000u64 + 0x0900_0000) as *
 ```
 {% asset_img 修改pl0113.png 修改pl0113 %}
 
-编译并运行，测试能否正常工作。
+**编译**并**运行**，**测试**能否**正常工作**。
 ```
 cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
 ```
 {% asset_img 第三次测试.png 第三次测试 %}
-~~正常运行！~~
+**~~正常运行！~~**
 
 ### 修复异常现象
 > 参考代码：{% asset_link ScienceEight3Fix.tar.gz 下载 %}
 
-乍一看能正常运行，但是运行一段时间后居然卡死了！这是为什么呢？
-第一时间想到的是互斥锁可能出问题了，但是仔细看互斥锁的代码发现和内存映射关系应该不大。
-仔细观察输出发现打点是正常的，而且在没有卡死之前如果触发输入中断则会立刻卡死，因此判断是输入中断出了问题，[noionion](https://noionion.top/)认为是链接脚本的问题，而事实也如他所说。
+乍一看能**正常运行**，但是运行一段时间后居然**卡死**了！这是**为什么**呢？
 
-编辑`aarch64-qemu.ld`，修改.text : {}部分：
+**第一时间**想到的是**互斥锁**可能出问题了，但是仔细看**互斥锁**的**代码**发现和**内存映射**关系应该不大。
+
+仔细观察**输出**发现**打点**是**正常**的，而且在**没有卡死之前**如果触发**输入中断**则会**立刻卡死**，因此判断是**输入中断**出了问题， **[noionion](https://noionion.top/)** 认为是**链接脚本**的问题，而**事实**也如他所说。
+
+编辑`aarch64-qemu.ld`，修改`.text : {}`部分：
 ```
 /* ······ */
 .text.boot : AT(__PHY_START_LOAD_ADDR) { KEEP(*(.text.boot)) }
@@ -2559,12 +2561,101 @@ cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -c
 ```
 {% asset_img 修复ld.png 修复ld %}
 
-编译并运行，测试能否正常工作。
+**编译**并**运行**，**测试**能否**正常工作**。
 ```
 cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
 ```
 {% asset_img 第三点五次测试.png 第三点五次测试 %}
-正常运行！
+**正常运行！**
 
 ## 四、使用非Identity Mapping映射 - 页表映射
-> 未完待续。
+> 参考代码：{% asset_link ScienceEight4.tar.gz 下载 %}
+
+在**成功实现块级映射**后，我们就可以尝试**实现二级页表映射**了。
+编辑`src/start.s`，修改**块级映射**为**二级页表映射**。
+```
+// ······
+_setup_pagetable:
+        // 因为采用的36位地址空间，所以是一级页表
+        ldr     x1, =LD_TTBR0_BASE
+        msr     ttbr0_el1, x1           //页表基地址TTBR0
+        ldr     x2, =LD_TTBR1_BASE
+        msr     ttbr1_el1, x2           //页表基地址TTBR1
+
+        // 一级页表部分
+        // 虚拟地址空间的下半部分采用Identity Mapping
+        // 第一项 虚拟地址0 - 1G
+        ldr     x5, =0x0
+        str     x5, [x1], #8
+        // 第二项 虚拟地址1G - 2G，_start部分
+        ldr     x3, =LD_TTBR1_L2TBL
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =IDENTITY_MAP_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x1], #8
+
+        // 虚拟地址空间的上半部分采用非Identity Mapping
+        // 第一项 虚拟地址0 - 1G，根据virt的定义为flash和外设，参见virt.c
+        ldr     x3, =0x0
+        lsr     x4, x3, #30             // 除以1G
+        lsl     x5, x4, #30             // 乘以1G，并且将表索引保存在x0
+        ldr     x6, =PERIPHERALS_ATTR
+        orr     x5, x5, x6              // 添加符号
+        str     x5, [x2], #8
+
+        // 二级页表，内核总共16M，参见aarch64-qemu.ld文件
+        ldr     x3, =LD_TTBR1_L2TBL
+        mov     x4, #8                  // 8个二级页表项
+        ldr     x5, =KERNEL_ATTR        // 内核属性，可读写，可执行
+        ldr     x7, =0x1
+        add     x5, x5, x7, lsl #30     // 物理地址在1G开始的位置
+        ldr     x6, =0x00200000         // 每次增加2M
+
+_build_2nd_pgtbl:
+        str     x5, [x2], #8            // 填入内容到页表项
+        add     x5, x5, x6              // 下一项的地址增加2M
+        subs    x4, x4, #1              // 项数减少1
+        bne     _build_2nd_pgtbl
+
+_enable_mmu:
+// ······
+```
+{% asset_img 二级页表映射.png 二级页表映射 %}
+
+编辑`aarch64-qemu.ld`，定义`LD_TTBR0_L2TBL`以及`LD_TTBR1_L2TBL`符号
+```
+/* ······ */
+/* 页表 */
+.pt :
+    {
+    . = ALIGN(4096);
+
+    /* 页表基地址TTBR0 */
+    LD_TTBR0_BASE = . - __KERN_VMA_BASE;
+    . = . + 0x1000;
+
+    /* 页表基地址TTBR1 */
+    LD_TTBR1_BASE = . - __KERN_VMA_BASE;
+    . = . + 0x1000;
+
+    /*二级页表*/
+    LD_TTBR0_L2TBL = . - __KERN_VMA_BASE;
+    . = . + 0x1000;
+
+    LD_TTBR1_L2TBL = . - __KERN_VMA_BASE;
+    . = . + 0x1000;
+    }
+/* ······ */
+```
+{% asset_img 最后的ld改动.png 最后的ld改动 %}
+
+**编译**并**运行**，**测试**能否**正常工作**。
+```
+cargo clean && cargo build && qemu-system-aarch64 -machine virt,gic-version=2 -cpu cortex-a57 -nographic -kernel target/aarch64-unknown-none-softfloat/debug/rui_armv8_os -semihosting
+```
+{% asset_img 第四次测试.png 第四次测试 %}
+**正常运行！**
+
+# 后记
+前前后后花了**三个月时间**完成了这篇**1.6W**字的笔记，**最大**的**感悟**却是：**自己的挖的坑只能含泪填完**。
