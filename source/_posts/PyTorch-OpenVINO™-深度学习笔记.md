@@ -2,6 +2,7 @@
 title: PyTorch + OpenVINO™ 深度学习笔记
 date: 2022-03-22 15:36:13
 tags: [ 'PyTorch', 'OpenVINO', '深度学习' ]
+mathjax: true
 ---
 
 # 一、前言
@@ -393,7 +394,138 @@ y:  tensor([1, 2, 3, 4], device='cuda:0')
 ```
 
 ## 5. 线性回归预测
-未完待续...
+**线性回归**的本质就是根据给出**二维数据集**来**拟合生成一条直线**，如下图：
+{% asset_img 线性回归.png 线性回归 %}
+**左图**是一组**圆点**表示的**二维坐标点数据集**，**直线**是根据**线性回归算法**生成的。
+**右图**则是根据**坐标点数据集**生成的一个**非线性回归**例子。
+现在我们已经可以很**直观地**了解什么是**线性回归**了，但**线性回归**是怎么找到这条**直线**的？
+我们可以通过**PyTorch**构建一个简单的**计算图**来**不断学习**，最终得到一个**足够逼近真实直线**的**参数方程**，这个过程被称为**线性回归**的**学习/训练**过程。
+
+### 1) 原理
+最常见的**直线方程**如下：
+$$
+y = kx + b
+$$
+
+假设有一组**二维坐标点数据集**：
+
+|  | 一 | 二 | 三 | 四 | 五 | 六 |
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| x | 1 | 2 | 0.5 | 2.5 | 2.6 | 3.1 |
+| y | 3.7 | 4.6 | 1.65 | 5.68 | 5.98 | 6.95 |
+
+**随机赋值**初始**k**、**b**两个**参数**，根据**直线方程**，通过**x**可以得到对应的$\mathop{y}\limits^{\frown}$，它跟 **真实值y** 之间的**差值**称为**损失**，最常见的损失是**均值平方损失（MSE）**，表示如下：
+$$
+MSE = \frac{1}{n}\sum(y-\mathop{y}\limits^{\frown})^2
+$$
+假设**当前参数**为**A(k, b)**，**新参数**为**B(k, b)**，我们可以通过下面的**公式**来**更新k**、**b**两个参数：
+$$
+A(k, b) = B(k, b) - η * grad(η)
+$$
+其中**η**称为**学习率**，**grad(η)**是对应的**参数梯度**，可根据**深度学习框架**的**自动微分机制**得到。这样就实现了**线性回归模型**的**构建**与**训练**过程，最终可根据输入的**迭代次数**运行并输出**回归直线**的两个参数，从而完成**线性回归**的求解。
+
+### 2) 实现
+**PyTorch**提供了丰富的函数，可以帮助我们快速搭建**线性回归模型**并完成**训练预测**。
+#### a. 构建数据集
+```
+import numpy as np
+
+x = np.array([1, 2, 0.5, 2.5, 2.6, 3.1], dtype=np.float32).reshape((-1, 1))
+y = np.array([3.7, 4.6, 1.65, 5.68, 5.98, 6.95], dtype=np.float32).reshape(-1, 1)
+```
+#### b. 构建线性回归模型
+```
+# 继承torch.nn.Module
+class LinearRegressionModel(torch.nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(LinearRegressionModel, self).__init__()
+        self.linear = torch.nn.Linear(input_dim, output_dim)  # 对应直线方程y = kx + b
+
+    def forward(self, x):
+        return self.linear(x)  # 重载forward(), 根据模型计算并返回预测结果
+```
+
+#### c. 创建损失功能与优化器
+```
+data_input_dim = 1  # 输入维度为1
+data_output_dim = 1  # 输出维度为1
+model = LinearRegressionModel(data_input_dim, data_output_dim)  # 实例化
+criterion = torch.nn.MSELoss()  # 均值平方损失
+learning_rate = 0.01  # 学习率
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # 优化器, 求解参数梯度
+```
+
+#### d. 迭代训练
+```
+# 迭代训练
+for index in range(100):
+    # 将NumPy数组转为torch变量
+    input_x = torch.from_numpy(data_x).requires_grad_()  # 需要为其计算梯度
+    input_y = torch.from_numpy(data_y)
+    optimizer.zero_grad()  # 梯度置零
+    output_y = model(input_x)  # 得到输出
+    loss = criterion(output_y, input_y)  # 计算损失
+    loss.backward()  # 计算梯度，反向传播
+    optimizer.step()  # 更新参数
+    print('迭代索引: {}, 损失: {}'.format(index, loss.item()))
+```
+
+#### e. 绘制结果
+```
+predicted_y = model(torch.from_numpy(data_x).requires_grad_()).data.numpy()  # 得到预测结果
+plt.plot(data_x, data_y, 'go', label='True data', alpha=0.5)  # 绘制数据集
+plt.plot(data_x, predicted_y, '--', label='Predictions', alpha=0.5)  # 绘制回归直线
+plt.legend()
+plt.show()
+```
+最终**完整代码**为：
+```
+import numpy as np
+import torch
+from matplotlib import pyplot as plt
+
+data_x = np.array([1, 2, 0.5, 2.5, 2.6, 3.1], dtype=np.float32).reshape((-1, 1))
+data_y = np.array([3.7, 4.6, 1.65, 5.68, 5.98, 6.95], dtype=np.float32).reshape(-1, 1)
+
+
+# 继承torch.nn.Module
+class LinearRegressionModel(torch.nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(LinearRegressionModel, self).__init__()
+        self.linear = torch.nn.Linear(input_dim, output_dim)  # 对应直线方程y = kx + b
+
+    def forward(self, x):
+        return self.linear(x)  # 重载forward(), 根据模型计算并返回预测结果
+
+
+data_input_dim = 1  # 输入维度为1
+data_output_dim = 1  # 输出维度为1
+model = LinearRegressionModel(data_input_dim, data_output_dim)  # 实例化
+criterion = torch.nn.MSELoss()  # 均值平方损失
+learning_rate = 0.01  # 学习率
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  # 优化器, 求解参数梯度
+
+# 迭代训练
+for index in range(100):
+    # 将NumPy数组转为torch变量
+    input_x = torch.from_numpy(data_x).requires_grad_()  # 需要为其计算梯度
+    input_y = torch.from_numpy(data_y)
+    optimizer.zero_grad()  # 梯度置零
+    output_y = model(input_x)  # 得到输出
+    loss = criterion(output_y, input_y)  # 计算损失
+    loss.backward()  # 计算梯度，反向传播
+    optimizer.step()  # 更新参数
+    print('迭代索引: {}, 损失: {}'.format(index, loss.item()))
+
+predicted_y = model(torch.from_numpy(data_x).requires_grad_()).data.numpy()  # 得到预测结果
+plt.plot(data_x, data_y, 'go', label='True data', alpha=0.5)  # 绘制数据集
+plt.plot(data_x, predicted_y, '--', label='Predictions', alpha=0.5)  # 绘制回归直线
+plt.legend()
+plt.show()
+```
+
+最终**得到**：
+{% asset_img 结果.png 结果 %}
 
 # 三、OpenVINO™
 未完待续...
