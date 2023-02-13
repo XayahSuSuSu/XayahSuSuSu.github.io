@@ -1,6 +1,11 @@
 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="<%= post.date %>"><%= date(post.date, 'YYYY-MM-DD') %></span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="<%= post.updated %>">
+                <%= date(post.updated, 'YYYY-MM-DD') %>
+            </span>
+        </span>
         <% if (post.categories.length && theme.home_article.category.enable === true) { %>
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -31,5 +36,5 @@
         <% } %>
     </div>
 
-    <a href="<%- url_for(post.path) %>"><%- __('read_more') %>&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="<%- url_for(post.path) %>"><%- __('read_more') %>&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>

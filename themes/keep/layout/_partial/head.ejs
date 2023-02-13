@@ -29,20 +29,10 @@
     </title>
     <%- css('css/style') %>
     <%- favicon_tag(theme.style.favicon) %>
-    <%- __css('css/font-awesome.min.css') %>
-    <%- export_config() %>
-    
-    <!-- require APlayer -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    <!-- require MetingJS -->
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-    <meting-js
-        server="netease"
-        type="song"
-        id="1811118551"
-        fixed="true"
-        autoplay="false">
-    </meting-js>
+    <%- __css('font/css/fontawesome.min.css') %>
+    <%- __css('font/css/regular.min.css') %>
+    <%- __css('font/css/solid.min.css') %>
+    <%- __css('font/css/brands.min.css') %>
+    <%- exportConfig() %>
 </head>
 

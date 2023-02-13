@@ -1,175 +1,170 @@
-$icon-size = 1.2rem;
+$icon-size = 1.2rem
+$search-header-height = 3rem
 
 .search-pop-overlay {
-  position: fixed;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-8
+  display flex
+  width 100%
+  height 100%
+  background rgba(0, 0, 0, 0)
+  visibility hidden
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease")
 
   &.active {
-    visibility: visible;
-    background: rgba(0, 0, 0, 0.35);
+    background rgba(0, 0, 0, 0.35)
+    visibility visible
 
     .search-popup {
-      transform: scale(1);
+      transform scale(1)
     }
-
   }
 
 
   .search-popup {
-    background: var(--background-color);
-    border-radius: 5px;
-    height: 80%;
-    width: 70%;
-    margin: auto;
-    transform: scale(0);
-    z-index: $z-index-6;
-    transition-t("transform", "0", "0.3", "ease");
+    z-index $z-index-6
+    width 70%
+    height 80%
+    margin auto
+    background var(--background-color-1)
+    border-radius 0.4rem
+    transform scale(0)
+    transition-t("transform", "0", "0.3", "ease")
 
     +keep-tablet() {
-      width: 80%;
+      width 80%
     }
 
     +keep-mobile() {
-      width: 90%;
+      width 90%
     }
 
     .search-header {
-      background: var(--fourth-text-color);
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
-      display: flex;
-      padding: 10px;
-
-      .search-input-field-pre, .popup-btn-close {
-        font-size: $icon-size;
-        padding: 0 10px;
-        display: flex;
-        align-items: center;
-      }
+      display flex
+      align-items center
+      height $search-header-height
+      padding 0 1rem
+      background var(--text-color-6)
+      border-top-left-radius 0.2rem
+      border-top-right-radius 0.2rem
 
       .search-input-field-pre {
-        cursor: pointer;
-        color: var(--third-text-color);
+        margin-right 0.2rem
+        color var(--text-color-3)
+        font-size 1.3rem
+        cursor pointer
       }
-
-      .popup-btn-close {
-        color: var(--default-text-color);
-      }
-
 
       .search-input-container {
-
-        flex-grow: 1;
-        padding: 2px;
+        flex-grow 1
+        padding 0.2rem
 
         .search-input {
-          background: transparent;
-          border: 0;
-          outline: 0;
-          width: 100%;
-          font-size: 1.2rem;
-          color: var(--default-text-color);
+          width 100%
+          color var(--text-color-3)
+          font-size 1.2rem
+          background transparent
+          border 0
+          outline 0
 
           &::-webkit-search-cancel-button {
-            display: none;
+            display none
+          }
+
+          &::-webkit-input-placeholder {
+            color var(--text-color-4)
+            font-size 1rem
           }
         }
-
-
       }
 
 
-      .popup-btn-close {
-        cursor: pointer;
+      .close-popup-btn {
+        color var(--text-color-3)
+        font-size $icon-size
+        cursor pointer
 
-        &:hover .fas, far, fab {
-          color: var(--first-text-color);
+        &:hover {
+          color var(--text-color-1)
         }
       }
-
     }
 
 
     #search-result {
-      display: flex;
-      height: calc(100% - 55px);
-      overflow: auto;
-      padding: 5px 25px;
+      position relative
+      display flex
+      box-sizing border-box
+      height 'calc(100% - %s)' % $search-header-height
+      padding 0.3rem 1.5rem
+      overflow auto
 
       .search-result-list {
-        width: 100%;
-        height: 100%;
-        font-size: 1rem;
+        width 100%
+        height 100%
+        font-size 1rem
 
         li {
-          border-bottom: 1px dashed var(--border-color);
-          padding: 10px 0;
-          margin: 10px 0;
-          box-sizing: border-box;
+          box-sizing border-box
+          margin 0.8rem 0
+          padding 0.8rem 0
+          border-bottom 0.1rem dashed var(--border-color)
 
           &:last-child {
-            border-bottom: none;
+            border-bottom none
           }
 
 
           .search-result-title {
-            position: relative;
-            font-weight: bold;
-            margin-bottom: 10px;
-            padding-left: 16px;
-            display: flex;
-            align-items: center;
+            position relative
+            display flex
+            align-items center
+            margin-bottom 0.8rem
+            padding-left 1rem
+            font-weight bold
 
             &::after {
-              content: '';
-              position: absolute;
-              width: 5px;
-              height: 5px;
-              border-radius: 50%;
-              top: 50%;
-              transform: translateY(-50%);
-              left: 0;
-              background: var(--default-text-color);
+              position absolute
+              top 50%
+              left 0
+              width 0.4rem
+              height 0.4rem
+              background var(--text-color-3)
+              border-radius 50%
+              transform translateY(-50%)
+              content ''
             }
           }
 
 
           .search-result {
-            line-height: 2rem;
-            margin: 0;
-            padding-left: 16px;
-            word-wrap: break-word;
+            margin 0
+            padding-left 1rem
+            line-height 2rem
+            word-wrap break-word
           }
 
           a {
             &:hover {
-              color: var(--default-text-color);
+              color var(--text-color-3)
             }
           }
 
           .search-keyword {
-            border-bottom: 1px dashed var(--primary-color);
-            color: var(--primary-color);
-            font-weight: bold;
+            color var(--primary-color)
+            font-weight bold
+            border-bottom 0.1rem dashed var(--primary-color)
           }
-
         }
       }
 
 
       #no-result {
-        color: var(--third-text-color);
-        margin: auto;
+        margin auto
+        color var(--text-color-4)
       }
-
     }
   }
 }
