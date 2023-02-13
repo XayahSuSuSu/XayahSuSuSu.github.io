@@ -301,7 +301,7 @@ footer:
   since: 2020  # The starting year of your website, Can be null
   icp:         # ICP record number of your website, Can be null
   site_deploy:
-    enable: false       # Option values: true | false
+    enable: true       # Option values: true | false
     provider: github    # Option values: github | vercel | netlify | gitee | aliyun | tencent_cloud | upyun
     url:                # Your deployment provider url, Can be null
 
