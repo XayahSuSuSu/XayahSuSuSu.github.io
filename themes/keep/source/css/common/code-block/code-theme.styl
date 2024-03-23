@@ -1,13 +1,18 @@
-@import "../variables.styl"
+@import "../stylus-variables.styl"
 
-// A single line block of code
-$code-foreground = lighten($text-color-3, 2%)
-$code-background = darken($background-color-1, 5%)
-$dark-code-foreground = lighten($dark-text-color-3, 2%)
-$dark-code-background = darken($dark-background-color-1, 10%)
+$code-foreground = lighten($text-color-3, 5%)
+$code-background = alpha($primary-color, 15%)
+$code-border-color = lighten($primary-color, 30%)
+
+$dark-code-foreground = lighten($dark-text-color-3, 10%)
+$dark-code-background = alpha($primary-color, 15%)
+$dark-code-border-color = darken($primary-color, 40%)
+
+$mac-toolbar-background-color = #21252b
+$dark-mac-toolbar-background-color = #1f2021
 
 
-if (hexo-config('code_block.highlight_theme') == 'obsidian') {
+if (hexo-config('code_block') && hexo-config('code_block.highlight_theme') == 'obsidian') {
   $toolbar-foreground = #b5b5b5
   $toolbar-background = #3a3f40
   $highlight-foreground = #faf5d6
@@ -24,6 +29,10 @@ if (hexo-config('code_block.highlight_theme') == 'obsidian') {
   $highlight-purple = #b18bb7
   $highlight-deletion = #ff9999
   $highlight-addition = #ccff99
+  $shrink-line-foreground = $dark-text-color-4
+  $shrink-line-background-1 = rgba(40, 40, 40, 0.9)
+  $shrink-line-background-2 = rgba(40, 40, 40, 0.6)
+
 
   $dark-toolbar-foreground = darken($toolbar-foreground, 2%)
   $dark-toolbar-background = darken($toolbar-background, 2%)
@@ -41,6 +50,9 @@ if (hexo-config('code_block.highlight_theme') == 'obsidian') {
   $dark-highlight-purple = darken($highlight-purple, 2%)
   $dark-highlight-deletion = darken($highlight-deletion, 2%)
   $dark-highlight-addition = darken($highlight-addition, 2%)
+  $dark-shrink-line-foreground = $dark-text-color-4
+  $dark-shrink-line-background-1 = rgba(40, 40, 40, 0.9)
+  $dark-shrink-line-background-2 = rgba(40, 40, 40, 0.6)
 }
 else {
   $toolbar-foreground = $text-color-3
@@ -59,6 +71,10 @@ else {
   $highlight-purple = #8959a8
   $highlight-deletion = #fdd
   $highlight-addition = #dfd
+  $shrink-line-foreground = $text-color-4
+  $shrink-line-background-1 = rgba(210, 210, 210, 0.9)
+  $shrink-line-background-2 = rgba(225, 225, 225, 0.6)
+
 
   $dark-toolbar-foreground = $dark-text-color-3
   $dark-toolbar-background = $dark-background-color-3
@@ -76,6 +92,9 @@ else {
   $dark-highlight-purple = #b294bb
   $dark-highlight-deletion = #008000
   $dark-highlight-addition = #800000
+  $dark-shrink-line-foreground = $dark-text-color-4
+  $dark-shrink-line-background-1 = rgba(38, 38, 38, 0.9)
+  $dark-shrink-line-background-2 = rgba(52, 52, 52, 0.6)
 }
 
 
@@ -84,6 +103,7 @@ code-theme(mode) {
   --toolbar-background mode == 'light' ? $toolbar-background : $dark-toolbar-background
   --code-foreground mode == 'light' ? $code-foreground : $dark-code-foreground
   --code-background mode == 'light' ? $code-background : $dark-code-background
+  --code-border-color mode == 'light' ? $code-border-color : $dark-code-border-color
   --highlight-background mode == 'light' ? $highlight-background : $dark-highlight-background
   --highlight-foreground mode == 'light' ? $highlight-foreground : $dark-highlight-foreground
   --highlight-comment mode == 'light' ? $highlight-comment : $dark-highlight-comment
@@ -96,6 +116,10 @@ code-theme(mode) {
   --highlight-purple mode == 'light' ? $highlight-purple : $dark-highlight-purple
   --highlight-gutter-color mode == 'light' ? $highlight-gutter-color : $dark-highlight-gutter-color
   --highlight-gutter-bg-color mode == 'light' ? $highlight-gutter-bg-color : $dark-highlight-gutter-bg-color
+  --mac-toolbar-background-color mode == 'light' ? $mac-toolbar-background-color : $dark-mac-toolbar-background-color
+  --shrink-line-foreground mode == 'light' ? $shrink-line-foreground : $dark-shrink-line-foreground
+  --shrink-line-background-1 mode == 'light' ? $shrink-line-background-1 : $dark-shrink-line-background-1
+  --shrink-line-background-2 mode == 'light' ? $shrink-line-background-2 : $dark-shrink-line-background-2
 }
 
 

@@ -1,9 +1,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="<%= page.keywords || config.keywords || 'Hexo Theme Keep' %>">
-    <meta name="description" content="<%= page.description || config.description || 'Hexo Theme Keep' %>">
-    <meta name="author" content="<%= theme.base_info.author || config.author || 'Keep Team' %>">
+    <meta name="keywords" content="<%= page?.keywords || config?.keywords || 'Hexo Theme Keep' %>">
+    <meta name="description" content="<%= page?.description || config?.description || 'Hexo Theme Keep' %>">
+    <meta name="author" content="<%= theme?.base_info?.author || config?.author || 'Keep Team' %>">
     <%
     let title = page.title;
     if (is_archive()) {
@@ -25,26 +25,23 @@
         <% if (title) { %>
             <%= title %> |
         <% } %>
-        <%= theme.base_info.title || config.title || 'Keep Theme' %>
+        <%= theme?.base_info?.title || config?.title || 'Keep Theme' %>
     </title>
     <%- css('css/style') %>
-    <%- favicon_tag(theme.style.favicon) %>
+    <% if (theme?.base_info?.favicon) { %>
+        <%- favicon_tag(theme?.base_info?.favicon) %>
+    <% } %>
     <%- __css('font/css/fontawesome.min.css') %>
     <%- __css('font/css/regular.min.css') %>
     <%- __css('font/css/solid.min.css') %>
     <%- __css('font/css/brands.min.css') %>
-    <%- exportConfig() %>
-    <!-- require APlayer -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    <!-- require MetingJS -->
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-    <meting-js
-        server="netease"
-        type="song"
-        id="1811118551"
-        fixed="true"
-        autoplay="false">
-    </meting-js>
+    <% if (theme?.inject?.enable === true) { %>
+        <% theme?.inject?.css?.forEach((css_path) => { %>
+            <% if (css_path && isCssFile(css_path)) { %>
+                <%- css(css_path) %>
+            <% } %>
+        <% }) %>
+    <% } %>
+    <%- exportThemeConfig() %>
 </head>
 

@@ -1,6 +1,7 @@
-@import 'variables.styl'
+@import 'css-variables.styl'
+@import 'stylus-variables.styl'
 @import 'animated.styl'
-@import 'keep-theme.styl'
+@import 'keep-style.styl'
 
 // ======================================================================
 // all
@@ -18,13 +19,13 @@
 
   &::-webkit-scrollbar {
     width 0.4rem
-    height 0.4rem
+    height 0.32rem
     transition all 0.2s ease
   }
 
   &::-webkit-scrollbar-thumb {
     background var(--scrollbar-color)
-    border-radius 0.1rem
+    border-radius 0.2rem
   }
 
   &::-webkit-scrollbar-track {
@@ -44,41 +45,31 @@ body {
   margin 0
   padding 0
   color var(--text-color-3)
-  font-weight $default-font-weight
-  font-size $default-font-size
-  font-family $default-font-family
-  line-height $default-font-line-height
+  font-weight var(--base-font-weight)
+  font-size var(--base-font-size)
+  font-family var(--base-font-family)
+  line-height var(--base-line-height)
   letter-spacing 0.2px
   background var(--background-color-1)
 
   &::-webkit-scrollbar {
-    width 0.6rem
-    height 0.6rem
+    width 0.56rem
+    height 0.56rem
   }
 
   +keep-tablet() {
+    font-size calc(var(--base-font-size) * 0.95) !important
+    line-height calc(var(--base-line-height) * 0.95) !important
+
     &::-webkit-scrollbar {
-      width 0.5rem
-      height 0.5rem
+      width 0.42rem
+      height 0.42rem
     }
   }
 
   +keep-mobile() {
-    &::-webkit-scrollbar {
-      width 0.4rem
-      height 0.4rem
-    }
-  }
-
-  +keep-tablet() {
-    font-size $default-font-size * 0.96
-    line-height $default-font-line-height * 0.96
-  }
-
-
-  +keep-mobile() {
-    font-size $default-font-size * 0.9
-    line-height $default-font-line-height * 0.9
+    font-size calc(var(--base-font-size) * 0.9) !important
+    line-height calc(var(--base-line-height) * 0.9) !important
   }
 }
 
@@ -133,6 +124,15 @@ a {
 // img
 // ======================================================================
 img {
+
+  .dark-mode & {
+    filter brightness(0.9)
+
+    &:hover {
+      filter brightness(1)
+    }
+  }
+
   &[lazyload] {
     position relative
     box-sizing border-box
@@ -153,6 +153,7 @@ img {
       content ''
       transition-t("background", "0", "0.2", "ease")
     }
+
 
     &::after {
       position absolute
@@ -177,43 +178,75 @@ img {
 
 
 // ======================================================================
-// button
-// ======================================================================
-button {
-  margin 0
-  padding 0
-  background transparent
-  border 0
-  outline none
-  cursor pointer
-}
-
-.btn {
-  position relative
-  display inline-block
-  padding 0.4rem 1rem
-  white-space nowrap
-  text-align center
-  background var(--background-color-1)
-  border-radius 5px
-  cursor pointer
-
-  hover-style(true, 1.06, 1.06)
-
-  &:hover {
-    color var(--background-color-1)
-    background var(--primary-color)
-  }
-}
-
-
-// ======================================================================
 // flex center
 // ======================================================================
 .flex-center {
   display flex
   align-items center
   justify-content center
+}
+
+
+// ======================================================================
+// flex start
+// ======================================================================
+.flex-start {
+  display flex
+  align-items center
+  justify-content flex-start
+}
+
+
+// ======================================================================
+// flex end
+// ======================================================================
+.flex-end {
+  display flex
+  align-items center
+  justify-content flex-end
+}
+
+
+// ======================================================================
+// border box
+// ======================================================================
+.border-box {
+  position relative
+  box-sizing border-box
+}
+
+
+// ======================================================================
+// text ellipsis
+// ======================================================================
+.text-ellipsis {
+  overflow hidden
+  white-space nowrap
+  text-overflow ellipsis
+}
+
+
+// ======================================================================
+// text color 2
+// ======================================================================
+.text-color-2 {
+  color var(--text-color-2)
+}
+
+
+// ======================================================================
+// text color 3
+// ======================================================================
+.text-color-3 {
+  color var(--text-color-3)
+}
+
+
+// ======================================================================
+// text color 4
+// ======================================================================
+.text-color-4 {
+  color var(--text-color-4)
 }
 
 
@@ -255,7 +288,7 @@ button {
     position absolute
     top -0.4rem
     left 50%
-    z-index $z-index-9
+    z-index $z-index-10
     display none
     box-sizing border-box
     padding 0.2rem 0.6rem
@@ -271,7 +304,9 @@ button {
   }
 }
 
-
+// ======================================================================
+// tooltip image
+// ======================================================================
 .tooltip-img {
   position relative
   box-sizing border-box
@@ -282,26 +317,43 @@ button {
     }
   }
 
+
   .tooltip-img-box {
     position absolute
     top -0.4rem
     left 50%
-    z-index $z-index-8
+    z-index $z-index-11
     display none
     align-items center
     justify-content center
     box-sizing border-box
     min-height 6rem
-    background var(--text-color-6)
-    border 0.2rem solid var(--text-color-3)
+    overflow hidden
+    background var(--background-color-3)
+    border 0.2rem solid var(--text-color-4)
     border-radius 0.3rem
     transform translateX(-50%) translateY(-100%)
     transition-t("display", "0", "0.2", "ease")
     disable-user-select()
 
+    &.has-tip {
+      flex-direction column
+      justify-content space-between
+    }
+
     img {
       display block
       max-height 10rem
+    }
+
+    .tip {
+      position relative
+      box-sizing border-box
+      width 100%
+      padding 0.3rem 0
+      color #555
+      font-size 0.9rem
+      text-align center
     }
   }
 }

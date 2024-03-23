@@ -1,73 +1,149 @@
-$first-screen-font-size = 2rem
-$first-screen-icon-size = 1.8rem
+if (hexo-config('first_screen')) {
+  $temp-fs-bg-img-light = hexo-config('first_screen.background_img')
+  $temp-fs-bg-img-dark = hexo-config('first_screen.background_img_dark')
+}
+else {
+  $temp-fs-bg-img-light = ''
+  $temp-fs-bg-img-dark = ''
+}
 
-$temp-img = hexo-config('style.first_screen.background_img')
-$first-screen-img = $temp-img ? $temp-img : '/images/bg.svg'
+$fs-bg-img-light = $temp-fs-bg-img-light ? $temp-fs-bg-img-light : '/images/bg.svg'
+$fs-bg-img-dark = $temp-fs-bg-img-dark ? $temp-fs-bg-img-dark : $fs-bg-img-light
 
-$temp-font-color = hexo-config('style.first_screen.font_color')
-$first-screen-font-color = $temp-font-color ? convert($temp-font-color) : var(--text-color-3)
+$root = hexo-config('root')
 
 .first-screen-container {
-  position relative
-  box-sizing border-box
   width 100%
   height 100vh
   overflow hidden
-  background url($first-screen-img) center center / cover no-repeat
+  background-image url($root + $fs-bg-img-light)
+  background-position-x center
+  background-position-y center
+  background-size cover
+  background-repeat-x no-repeat
+  background-repeat-y no-repeat
 
-  if (!(hexo-config('style.first_screen.header_transparent') == true)) {
-    background-position-y $header-height
+
+  .dark-mode & {
+    background-image url($root + $fs-bg-img-dark)
+  }
+
+  .first-screen-content {
+    display flex
+    flex-direction column
+    align-items center
+    justify-content space-between
+    width 80%
+    height 90%
+    padding-top calc(var(--header-height) * 0.5)
 
     +keep-tablet() {
-      background-position-y $header-height * 0.9
+      padding-top calc(var(--header-height) * 0.5 * 0.9)
     }
 
     +keep-mobile() {
-      background-position-y $header-height * 0.8
+      padding-top calc(var(--header-height) * 0.5 * 0.8)
     }
-  }
-
-  .content {
-    position relative
-    box-sizing border-box
-    width 80%
-    height 90%
-    padding-top 2rem
 
     .description {
-      color $first-screen-font-color
+      display var(--first-screen-display)
+      color var(--first-screen-font-color-light)
       font-weight bold
-      font-size $first-screen-font-size
+      font-size var(--first-screen-font-size)
+      font-family var(--first-screen-font-family)
       line-height 1.8
       text-align center
+      transform translateY(var(--first-screen-font-offset))
+      opacity 0
 
-      .desc-item {
-        color $first-screen-font-color
+      .dark-mode & {
+        color var(--first-screen-font-color-dark)
+
+        .desc-item {
+          .desc
+          .cursor {
+            color var(--first-screen-font-color-dark)
+          }
+        }
       }
 
+
+      .desc-item {
+        .desc {
+          color var(--first-screen-font-color-light)
+        }
+
+        .cursor {
+          color var(--first-screen-font-color-light)
+          animation blink-caret 0.8s step-end infinite
+        }
+      }
+
+
       +keep-tablet() {
-        font-size $first-screen-font-size * 0.9
+        font-size calc(var(--first-screen-font-size) * 0.9)
       }
     }
 
 
-    .s-icon-list {
-      position absolute
-      bottom 0
-      display flex
-      box-sizing border-box
-      font-size $first-screen-icon-size
+    .bottom-placeholder {
+      width 100%
 
-      +keep-tablet() {
-        font-size $first-screen-icon-size * 0.9
-      }
+      .sc-icon-list {
+        display flex
+        justify-content center
 
-      .s-icon-item {
-        margin 0 1rem
-        cursor pointer
+        .sc-icon-item {
+          display flex
+          align-items center
+          margin 0 1rem
+          cursor pointer
 
-        i {
-          color var(--text-color-3)
+          i {
+            color var(--first-screen-icon-color-light)
+            font-size var(--first-screen-icon-size)
+          }
+
+
+          svg {
+            width var(--first-screen-icon-size)
+            height var(--first-screen-icon-size)
+
+            path {
+              fill var(--first-screen-icon-color-light)
+            }
+          }
+
+
+          .dark-mode & {
+            i {
+              color var(--first-screen-icon-color-dark)
+            }
+
+            svg {
+              path {
+                fill var(--first-screen-icon-color-dark)
+              }
+            }
+          }
+
+
+          +keep-tablet() {
+            i {
+              font-size calc(var(--first-screen-icon-size) * 0.9)
+            }
+
+            svg {
+              width calc(var(--first-screen-icon-size) * 0.9)
+              height calc(var(--first-screen-icon-size) * 0.9)
+            }
+          }
+
+
+          a {
+            display flex !important
+            align-items center !important
+          }
         }
       }
     }

@@ -10,10 +10,10 @@ const yaml = require('js-yaml')
 /**
  * Export theme config to js
  */
-hexo.extend.helper.register('exportConfig', function () {
+hexo.extend.helper.register('exportThemeConfig', function () {
   const { config, theme } = this
 
-  // ------------------------ export language to js ------------------------
+  // -------------------------- export languages --------------------------
   const languageDir = path.join(__dirname, '../../languages')
   let file = fs.readdirSync(languageDir).find((v) => v === `${config.language}.yml`)
   file = languageDir + '/' + (file ? file : 'en.yml')
@@ -25,34 +25,27 @@ hexo.extend.helper.register('exportConfig', function () {
   }
   // -----------------------------------------------------------------------
 
-  let hexo_config = {
+  // ----------------------------- hexo config -----------------------------
+  const hexoConfig = {
     hostname: url.parse(config.url).hostname || config.url,
-    root: config.root,
+    root: config?.root || '/',
     language: config.language
   }
 
   if (config.search) {
-    hexo_config.path = config.search.path
+    hexoConfig.path = config.search.path
   }
+  // -----------------------------------------------------------------------
 
-  let theme_config = {
-    toc: theme.toc || {},
-    style: theme.style || {},
-    local_search: theme.local_search || {},
-    code_copy: theme.code_copy || {},
-    code_block: theme.code_block || {},
-    side_tools: theme.side_tools || {},
-    pjax: theme.pjax || {},
-    lazyload: theme.lazyload || {},
-    comment: theme.comment || {},
-    post: theme.post || {},
-    version: require('../../package.json').version
-  }
+  // ----------------------------- theme config ----------------------------
+  const themeConfig = theme
+  themeConfig.version = require('../../package.json').version
+  // -----------------------------------------------------------------------
 
-  return `<script id="hexo-configurations">
-    let KEEP = window.KEEP || {}
-    KEEP.hexo_config = ${JSON.stringify(hexo_config)}
-    KEEP.theme_config = ${JSON.stringify(theme_config)}
+  return `<script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = ${JSON.stringify(hexoConfig)}
+    KEEP.theme_config = ${JSON.stringify(themeConfig)}
     KEEP.language_ago = ${JSON.stringify(languageContent['ago'])}
     KEEP.language_code_block = ${JSON.stringify(languageContent['code_block'])}
     KEEP.language_copy_copyright = ${JSON.stringify(languageContent['copy_copyright'])}

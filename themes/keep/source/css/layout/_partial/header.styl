@@ -1,7 +1,6 @@
-$logo-title-font-size = 2rem
 $pc-search-icon-font-size = 1.5rem
 $menu-bar-line-height = 2.5px
-$logo-image-box-width = 46px
+$logo-image-box-width = 2.68rem
 
 .header-wrapper {
   display flex
@@ -10,56 +9,67 @@ $logo-image-box-width = 46px
   box-sizing border-box
   width 100%
   height 100%
-  padding-top $scroll-progress-bar-height
+  padding-top var(--header-scroll-progress-bar-height)
   background var(--background-color-1)
+  box-shadow 1px 2px 6px var(--shadow-color)
 
-  hover-style(false, 0, 0)
+  &:hover {
+    box-shadow 1px 2px 10px var(--shadow-hover-color)
+  }
 
   .header-content {
-    position relative
     z-index $z-index-5
     display flex
     flex-direction row
     align-items center
     justify-content space-between
-    width $main-content-width
-    max-width $content-max-width
+    width var(--page-content-width)
+    max-width var(--page-content-max-width)
     height 100%
     transition-t("max-width, width", "0, 0", "0.1, 0.1", "ease, ease")
 
 
     &.has-first-screen {
-      max-width $has-fs-content-max-width
+      max-width var(--page-content-max-width-2)
     }
+
 
     .has-toc & {
-      max-width $has-toc-content-max-width
+      max-width var(--page-content-max-width-2)
     }
+
 
     +keep-tablet() {
-      width $main-content-width-tablet
+      width var(--page-content-width-tablet)
     }
 
+
     +keep-mobile() {
-      width $main-content-width-mobile
+      width var(--page-content-width-mobile)
     }
+
 
     .left {
       display flex
       align-items center
-      transition-t("transform", "0", "0.2", "linear")
+      justify-content flex-start
+      height 100%
+      font-size 2rem
+
+      transition-t("transform, transform-origin", "0, 0", "0.2, 0.2", "linear, linear")
 
       .header-shrink & {
-        transform scale(0.72)
+        transform scale(0.78)
         transform-origin left
       }
 
 
-      if (hexo-config('base_info.logo_img') || hexo-config('style.logo')) {
+      if (hexo-config('base_info') && hexo-config('base_info.logo')) {
         .logo-image {
+          flex-shrink 0
           width $logo-image-box-width
           height $logo-image-box-width
-          margin-right 8px
+          margin-right 0.5rem
 
 
           +keep-tablet() {
@@ -67,40 +77,58 @@ $logo-image-box-width = 46px
             height $logo-image-box-width * 0.9
           }
 
+
           +keep-mobile() {
             width $logo-image-box-width * 0.8
             height $logo-image-box-width * 0.8
           }
 
+
           img {
             width 100%
-            border-radius 6px
+            border-radius 0.4rem
           }
         }
       }
 
-      .logo-title {
+
+      .site-name {
         color var(--text-color-1)
-        font-weight bold
-        font-size $logo-title-font-size
+        font-weight 600
+        font-size var(--header-title-font-size)
+        font-family var(--header-title-font-family)
         line-height 1
         letter-spacing 1px
 
         +keep-tablet() {
-          font-size $logo-title-font-size * 0.9
+          font-size calc(var(--header-title-font-size) * 0.9)
         }
 
         +keep-mobile() {
-          font-size $logo-title-font-size * 0.8
+          font-size calc(var(--header-title-font-size) * 0.8)
+        }
+
+        .is-home & {
+          if (hexo-config('first_screen') && hexo-config('first_screen.enable') == true) {
+            color var(--first-screen-header-font-color-light)
+            filter brightness(92%)
+
+            .dark-mode & {
+              color var(--first-screen-header-font-color-dark)
+              filter brightness(106%)
+            }
+          }
+        }
+
+        .show-header-drawer & {
+          color var(--text-color-1) !important
         }
       }
     }
 
 
     .right {
-
       .pc {
-
         .menu-list {
           display flex
           align-items center
@@ -113,8 +141,8 @@ $logo-image-box-width = 46px
           .menu-item {
             position relative
             float left
+            box-sizing border-box
             margin-left 2rem
-            color var(--text-color-3)
             font-size 1rem
             cursor pointer
 
@@ -123,32 +151,95 @@ $logo-image-box-width = 46px
             }
 
 
-            a:hover
-            .active {
-
-              &::after {
+            a {
+              &::before {
                 position absolute
                 bottom -10px
                 left 50%
-                width 100%
-                height 2px
+                box-sizing border-box
+                width 0
+                height 2.6px
                 background var(--primary-color)
+                border-radius 3px
                 transform translateX(-50%)
                 content ''
-                transition-t("transform, bottom", "0, 0", "0.2, 0.2", "linear, linear")
+                transition-t("transform, bottom, width", "0, 0, 0", "0.2, 0.2, 0.2", "linear, linear, ease")
 
                 .header-shrink & {
-                  bottom -($header-shrink-height / 2 - 12)
+                  bottom calc(-1 * calc(var(--header-shrink-height) * 0.5 - 12px))
+                }
+              }
+
+
+              &:hover
+              &.active {
+                &::before {
+                  width 100%
                 }
               }
             }
 
+
             &.search {
-              margin-left 26px
+              margin-left 1.6rem
               font-size $pc-search-icon-font-size
 
               i {
                 color var(--text-color-3)
+              }
+            }
+
+
+            .menu-icon {
+              display var(--header-menu-icon)
+              margin-right 0.1rem
+            }
+
+            .is-home & {
+              if (hexo-config('first_screen') && hexo-config('first_screen.enable') == true) {
+                a {
+                  color var(--first-screen-header-font-color-light)
+
+                  .menu-icon {
+                    color var(--first-screen-header-font-color-light)
+                  }
+
+                  &:hover {
+                    color var(--primary-color)
+
+                    .menu-icon {
+                      color var(--primary-color)
+                    }
+                  }
+                }
+
+
+                i.search {
+                  color var(--first-screen-header-font-color-light)
+                }
+
+
+                .dark-mode & {
+                  a {
+                    color var(--first-screen-header-font-color-dark)
+
+                    .menu-icon {
+                      color var(--first-screen-header-font-color-dark)
+                    }
+
+                    &:hover {
+                      color var(--primary-color)
+
+                      .menu-icon {
+                        color var(--primary-color)
+                      }
+                    }
+                  }
+
+                  i.search {
+                    color var(--first-screen-header-font-color-dark)
+                  }
+                }
               }
             }
           }
@@ -173,6 +264,14 @@ $logo-image-box-width = 46px
 
           i {
             color var(--text-color-3)
+
+            .show-header-drawer & {
+              color var(--text-color-3) !important
+            }
+
+            .reset-color & {
+              color var(--text-color-3) !important
+            }
           }
 
           &:first-child {
@@ -186,18 +285,13 @@ $logo-image-box-width = 46px
           }
         }
 
-        .menu-bar {
 
+        .menu-bar {
           .menu-bar-middle {
             position relative
             width 18px
             height $menu-bar-line-height
             background var(--text-color-3)
-
-            .header-drawer-show & {
-              background transparent
-            }
-
 
             &::before
             &::after {
@@ -214,7 +308,7 @@ $logo-image-box-width = 46px
             &::before {
               top -6px
 
-              .header-drawer-show & {
+              .show-header-drawer & {
                 transform translateY(6px) rotate(45deg)
               }
             }
@@ -223,8 +317,60 @@ $logo-image-box-width = 46px
             &::after {
               bottom -6px
 
-              .header-drawer-show & {
+              .show-header-drawer & {
                 transform translateY(-6px) rotate(-45deg)
+              }
+            }
+
+
+            .reset-color & {
+              background var(--text-color-3) !important
+
+              &::before
+              &::after {
+                background var(--text-color-3) !important
+              }
+            }
+
+
+            .show-header-drawer & {
+              background transparent !important
+
+              &::before
+              &::after {
+                background var(--text-color-3) !important
+              }
+            }
+          }
+        }
+
+        .is-home & {
+          if (hexo-config('first_screen') && hexo-config('first_screen.enable') == true) {
+            .icon-item i {
+              color var(--first-screen-header-font-color-light)
+            }
+
+            .menu-bar .menu-bar-middle {
+              background var(--first-screen-header-font-color-light)
+
+              &::before
+              &::after {
+                background var(--first-screen-header-font-color-light)
+              }
+            }
+
+            .dark-mode & {
+              .icon-item i {
+                color var(--first-screen-header-font-color-dark)
+              }
+
+              .menu-bar .menu-bar-middle {
+                background var(--first-screen-header-font-color-dark)
+
+                &::before
+                &::after {
+                  background var(--first-screen-header-font-color-dark)
+                }
               }
             }
           }
@@ -240,13 +386,13 @@ $logo-image-box-width = 46px
     left 0
     z-index $z-index-2
     width 100%
-    padding $header-height 0 20px 0
+    padding var(--header-height) 0 20px 0
     background var(--background-color-1)
     transform scaleY(0)
     transform-origin top
     transition-t("transform", "0", "0.38", "ease")
 
-    .header-drawer-show & {
+    .show-header-drawer & {
       transform scaleY(1)
     }
 
@@ -293,13 +439,14 @@ $logo-image-box-width = 46px
     opacity 0
     transition-t("transform, opacity", "0, 0", "0.38, 0.38", "ease, ease")
 
-    .header-drawer-show & {
+    .show-header-drawer & {
       visibility visible
       opacity 1
     }
   }
 }
 
-.header-drawer-show {
+
+.show-header-drawer {
   overflow hidden
 }

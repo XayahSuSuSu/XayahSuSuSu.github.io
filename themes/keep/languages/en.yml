@@ -1,6 +1,22 @@
 # ====================================================================
 # English
 # ====================================================================
+
+category: Category
+categories: Categories
+tag: Tag
+tags: Tags
+tagcloud: Tag Cloud
+home: Home
+archive: Archive
+archives: Archives
+about: About
+links: Links
+link: Link
+photos: Photos
+photo: Photo
+tool: Tool
+tools: Tools
 search: Search...
 prev: Prev
 next: Next
@@ -9,26 +25,8 @@ next_posts: Next posts
 page: Page %d
 recent_posts: Recent Posts
 share: Share
-powered_by: "Powered by %s"
 theme: Theme
 rss_feed: RSS Feed
-category: Category
-categories: Categories
-tag: Tag
-tags: Tags
-tagcloud: Tag Cloud
-comment: Comment
-comments: Comments
-home: Home
-archive: Archive
-archives: Archives
-unlock-music: Music unlock
-boot-repacker: Boot repacker
-about: About
-site_uv: Visitor Count
-site_pv: Totalview
-links: Links
-link: Link
 top: TOP
 read_more: Read more
 wordcount: Words
@@ -45,6 +43,7 @@ alipay: Alipay
 weibo: Weibo
 zhihu: Zhihu
 twitter: Twitter
+x: X
 facebook: Facebook
 email: Email
 code_block:
@@ -55,17 +54,18 @@ code_block:
 copy_copyright:
   copy: Copy copyright info
   copied: Copied
-  title: Original article title
-  author: Original article author
-  link: Original article link
+  title: Original post title
+  author: Original post author
+  link: Original post link
 copyright:
-  author: Post author
-  title: Post title
-  link: Post link
+  author: Author
+  title: Title
+  link: Link
   create_time: Create time
+  published: Published
+  license: License
   license_title: Copyright notice
-  license_content: "All articles in this blog are licensed under %s unless stating additionally."
-article-aging: "It has been %s days since the last update of this article. Some contents may be outdated. Please pay attention to screening."
+  license_content: "All posts in this blog are licensed under %s unless stating additionally."
 ago:
   second: "%s seconds ago"
   minute: "%s minutes ago"
@@ -74,12 +74,34 @@ ago:
   week: "%s weeks ago"
   month: "%s months ago"
   year: "%s years ago"
-footer_deploy: "This site is provided with deployment services by %s"
-deploy_provider:
-  github: GitHub Pages
-  vercel: Vercel
-  netlify: Netlify
-  gitee: Gitee Pages
-  aliyun: Alibaba Cloud
-  tencent_cloud: Tencent Cloud
-  upyun: UPYUN
+footer:
+  powered_by: "Powered by&nbsp;%s"
+  site_uv: Unique Visitor
+  site_pv: Page View
+  deploy: "This site is deployed on %s"
+  deploy_provider:
+    github: GitHub Pages
+    vercel: Vercel
+    netlify: Netlify
+    gitee: Gitee Pages
+    aliyun: Alibaba Cloud
+    tencent_cloud: Tencent Cloud
+    upyun: UPYUN
+  total_words: Total words
+post:
+  aging: "It has been %s days since the last update of this post. Some contents may be outdated. Please pay attention to screening."
+  share:
+    qq: "Share to QQ"
+    wechat: "Share to WeChat"
+    weibo: "Share to WeiBo"
+    wechat_scan: "Scan by WeChat"
+  reward: Reward Author
+comment:
+  comments: Comments
+  fail_tip: Comment plugin failed to load
+  reload: Click to reload
+  loading: Loading comment plugin
+  config_error: "Please fill in the required configuration items for %s comment plugin"
+404:
+  page_not_found: Page Not Found
+  go_home: Take me home

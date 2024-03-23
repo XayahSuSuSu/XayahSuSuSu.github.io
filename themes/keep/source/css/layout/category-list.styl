@@ -1,55 +1,92 @@
+$left-gap = 1.6rem
+$spacing-padding = 0.6rem
+
 .category-list-container {
 
-  keep-container(false, 0, 0, 2rem, 0)
+  keep-container(1, 2rem, 0)
+
+  padding-top 1.2rem
+  padding-bottom 1.2rem
 
   .category-list-content {
 
-    .all-category-list {
+    ul.site-all-category-list {
+      user-select none
 
-      & > .all-category-list-item > .all-category-list-link {
-        font-size 1.1rem
-      }
-
-      li.all-category-list-item {
-        margin-bottom 1rem
+      & > li.site-all-category-list-item {
+        position relative
+        box-sizing border-box
+        margin-bottom 0.8rem
         font-size 1rem
 
         &:last-child {
           margin-bottom 0
         }
 
-        span.all-category-list-count {
-          float right
-          color var(--text-color-3)
+
+        .self-category-info {
+          display flex
+          align-items center
+          justify-content space-between
+          height 2.6rem
+
+          .left {
+            display flex
+            align-items center
+            justify-content flex-start
+            width 100%
+            height 100%
 
 
-          &::before {
-            content '['
+            .icon {
+              display flex
+              flex-shrink 0
+              align-items center
+              justify-content flex-start
+              width $left-gap
+              height 100%
+              color var(--text-color-3)
+              font-size 1.06rem
+              cursor pointer
+            }
+
+
+            .site-all-category-list-link {
+              position relative
+              display flex
+              align-items center
+              justify-content flex-start
+              box-sizing border-box
+              width 100%
+              height 100%
+              font-size 1.02rem
+            }
           }
 
-          &::after {
-            content ']'
+
+          .right {
+            display flex
+            flex-shrink 0
+            align-items center
+            justify-content flex-end
+            width 1.6rem
+            height 100%
+
+            .site-all-category-list-count {
+              color var(--text-color-3)
+              font-size 1.08rem
+            }
           }
         }
 
 
-        ul.all-category-list-child {
-          margin-top 1rem
-
-          margin-left 0.9rem
-
-          li {
-
-            &::before {
-              content '- '
-            }
-
-            margin-bottom 0.9rem
-
-            &:last-child {
-              margin-bottom 0
-            }
-          }
+        .site-all-category-list-child {
+          position relative
+          box-sizing border-box
+          height 0
+          margin-left $left-gap
+          overflow hidden
+          visibility hidden
         }
       }
     }

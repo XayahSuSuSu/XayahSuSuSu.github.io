@@ -1,39 +1,46 @@
 <%
-const { title: bi_title, logo_img: bi_logo_img } = theme.base_info
-const { logo: s_logo, first_screen: s_first_screen } = theme.style
-const { enable: s_fs_enable, header_transparent: s_fs_header_transparent } = s_first_screen
-const { title: config_title } = config
-const { enable: local_search_enable } = theme.local_search
+const { title: bi_title, logo: bi_logo } = theme?.base_info || {}
+const { enable: s_fs_enable } = theme?.first_screen || {}
+const { enable: local_search_enable } = theme?.local_search || {}
+const h_menu_nav_object = theme?.menu || { archives: '/archives' }
 %>
-<header class="header-wrapper<%= s_fs_enable === true && is_home() && s_fs_header_transparent ? ' transparent-1' : '' %>">
+<header class="header-wrapper<%= s_fs_enable === true && is_home() ? ' transparent-1' : '' %>">
 
-    <div class="header-content<%- (s_fs_enable === true && is_home() && !page.prev) ? ' has-first-screen' : '' %>">
-        <div class="left">
-            <% if (s_logo || bi_logo_img) { %>
-                <a class="logo-image" href="/">
-                    <%- image_tag(s_logo || bi_logo_img) %>
+    <div class="border-box header-content<%- (s_fs_enable === true && is_home() && !page.prev) ? ' has-first-screen' : '' %>">
+        <div class="left border-box">
+            <% if (bi_logo) { %>
+                <a class="logo-image border-box" href="<%- url_for('/') %>">
+                    <%- image_tag(bi_logo) %>
                 </a>
             <% } %>
-            <a class="logo-title" href="/">
-               <%= bi_title || config_title || 'Keep Theme' %>
+            <a class="site-name border-box" href="<%- url_for('/') %>">
+               <%= bi_title || config?.title || 'Keep Theme' %>
             </a>
         </div>
 
-        <div class="right">
+        <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <% for (const i in theme.menu) { %>
+                    <% for (const i in h_menu_nav_object) { %>
+                        <%
+                            const temp_menu_list = h_menu_nav_object[i]?.split('||')
+                            const nav_path = temp_menu_list[0]?.trim()?.toLowerCase()
+                            const nav_icon = temp_menu_list[1]?.trim()?.toLowerCase()
+                        %>
                         <li class="menu-item">
-                            <a class="<%- isInHomePaging(page.path, theme.menu[i]) ? 'active' : is_current(theme.menu[i]) ? 'active' : '' %>"
-                               href="<%- url_for(theme.menu[i]) %>"
+                            <a class="<%- is_current(nav_path) ? 'active' : '' %>"
+                               href="<%- url_for(nav_path) %>"
                             >
+                                <% if (nav_icon) { %>
+                                    <i class="menu-icon <%= nav_icon %>"></i>
+                                <% } %>
                                 <%= __(i.toLowerCase()).toUpperCase() %>
                             </a>
                         </li>
                     <% } %>
                     <% if (local_search_enable === true) { %>
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     <% } %>
                 </ul>
@@ -51,10 +58,15 @@ const { enable: local_search_enable } = theme.local_search
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <% for (let i in theme.menu) { %>
+            <% for (let i in h_menu_nav_object) { %>
+                <%
+                    const temp_menu_list2 = h_menu_nav_object[i]?.split('||')
+                    const nav_path2 = temp_menu_list2[0]?.trim()?.toLowerCase()
+                %>
                 <li class="drawer-menu-item flex-center">
-                    <a class="<%- isInHomePaging(page.path, theme.menu[i]) ? 'active' : is_current(theme.menu[i]) ? 'active' : '' %>"
-                       href="<%- url_for(theme.menu[i]) %>"><%= __(i.toLowerCase()).toUpperCase() %></a>
+                    <a class="<%- is_current(nav_path2) ? 'active' : '' %>"
+                       href="<%- url_for(nav_path2) %>"
+                    ><%= __(i.toLowerCase()).toUpperCase() %></a>
                 </li>
             <% } %>
         </ul>
