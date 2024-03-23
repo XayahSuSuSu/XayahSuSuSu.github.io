@@ -61,7 +61,7 @@ first_screen:
 
   # First screen description
   # You can use the "||" to begin a newline, maximum is two lines.
-  description: 这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。生如长河，渡船千艘，唯自渡方是真渡。
+  description: 这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。||生如长河，渡船千艘，唯自渡方是真渡。
 
   # If enable hitokoto, first screen description is different every time when you enter the website
   hitokoto: false      # Option values: true | false
