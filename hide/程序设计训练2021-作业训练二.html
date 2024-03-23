@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            程序设计训练2021-作业训练二 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="page-template-container border-box keep-container ">
+        <!-- page top -->
+        
+
+        <!-- page bottom -->
+        <div class="page-template-bottom border-box">
+            <!-- use page template -->
+            
+
+            <!-- page content -->
+            <div class="page-content border-box keep-markdown-body ">
+                
+                    <h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><h5 id="Python实现方案"><a href="#Python实现方案" class="headerlink" title="Python实现方案"></a><strong><a class="link"   target="_blank" rel="noopener" href="https://www.seaeye.cn/archives/175.html" >Python实现方案<i class="fas fa-external-link-alt"></i></a></strong></h5><h6 id="一、字符串反转2"><a href="#一、字符串反转2" class="headerlink" title="一、字符串反转2"></a><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC2">一、字符串反转2</a></h6><h6 id="二、487-3279"><a href="#二、487-3279" class="headerlink" title="二、487-3279"></a><a href="#487-3279">二、487-3279</a></h6><h6 id="三、缺席考试的是谁？"><a href="#三、缺席考试的是谁？" class="headerlink" title="三、缺席考试的是谁？"></a><a href="#%E7%BC%BA%E5%B8%AD%E8%80%83%E8%AF%95%E7%9A%84%E6%98%AF%E8%B0%81%EF%BC%9F">三、缺席考试的是谁？</a></h6><h6 id="四、电话号码"><a href="#四、电话号码" class="headerlink" title="四、电话号码"></a><a href="#%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81">四、电话号码</a></h6><h6 id="五、点球大战"><a href="#五、点球大战" class="headerlink" title="五、点球大战"></a><a href="#%E7%82%B9%E7%90%83%E5%A4%A7%E6%88%98">五、点球大战</a></h6><h6 id="六、飞行棋"><a href="#六、飞行棋" class="headerlink" title="六、飞行棋"></a><a href="#%E9%A3%9E%E8%A1%8C%E6%A3%8B">六、飞行棋</a></h6><h6 id="七、棋盘"><a href="#七、棋盘" class="headerlink" title="七、棋盘"></a><a href="#%E6%A3%8B%E7%9B%98">七、棋盘</a></h6><h6 id="八、Engine-字符串"><a href="#八、Engine-字符串" class="headerlink" title="八、Engine-字符串"></a><a href="#Engine-%E5%AD%97%E7%AC%A6%E4%B8%B2">八、Engine-字符串</a></h6><h6 id="九、字符串压缩"><a href="#九、字符串压缩" class="headerlink" title="九、字符串压缩"></a><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8E%8B%E7%BC%A9">九、字符串压缩</a></h6><h6 id="十、拼写检查"><a href="#十、拼写检查" class="headerlink" title="十、拼写检查"></a><a href="#%E6%8B%BC%E5%86%99%E6%A3%80%E6%9F%A5">十、拼写检查</a></h6><h6 id="十一、最小的K个数"><a href="#十一、最小的K个数" class="headerlink" title="十一、最小的K个数"></a><a href="#%E6%9C%80%E5%B0%8F%E7%9A%84K%E4%B8%AA%E6%95%B0">十一、最小的K个数</a></h6><h6 id="十二、绩点计算"><a href="#十二、绩点计算" class="headerlink" title="十二、绩点计算"></a><a href="#%E7%BB%A9%E7%82%B9%E8%AE%A1%E7%AE%97">十二、绩点计算</a></h6><h6 id="十三、xxx定律"><a href="#十三、xxx定律" class="headerlink" title="十三、xxx定律"></a><a href="#xxx%E5%AE%9A%E5%BE%8B">十三、xxx定律</a></h6><h6 id="十四、数的距离差"><a href="#十四、数的距离差" class="headerlink" title="十四、数的距离差"></a><a href="#%E6%95%B0%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%B7%AE">十四、数的距离差</a></h6><h6 id="十五、亲和数"><a href="#十五、亲和数" class="headerlink" title="十五、亲和数"></a><a href="#%E4%BA%B2%E5%92%8C%E6%95%B0">十五、亲和数</a></h6><h6 id="十六、金币"><a href="#十六、金币" class="headerlink" title="十六、金币"></a><a href="#%E9%87%91%E5%B8%81">十六、金币</a></h6><h6 id="十七、小A的计算器"><a href="#十七、小A的计算器" class="headerlink" title="十七、小A的计算器"></a><a href="#%E5%B0%8FA%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8">十七、小A的计算器</a></h6><h6 id="十八、小丑排序"><a href="#十八、小丑排序" class="headerlink" title="十八、小丑排序"></a><a href="#%E5%B0%8F%E4%B8%91%E6%8E%92%E5%BA%8F">十八、小丑排序</a></h6><h6 id="十九、数圈"><a href="#十九、数圈" class="headerlink" title="十九、数圈"></a><a href="#%E6%95%B0%E5%9C%88">十九、数圈</a></h6><h6 id="二十、锤子剪刀布"><a href="#二十、锤子剪刀布" class="headerlink" title="二十、锤子剪刀布"></a><a href="#%E9%94%A4%E5%AD%90%E5%89%AA%E5%88%80%E5%B8%83">二十、锤子剪刀布</a></h6><h6 id="二十一、新型冠状病毒（COVID19）传播"><a href="#二十一、新型冠状病毒（COVID19）传播" class="headerlink" title="二十一、新型冠状病毒（COVID19）传播"></a><a href="#%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92%EF%BC%88COVID19%EF%BC%89%E4%BC%A0%E6%92%AD">二十一、新型冠状病毒（COVID19）传播</a></h6><h1 id="字符串反转2"><a href="#字符串反转2" class="headerlink" title="字符串反转2"></a>字符串反转2</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】"><a href="#【问题描述】" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;给定一个句子（只包含字母和空格）， 将句子中的单词位置反转，单词用空格分割, 单词之间只有一个空格，前后没有空格。 比如： “hello xiao mi”-&gt; “mi xiao hello”</p>
+<h2 id="【输入形式】"><a href="#【输入形式】" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入数据有多组，每组占一行，包含一个句子(句子长度小于1000个字符)</p>
+<h2 id="【输出形式】"><a href="#【输出形式】" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每个测试示例，要求输出句子中单词反转后形成的句子</p>
+<h2 id="【样例输入】"><a href="#【样例输入】" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>hello xiao mi
+I am a student
+</code></pre>
+<h2 id="【样例输出】"><a href="#【样例输出】" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>mi xiao hello
+student a am I
+</code></pre>
+<h2 id="【思路】"><a href="#【思路】" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;利用栈的先入后出特性，将每个单词作为一个元素推入栈中，再依次出栈。</p>
+<h2 id="【代码（C-）】"><a href="#【代码（C-）】" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    stack&lt;string&gt; s;</span><br><span class="line">    string str;</span><br><span class="line">    stringstream sstream; // 利用字符串流得到每行的每个单词</span><br><span class="line">    ios::sync_with_stdio(false); // 清除IO流缓存，使其效率接近scanf与printf</span><br><span class="line">    cout.tie(nullptr); // 解除cout绑定 注意不要与printf混用</span><br><span class="line">    while (getline(cin, str)) &#123; // 以行读入</span><br><span class="line">        sstream &lt;&lt; str; //输入到字符串流</span><br><span class="line">        string word;</span><br><span class="line">        while (sstream &gt;&gt; word) &#123; // 从字符串流流输出单词</span><br><span class="line">            s.push(word); // 单词入栈</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            cout &lt;&lt; s.top() &lt;&lt; &quot; &quot;;</span><br><span class="line">            s.pop(); // 将已输出单词出栈</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; &quot;\n&quot;;</span><br><span class="line">        sstream.clear(); // 清空字符串流，避免未知错误</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="487-3279"><a href="#487-3279" class="headerlink" title="487-3279"></a>487-3279</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-1"><a href="#【问题描述】-1" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;每个人都喜欢有令人难忘的电话号码。要想让电话号码变得令人难忘的一种方法是拼出一个令人难忘的单词或短语。例如，你可以拨打滑铁卢大学的电话，拨打令人难忘的电话号码TUT-GLOP。</p>
+<p>&emsp;&emsp;有时只有一部分号码被用来拼写一个单词，例如，你可以拨打310-gino从Gino’s订购披萨。</p>
+<p>&emsp;&emsp;要使电话号码令人难忘的另一种方法是以一种令人难忘的方式对数字进行分组。你可以从比萨饼小屋中订购比萨饼，方法是拨打他们的“3个10”，即号码3-10-10-10。</p>
+<p>&emsp;&emsp;电话号码的标准格式是七位的十进制数字，第三和第四位之间包含连字符（例如888-1200）。电话的键盘提供字母到数字的映射，如下所示：</p>
+<p>&emsp;&emsp;A, B, C映射到2</p>
+<p>&emsp;&emsp;D, E, F映射到3</p>
+<p>&emsp;&emsp;G, H, I映射到4</p>
+<p>&emsp;&emsp;J, K, L映射到5</p>
+<p>&emsp;&emsp;M, N, O映射到6</p>
+<p>&emsp;&emsp;P, R, S映射到7</p>
+<p>&emsp;&emsp;T, U, V映射到8</p>
+<p>&emsp;&emsp;W, X, Y映射到9</p>
+<p>&emsp;&emsp;Q和Z没有映射。连接符不拨号，必要时可加上或去除。TUT-GLOP的标准格式是888-4567，310-GINO的标准格式是310-4466，3-10-10-10的标准格式是310-1010。</p>
+<p>&emsp;&emsp;当两个电话号码有相同的标准格式时是等价的（拨同样的号码）。</p>
+<p>&emsp;&emsp;你的公司正在编制本地企业的电话号码目录，作为质量控制的一部分，你需要检查没有两个（或多个）企业具有相同的电话号码。</p>
+<h2 id="【输入形式】-1"><a href="#【输入形式】-1" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入包括一个案例。输入的第一行为一个正整数，指定目录中电话号码的数目(最多100，000)。其余的各行列出目录中的电话号码，每个号码单独占一行。每个电话号码都是一个由十进制数字、大写字母(不包括Q和z)和连字符组成的字符串。字符串中的七个字符或是数字或是字母。</p>
+<h2 id="【输出形式】-1"><a href="#【输出形式】-1" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于出现超过一次的每个号码，按照标准格式及字典序每个输出一行，然后是空格，接着输出出现的次数。只出现1次的电话号码不输出。</p>
+<h2 id="【样例输入】-1"><a href="#【样例输入】-1" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>12
+4873279
+ITS-EASY
+888-4567
+3-10-10-10
+888-GLOP
+TUT-GLOP
+967-11-11
+310-GINO
+F101010
+888-1200
+-4-8-7-3-2-7-9-
+487-3279
+</code></pre>
+<h2 id="【样例输出】-1"><a href="#【样例输出】-1" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>310-1010 2
+487-3279 4
+888-4567 3
+</code></pre>
+<h2 id="【思路】-1"><a href="#【思路】-1" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;先将输入的号码标准格式化，按照字典序排序后，再计数判断并输出</p>
+<h2 id="【代码（C-）】-1"><a href="#【代码（C-）】-1" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    string str[n]; // 定义最终字符串数组</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        string tmpNum; // 定义临时变量用于接收待处理号码</span><br><span class="line">        stringstream sstream; // 定义字符串流用于处理号码中的每个字符</span><br><span class="line">        stringstream sstreamOut; // 定义字符串流用于构造标准格式号码</span><br><span class="line">        cin &gt;&gt; tmpNum;</span><br><span class="line">        sstream &lt;&lt; tmpNum; // 入流</span><br><span class="line">        char a; // 定义单个字符用于接收</span><br><span class="line">        int count = 0; // 处理的字符个数，用于判断是否到第三个数字以构造 &#x27;-&#x27;</span><br><span class="line">        while (sstream &gt;&gt; a) &#123;</span><br><span class="line">            if (a != &#x27;-&#x27;) &#123;</span><br><span class="line">                sstreamOut &lt;&lt; a;</span><br><span class="line">                count++;</span><br><span class="line">                if (count == 3)</span><br><span class="line">                    sstreamOut &lt;&lt; &#x27;-&#x27;; // 构造 xxx-xxxx 中的 -</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        string formatNum; // 定义标准格式号码</span><br><span class="line">        sstreamOut &gt;&gt; formatNum; // 从字符串流输出到formatNum</span><br><span class="line">        for (int j = 0; j &lt; 8; ++j) &#123; // 将号码中的字母转为数字</span><br><span class="line">            if (formatNum[j] &gt;= &#x27;A&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;C&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;2&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;D&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;F&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;3&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;G&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;I&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;4&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;J&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;L&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;5&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;M&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;O&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;6&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;P&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;S&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;7&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;T&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;V&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;8&#x27;;</span><br><span class="line">            else if (formatNum[j] &gt;= &#x27;W&#x27; &amp;&amp; formatNum[j] &lt;= &#x27;Y&#x27;)</span><br><span class="line">                formatNum[j] = &#x27;9&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        str[i] = formatNum; // 将构造好的标准格式号码赋值给最终的判断数组</span><br><span class="line">    &#125;</span><br><span class="line">    sort(str, str + n); // 按照字典序排序</span><br><span class="line">    int numCount = 1; // 定义号码出现次数，用于判断</span><br><span class="line">    for (int i = 0; i &lt; n - 1; ++i) &#123;</span><br><span class="line">//        cout &lt;&lt; str[i] &lt;&lt; endl;</span><br><span class="line">        if (str[i] == str[i + 1]) &#123; // 如果当前号码和下个号码一样，则计数+1</span><br><span class="line">            numCount++;</span><br><span class="line">        &#125; else &#123; // 如果不一样，当计数＞1时，按照格式输出，并且重新计数</span><br><span class="line">            if (numCount &gt; 1)</span><br><span class="line">                cout &lt;&lt; str[i] &lt;&lt; &quot; &quot; &lt;&lt; numCount &lt;&lt; endl;</span><br><span class="line">            numCount = 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="缺席考试的是谁？"><a href="#缺席考试的是谁？" class="headerlink" title="缺席考试的是谁？"></a>缺席考试的是谁？</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-2"><a href="#【问题描述】-2" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;程序设计考试结束了，传来个不好的消息：有一个学生没参加考试!需要尽快知道缺席考试的人是谁，以便尽快做出处理。</p>
+<p>&emsp;&emsp;糟糕的是，尽管有签到表，但由于人数较多，签到情况比较混乱：有的签到表签在一张白纸上，有的虽然签在名册上，但并不是签在自己姓名旁，更有学生签到了别的签到表上……</p>
+<p>&emsp;&emsp;现在只能根据这2n-1个姓名（名册上有n个学生姓名，签到有n-1个姓名，签到姓名和名册姓名可能混在一起了），来找到缺席考试的人是谁。唯一一个有利的条件是所有参加考试的人都签了名，且只签一次，签名也都正确无误。</p>
+<p>&emsp;&emsp;现在任务交给你：编写一个程序，找出缺席考试的是谁。</p>
+<h2 id="【输入形式】-2"><a href="#【输入形式】-2" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据。</p>
+<p>&emsp;&emsp;每组测试数据开始一行，是一个正整数n，表示总人数，n=0意味着输入结束并且不需要处理。</p>
+<p>&emsp;&emsp;以下2n-1行，每行一个字符串，长度不超过20，表示一个人的姓名。姓名有大小写的英文字母、常用汉字组成(注意每个汉字占2个字节，中英文姓名都不排除有重名情况)。</p>
+<p>&emsp;&emsp;40%的测试数据1 ≤ n≤ 10；</p>
+<p>&emsp;&emsp;30%的测试数据1 ≤ n≤ 100；</p>
+<p>&emsp;&emsp;20%的测试数据1 ≤ n≤ 103；</p>
+<p>&emsp;&emsp;10%的测试数据1 ≤ n≤ 104；</p>
+<p>&emsp;&emsp;提示：大量输入数据，C/C++输入推荐使用scanf函数</p>
+<h2 id="【输出形式】-2"><a href="#【输出形式】-2" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一行，只包含一个字符串，表示缺席的人的姓名。</p>
+<h2 id="【样例输入】-2"><a href="#【样例输入】-2" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>2
+张三
+张三
+李四
+0
+</code></pre>
+<h2 id="【样例输出】-2"><a href="#【样例输出】-2" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>李四
+</code></pre>
+<h2 id="【思路】-2"><a href="#【思路】-2" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;这里简单地讲解下 <strong>scanf</strong> 和 <strong>map</strong> 的用法。</p>
+<h4 id="scanf："><a href="#scanf：" class="headerlink" title="scanf："></a>scanf：</h4><p>&emsp;&emsp;<strong>scanf</strong> 是一个 <strong>C标准库函数</strong> ，由 <strong>两个参数</strong> 组成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scanf($格式控制字符串, $地址表列);</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>格式控制字符串：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">合格的输入</th>
+<th align="center">参数的类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%a、%A</td>
+<td align="center">读入一个浮点值(仅 C99 有效)。</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">%c</td>
+<td align="center">单个字符：读取下一个字符。如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置。在末尾不会追加空字符。</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">%d</td>
+<td align="center">十进制整数：数字前面的 + 或 - 号是可选的。</td>
+<td align="center">int</td>
+</tr>
+<tr>
+<td align="center">%e、%E、%f、%F、%g、%G</td>
+<td align="center">浮点数：包含了一个小数点、一个可选的前置符号 + 或 -、一个可选的后置字符 e 或 E，以及一个十进制数字。两个有效的实例 -732.103 和 7.12e4</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">%i</td>
+<td align="center">读入十进制，八进制，十六进制整数 。</td>
+<td align="center">int</td>
+</tr>
+<tr>
+<td align="center">%o</td>
+<td align="center">八进制整数。</td>
+<td align="center">int</td>
+</tr>
+<tr>
+<td align="center">%s</td>
+<td align="center">字符串。这将读取连续字符，直到遇到一个空格字符（空格字符可以是空白、换行和制表符）。</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">%u</td>
+<td align="center">无符号的十进制整数。</td>
+<td align="center">unsigned int</td>
+</tr>
+<tr>
+<td align="center">%x、%X</td>
+<td align="center">十六进制整数。</td>
+<td align="center">int</td>
+</tr>
+<tr>
+<td align="center">%p</td>
+<td align="center">读入一个指针 。</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">%[]</td>
+<td align="center">扫描字符集合 。</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">%%</td>
+<td align="center">读 % 符号。</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;&emsp;&emsp;● <strong>参考资料：</strong><a class="link"   target="_blank" rel="noopener" href="https://www.runoob.com/cprogramming/c-function-scanf.html" >C 库函数 - scanf()<i class="fas fa-external-link-alt"></i></a></p>
+<p>&emsp;&emsp;<strong>地址表列：</strong></p>
+<p>&emsp;&emsp;&emsp;&emsp;使用 <strong>取地址符&amp;</strong></p>
+<p>&emsp;&emsp;&emsp;&emsp;由于这是一个 <strong>C标准库函数</strong> ，因此不能直接传入C++的string，需要使用char[]代替</p>
+<p>&emsp;&emsp;&emsp;&emsp;示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a,b,c;</span><br><span class="line">scanf(&quot;%d, %d, %d&quot;,&amp;a,&amp;b,&amp;c);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char name[20];</span><br><span class="line">scanf(&quot;%s&quot;, name);</span><br></pre></td></tr></table></figure>
+
+<h4 id="map："><a href="#map：" class="headerlink" title="map："></a>map：</h4><p>&emsp;&emsp;<strong>map</strong> 是 <strong>STL</strong> 中的一个 <strong>键值对容器</strong> ，它提供 <strong>一对一</strong> 的 <strong>Hash</strong> ，相当于 <strong>Python</strong> 里的 <strong>字典（Dictionary）</strong> ，<strong>JSON</strong> 里的 <strong>键(Key) 值 (Value)</strong> 。</p>
+<p>&emsp;&emsp;不过相比于上述两种概念，C++里的使用更加复杂。仅在此说明本题需要用到的地方。</p>
+<p>&emsp;&emsp;以 <strong>未使用命名空间std</strong> 为例：</p>
+<p>&emsp;&emsp;即 <strong>未包含：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using namespace std;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>引入头文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;map&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>初始化：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::map&lt;std::string, int&gt; student;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>插入：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student.insert(std::pair&lt;std::string, int&gt;(name, 1); // pair（位于 std:: 命名空间）将string和bool合成一组</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>遍历：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::map&lt;std::string, int&gt;::iterator iterator; // 声明迭代器，类似于指针或者数组下标</span><br><span class="line">for (iterator = student.begin(); iterator != student.end(); iterator++) &#123;</span><br><span class="line">    std::cout &lt;&lt; iterator-&gt;first &lt;&lt; &quot;: &quot; &lt;&lt; iterator-&gt;second &lt;&lt; endl;</span><br><span class="line">    // iterator-&gt;first 相当于当前元素的第一个值， iterator-&gt;second 相当于当前元素的第二个值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;<strong>判断是否有重复键(Key)：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::pair&lt;map&lt;std::string, int&gt;::iterator, bool&gt; isExist; // pair将map的迭代器和bool合成一组</span><br><span class="line">isExist = student.insert(std::pair&lt;std::string, int&gt;(name, 1));</span><br><span class="line">if (!isExist.second) &#123;</span><br><span class="line">    student[name] += 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="【代码（C-）】-2"><a href="#【代码（C-）】-2" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    while (cin &gt;&gt; n &amp;&amp; n != 0) &#123;</span><br><span class="line">        map&lt;string, int&gt; student; // 定义学生姓名键值对 &lt;姓名,计数&gt;</span><br><span class="line">        for (int i = 0; i &lt; 2 * n - 1; ++i) &#123;</span><br><span class="line">            char name[20]; // 定义姓名字符数组（相当于字符串）</span><br><span class="line">            scanf(&quot;%s&quot;, name); // 使用 scanf 输入姓名</span><br><span class="line">            pair&lt;map&lt;string, int&gt;::iterator, bool&gt; isExist; // 定义检查重复性pair</span><br><span class="line">            isExist = student.insert(pair&lt;string, int&gt;(name, 1)); // 若有重复项则isExist Value值为false</span><br><span class="line">            if (!isExist.second) &#123;</span><br><span class="line">                student[name] += 1; // 计数+1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        map&lt;string, int&gt;::iterator iterator; // 定义map迭代器</span><br><span class="line">        for (iterator = student.begin(); iterator != student.end(); iterator++) &#123; // 遍历map</span><br><span class="line">            // 请注意：题目中提示 “中英文姓名都不排除有重名情况”</span><br><span class="line">            // 即若有两个人都叫 张三</span><br><span class="line">            // 当两个 张三 都签到之后，map中 张三 的计数为 4</span><br><span class="line">            // 若只有一个 张三 签到，而另一个 张三 没有签到时，map中 张三 的计数为 3</span><br><span class="line">            // 因此，当map中的计数为偶数时，则无论是否有重名，重名者均已签到</span><br><span class="line">            // 当map中的计数为奇数时，则无论是否有重名，必有一人未签到</span><br><span class="line">            if (iterator-&gt;second % 2 != 0) &#123;</span><br><span class="line">                cout &lt;&lt; iterator-&gt;first &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="电话号码"><a href="#电话号码" class="headerlink" title="电话号码"></a>电话号码</h1><blockquote>
+<p>类型：字符串，模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-3"><a href="#【问题描述】-3" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;程序设计考试结束了，传来个不好的消息：有一个学生没参加考试!需要尽快知道缺席考试的人是谁，以便尽快做出处理。</p>
+<p>&emsp;&emsp;糟糕的是，尽管有签到表，但由于人数较多，签到情况比较混乱：有的签到表签在一张白纸上，有的虽然签在名册上，但并不是签在自己姓名旁，更有学生签到了别的签到表上……</p>
+<p>&emsp;&emsp;现在只能根据这2n-1个姓名（名册上有n个学生姓名，签到有n-1个姓名，签到姓名和名册姓名可能混在一起了），来找到缺席考试的人是谁。唯一一个有利的条件是所有参加考试的人都签了名，且只签一次，签名也都正确无误。</p>
+<p>&emsp;&emsp;现在任务交给你：编写一个程序，找出缺席考试的是谁。</p>
+<h2 id="【输入形式】-3"><a href="#【输入形式】-3" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;Vasya有几本电话簿，记录了他的朋友们的电话号码，每一个朋友都可以有一或几个电话号码。</p>
+<p>&emsp;&emsp;Vasya决定整理关于朋友电话号码的信息。给定n个字符串，来自于Vasya的电话簿中的条目。每一条都以朋友的姓名开头，然后跟着当前条目中的电话号码个数，然后是本人的电话号码。有可能几个相同的电话被记录在同一个记录中。</p>
+<p>&emsp;&emsp;Vasya还认为，如果电话号码a是电话号码b的后缀（也就是说，号码b以a结尾），这两个号码被当作同一个电话号码，那么a被认为是无城市代码，它不应该被考虑。</p>
+<p>&emsp;&emsp;输出整理后Vasya朋友的电话号码信息。有可能两个不同的人有相同的号码。如果一个人有两个电话号码x和y，x是y的后缀（即y以x结尾），则不输出x。 </p>
+<p>&emsp;&emsp;如果Vasya的电话簿中的某些朋友记录了几次，那么只需要记录一次。 </p>
+<h2 id="【输出形式】-3"><a href="#【输出形式】-3" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出Vasya的朋友的电话号码的有序信息。首先输出电话簿中的朋友数目m。</p>
+<p>&emsp;&emsp;接下来的m行，包含以格式“姓名 电话号码个数 电话号码1 … 电话号码k”的条目，号码间以空格分隔。每个记录包含当前朋友的所有电话号码。</p>
+<p>&emsp;&emsp;每个条目输出按照姓名字母序进行排序，电话号码按照从小到大的顺序排列（注意电话号码比较规则：”1”&lt;”01”、”12”&lt;”012”，依此类推）</p>
+<h2 id="【样例输入】-3"><a href="#【样例输入】-3" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>4
+ivan 3 123 123 456
+ivan 2 456 456
+ivan 8 789 3 23 6 56 9 89 2
+dasha 2 23 789
+</code></pre>
+<h2 id="【样例输出】-3"><a href="#【样例输出】-3" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>2
+dasha 2 23 789 
+ivan 4 2 123 456 789
+</code></pre>
+<h2 id="【思路】-3"><a href="#【思路】-3" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;定义结构体Friend，存储朋友的名字，号码数量，具体号码。合理利用动态数组（向量），存储时先判断是否再存储。这里在删除无城市前缀号码时，没有用迭代器实现，而是将无城市前缀号码赋值为一个不可能的号码 “*”，同时号码数量-1，在输出时不输出即可。</p>
+<h2 id="【代码（C-）】-3"><a href="#【代码（C-）】-3" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct Friend &#123;</span><br><span class="line">    string name; // 名字</span><br><span class="line">    int count = 0; // 号码数量</span><br><span class="line">    vector&lt;string&gt; num; // 号码动态数组</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void addNum(string num, Friend &amp;f) &#123;</span><br><span class="line">    bool isExist = false;</span><br><span class="line">    for (string &amp;i : f.num) &#123;</span><br><span class="line">        if (num == i) &#123;</span><br><span class="line">            isExist = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!isExist) &#123;</span><br><span class="line">        f.count++;</span><br><span class="line">        f.num.push_back(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 向某一个朋友添加号码，重复时忽略</span><br><span class="line"></span><br><span class="line">void addFri(Friend &amp;f, vector&lt;Friend&gt; &amp;fs) &#123;</span><br><span class="line">    bool isExist = false;</span><br><span class="line">    for (Friend &amp;i : fs) &#123;</span><br><span class="line">        if (f.name == i.name) &#123;</span><br><span class="line">            isExist = true;</span><br><span class="line">            for (string &amp;j : f.num) &#123;</span><br><span class="line">                addNum(j, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!isExist) &#123;</span><br><span class="line">        fs.push_back(f);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 向电话簿添加朋友的记录，重复时合并</span><br><span class="line"></span><br><span class="line">bool cmp(string a, string b) &#123;</span><br><span class="line">    if (a.size() != b.size()) &#123;</span><br><span class="line">        // 注意电话号码比较规则：”1”&lt;”01”、”12”&lt;”012”，依此类推。</span><br><span class="line">        // 这里我觉得题目没有说的太清楚，实际上 1 和 01 根本没有比较的可能，因为1已经作为无城市号码被忽略了。</span><br><span class="line">        // 因此这里的意思其实是：2 &lt; 01，03 &lt; 002 ...</span><br><span class="line">        return a.size() &lt; b.size();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return a &lt; b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 对某个朋友的号码动态数组进行排序的规则</span><br><span class="line"></span><br><span class="line">void cleanNum(Friend &amp;f) &#123;</span><br><span class="line">    for (auto &amp;i:f.num) &#123;</span><br><span class="line">        for (auto &amp;j:f.num) &#123;</span><br><span class="line">            if (i != j) &#123;</span><br><span class="line">                // 目标是是判断j的后缀是否是i</span><br><span class="line">                stack&lt;char&gt; si, sj;</span><br><span class="line">                for (char &amp;k : i) &#123;</span><br><span class="line">                    si.push(k); // i入栈</span><br><span class="line">                &#125;</span><br><span class="line">                for (char &amp;k : j) &#123;</span><br><span class="line">                    sj.push(k); // j入栈</span><br><span class="line">                &#125;</span><br><span class="line">                // 利用栈的先入后出特性，将i、j反转</span><br><span class="line">                bool isBack = true;</span><br><span class="line">                while (!si.empty()) &#123;</span><br><span class="line">                    if (si.top() == sj.top()) &#123;</span><br><span class="line">                        si.pop();</span><br><span class="line">                        sj.pop();</span><br><span class="line">                        // 相同则出栈</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        // 当存在不一样的字符，则i不是j的后缀</span><br><span class="line">                        isBack = false;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                // 如果si弹栈到空栈每个字符都和sj一样，那么i就是j的后缀，将其标记为 *，同时计数-1</span><br><span class="line">                if (isBack) &#123;</span><br><span class="line">                    i = &quot;*&quot;;</span><br><span class="line">                    f.count--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; // 删除无城市号码</span><br><span class="line"></span><br><span class="line">bool cmp2(Friend a, Friend b) &#123;</span><br><span class="line">    return a.name &lt; b.name;</span><br><span class="line">&#125; // 对电话簿进行排序的规则</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    vector&lt;Friend&gt; friends; // 定义号码簿动态数组</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        Friend f; // 定义朋友类</span><br><span class="line">        int count; // 用于接收号码数量，以便后续接收具体号码</span><br><span class="line">        cin &gt;&gt; f.name &gt;&gt; count;</span><br><span class="line">        for (int j = 0; j &lt; count; ++j) &#123;</span><br><span class="line">            string num;</span><br><span class="line">            cin &gt;&gt; num;</span><br><span class="line">            addNum(num, f); // 添加号码（重复则忽略）</span><br><span class="line">        &#125;</span><br><span class="line">        addFri(f, friends); // 添加记录到号码簿（重复则合并）</span><br><span class="line">    &#125;</span><br><span class="line">    sort(friends.begin(), friends.end(), cmp2); // 按照字典序对号码簿排序</span><br><span class="line">    cout &lt;&lt; friends.size() &lt;&lt; endl; // 输出号码簿记录数量</span><br><span class="line">    for (auto &amp;i : friends) &#123;</span><br><span class="line">        sort(i.num.begin(), i.num.end(), cmp); // 对某条记录的号码动态数组排序</span><br><span class="line">        cleanNum(i); // 清除无城市号码</span><br><span class="line">        cout &lt;&lt; i.name &lt;&lt; &quot; &quot; &lt;&lt; i.count &lt;&lt; &quot; &quot;; // 先输出记录中的朋友名称和号码数量</span><br><span class="line">        for (auto &amp;j : i.num) &#123;</span><br><span class="line">            // 根据标记输出具体号码</span><br><span class="line">            if (j != &quot;*&quot;)</span><br><span class="line">                cout &lt;&lt; j &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="点球大战"><a href="#点球大战" class="headerlink" title="点球大战"></a>点球大战</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-4"><a href="#【问题描述】-4" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;在足球比赛中，有不少赛事，例如世界杯淘汰赛和欧洲冠军联赛淘汰赛中，当比赛双方经过正规比赛和加时赛之后仍然不分胜负时，需要进行点球大战来决定谁能够获得最终的胜利。点球大战的规则非常简单，两方轮流派出球员罚点球，每方各罚5个。当5轮点球结束以后如果仍然不分胜负，则进入一轮定胜负的阶段。两方各派一名球员罚点球，直到有一方罚进而另一方没有进为止。 </p>
+<p>&emsp;&emsp;在北美职业冰球联赛中，也有点球大战。与足球的规则不同的是，它只先罚3轮点球，随后就进入一轮定胜负的阶段，而其他的规则完全一样。 </p>
+<p>&emsp;&emsp;在本题中，输入将给出每次点球是否罚进，而你的任务则是输出一个“比分板”。</p>
+<h2 id="【输入形式】-4"><a href="#【输入形式】-4" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入包含多组数据。每组数据的第一行包含一个整数N(1&lt;=N&lt;=18)，表示双方总共罚了多少个点球，N=0表示输入结束。随后有N行，每行是一个如下形式的字符串： </p>
+<p>&emsp;&emsp;&emsp;&emsp;●XXXX good：表示这个点球罚进 </p>
+<p>&emsp;&emsp;&emsp;&emsp;●或者XXXX no good：表示这个点球没有罚进 </p>
+<p>&emsp;&emsp;&emsp;&emsp;●其中XXXX表示球员名字（全部由字母和空格组成，保证不会出现歧义） </p>
+<p>&emsp;&emsp;&emsp;&emsp;●每一行保证不超过100个字符。 </p>
+<p>&emsp;&emsp;&emsp;&emsp;●XXXX和good以及XXXX和no、no和good之间保证有且只有1个空格。 </p>
+<p>&emsp;&emsp;&emsp;&emsp;●good、no good都是小写。本题是大小写相关的。 </p>
+<p>&emsp;&emsp;数据不保证点球大战一定结束，也不保证在结束以后立即结束这组数据（即：不用判断点球大战是否结束，只用把罚进的点球往比分上加即可）。</p>
+<h2 id="【输出形式】-4"><a href="#【输出形式】-4" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对每组数据，输出一个比分板。</p>
+<p>&emsp;&emsp;一个点球如果罚进，则在对应的地方标上’O’，如果没有进则标上’X’。</p>
+<p>&emsp;&emsp;先罚球的队伍的信息在上面，后罚的在下面。</p>
+<p>&emsp;&emsp;最右边标上两队的比分。具体格式参考样例输出。</p>
+<p>&emsp;&emsp;注意如果一轮点球只罚了一个，则后面那个点球对应的地方写上’-’。</p>
+<h2 id="【样例输入】-4"><a href="#【样例输入】-4" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>6
+Riise good
+Ballack good
+Gerrard no good
+Lampard no good
+Fernando Torres good
+Malouda good
+9
+Christiano Ronaldo no good
+Messi no good
+Giggs good
+Abidal no good
+Carrick good
+Ronaldinho good
+Rooney good
+Henry no good
+Tevez good
+0
+</code></pre>
+<h2 id="【样例输出】-4"><a href="#【样例输出】-4" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>1 2 3 Score
+O X O 2
+O X O 2
+1 2 3 4 5 Score
+X O O O O 4
+X X O X - 1
+</code></pre>
+<h2 id="【思路】-4"><a href="#【思路】-4" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;逐行解析进球数并存储在数组中，按照奇偶关系分割出两个球队的得分情况，再依次输出</p>
+<h2 id="【代码（C-）】-4"><a href="#【代码（C-）】-4" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int N;</span><br><span class="line">    while (cin &gt;&gt; N &amp;&amp; N != 0) &#123;</span><br><span class="line">        string line; // 接收每行数据</span><br><span class="line">        stringstream sstream; // 定义字符串流，用于对每行非空格数据处理</span><br><span class="line">        vector&lt;char&gt; socre; // 定义得分情况动态数组</span><br><span class="line">        cin.ignore(); // 清除缓存，避免影响后续getline()</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            getline(cin, line); // 按行输入</span><br><span class="line">            sstream &lt;&lt; line;  // 入流</span><br><span class="line">            string word; // 定义每行每单位非空格数据变量</span><br><span class="line">            vector&lt;string&gt; v; // 将非空格数据存入动态数组</span><br><span class="line">            while (sstream &gt;&gt; word) &#123;</span><br><span class="line">                v.push_back(word); // 入组</span><br><span class="line">            &#125;</span><br><span class="line">            sstream.clear(); // 清空字符串流，避免影响下次操作</span><br><span class="line">            bool isIn = true; // 定义是否进球标志</span><br><span class="line">            for (int j = 0; j &lt; v.size(); ++j) &#123;</span><br><span class="line">                if (v[j] == &quot;good&quot; &amp;&amp; j != 0) &#123;</span><br><span class="line">                    // 如果当前单词是good并且它不在首位</span><br><span class="line">                    if (v[j - 1] == &quot;no&quot;) &#123;</span><br><span class="line">                        // 如果当前单词是good，并且与它相邻的前一个单词是no</span><br><span class="line">                        isIn = false;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (isIn)</span><br><span class="line">                socre.push_back(&#x27;O&#x27;);</span><br><span class="line">            else</span><br><span class="line">                socre.push_back(&#x27;X&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; (socre.size() + 1) / 2; ++i) &#123;</span><br><span class="line">            // 得分情况动态数组中，（siez+1）÷2即为最高得分</span><br><span class="line">            cout &lt;&lt; i + 1 &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; &quot;Score&quot; &lt;&lt; endl;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            if (i % 2 == 0) &#123;</span><br><span class="line">                // 如果索引对2的余数是0，则是第一个球队的得分情况</span><br><span class="line">                cout &lt;&lt; socre[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">                if (socre[i] == &#x27;O&#x27;)</span><br><span class="line">                    count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; count &lt;&lt; endl;</span><br><span class="line">        count = 0;</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            if (i % 2 != 0) &#123;</span><br><span class="line">                // 如果索引对2的余数不是0，则是第二个球队的得分情况</span><br><span class="line">                cout &lt;&lt; socre[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">                if (socre[i] == &#x27;O&#x27;)</span><br><span class="line">                    count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (N % 2 != 0) &#123;</span><br><span class="line">            // 如果N是奇数，那么第二只球队必少罚一球</span><br><span class="line">            cout &lt;&lt; &quot;-&quot; &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; count &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="飞行棋"><a href="#飞行棋" class="headerlink" title="飞行棋"></a>飞行棋</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-5"><a href="#【问题描述】-5" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;大家当年一定都下过飞行棋吧。现在Lele和Yueyue要下的棋和这个很相似，只是更简单一点而已。</p>
+<p>&emsp;&emsp;棋盘由N个格子组成，分别标记为第0格到第N-1格。格子分为两种，一种是普通格子，即表示在该格可以停留。否则是特殊的格子，一旦走到上面，就要根据上面标记的数飞到相应的格子上。如果飞到一个特殊的格子上，则可以继续飞。</p>
+<p>&emsp;&emsp;除了第0格外，其他格子都只能容纳一个玩家。即一旦A玩家已经在某个格子上，B玩家又走到这里，A玩家则会被踢回第0格，而B玩家留在这个格子上面。</p>
+<p>&emsp;&emsp;第N-1个格子是终点，一旦一个玩家走到这个格子上，该玩家获胜，游戏结束。</p>
+<p>&emsp;&emsp;刚刚开始时，两个玩家都站在第0格上，依次扔骰子，根据骰子显示的点数走相应的格子数。比如，玩家在第0格，扔出了5点，则会走到第5个格子上。如果玩家走得超出了棋盘的范围，则要往回走一定的步数。比如，棋盘一共有7(0~6)个格子,玩家在第4格上，扔出了6点，最终他会走到第2格上(4-&gt;5-&gt;6-&gt;5-&gt;4-&gt;3-&gt;2)。</p>
+<p>&emsp;&emsp;根据观察，骰子扔出来的数也是有规律的。<br>对于每一盘棋，扔出的第一个点数为 F0=(A<em>C+B)%6+1,第二个点数为 F1=(A</em>F0+B)%6+1,第三个点数为 F2=(A*F1+B)%6+1 ….依此类推。</p>
+<p>&emsp;&emsp;每一盘棋都是由Lele先走，现在就请你当裁判，看谁能获胜。</p>
+<h2 id="【输入形式】-5"><a href="#【输入形式】-5" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;本题目包含多组测试，请处理到文件结束。</p>
+<p>&emsp;&emsp;每组数据占两行。</p>
+<p>&emsp;&emsp;第一行有4个整数N,A,B,C(含义见题目描述，6&lt;N&lt;200,0&lt;=A,B,C&lt;=2^31)。</p>
+<p>&emsp;&emsp;第二行有N个字符串，分别表示棋盘上第0个到第N-1个格子的内容。两个字符串之间用一个空格分隔开。</p>
+<p>&emsp;&emsp;如果字符串为”N”,则表示这个格子为普通格子。否则字符串为”GX”(X为0到N-1之间的整数)的形式，其中X表示玩家走到这个格子时，要马上飞到第X个格子。</p>
+<p>&emsp;&emsp;数据保证第0个和第N-1个格子一定为”N”。</p>
+<h2 id="【输出形式】-5"><a href="#【输出形式】-5" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组数据，在一行内输出结果。</p>
+<p>&emsp;&emsp;如果Lele能赢这盘棋，则输出”Lele”,如果Yueyue赢的话，就输出”Yueyue”。</p>
+<h2 id="【样例输入】-5"><a href="#【样例输入】-5" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>7 1 0 6
+N G3 N N N N N
+7 1 0 6
+N G4 N N N N N
+</code></pre>
+<h2 id="【样例输出】-5"><a href="#【样例输出】-5" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>Lele
+Yueyue
+</code></pre>
+<h2 id="【思路】-5"><a href="#【思路】-5" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;将格子抽象化为数组，将所有格子都想成特殊格，而普通格则为对应本身的特殊格，其下标与位置对应，其值与其格对应的位置对应。</p>
+<p>&emsp;&emsp;按照题目所给公式计算每一次投掷骰子的步数。</p>
+<p>&emsp;&emsp;根据骰子得到的步数计算两人每次游戏的位置，最后再判断谁到达终点。</p>
+<h2 id="【代码（C-）】-5"><a href="#【代码（C-）】-5" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int getStep(int A, int C, int B) &#123;</span><br><span class="line">    return (A * C + B) % 6 + 1;</span><br><span class="line">&#125;// 根据公式计算每一次掷骰子得到的步数</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int N, A, B, C; // 定义题目所需变量</span><br><span class="line">    while (cin &gt;&gt; N &gt;&gt; A &gt;&gt; B &gt;&gt; C) &#123;</span><br><span class="line">        // “本题目包含多组测试，请处理到文件结束。”</span><br><span class="line">        // 使用while(cin&gt;&gt;xxx)</span><br><span class="line">        vector&lt;int&gt; cell; // 定义格子的动态数组</span><br><span class="line">        // 将所有的格子都想成特殊格，格子数组的值为其对应需要走到的格子位置</span><br><span class="line">        // 普通格的值即为其本身的位置，而特殊格的值是相应G后面的数值</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            string s; // 定义临时变量s，用于接收格子数据</span><br><span class="line">            cin &gt;&gt; s; // 输入</span><br><span class="line">            if (s[0] == &#x27;N&#x27;) &#123;</span><br><span class="line">                // 如果是普通格，则直接推入</span><br><span class="line">                cell.push_back(i);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 如果是特殊格，则将第一个字符设置为0，然后转为int推入</span><br><span class="line">                s[0] = &#x27;0&#x27;;</span><br><span class="line">                cell.push_back(stoi(s));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        bool isLele = true; // 设置标志符，判定当前是谁走</span><br><span class="line">        int mC = C; // 初始化投掷步数</span><br><span class="line">        int Lele = 0, Yueyue = 0; // 初始化两人的位置</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            mC = getStep(A, mC, B); // 第n次掷骰子得到的步数</span><br><span class="line">            int mStep = cell[mC]; // 获取这个格子对应的实际格子位置</span><br><span class="line">//            while (mStep != cell[mStep]) &#123;</span><br><span class="line">//                mStep = cell[mStep];</span><br><span class="line">//            &#125;</span><br><span class="line">            // “特殊的格子，一旦走到上面，就要根据上面标记的数飞到相应的格子上。</span><br><span class="line">            // 如果飞到一个特殊的格子上，则可以继续飞。”</span><br><span class="line">            // 这个循环是针对连续特殊格的情况</span><br><span class="line">            // 奇怪的是，这个循环加上去之后会有两个样例超时</span><br><span class="line">//            cout &lt;&lt; &quot;mC: &quot; &lt;&lt; mC &lt;&lt; endl;</span><br><span class="line">            if (isLele) &#123;</span><br><span class="line">                // 如果是Lele</span><br><span class="line">                Lele += mStep; // 步数计算</span><br><span class="line">//                cout &lt;&lt; &quot;Lele: &quot; &lt;&lt; Lele &lt;&lt; endl;</span><br><span class="line">                if (Lele &gt; N - 1) &#123;</span><br><span class="line">                    Lele = N - 1 - (Lele - (N - 1)); // 如果已经到头了，就返回</span><br><span class="line">                &#125;</span><br><span class="line">                if (Lele == Yueyue) &#123;</span><br><span class="line">                    Yueyue = 0; // 如果相遇，则把Yueyue踢回起点</span><br><span class="line">                &#125;</span><br><span class="line">                if (Lele == N - 1) &#123;</span><br><span class="line">                    // 到达终点</span><br><span class="line">                    cout &lt;&lt; &quot;Lele&quot; &lt;&lt; endl;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 如果是Yueyue</span><br><span class="line">                Yueyue += mStep; // 步数计算</span><br><span class="line">//                cout &lt;&lt; &quot;Yueyue: &quot; &lt;&lt; Yueyue &lt;&lt; endl;</span><br><span class="line">                if (Yueyue &gt; N - 1) &#123;</span><br><span class="line">                    Yueyue = N - (Yueyue - (N - 1)); // 如果已经到头了，就返回</span><br><span class="line">                &#125;</span><br><span class="line">                if (Yueyue == Lele) &#123;</span><br><span class="line">                    Lele = 0; // 如果相遇，则把Lele踢回起点</span><br><span class="line">                &#125;</span><br><span class="line">                if (Yueyue == N - 1) &#123;</span><br><span class="line">                    // 到达终点</span><br><span class="line">                    cout &lt;&lt; &quot;Yueyue&quot; &lt;&lt; endl;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            isLele = !isLele; // 取反</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="棋盘"><a href="#棋盘" class="headerlink" title="棋盘"></a>棋盘</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-6"><a href="#【问题描述】-6" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;棋盘是指一个行和列编号从1~N的NxN的二进制矩阵，当行号和列号之和为偶数时该矩阵对应位置为黑色的(1)，否则为白色的(0)。以下图示为N=1、2、3时的棋盘。</p>
+
+
+<p>&emsp;&emsp;给出一个NxN的二进制矩阵，请找出位于该矩阵内的最大尺寸的完整棋盘，以及最大尺寸棋盘的数量（棋盘可以交叠）。</p>
+<h2 id="【输入形式】-6"><a href="#【输入形式】-6" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;每个测试用例的第一行是一个正整数N(1&lt;=N&lt;=2000)，表示給定矩阵的行数和列数，接下来的N行描述了这个矩阵：每行有N个字符，既可以是“1”（代表黑块），也可以是“0”（代表白块）。矩阵至少包含一个“1”字符。</p>
+<h2 id="【输出形式】-6"><a href="#【输出形式】-6" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出最大尺寸棋盘的行列的大小，以及最大棋盘的个数，以空格分隔。</p>
+<h2 id="【样例输入】-6"><a href="#【样例输入】-6" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>5
+00101
+11010
+00101
+01010
+11101
+</code></pre>
+<h2 id="【样例输出】-6"><a href="#【样例输出】-6" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>3 3
+</code></pre>
+<h2 id="【思路】-6"><a href="#【思路】-6" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;值为1的格即为最小的棋盘，而每个更大的棋盘其左上角值必是1。因此遍历整个棋盘，逢1判断。</p>
+<h2 id="【代码（C-）】-6"><a href="#【代码（C-）】-6" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int N;</span><br><span class="line">    cin &gt;&gt; N;</span><br><span class="line">    int matrix[N][N]; // 定义矩阵数组</span><br><span class="line">    for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">        for (int j = 0; j &lt; N; ++j) &#123;</span><br><span class="line">            char a;</span><br><span class="line">            cin &gt;&gt; a;</span><br><span class="line">            matrix[i][j] = a - 48; // char &#x27;0&#x27; 与 int 0 的ASCII码相差48</span><br><span class="line">//            cout &lt;&lt; matrix[i][j] &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">//        cout &lt;&lt; &quot;\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    int size[N]; // 定义棋盘尺寸数组，下标+1为其尺寸大小，值为其数量</span><br><span class="line">    int tmpMaxSize; // 定义临时最大尺寸变量</span><br><span class="line">    for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">        size[i] = 0; // 初始化为0</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">        for (int j = 0; j &lt; N; ++j) &#123;</span><br><span class="line">            // matrix[i][j]为当前基点</span><br><span class="line">            if (matrix[i][j] == 1) &#123;</span><br><span class="line">                // 值为1才有可能成为一个棋盘</span><br><span class="line">                tmpMaxSize = min(N - i, N - j);</span><br><span class="line">                // 计算其理论上最大边界长度</span><br><span class="line">//                cout &lt;&lt; &quot;N - i: &quot; &lt;&lt; N - i &lt;&lt; endl;</span><br><span class="line">//                cout &lt;&lt; &quot;N - j: &quot; &lt;&lt; N - j &lt;&lt; endl;</span><br><span class="line">//                cout &lt;&lt; &quot;tmpMaxSize: &quot; &lt;&lt; tmpMaxSize &lt;&lt; endl;</span><br><span class="line">                for (int k = 1; k &lt;= tmpMaxSize; ++k) &#123;</span><br><span class="line">                    // 边界长度至少为1</span><br><span class="line">                    bool isMatrix = true; // 标志符，用于判断是否是矩阵</span><br><span class="line">                    for (int l = 0; l &lt; k; ++l) &#123;</span><br><span class="line">                        // 纵列</span><br><span class="line">                        for (int m = 0; m &lt; k - 1; ++m) &#123;</span><br><span class="line">                            // 横列</span><br><span class="line">                            if (matrix[i + l][j + m] == matrix[i + l][j + m + 1]) &#123;</span><br><span class="line">                                // 如果当前格与其右边格值一样，则不满足要求</span><br><span class="line">                                isMatrix = false;</span><br><span class="line">                                break;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        if (l != 0) &#123;</span><br><span class="line">                            if (matrix[i + l][j] == matrix[i + l - 1][j]) &#123;</span><br><span class="line">                                // 如果当前格与其上边格值一样，则不满足要求</span><br><span class="line">                                isMatrix = false;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        if (!isMatrix) &#123;</span><br><span class="line">                            // 如果不是矩阵，直接跳出循环，节省时间</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (isMatrix)</span><br><span class="line">                        // 如果是矩阵，则在矩阵数组里记录</span><br><span class="line">                        size[k - 1]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stack&lt;int&gt; s; // 定义栈，利用其先入后出的特性反向查找矩阵数组中的最大值及其数量</span><br><span class="line">    for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">        s.push(size[i]); // 入栈</span><br><span class="line">//        cout &lt;&lt; size[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    int count = 0, maxSize = 0; // 定义计数和最大尺寸变量</span><br><span class="line">    while (!s.empty()) &#123;</span><br><span class="line">        if (s.top() == 0) &#123;</span><br><span class="line">            // 如果栈顶是0，那么这个尺寸的棋盘不存在</span><br><span class="line">            s.pop(); // 弹栈</span><br><span class="line">            count++; // 计数+1</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 反之则找到棋盘的最大尺寸，跳出循环</span><br><span class="line">            maxSize = s.top(); // 赋值</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; N - count &lt;&lt; &quot; &quot; &lt;&lt; maxSize; // 输出</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Engine-字符串"><a href="#Engine-字符串" class="headerlink" title="Engine-字符串"></a>Engine-字符串</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-7"><a href="#【问题描述】-7" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;谷歌、百度等搜索引擎已经成为了互连网中不可或缺的一部分。在本题中，你的任务也是设计一个搜索论文的搜索引擎，当然，本题的要求比起实际的需求要少了许多。</p>
+<p>&emsp;&emsp;本题的输入将首先给出一系列的论文，对于每篇论文首先给出标题，然后给出它被引用的次数。然后会有一系列的搜索询问，询问标题中包含特定关键词的论文有哪些。</p>
+<p>&emsp;&emsp;每一个询问可能包含多个关键词，你需要找出标题包含所有关键词的论文。</p>
+<p>&emsp;&emsp;“包含”必须是标题中有一个词正好是给定的关键词，不区分大小写。</p>
+<p>&emsp;&emsp;对每个询问，都按被引用的次数从多到少输出满足条件的论文的标题。如果有被引用的次数相同的论文，则按照论文在输入中的顺序排列，先给出的论文排在前面。</p>
+<h2 id="【输入形式】-7"><a href="#【输入形式】-7" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;每组数据首先有一行包含一个整数N(1&lt;=N&lt;=1000)，表示论文的数目，N=0表示输入结束。每组论文的信息第一行是论文的标题，由字母（大小写均可）和空格组成，不超过10个词，每个词不超过20个字符，标题总共不超过250个字符。第二行是一个整数K(0&lt;=K&amp;&amp;&lt;=108)，表示它被引用的次数。在论文信息结束以后，有一行包含一个整数M(1&lt;=M&lt;=100)，表示询问的数目。接下来有M行，每行是一个询问，由L(1&lt;=L&lt;=10)个空格分开的词构成，每个词不超过20个字符。</p>
+<h2 id="【输出形式】-7"><a href="#【输出形式】-7" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对每个询问，按照题目给定的顺序输出满足条件的论文的标题；如果没有满足条件的论文，就不输出。在每组询问的输出之后输出一行“***”，在每组数据的输出之后输出一行“—”。</p>
+<h2 id="【样例输入1】"><a href="#【样例输入1】" class="headerlink" title="【样例输入1】"></a>【样例输入1】</h2><pre><code>6
+Finding the Shortest Path
+120
+Finding the k Shortest Path
+80
+Find Augmenting Path in General Graph
+80
+Matching in Bipartite Graph
+200
+Finding kth Shortest Path
+50
+Graph Theory and its Applications
+40
+6
+shortest path
+k shortest path
+graph
+path
+find
+application
+0
+</code></pre>
+<h2 id="【样例输出1】"><a href="#【样例输出1】" class="headerlink" title="【样例输出1】"></a>【样例输出1】</h2><pre><code>Finding the Shortest Path
+Finding the k Shortest Path
+Finding kth Shortest Path
+***
+Finding the k Shortest Path
+***
+Matching in Bipartite Graph
+Find Augmenting Path in General Graph
+Graph Theory and its Applications
+***
+Finding the Shortest Path
+Finding the k Shortest Path
+Find Augmenting Path in General Graph
+Finding kth Shortest Path
+***
+Find Augmenting Path in General Graph
+***
+***
+---
+</code></pre>
+<h2 id="【样例输入2】"><a href="#【样例输入2】" class="headerlink" title="【样例输入2】"></a>【样例输入2】</h2><pre><code>1
+Finding the Shortest Path
+120
+2
+Path
+Pat
+0
+</code></pre>
+<h2 id="【样例输出2】"><a href="#【样例输出2】" class="headerlink" title="【样例输出2】"></a>【样例输出2】</h2><pre><code>Finding the Shortest Path
+***
+***
+---
+</code></pre>
+<h2 id="【样例说明】"><a href="#【样例说明】" class="headerlink" title="【样例说明】"></a>【样例说明】</h2><p>&emsp;&emsp;需要查询的内容为“k shortest path”，他包含了3个独立的关键词。</p>
+<h2 id="【思路】-7"><a href="#【思路】-7" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;先将文章及引用次数用结构体数组存储，然后根据题目要求排序，再依次按照询问输出。</p>
+<h2 id="【代码（C-）】-7"><a href="#【代码（C-）】-7" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct Article &#123;</span><br><span class="line">    string title; // 标题</span><br><span class="line">    string titleLow; // 标题（小写字母）</span><br><span class="line">    int times = 0; // 引用次数</span><br><span class="line">    vector&lt;string&gt; word; // 小写标题关键词动态数组</span><br><span class="line">&#125;; // 文章结构体</span><br><span class="line"></span><br><span class="line">bool cmp(Article a, Article b) &#123;</span><br><span class="line">    return a.times &gt; b.times;</span><br><span class="line">&#125; // 逆序排序规则</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int N;</span><br><span class="line">    while (cin &gt;&gt; N &amp;&amp; N != 0) &#123;</span><br><span class="line">        Article articles[N]; // 定义文章数组</span><br><span class="line">        stringstream sstream; // 定义字符串流</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            // cin和getline混用请注意缓存区换行符问题</span><br><span class="line">            cin.ignore();</span><br><span class="line">            getline(cin, articles[i].title);</span><br><span class="line">            cin &gt;&gt; articles[i].times; // 输入引用次数</span><br><span class="line">            articles[i].titleLow = articles[i].title; // 复制原标题</span><br><span class="line">            // 利用 algorithm 里的transform函数将字符串转换为小写</span><br><span class="line">            transform(articles[i].titleLow.begin(), articles[i].titleLow.end(), articles[i].titleLow.begin(),</span><br><span class="line">                      ::tolower);</span><br><span class="line">            sstream &lt;&lt; articles[i].titleLow; // 入流</span><br><span class="line">            string tmpWord; // 定义临时单词变量</span><br><span class="line">            while (sstream &gt;&gt; tmpWord) &#123;</span><br><span class="line">                articles[i].word.push_back(tmpWord); // 将小写化标题的每个关键字存入</span><br><span class="line">            &#125;</span><br><span class="line">            sstream.clear(); // 使用后注意清空</span><br><span class="line">        &#125;</span><br><span class="line">        stable_sort(articles, articles + N, cmp); // 要求引用次数相同且原序不变，则使用 algorithm 中的稳定排序算法</span><br><span class="line">        int M;</span><br><span class="line">        cin &gt;&gt; M;</span><br><span class="line">        string keyWord; // 定义询问变量</span><br><span class="line">        for (int i = 0; i &lt; M; ++i) &#123;</span><br><span class="line">            if (i == 0)</span><br><span class="line">                cin.ignore(); // cin和getline混用请注意缓存区换行符问题</span><br><span class="line">            getline(cin, keyWord);</span><br><span class="line">            if (keyWord.empty()) &#123;</span><br><span class="line">                // 防止getline读入换行符造成数据紊乱</span><br><span class="line">                // 实际上测试数据在讯问过程中没有直接输入换行符，所以注释不影响ac</span><br><span class="line">                i--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            // 将输入的询问全部转为小写</span><br><span class="line">            transform(keyWord.begin(), keyWord.end(), keyWord.begin(), ::tolower);</span><br><span class="line">            for (int j = 0; j &lt; N; ++j) &#123;</span><br><span class="line">                string key; // 定义单个关键词变量</span><br><span class="line">                sstream &lt;&lt; keyWord; // 询问入流</span><br><span class="line">                stack&lt;string&gt; s; // 定义栈，用于判断某个文章标题是否含有全部关键词</span><br><span class="line">                while (sstream &gt;&gt; key) &#123;</span><br><span class="line">                    s.push(key); // 将询问关键词依次入栈，这里用队列也可以</span><br><span class="line">                &#125;</span><br><span class="line">                sstream.clear(); // 使用后注意清空</span><br><span class="line">                int size = s.size(); // s的size理论不超过int最大值，因此直接用int存就可以了</span><br><span class="line">                for (int k = 0; k &lt; size; ++k) &#123;</span><br><span class="line">                    // 循环size次，每次循环中关键词匹配则出栈</span><br><span class="line">                    // 最后若空栈则该文章标题中含有全部关键词</span><br><span class="line">                    for (auto &amp;l : articles[j].word) &#123;</span><br><span class="line">                        if (s.top() == l) &#123;</span><br><span class="line">                            s.pop();</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                if (s.empty())</span><br><span class="line">                    cout &lt;&lt; articles[j].title &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">            cout &lt;&lt; &quot;***&quot; &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!keyWord.empty())</span><br><span class="line">            cout &lt;&lt; &quot;---&quot; &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串压缩"><a href="#字符串压缩" class="headerlink" title="字符串压缩"></a>字符串压缩</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-8"><a href="#【问题描述】-8" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;给定一个由n个小写字母组成的字符串s，需要使用最少数量的钱币来压缩它。</p>
+<p>&emsp;&emsp;压缩该字符串，必须将s表示为多个相互连接的非空字符串: s=t1t2…tk，其中第 i 个字符串按照下列两种方法之一编码：</p>
+<p>&emsp;&emsp;&emsp;&emsp;●如果|ti|=1，也就是说 ti为单个字符组成的字符串，编码时需要支付a个钱币</p>
+<p>&emsp;&emsp;&emsp;&emsp;●如果ti是t1t2…ti-1的子串，编码时需要支付b个钱币</p>
+<p>&emsp;&emsp;你的任务是计算压缩给定的字符串需要花费的最小钱币数。</p>
+<h2 id="【输入形式】-8"><a href="#【输入形式】-8" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入的第一行包含3个用空格分隔的正整数：n、a和b(1≤n、a、b≤5000)，第二行为一个长度为n的小写字符串。</p>
+<h2 id="【输出形式】-8"><a href="#【输出形式】-8" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出一个整数，表示你需要为压缩s所需要支付的最小钱币数。</p>
+<h2 id="【样例输入1】-1"><a href="#【样例输入1】-1" class="headerlink" title="【样例输入1】"></a>【样例输入1】</h2><pre><code>3 3 1
+aba
+</code></pre>
+<h2 id="【样例输出1】-1"><a href="#【样例输出1】-1" class="headerlink" title="【样例输出1】"></a>【样例输出1】</h2><pre><code>7
+</code></pre>
+<h2 id="【样例输入2】-1"><a href="#【样例输入2】-1" class="headerlink" title="【样例输入2】"></a>【样例输入2】</h2><pre><code>4 1 1
+abcd
+</code></pre>
+<h2 id="【样例输出2】-1"><a href="#【样例输出2】-1" class="headerlink" title="【样例输出2】"></a>【样例输出2】</h2><pre><code>4
+</code></pre>
+<h2 id="【样例输入3】"><a href="#【样例输入3】" class="headerlink" title="【样例输入3】"></a>【样例输入3】</h2><pre><code>4 10 1
+aaaa
+</code></pre>
+<h2 id="【样例输出3】"><a href="#【样例输出3】" class="headerlink" title="【样例输出3】"></a>【样例输出3】</h2><pre><code>12
+</code></pre>
+<h2 id="【思路】-8"><a href="#【思路】-8" class="headerlink" title="【思路】"></a>【思路】</h2><p>&emsp;&emsp;感谢 <strong><a class="link"   target="_blank" rel="noopener" href="https://noionion.top/" >noionion<i class="fas fa-external-link-alt"></i></a></strong> 指正，这里我把 <strong>动态规划法</strong> 和 <strong>贪心算法</strong> 搞混了</p>
+<p>&emsp;&emsp;并且，该方法既复杂又不完全正确，虽然CG上能够AC，但将下例字符串反转后得到的答案并非正确答案！</p>
+<p>&emsp;&emsp;十分不推荐这种做法！</p>
+<hr>
+<p>&emsp;&emsp; <strong>（<del>动态规划法</del>）贪心算法仅得到某种意义上的局部最优解</strong> </p>
+<pre><code>37 10 30
+cdddccbdcdcdcdbcbdcbcdddccadcdcddaaab
+</code></pre>
+<p>&emsp;&emsp;&emsp;&emsp;● 感谢 <strong><a class="link"   target="_blank" rel="noopener" href="https://www.seaeye.cn/" >B1ue1nWh1te<i class="fas fa-external-link-alt"></i></a></strong> 提供的数据。</p>
+<p>&emsp;&emsp;若按照普通的（<del>动态规划法</del>）贪心算法计算，最后该样例得到的答案为 <strong>320</strong> ，而优化后的算法才能得到正确答案  <strong>310</strong></p>
+<hr>
+<p>&emsp;&emsp;（<del>动态规划法</del>）贪心算法的思想是 <strong>局部最优</strong> 得到 <strong>整体最优</strong> ，那么将字符串s <strong>逆置</strong> ，从逆置后的 <strong>第一个字符</strong> 开始，若第一个字符能够在剩下的字符串中找到，便试图寻找 <strong>前两个字符</strong> 组成的字符串能否在剩下的字符串中找到，直到找到能够在剩下字符串中找到的 <strong>最长左字符串</strong> 。</p>
+<p>&emsp;&emsp;此时，需要判断 <strong>局部最优情况</strong> ，是 <strong>b钱币方案</strong> 花费更少还是 <strong>a钱币方案</strong> 花费更少？还是相同？如果 <strong>b钱币方案</strong> 花费更少，那么当然选择该方案。如果两者相同甚至 <strong>a钱币方案</strong> 花费更少，那么就选择 <strong>a钱币方案</strong> （此处落入局部最优 <strong>非</strong> 全局最优 <strong>陷阱</strong> ）</p>
+<p>&emsp;&emsp; <strong>（优化后）</strong> 只处理最左边的 <strong>第一个字符</strong> 。</p>
+<p>&emsp;&emsp;&emsp;&emsp;例如，</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;● a = 30，b = 10。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;● cdddccbdcdcdcdbcbdcb <strong>cdd</strong> dccadcd <strong>cdd</strong> aaab</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;● cdddccbdc <strong>dcdcd</strong> bcbdcbcdddcca <strong>dcdcd</strong> daaab</p>
+<p>&emsp;&emsp;&emsp;&emsp;当处理到从右往左数第 <strong>10</strong> 个字符时，哪种方案花费更少？</p>
+<h2 id="【代码（C-）】-8"><a href="#【代码（C-）】-8" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, a, b;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    string mStr;</span><br><span class="line">    cin &gt;&gt; mStr;</span><br><span class="line">    // 输入题目所给数据</span><br><span class="line">    stringstream sstream; // 定义字符串流，用于逆置字符串s</span><br><span class="line">    for (int i = (int) mStr.size() - 1; i &gt;= 0; --i) &#123;</span><br><span class="line">        sstream &lt;&lt; mStr[i]; // 逆置入流</span><br><span class="line">    &#125;</span><br><span class="line">    string mRts; // 定义逆置后的字符串</span><br><span class="line">    sstream &gt;&gt; mRts; // 存入</span><br><span class="line">    sstream.clear(); // 清空字符串流</span><br><span class="line">    int payment = 0; // 初始化最终所需要支付的最小钱币数</span><br><span class="line">    while (!mRts.empty()) &#123;</span><br><span class="line">        // 将逆置的字符串分为左右两个部分，每次处理左边的部分，直到右边的部分为空</span><br><span class="line">        // 每次循环处理后，mRts = 剩下的右边部分</span><br><span class="line">//        cout &lt;&lt; &quot;mRts: &quot; &lt;&lt; mRts &lt;&lt; endl;</span><br><span class="line">        stack&lt;string&gt; leftStack; // 定义左边部分的栈，用于回退得值</span><br><span class="line">        stack&lt;string&gt; rightStack; // 定义右边部分的栈，用于回退得值</span><br><span class="line">        for (int i = 1; i &lt;= mRts.size(); ++i) &#123;</span><br><span class="line">            // 从1开始，查看长度为i的左边部分是否能在右边找到</span><br><span class="line">            stringstream leftSstream; // 定义左流</span><br><span class="line">            for (int j = 0; j &lt; i; ++j) &#123;</span><br><span class="line">                leftSstream &lt;&lt; mRts[j];</span><br><span class="line">            &#125;</span><br><span class="line">            stringstream rightSstream; // 定义右流</span><br><span class="line">            for (int j = i; j &lt; mRts.size(); ++j) &#123;</span><br><span class="line">                rightSstream &lt;&lt; mRts[j];</span><br><span class="line">            &#125;</span><br><span class="line">            string leftStr, rightStr; // 定义左字符串，右字符串</span><br><span class="line">            leftSstream &gt;&gt; leftStr; // 出流</span><br><span class="line">            rightSstream &gt;&gt; rightStr; // 出流</span><br><span class="line">            leftStack.push(leftStr); // 左字符串入栈</span><br><span class="line">            rightStack.push(rightStr); // 右字符串入栈</span><br><span class="line">            leftSstream.clear(); // 清空字符串流</span><br><span class="line">            rightSstream.clear(); // 清空字符串流</span><br><span class="line">//            cout &lt;&lt; &quot;leftStr: &quot; &lt;&lt; leftStr &lt;&lt; endl;</span><br><span class="line">//            cout &lt;&lt; &quot;rightStr: &quot; &lt;&lt; rightStr &lt;&lt; endl;</span><br><span class="line">//            cout &lt;&lt; &quot;--------------------------&quot; &lt;&lt; endl;</span><br><span class="line">            if (rightStack.top().find(leftStack.top()) &lt;= rightStack.top().size()) &#123;</span><br><span class="line">                // 如果在右边部分找到了左边部分的字符串，则继续进行下一次循环</span><br><span class="line">                // 直到找不到为止，此时利用栈的特性退回到上次的左字符串和右字符串</span><br><span class="line">                continue;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 此时右字符串中已经找不到左字符串。</span><br><span class="line">                // 根据栈的大小判断，如果栈大小为1，那么左边长度为1的字符串都不能在右边找到</span><br><span class="line">                // 那么只能满足支付a个钱币的条件</span><br><span class="line">                // 如果栈的大小大于1，那么左边字符串的花费可能比每个字符支付a个钱币的花费更少</span><br><span class="line">                // 什么时候左边字符串的花费比每个字符支付a个钱币的花费相同或更多呢？</span><br><span class="line">                // a = 10 b = 30</span><br><span class="line">                // cc c -- 更多</span><br><span class="line">                // ccc ccc  -- 相同</span><br><span class="line">                if (leftStack.size() &gt; 1) &#123;</span><br><span class="line">                    // 栈大小大于1的情况</span><br><span class="line">                    leftStack.pop(); // 弹栈退回上次的左字符串</span><br><span class="line">                    rightStack.pop(); // 弹栈退回上次的右字符串</span><br><span class="line">                    if (b &lt; a * leftStack.top().size()) &#123;</span><br><span class="line">                        // 左边字符串的花费比每个字符支付a个钱币的花费更少</span><br><span class="line">                        // 那么就采用这个方案</span><br><span class="line">                        payment += b;</span><br><span class="line">//                        cout &lt;&lt; &quot;b &lt; a * leftStack.top().size()&quot; &lt;&lt; endl;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        // 否则，退回最上层右字符串，使左字符串长度为1，然后进行下一次处理</span><br><span class="line">                        while (!rightStack.empty()) &#123;</span><br><span class="line">                            if (rightStack.size() == 1)</span><br><span class="line">                                mRts = rightStack.top(); // 得到最上层右字符串</span><br><span class="line">                            rightStack.pop();</span><br><span class="line">                        &#125;</span><br><span class="line">                        payment += a; // 仅当作左字符串为1处理</span><br><span class="line">//                        cout &lt;&lt; &quot;b &gt;= a * leftStack.top().size()&quot; &lt;&lt; endl;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    mRts = rightStack.top(); // 把右字符串栈顶赋值给mRts，进行下次循环处理</span><br><span class="line">                    break;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    // 栈大小只有1的情况</span><br><span class="line">                    mRts = rightStack.top(); // 把右字符串栈顶赋值给mRts，进行下次循环处理</span><br><span class="line">                    payment += a; // 直接采用支付a个钱币的方案</span><br><span class="line">//                    cout &lt;&lt; &quot;else&quot; &lt;&lt; endl;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">//        cout &lt;&lt; &quot;payment: &quot; &lt;&lt; payment &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; payment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="拼写检查"><a href="#拼写检查" class="headerlink" title="拼写检查"></a>拼写检查</h1><blockquote>
+<p>类型：字符串，模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-9"><a href="#【问题描述】-9" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-9"><a href="#【输入形式】-9" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-9"><a href="#【输出形式】-9" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-7"><a href="#【样例输入】-7" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-7"><a href="#【样例输出】-7" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-9"><a href="#【思路】-9" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-9"><a href="#【代码（C-）】-9" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="最小的K个数"><a href="#最小的K个数" class="headerlink" title="最小的K个数"></a>最小的K个数</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-10"><a href="#【问题描述】-10" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-10"><a href="#【输入形式】-10" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-10"><a href="#【输出形式】-10" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-8"><a href="#【样例输入】-8" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-8"><a href="#【样例输出】-8" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-10"><a href="#【思路】-10" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-10"><a href="#【代码（C-）】-10" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="绩点计算"><a href="#绩点计算" class="headerlink" title="绩点计算"></a>绩点计算</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-11"><a href="#【问题描述】-11" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-11"><a href="#【输入形式】-11" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-11"><a href="#【输出形式】-11" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-9"><a href="#【样例输入】-9" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-9"><a href="#【样例输出】-9" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-11"><a href="#【思路】-11" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-11"><a href="#【代码（C-）】-11" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="xxx定律"><a href="#xxx定律" class="headerlink" title="xxx定律"></a>xxx定律</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】-12"><a href="#【问题描述】-12" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-12"><a href="#【输入形式】-12" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-12"><a href="#【输出形式】-12" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-10"><a href="#【样例输入】-10" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-10"><a href="#【样例输出】-10" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-12"><a href="#【思路】-12" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-12"><a href="#【代码（C-）】-12" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="数的距离差"><a href="#数的距离差" class="headerlink" title="数的距离差"></a>数的距离差</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】-13"><a href="#【问题描述】-13" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-13"><a href="#【输入形式】-13" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-13"><a href="#【输出形式】-13" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-11"><a href="#【样例输入】-11" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-11"><a href="#【样例输出】-11" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-13"><a href="#【思路】-13" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-13"><a href="#【代码（C-）】-13" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="亲和数"><a href="#亲和数" class="headerlink" title="亲和数"></a>亲和数</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-14"><a href="#【问题描述】-14" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-14"><a href="#【输入形式】-14" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-14"><a href="#【输出形式】-14" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-12"><a href="#【样例输入】-12" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-12"><a href="#【样例输出】-12" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-14"><a href="#【思路】-14" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-14"><a href="#【代码（C-）】-14" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="金币"><a href="#金币" class="headerlink" title="金币"></a>金币</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-15"><a href="#【问题描述】-15" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-15"><a href="#【输入形式】-15" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-15"><a href="#【输出形式】-15" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-13"><a href="#【样例输入】-13" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-13"><a href="#【样例输出】-13" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-15"><a href="#【思路】-15" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-15"><a href="#【代码（C-）】-15" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="小A的计算器"><a href="#小A的计算器" class="headerlink" title="小A的计算器"></a>小A的计算器</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-16"><a href="#【问题描述】-16" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-16"><a href="#【输入形式】-16" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-16"><a href="#【输出形式】-16" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-14"><a href="#【样例输入】-14" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-14"><a href="#【样例输出】-14" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-16"><a href="#【思路】-16" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-16"><a href="#【代码（C-）】-16" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="小丑排序"><a href="#小丑排序" class="headerlink" title="小丑排序"></a>小丑排序</h1><blockquote>
+<p>类型：排序</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-17"><a href="#【问题描述】-17" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-17"><a href="#【输入形式】-17" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-17"><a href="#【输出形式】-17" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-15"><a href="#【样例输入】-15" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-15"><a href="#【样例输出】-15" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-17"><a href="#【思路】-17" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-17"><a href="#【代码（C-）】-17" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="数圈"><a href="#数圈" class="headerlink" title="数圈"></a>数圈</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-18"><a href="#【问题描述】-18" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-18"><a href="#【输入形式】-18" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-18"><a href="#【输出形式】-18" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-16"><a href="#【样例输入】-16" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-16"><a href="#【样例输出】-16" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-18"><a href="#【思路】-18" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-18"><a href="#【代码（C-）】-18" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="锤子剪刀布"><a href="#锤子剪刀布" class="headerlink" title="锤子剪刀布"></a>锤子剪刀布</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-19"><a href="#【问题描述】-19" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-19"><a href="#【输入形式】-19" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-19"><a href="#【输出形式】-19" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-17"><a href="#【样例输入】-17" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-17"><a href="#【样例输出】-17" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-19"><a href="#【思路】-19" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-19"><a href="#【代码（C-）】-19" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="新型冠状病毒（COVID19）传播"><a href="#新型冠状病毒（COVID19）传播" class="headerlink" title="新型冠状病毒（COVID19）传播"></a>新型冠状病毒（COVID19）传播</h1><blockquote>
+<p>类型：排序</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-20"><a href="#【问题描述】-20" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输入形式】-20"><a href="#【输入形式】-20" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【输出形式】-20"><a href="#【输出形式】-20" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;</p>
+<h2 id="【样例输入】-18"><a href="#【样例输入】-18" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><h2 id="【样例输出】-18"><a href="#【样例输出】-18" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><h2 id="【思路】-20"><a href="#【思路】-20" class="headerlink" title="【思路】"></a>【思路】</h2><h2 id="【代码（C-）】-20"><a href="#【代码（C-）】-20" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+                
+            </div>
+
+            <!-- comment plugin -->
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">37.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            AARCH64交叉编译笔记 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        AARCH64交叉编译笔记
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/Xayah.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Xayah</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-07-07 13:38:27</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Sat Mar 23 2024 23:29:59 GMT+0800">2024-03-23 23:29:59</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Cross-Compile/">Cross Compile</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Cmake/">Cmake</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Python/">Python</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h1 id="Github地址"><a href="#Github地址" class="headerlink" title="Github地址"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/XayahSuSuSu/Notes-Cross-Compile" >Github地址<i class="fas fa-external-link-alt"></i></a></h1><blockquote>
+<p>Android NDK 版本：r22b (22.1.7171670)</p>
+<p>目标平台：AArch64</p>
+</blockquote>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol>
+<li><p>下载 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/ndk/downloads/" >Android NDK<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>解压</p>
+</li>
+</ol>
+<h2 id="CMake-交叉编译-以-Brotli-为例"><a href="#CMake-交叉编译-以-Brotli-为例" class="headerlink" title="CMake 交叉编译 (以 Brotli 为例)"></a><strong>CMake</strong> 交叉编译 (以 <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/brotli" >Brotli<i class="fas fa-external-link-alt"></i></a> 为例)</h2><ol>
+<li><p>更新Cmake版本 (最低 <strong>3.19</strong> )</p>
+<p>以 <strong>cmake-3.21.0-rc1</strong> 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wget https://cmake.org/files/v3.21/cmake-3.21.0-rc1.tar.gz</span><br><span class="line"></span><br><span class="line">tar -xvf cmake-3.21.0-rc1.tar.gz</span><br><span class="line"></span><br><span class="line">cd cmake-3.21.0-rc1</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">sudo make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line">cmake --version         # 检查版本</span><br></pre></td></tr></table></figure></li>
+<li><p>克隆 Brotli</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/google/brotli</span><br></pre></td></tr></table></figure></li>
+<li><p>交叉编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cd brotli</span><br><span class="line"></span><br><span class="line">mkdir out &amp;&amp; cd out</span><br><span class="line"></span><br><span class="line">export NDK=/home/xayah/Compile/NDK             # NDK根目录绝对路径</span><br><span class="line"></span><br><span class="line">export ABI=arm64-v8a                           # ABI配置(arm64-v8a 即为 AArch64)</span><br><span class="line"></span><br><span class="line">export MINSDKVERSION=24                        # 最小目标SDK版本配置(24 即为 Android 7.0)</span><br><span class="line"></span><br><span class="line">cmake \</span><br><span class="line">   -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \</span><br><span class="line">   -DANDROID_ABI=$ABI \</span><br><span class="line">   -DANDROID_NATIVE_API_LEVEL=$MINSDKVERSION \</span><br><span class="line">   -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./installed ..</span><br><span class="line"></span><br><span class="line">cmake --build . --config Release</span><br></pre></td></tr></table></figure></li>
+<li><p>编译产物生成于 <strong>out</strong> 文件夹中</p>
+</li>
+</ol>
+<h2 id="Autoconf-Makefile-交叉编译-以-Make-4-3-为例"><a href="#Autoconf-Makefile-交叉编译-以-Make-4-3-为例" class="headerlink" title="Autoconf Makefile 交叉编译 (以 Make-4.3 为例)"></a><strong>Autoconf Makefile</strong> 交叉编译 (以 <a class="link"   target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/make/make-4.3.tar.gz" >Make-4.3<i class="fas fa-external-link-alt"></i></a> 为例)</h2><ol>
+<li><p>下载 <strong>make-4.3.tar.gz</strong> 并解压</p>
+</li>
+<li><p>交叉编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">cd make-4.3</span><br><span class="line"></span><br><span class="line">export NDK=/home/xayah/Compile/NDK                              # NDK根目录绝对路径</span><br><span class="line"></span><br><span class="line">export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64     # 交叉编译链路径</span><br><span class="line"></span><br><span class="line">export TARGET=aarch64-linux-android                             # 交叉编译目标</span><br><span class="line"></span><br><span class="line">export API=24                                                   # 最小目标SDK版本配置(24 即为 Android 7.0)</span><br><span class="line"></span><br><span class="line">export AR=$TOOLCHAIN/bin/llvm-ar</span><br><span class="line"></span><br><span class="line">export CC=$TOOLCHAIN/bin/$TARGET$API-clang</span><br><span class="line"></span><br><span class="line">export AS=$CC</span><br><span class="line"></span><br><span class="line">export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++</span><br><span class="line"></span><br><span class="line">export LD=$TOOLCHAIN/bin/ld</span><br><span class="line"></span><br><span class="line">export RANLIB=$TOOLCHAIN/bin/llvm-ranlib</span><br><span class="line"></span><br><span class="line">export STRIP=$TOOLCHAIN/bin/llvm-strip</span><br><span class="line"></span><br><span class="line">./configure --enable-checking=release --enable-languages=c,c++ --disable-multilib --host $TARGET</span><br><span class="line"></span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>注：其中的 <strong>AR</strong> 、 <strong>CC</strong> 、 <strong>AS</strong> 、 <strong>CXX</strong> 、 <strong>LD</strong> 、 <strong>RANLIB</strong> 、 <strong>STRIP</strong> 等决定于Makefile，我这里图方便就直接复制了 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/ndk/guides/other_build_systems#autoconf" >NDK文档<i class="fas fa-external-link-alt"></i></a> 中的变量，恰好已经覆盖完全，不会报错。当交叉编译报错时，请自行添加相应变量。</p>
+</li>
+<li><p>编译产物生成于当前文件夹中</p>
+</li>
+</ol>
+<h2 id="非-Autoconf-Makefile-交叉编译-以-Dtc-为例"><a href="#非-Autoconf-Makefile-交叉编译-以-Dtc-为例" class="headerlink" title="非 Autoconf Makefile 交叉编译 (以 Dtc 为例)"></a><strong>非 Autoconf Makefile</strong> 交叉编译 (以 <a class="link"   target="_blank" rel="noopener" href="https://github.com/dgibson/dtc" >Dtc<i class="fas fa-external-link-alt"></i></a> 为例)</h2><ol>
+<li><p>克隆 <strong>dtc</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/dgibson/dtc</span><br></pre></td></tr></table></figure></li>
+<li><p>交叉编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">cd dtc</span><br><span class="line"></span><br><span class="line">export NDK=/home/xayah/Compile/NDK                              # NDK根目录绝对路径</span><br><span class="line"></span><br><span class="line">export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64     # 交叉编译链路径</span><br><span class="line"></span><br><span class="line">export TARGET=aarch64-linux-android                             # 交叉编译目标</span><br><span class="line"></span><br><span class="line">export API=24                                                   # 最小目标SDK版本配置(24 即为 Android 7.0)</span><br><span class="line"></span><br><span class="line">export AR=$TOOLCHAIN/bin/llvm-ar</span><br><span class="line"></span><br><span class="line">export CC=$TOOLCHAIN/bin/$TARGET$API-clang</span><br><span class="line"></span><br><span class="line">export AS=$CC</span><br><span class="line"></span><br><span class="line">export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++</span><br><span class="line"></span><br><span class="line">export LD=$TOOLCHAIN/bin/ld</span><br><span class="line"></span><br><span class="line">export RANLIB=$TOOLCHAIN/bin/llvm-ranlib</span><br><span class="line"></span><br><span class="line">export STRIP=$TOOLCHAIN/bin/llvm-strip</span><br><span class="line"></span><br><span class="line">make \</span><br><span class="line">   AR=$AR \</span><br><span class="line">   CC=$CC \</span><br><span class="line">   AS=$AS \</span><br><span class="line">   CXX=$CXX \</span><br><span class="line">   LD=$LD \</span><br><span class="line">   RANLIB=$RANLIB \</span><br><span class="line">   STRIP=$STRIP \</span><br><span class="line">   dtc</span><br></pre></td></tr></table></figure>
+
+<p>注：其中的 <strong>AR</strong> 、 <strong>CC</strong> 、 <strong>AS</strong> 、 <strong>CXX</strong> 、 <strong>LD</strong> 、 <strong>RANLIB</strong> 、 <strong>STRIP</strong> 等决定于Makefile，我这里图方便就直接复制了 <a class="link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/ndk/guides/other_build_systems#autoconf" >NDK文档<i class="fas fa-external-link-alt"></i></a> 中的变量，恰好已经覆盖完全，不会报错。当交叉编译报错时，请自行添加相应变量。</p>
+</li>
+<li><p>编译产物生成于当前文件夹中</p>
+</li>
+</ol>
+<h2 id="Python-交叉编译-以-Imgextractor-py-为例"><a href="#Python-交叉编译-以-Imgextractor-py-为例" class="headerlink" title="Python 交叉编译 (以 Imgextractor.py 为例)"></a><strong>Python</strong> 交叉编译 (以 <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiaoxindada/SGSI-build-tool/blob/11/tool_bin/imgextractor.py" >Imgextractor.py<i class="fas fa-external-link-alt"></i></a> 为例)</h2><blockquote>
+<p>利用 <strong>Soong 编译系统</strong> 将 Python 交叉编译为目标平台二进制ELF文件</p>
+<p>以 <strong>LineageOS源码</strong> 中的 <strong>Soong 编译系统</strong> 为例</p>
+<p>需要有一定 <strong>Android源码</strong> 编译基础</p>
+<p>目标平台：AArch64</p>
+</blockquote>
+<ol>
+<li><p>下载 <strong>imgextractor.py</strong></p>
+</li>
+<li><p>处理第三方模块</p>
+<p>注意到 <strong>imgextractor.py</strong> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import ext4</span><br></pre></td></tr></table></figure>
+<p>这是一个自定义模块，位于其同目录下 <strong>ext4.py</strong></p>
+<p>我查阅了 <a target="_blank" rel="noopener" href="https://source.android.google.cn/setup/build">Soong 编译系统<br>文档</a>，暂时没有发现编译时处理第三方模块的解决方案，若同时交叉编译<strong>imgextractor.py</strong>、<strong>ext4.py</strong>并放置在同一目录下，仍会报错找不到模块 <strong>ext4</strong></p>
+<p>因此，我们将 <strong>ext4.py</strong> 合并到 <strong>imgextractor.py</strong> 中：</p>
+<ol>
+<li><p>复制 <strong>ext4.py</strong> 中所有代码到 <strong>imgextractor.py</strong> 的文件首</p>
+</li>
+<li><p>移除 <strong>ext4</strong>：</p>
+<p>将</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import ext4, string, struct</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import string, struct</span><br></pre></td></tr></table></figure></li>
+<li><p>处理类：</p>
+<p>搜索所有 <strong>ext4.</strong> 并删除：</p>
+<p>即将</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root = ext4.Volume(file).root</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root = Volume(file).root</span><br></pre></td></tr></table></figure></li>
+<li><p>保存</p>
+</li>
+</ol>
+</li>
+<li><p>编写 <strong>Android.bp</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// Copyright (C) 2017 The Android Open Source Project</span><br><span class="line">//</span><br><span class="line">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span><br><span class="line">// you may not use this file except in compliance with the License.</span><br><span class="line">// You may obtain a copy of the License at</span><br><span class="line">//</span><br><span class="line">//      http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">//</span><br><span class="line">// Unless required by applicable law or agreed to in writing, software</span><br><span class="line">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">// See the License for the specific language governing permissions and</span><br><span class="line">// limitations under the License.</span><br><span class="line"></span><br><span class="line">//##################################################</span><br><span class="line"></span><br><span class="line">python_test &#123;</span><br><span class="line">   name: &quot;imgextractor&quot;,</span><br><span class="line">   main: &quot;imgextractor.py&quot;,</span><br><span class="line">   srcs: [</span><br><span class="line">      &quot;imgextractor.py&quot;,</span><br><span class="line">   ],</span><br><span class="line">   version: &#123;</span><br><span class="line">      py3: &#123;</span><br><span class="line">            embedded_launcher: true,</span><br><span class="line">            enabled: true,</span><br><span class="line">      &#125;,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：<br>如果 <strong>待编译Python脚本</strong> 是 <strong>Python2</strong> 版本，则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// Copyright (C) 2017 The Android Open Source Project</span><br><span class="line">//</span><br><span class="line">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span><br><span class="line">// you may not use this file except in compliance with the License.</span><br><span class="line">// You may obtain a copy of the License at</span><br><span class="line">//</span><br><span class="line">//      http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">//</span><br><span class="line">// Unless required by applicable law or agreed to in writing, software</span><br><span class="line">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">// See the License for the specific language governing permissions and</span><br><span class="line">// limitations under the License.</span><br><span class="line"></span><br><span class="line">//##################################################</span><br><span class="line"></span><br><span class="line">python_test &#123;</span><br><span class="line">   name: &quot;xxx&quot;,</span><br><span class="line">   main: &quot;xxx.py&quot;,</span><br><span class="line">   srcs: [</span><br><span class="line">      &quot;xxx.py&quot;,</span><br><span class="line">   ],</span><br><span class="line">   version: &#123;</span><br><span class="line">      py2: &#123;</span><br><span class="line">            embedded_launcher: true,</span><br><span class="line">            enabled: true,</span><br><span class="line">      &#125;,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>将 <strong>imgextractor.py</strong> 、<strong>Android.bp</strong> 放置在LineageOS源码任意位置(需包含在文件夹中)：</p>
+<p>以 <strong>/home/xayah/LineageOS/system/imgextractor</strong> 为例</p>
+<p>假设你现在位于LineageOS源码根目录，打开终端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">. build/envsetup.sh</span><br><span class="line"></span><br><span class="line">lunch lineage_cas-userdebug</span><br><span class="line"></span><br><span class="line">mmma system/imgextractor</span><br></pre></td></tr></table></figure>
+
+<p>注意： <a class="link"   target="_blank" rel="noopener" href="https://github.com/XayahSuSuSu/android_device_xiaomi_cas-oss" >cas(Mi 10 Ultra)<i class="fas fa-external-link-alt"></i></a> 可使用其他AArch64平台的手机的设备树</p>
+</li>
+<li><p>编译产物生成于 <strong>out/target/product/cas/testcases/imgextractor/arm64/imgextractor</strong></p>
+</li>
+</ol>
+
+                </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                AARCH64交叉编译笔记
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/07/07/AARCH64交叉编译笔记/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">Xayah</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-07-07 13:38</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Cross-Compile/">Cross Compile</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Cmake/">Cmake</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Python/">Python</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/07/08/Hexo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/"
+                                   title="Hexo添加自定义静态页面"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Hexo添加自定义静态页面</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E5%9C%B0%E5%9D%80"><span class="nav-text">Github地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Brotli-%E4%B8%BA%E4%BE%8B"><span class="nav-text">CMake 交叉编译 (以 Brotli 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoconf-Makefile-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Make-4-3-%E4%B8%BA%E4%BE%8B"><span class="nav-text">Autoconf Makefile 交叉编译 (以 Make-4.3 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E-Autoconf-Makefile-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Dtc-%E4%B8%BA%E4%BE%8B"><span class="nav-text">非 Autoconf Makefile 交叉编译 (以 Dtc 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Imgextractor-py-%E4%B8%BA%E4%BE%8B"><span class="nav-text">Python 交叉编译 (以 Imgextractor.py 为例)</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">37.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E5%9C%B0%E5%9D%80"><span class="nav-text">Github地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Brotli-%E4%B8%BA%E4%BE%8B"><span class="nav-text">CMake 交叉编译 (以 Brotli 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoconf-Makefile-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Make-4-3-%E4%B8%BA%E4%BE%8B"><span class="nav-text">Autoconf Makefile 交叉编译 (以 Make-4.3 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E-Autoconf-Makefile-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Dtc-%E4%B8%BA%E4%BE%8B"><span class="nav-text">非 Autoconf Makefile 交叉编译 (以 Dtc 为例)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-%E4%BB%A5-Imgextractor-py-%E4%B8%BA%E4%BE%8B"><span class="nav-text">Python 交叉编译 (以 Imgextractor.py 为例)</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>
