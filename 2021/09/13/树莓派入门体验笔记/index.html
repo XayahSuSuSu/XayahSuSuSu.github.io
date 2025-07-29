@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            树莓派入门体验笔记 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。||生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"},{"name":"Bzmshang","link":"https://blog.bzmshang.top/","description":"一个热爱教程分享者","avatar":"https://blog.bzmshang.top/image/avatar.jpg"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        树莓派入门体验笔记
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/Xayah.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Xayah</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-09-13 21:33:14</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Jul 29 2025 08:28:38 GMT+0000">2025-07-29 08:28:38</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux/">Linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>832 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>老早就对这块神奇的<strong>微型电脑</strong>感兴趣，机缘巧合之下<strong>暂时</strong>搞到一块，我手上这块是<strong>树莓派3B</strong>。</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/Raspberry.jpg"
+                        class="" title="Raspberry"
+                 >
+
+<h1 id="镜像烧录"><a href="#镜像烧录" class="headerlink" title="镜像烧录"></a>镜像烧录</h1><p>起初我还以为我手上这块能够直接<strong>U盘引导</strong>，在我无数次尝试下终于放弃了这个想法，实际上 <strong>树莓派3B+</strong> 才行。</p>
+<p>因此只能用<strong>SD卡</strong>了！虽然卡能直接插在板子上，但<strong>烧录镜像</strong>的时候还是需要<strong>读卡器</strong>这一<strong>远古神器</strong>。</p>
+<p>我的<strong>烧录环境</strong>是<strong>Windows</strong>。</p>
+<p>下载并安装 <strong><a class="link"   target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/" >Raspberry Pi Imager<i class="fas fa-external-link-alt"></i></a></strong> 。</p>
+<p>打开<strong>Raspberry Pi Imager</strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/RaspberryPiImager.png"
+                        class="" title="RaspberryPiImager"
+                 >
+
+<p>首先选择<strong>镜像</strong>（官方的<strong>Raspberry Pi OS</strong>蛮好用的）</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/ChooseOS.png"
+                        class="" title="ChooseOS"
+                 >
+
+<p>把<strong>SD卡</strong>插入<strong>读卡器</strong>，再<strong>连接</strong>到<strong>PC</strong></p>
+<p>然后选择<strong>存储卡</strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/ChooseStorage.png"
+                        class="" title="ChooseStorage"
+                 >
+
+<p>接下来点击<strong>Write</strong>，可以坐下来喝一杯<strong>奶茶</strong>并等待<strong>完成</strong>。</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/Finish.png"
+                        class="" title="Finish"
+                 >
+
+<h1 id="开机前准备"><a href="#开机前准备" class="headerlink" title="开机前准备"></a>开机前准备</h1><p>如果有<strong>HDMI接口</strong>和<strong>显示器</strong>，那么可以直接进行<strong>下一步</strong>，然后<strong>手动连接网络</strong>。</p>
+<p>如果有<strong>网线</strong>，那么也可以直接进行<strong>下一步</strong>。</p>
+<p>如果<strong>啥都没有</strong>（<strong>像我一样</strong>），那么就需要在开机前对烧录好系统的SD卡<strong>“动点手脚”</strong>了。</p>
+<p>首先<strong>重新拔插读卡器</strong></p>
+<p><strong>不要格式化H:<strong>（</strong>Windows</strong>无法识别<strong>Linux文件系统</strong>）</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/Format.png"
+                        class="" title="Format"
+                 >
+
+<p>然后打开另一个<strong>boot分区</strong></p>
+<p>在该分区<strong>根目录</strong>下<strong>新建</strong>一个名为 <strong><code>ssh</code></strong> 的<strong>空白文件</strong>，以<strong>打开</strong>树莓派<strong>默认关闭</strong>的<strong>SSH功能</strong></p>
+<p>再在<strong>该分区</strong>下新建 <strong><code>wpa_supplicant.conf</code></strong> ，<strong>配置待连接的WIFI信息</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid=&quot;WifiName&quot;</span><br><span class="line">    psk=&quot;Password&quot;</span><br><span class="line">    priority=1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/wpa_supplicant.conf.png"
+                        class="" title="wpa_supplicant.conf"
+                 >
+
+<p>最后，<strong>boot分区根目录</strong>新建文件如下：</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/File.png"
+                        class="" title="File"
+                 >
+
+<p>到此，<strong>万事俱备，只欠东风</strong>。</p>
+<h1 id="开机"><a href="#开机" class="headerlink" title="开机"></a>开机</h1><p>将<strong>SD卡</strong>插在<strong>树莓派背后</strong>，再<strong>接上电源</strong>。</p>
+<p>如果<strong>正常</strong>的话，此时树莓派<strong>红灯常亮（树莓派电源正常）</strong>，<strong>绿灯闪烁（读写SD卡正常）</strong>。</p>
+<p>在之前的<strong>网络</strong>配置<strong>正常</strong>的前提下，我们通过<strong>路由器</strong>可查看到<strong>树莓派</strong>的<strong>IP地址</strong>。</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/IP.png"
+                        class="" title="IP"
+                 >
+
+<p>打开任意一款<strong>SSH工具</strong>（我这里用的是<strong>Xshell</strong>）</p>
+<p>输入相应<strong>IP地址</strong>和<strong>端口（默认22）</strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/NewSSH.png"
+                        class="" title="NewSSH"
+                 >
+
+<p><strong>接收主机密钥</strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/Auth.png"
+                        class="" title="Auth"
+                 >
+
+<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><p>默认账号： <strong><code>pi</code></strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/username.png"
+                        class="" title="username"
+                 >
+
+<p>默认密码： <strong><code>raspberry</code></strong></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/pwd.png"
+                        class="" title="pwd"
+                 >
+
+<p>至此，我们已<strong>成功开机并登录</strong>！</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/successfully.png"
+                        class="" title="successfully"
+                 >
+
+<h1 id="初次开机的一些配置"><a href="#初次开机的一些配置" class="headerlink" title="初次开机的一些配置"></a>初次开机的一些配置</h1><h3 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h3><p>第一次启动<strong>Linux</strong>，首先要做的当然是<strong>换源</strong>啦！</p>
+<p>这里以<strong>阿里源</strong>为例。</p>
+<p>首先查看<strong>系统代号</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
+
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/codename.png"
+                        class="" title="codename"
+                 >
+
+<p>我手上这块<strong>树莓派OS</strong>系统代号是<strong>buster</strong>（如果是其他版本，请自行更换下述代码中的<strong>buster</strong>），修改<strong>两处源</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>将之前的用 <strong>#</strong> 注释掉，再<strong>加入</strong>以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/raspbian/raspbian/ buster main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.aliyun.com/raspbian/raspbian/ buster main contrib non-free rpi</span><br></pre></td></tr></table></figure>
+
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/sources.list.png"
+                        class="" title="sources.list"
+                 >
+
+<p>键入 <strong>Ctrl + O</strong> 保存<br>键入 <strong>Enter（回车）</strong> 确认文件名<br>键入 <strong>Ctrl + X</strong> 退出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
+
+<p>将之前的用 <strong>#</strong> 注释掉，再<strong>加入</strong>以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/raspbian/raspbian/ buster main</span><br><span class="line">deb-src http://mirrors.aliyun.com/raspbian/raspbian/ buster main</span><br></pre></td></tr></table></figure>
+
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/09/13/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E4%BD%93%E9%AA%8C%E7%AC%94%E8%AE%B0/raspi.list.png"
+                        class="" title="raspi.list"
+                 >
+
+<p>键入 <strong>Ctrl + O</strong> 保存<br>键入 <strong>Enter（回车）</strong> 确认文件名<br>键入 <strong>Ctrl + X</strong> 退出</p>
+<p><strong>更新源</strong>并<strong>升级</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="校准时间"><a href="#校准时间" class="headerlink" title="校准时间"></a>校准时间</h3><p>选择<strong>Asia - ShangHai</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure tzdata</span><br></pre></td></tr></table></figure>
+
+<h1 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h1><p>可得好好<strong>保护数据</strong>！<strong>关机</strong>时<strong>记得</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo shutdown -r now</span><br></pre></td></tr></table></figure>
+
+<p>然后再<strong>断电</strong>！</p>
+
+                </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                树莓派入门体验笔记
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/09/13/树莓派入门体验笔记/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">Xayah</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-09-13 21:33</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux/">Linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/09/27/RESTful-API%E7%AC%94%E8%AE%B0/"
+                                   title="RESTful API笔记"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RESTful API笔记</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/08/18/Golang-Gin-Gorm%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+                                   title="Golang+Gin+Gorm后端开发学习笔记"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Golang+Gin+Gorm后端开发学习笔记</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%83%A7%E5%BD%95"><span class="nav-text">镜像烧录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-text">开机前准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA"><span class="nav-text">开机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95"><span class="nav-text">登录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%AC%A1%E5%BC%80%E6%9C%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="nav-text">初次开机的一些配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E6%BA%90"><span class="nav-text">换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E5%87%86%E6%97%B6%E9%97%B4"><span class="nav-text">校准时间</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E6%9C%BA"><span class="nav-text">关机</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">42.3k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%83%A7%E5%BD%95"><span class="nav-text">镜像烧录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-text">开机前准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA"><span class="nav-text">开机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95"><span class="nav-text">登录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%AC%A1%E5%BC%80%E6%9C%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="nav-text">初次开机的一些配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E6%BA%90"><span class="nav-text">换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E5%87%86%E6%97%B6%E9%97%B4"><span class="nav-text">校准时间</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E6%9C%BA"><span class="nav-text">关机</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

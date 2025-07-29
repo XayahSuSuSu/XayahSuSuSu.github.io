@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            Git交叉编译到Android平台 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。||生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"},{"name":"Bzmshang","link":"https://blog.bzmshang.top/","description":"一个热爱教程分享者","avatar":"https://blog.bzmshang.top/image/avatar.jpg"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Git交叉编译到Android平台
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/Xayah.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Xayah</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-08-02 12:05:30</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Jul 29 2025 08:28:38 GMT+0000">2025-07-29 08:28:38</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Android/">Android</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Git/">Git</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/">交叉编译</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>9 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这是一个很久之前的想法了，但是之前一直编译不成功。</p>
+<p>这两天仔细研究了下，证明还是可行的。</p>
+<blockquote>
+<p>Android NDK 版本：r23b</p>
+<p>编译环境：Ubuntu 20.04</p>
+<p>NDK目录：<code>~/NDK</code></p>
+</blockquote>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="一、下载交叉编译所需源码"><a href="#一、下载交叉编译所需源码" class="headerlink" title="一、下载交叉编译所需源码"></a>一、下载交叉编译所需源码</h2><p>想要交叉编译<strong>Git</strong>，需要先<strong>交叉编译Curl</strong>和<strong>Zlib</strong>，<strong>新版本</strong>的<strong>NDK</strong>已经包含<strong>预编译Zlib</strong>，所以我们<strong>只需要交叉编译Curl</strong>即可。</p>
+<p>至于为什么要交叉编译<strong>Curl</strong>，是因为<strong>git clone</strong>命令在<strong>clone https等仓库</strong>时，需要<strong>依赖该库创建的git-remote-https等EFL文件</strong>。否则，在<strong>clone</strong>时会发生<strong>找不到remote-https等错误</strong>。</p>
+<p>而若<strong>Curl</strong>依赖<strong>OpenSSL</strong>，因此还得先交叉编译<strong>OpenSSL</strong>。</p>
+<p>下载 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/git/git" >Git<i class="fas fa-external-link-alt"></i></a></strong> 、 <strong><a class="link"   target="_blank" rel="noopener" href="https://curl.se/download.html" >Curl<i class="fas fa-external-link-alt"></i></a></strong> 和 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/openssl/openssl" >OpenSSL<i class="fas fa-external-link-alt"></i></a></strong> 的源码并<strong>解压</strong>。</p>
+<h2 id="二、交叉编译OpenSSL并安装到NDK"><a href="#二、交叉编译OpenSSL并安装到NDK" class="headerlink" title="二、交叉编译OpenSSL并安装到NDK"></a>二、交叉编译OpenSSL并安装到NDK</h2><p>在<strong>OpenSSL</strong>官方仓库中，可以找到编译到<strong>Android</strong>平台的 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/openssl/openssl/blob/master/NOTES-ANDROID.md" >文档<i class="fas fa-external-link-alt"></i></a></strong> 。<br>导出<strong>NDK</strong>临时变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export ANDROID_NDK_ROOT=~/NDK</span><br></pre></td></tr></table></figure>
+<p>导出<strong>PATH</strong>临时变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>配置<code>Makefile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Configure android-arm64 -D__ANDROID_API__=26 --prefix=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/sysroot</span><br></pre></td></tr></table></figure>
+<p>编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j128</span><br></pre></td></tr></table></figure>
+<p>安装到<code>prefix</code>目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install -j128</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、交叉编译Curl并安装到NDK"><a href="#三、交叉编译Curl并安装到NDK" class="headerlink" title="三、交叉编译Curl并安装到NDK"></a>三、交叉编译Curl并安装到NDK</h2><p>打开<strong>Curl</strong>的源码，我们可以发现它提供了两种编译方式，<strong>Autoconf Makefile</strong> 和 <strong>Cmake</strong>。</p>
+<p>使用<strong>Autoconf Makefile</strong>方式可以编译<strong>带OpenSSL</strong>的<strong>Curl</strong>，但是由于某种未知原因，在后面在<strong>编译Git</strong>时<strong>无法识别</strong>。</p>
+<p>因此我们选择<strong>Cmake</strong>方式。</p>
+<p>在<code>INSTALL.cmake</code>中我们可以得到一些编译的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Current flaws in the curl CMake build</span><br><span class="line">=====================================</span><br><span class="line"></span><br><span class="line">   Missing features in the cmake build:</span><br><span class="line"></span><br><span class="line">   - Builds libcurl without large file support</span><br><span class="line">   - Does not support all SSL libraries (only OpenSSL, Schannel,</span><br><span class="line">     Secure Transport, and mbed TLS, NSS, WolfSSL)</span><br><span class="line">   - Doesn&#x27;t allow different resolver backends (no c-ares build support)</span><br><span class="line">   - No RTMP support built</span><br><span class="line">   - Doesn&#x27;t allow build curl and libcurl debug enabled</span><br><span class="line">   - Doesn&#x27;t allow a custom CA bundle path</span><br><span class="line">   - Doesn&#x27;t allow you to disable specific protocols from the build</span><br><span class="line">   - Doesn&#x27;t find or use krb4 or GSS</span><br><span class="line">   - Rebuilds test files too eagerly, but still can&#x27;t run the tests</span><br><span class="line">   - Doesn&#x27;t detect the correct strerror_r flavor when cross-compiling (issue #1123)</span><br></pre></td></tr></table></figure>
+
+<p>由此可知，利用<strong>Cmake</strong>编译出来的<strong>Curl不带SSL库</strong>，但这并<strong>不影响</strong>我们后续<strong>编译Git</strong>和<strong>相应的git-remote-https等二进制文件</strong>。</p>
+<p><strong>cd</strong>到<strong>解压后</strong>的<strong>Curl根目录</strong>，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mkdir out &amp;&amp; cd out</span><br><span class="line"></span><br><span class="line">export NDK=~/NDK                     # NDK根目录绝对路径</span><br><span class="line"></span><br><span class="line">export ABI=arm64-v8a                           # ABI配置(arm64-v8a 即为 AArch64)</span><br><span class="line"></span><br><span class="line">export MINSDKVERSION=26                        # 最小目标SDK版本配置(26 即为 Android 8.0)</span><br><span class="line"></span><br><span class="line">cmake \</span><br><span class="line">   -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \</span><br><span class="line">   -DANDROID_ABI=$ABI \</span><br><span class="line">   -DANDROID_NATIVE_API_LEVEL=$MINSDKVERSION \</span><br><span class="line">   -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot ..</span><br><span class="line"></span><br><span class="line">cmake --build . --config Release</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、交叉编译Git"><a href="#四、交叉编译Git" class="headerlink" title="四、交叉编译Git"></a>四、交叉编译Git</h2><p>接下来是我们的<strong>重头戏</strong>了。</p>
+<p>进入<strong>Git源码解压后的根目录</strong>，可以发现<strong>Git</strong>有两种编译方式，一是<strong>非Autoconf Makefile</strong>，二是<strong>Autoconf Makefile</strong>，<strong>前者</strong>我尝试过多次，皆以<strong>失败</strong>告终。所以这次我们尝试<strong>后者</strong>。</p>
+<p>我们的<strong>宿主机</strong>因为<strong>无法测试Android平台上的二进制文件</strong>，所以我们把<strong>测试代码</strong>删掉。</p>
+<p>进入<code>configure.ac</code>，<strong>删除</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Define FREAD_READS_DIRECTORIES if your are on a system which succeeds</span><br><span class="line"># when attempting to read from an fopen&#x27;ed directory.</span><br><span class="line">AC_CACHE_CHECK([whether system succeeds to read fopen&#x27;ed directory],</span><br><span class="line"> [ac_cv_fread_reads_directories],</span><br><span class="line">[</span><br><span class="line">AC_RUN_IFELSE(</span><br><span class="line">	[AC_LANG_PROGRAM([AC_INCLUDES_DEFAULT],</span><br><span class="line">		[[</span><br><span class="line">		FILE *f = fopen(&quot;.&quot;, &quot;r&quot;);</span><br><span class="line">		return f != NULL;]])],</span><br><span class="line">	[ac_cv_fread_reads_directories=no],</span><br><span class="line">	[ac_cv_fread_reads_directories=yes])</span><br><span class="line">])</span><br><span class="line">if test $ac_cv_fread_reads_directories = yes; then</span><br><span class="line">	FREAD_READS_DIRECTORIES=UnfortunatelyYes</span><br><span class="line">else</span><br><span class="line">	FREAD_READS_DIRECTORIES=</span><br><span class="line">fi</span><br><span class="line">GIT_CONF_SUBST([FREAD_READS_DIRECTORIES])</span><br></pre></td></tr></table></figure>
+<p><strong>再删除</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Define SNPRINTF_RETURNS_BOGUS if your are on a system which snprintf()</span><br><span class="line"># or vsnprintf() return -1 instead of number of characters which would</span><br><span class="line"># have been written to the final string if enough space had been available.</span><br><span class="line">AC_CACHE_CHECK([whether snprintf() and/or vsnprintf() return bogus value],</span><br><span class="line"> [ac_cv_snprintf_returns_bogus],</span><br><span class="line">[</span><br><span class="line">AC_RUN_IFELSE(</span><br><span class="line">	[AC_LANG_PROGRAM([AC_INCLUDES_DEFAULT</span><br><span class="line">		#include &quot;stdarg.h&quot;</span><br><span class="line"></span><br><span class="line">		int test_vsnprintf(char *str, size_t maxsize, const char *format, ...)</span><br><span class="line">		&#123;</span><br><span class="line">		  int ret;</span><br><span class="line">		  va_list ap;</span><br><span class="line">		  va_start(ap, format);</span><br><span class="line">		  ret = vsnprintf(str, maxsize, format, ap);</span><br><span class="line">		  va_end(ap);</span><br><span class="line">		  return ret;</span><br><span class="line">		&#125;],</span><br><span class="line">		[[char buf[6];</span><br><span class="line">		  if (test_vsnprintf(buf, 3, &quot;%s&quot;, &quot;12345&quot;) != 5</span><br><span class="line">		      || strcmp(buf, &quot;12&quot;)) return 1;</span><br><span class="line">		  if (snprintf(buf, 3, &quot;%s&quot;, &quot;12345&quot;) != 5</span><br><span class="line">		      || strcmp(buf, &quot;12&quot;)) return 1]])],</span><br><span class="line">	[ac_cv_snprintf_returns_bogus=no],</span><br><span class="line">	[ac_cv_snprintf_returns_bogus=yes])</span><br><span class="line">])</span><br><span class="line">if test $ac_cv_snprintf_returns_bogus = yes; then</span><br><span class="line">	SNPRINTF_RETURNS_BOGUS=UnfortunatelyYes</span><br><span class="line">else</span><br><span class="line">	SNPRINTF_RETURNS_BOGUS=</span><br><span class="line">fi</span><br><span class="line">GIT_CONF_SUBST([SNPRINTF_RETURNS_BOGUS])</span><br></pre></td></tr></table></figure>
+
+<p>观察源码结构，可以发现并没有<code>configure</code>文件，但存在<code>configure.ac</code>，所以我们可以<strong>make</strong>一个<code>configure</code>。</p>
+<p><strong>cd</strong>到源码<strong>根目录</strong>，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make configure</span><br></pre></td></tr></table></figure>
+
+<p>此时即可生成<code>configure</code>。</p>
+<p><strong>git</strong>编译时会默认编译<strong>pthread</strong>，而<strong>Android由于性能及安全原因</strong>，放弃了<strong>glibc</strong>在其平台上的支持，所以相应地交叉编译链也不含有这个库。</p>
+<p><strong>Android</strong>有其<strong>替代方案</strong>，所以我们在<code>make</code>时将<code>NEEDS_LIBRT</code>赋值为空从而不编译它即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifdef NEEDS_LIBRT</span><br><span class="line">	EXTLIBS += -lrt</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+
+<p>而在<code>configure.ac</code>中可以发现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">AC_ARG_ENABLE([pthreads],</span><br><span class="line"> [AS_HELP_STRING([--enable-pthreads=FLAGS],</span><br><span class="line">  [FLAGS is the value to pass to the compiler to enable POSIX Threads.]</span><br><span class="line">  [The default if FLAGS is not specified is to try first -pthread]</span><br><span class="line">  [and then -lpthread.]</span><br><span class="line">  [--disable-pthreads will disable threading.])],</span><br><span class="line">[</span><br><span class="line">if test &quot;x$enableval&quot; = &quot;xyes&quot;; then</span><br><span class="line">   AC_MSG_NOTICE([Will try -pthread then -lpthread to enable POSIX Threads])</span><br><span class="line">elif test &quot;x$enableval&quot; != &quot;xno&quot;; then</span><br><span class="line">   PTHREAD_CFLAGS=$enableval</span><br><span class="line">   AC_MSG_NOTICE([Setting &#x27;$PTHREAD_CFLAGS&#x27; as the FLAGS to enable POSIX Threads])</span><br><span class="line">else</span><br><span class="line">   AC_MSG_NOTICE([POSIX Threads will be disabled.])</span><br><span class="line">   NO_PTHREADS=YesPlease</span><br><span class="line">   USER_NOPTHREAD=1</span><br><span class="line">fi],</span><br><span class="line">[</span><br><span class="line">   AC_MSG_NOTICE([Will try -pthread then -lpthread to enable POSIX Threads.])</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以使用 <strong>–disable-pthreads</strong> 参数来<strong>取消</strong>编译 <strong>phread</strong> 相关部分。</p>
+<p>于是接下来我们输入以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">export NDK=~/NDK                                      # NDK根目录绝对路径</span><br><span class="line"></span><br><span class="line">export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64     # 交叉编译链路径</span><br><span class="line"></span><br><span class="line">export TARGET=aarch64-linux-android                             # 交叉编译目标</span><br><span class="line"></span><br><span class="line">export API=26                                                   # 最小目标SDK版本配置(26 即为 Android 8.0)</span><br><span class="line"></span><br><span class="line">export AR=$TOOLCHAIN/bin/llvm-ar</span><br><span class="line"></span><br><span class="line">export CC=$TOOLCHAIN/bin/$TARGET$API-clang</span><br><span class="line"></span><br><span class="line">export AS=$CC</span><br><span class="line"></span><br><span class="line">export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++</span><br><span class="line"></span><br><span class="line">export LD=$TOOLCHAIN/bin/ld</span><br><span class="line"></span><br><span class="line">export RANLIB=$TOOLCHAIN/bin/llvm-ranlib</span><br><span class="line"></span><br><span class="line">export READELF=$TOOLCHAIN/bin/readelf</span><br><span class="line"></span><br><span class="line">export STRIP=$TOOLCHAIN/bin/llvm-strip</span><br><span class="line"></span><br><span class="line">./configure --host=$TARGET --prefix=/data/local/tmp --disable-pthreads</span><br></pre></td></tr></table></figure>
+
+<p>注意这里的<code>--prefix</code>，需要定义为<strong>Android</strong>环境下<strong>git运行目录</strong>，否则会出现<strong>找不到templates</strong>等问题。</p>
+<p>然后<strong>编译</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make NEEDS_LIBRT= NO_TCLTK=1 -j128</span><br></pre></td></tr></table></figure>
+
+<p>注意这里的<code>NO_TCLTK</code>，如果不定义它的话，会默认编译<code>git-gui</code>，这不是我们需要的，所以将其定义为<code>1</code>。</p>
+<h2 id="五、推送并测试"><a href="#五、推送并测试" class="headerlink" title="五、推送并测试"></a>五、推送并测试</h2><p>先安装到宿主机<code>~/git/install</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install NEEDS_LIBRT= NO_TCLTK=1 DESTDIR=~/git/install -j128</span><br></pre></td></tr></table></figure>
+<p>可得如下<strong>产物</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xayah@xayah-virtual-machine:~/git/install/data/local/tmp$ ls</span><br><span class="line">bin  libexec  share</span><br></pre></td></tr></table></figure>
+<p>将<code>~/git/install/data/local/tmp</code> <strong>打包</strong>并<strong>推送</strong>到<strong>Android</strong> <code>/data/local/tmp</code>目录<br>由于一些<strong>魔法因素</strong>，<strong>打包</strong>为<strong>zip</strong>竟足足有<strong>200M+<strong>！可能是因为</strong>压缩算法</strong>不同，<strong>打包</strong>为<strong>tar.xz</strong>就会<strong>小很多</strong>，大概<strong>10M</strong>左右。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\Xayah\Desktop&gt; adb push git.zip /data/local/tmp</span><br><span class="line">git.zip: 1 file pushed, 0 skipped. 38.1 MB/s (648532238 bytes in 16.219s)</span><br><span class="line">PS C:\Users\Xayah\Desktop&gt; adb shell</span><br><span class="line">cas:/ $ cd /data/local/tmp</span><br><span class="line">cas:/data/local/tmp $ unzip git.zip &gt;/dev/null</span><br><span class="line">cas:/data/local/tmp $ cd bin</span><br><span class="line">cas:/data/local/tmp/bin $ ls</span><br><span class="line">git  git-cvsserver  git-receive-pack  git-shell  git-upload-archive  git-upload-pack  gitk</span><br></pre></td></tr></table></figure>
+<p>让我们<code>git clone</code>试试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cas:/data/local/tmp/bin $ ./git clone https://github.com/git/git mGit</span><br><span class="line">Cloning into &#x27;mGit&#x27;...</span><br><span class="line">remote: Enumerating objects: 311108, done.</span><br><span class="line">remote: Counting objects: 100% (72/72), done.</span><br><span class="line">remote: Compressing objects: 100% (32/32), done.</span><br><span class="line">remote: Total 311108 (delta 41), reused 70 (delta 40), pack-reused 311036</span><br><span class="line">Receiving objects: 100% (311108/311108), 164.19 MiB | 10.32 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (232238/232238), done.</span><br><span class="line">Segmentation fault</span><br></pre></td></tr></table></figure>
+
+<p><strong>Segmentation fault</strong>！这可是个头疼的事。不过没有关系，我们可以使用 <strong>gdbserver</strong> 调试，看看到底是<strong>哪里</strong>出了<strong>问题</strong>。</p>
+<p>首先将<strong>NDK</strong>中相应的<strong>gdbserver</strong>推送到<strong>Android平台</strong>，我的手机是<strong>aarch64</strong>（现在<strong>大多数安卓手机都是这个平台</strong>），也就是<strong>arm64</strong>，所以推送<strong>该文件夹</strong>下的<strong>gdbserver</strong>即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb push gdbserver /data/local/tmp/bin</span><br></pre></td></tr></table></figure>
+
+<p>接下来<strong>新建</strong>一个<strong>终端</strong>并<strong>forward</strong>一个<strong>自定义端口</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb forward tcp:12345 tcp:12345</span><br></pre></td></tr></table></figure>
+
+<p>接下来在另一个<strong>终端</strong>中进入<strong>adb shell</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gdbserver 0.0.0.0:12345 ./git clone https://github.com/git/git mGit</span><br></pre></td></tr></table></figure>
+
+<p>现在<strong>gdbserver</strong>已经启动了，我们转向另一个<strong>终端</strong>，启动<strong>gdb</strong>：</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/gdb.png"
+                        class="" title="gdb"
+                 >
+
+<p>现在<strong>gdb</strong>和<strong>gdbserver</strong>均已启动，我们<strong>指定目标端口</strong>：</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/remote.png"
+                        class="" title="remote"
+                 >
+
+<p>输入<code>c</code>继续运行</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/sigsegv.png"
+                        class="" title="sigsegv"
+                 >
+<p>段错误出现了！可以看出错误是出在<code>copy_gecos()</code>这个函数。<br>在源码中搜索这个函数，可以在<code>ident.c</code>中找到。<br>定位至相应位置</p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/copy_gecos.png"
+                        class="" title="copy_gecos"
+                 >
+<p>这个函数看起来貌似和<code>git config</code>有一丝关系，难道是因为我们没有定义<strong>git用户信息</strong>？<br>让我们试试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./git config --global user.name &quot;Xayah&quot;</span><br></pre></td></tr></table></figure>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/config.png"
+                        class="" title="config"
+                 >
+
+<p>果然报错了！看来是<code>.gitconfig</code>没有创建成功，在源码中搜索<code>.gitconfig</code>，可以发现<strong>git</strong>获取<code>.gitconfig</code>的路径是<code>$HOME/.gitconfig</code></p>
+<p>那么我们试试把<code>$HOME</code>定义为<strong>当前目录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HOME=/data/local/tmp/bin</span><br></pre></td></tr></table></figure>
+<p>再配置用户信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./git config --global user.name &quot;Xayah&quot;</span><br><span class="line">./git config --global user.email zds1249475336@gmail.com</span><br></pre></td></tr></table></figure>
+<p>这次没有报错了，并且当前目录也成功生成了<code>.gitconfig</code></p>
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/config2.png"
+                        class="" title="config2"
+                 >
+
+<p>这次我们再试试<code>git clone</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./git clone https://github.com/git/git mGit</span><br></pre></td></tr></table></figure>
+
+<img  
+                       lazyload
+                       alt="image"
+                       data-src="/2021/08/02/Git%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/success.png"
+                        class="" title="success"
+                 >
+<p>成功！</p>
+
+                </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Git交叉编译到Android平台
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/08/02/Git交叉编译到Android平台/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">Xayah</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-08-02 12:05</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Android/">Android</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Git/">Git</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/">交叉编译</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/08/18/Golang-Gin-Gorm%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+                                   title="Golang+Gin+Gorm后端开发学习笔记"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Golang+Gin+Gorm后端开发学习笔记</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/08/01/Python3-9%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%88%B0Android%E5%B9%B3%E5%8F%B0/"
+                                   title="Python3.9交叉编译到Android平台"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Python3.9交叉编译到Android平台</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E6%89%80%E9%9C%80%E6%BA%90%E7%A0%81"><span class="nav-text">一、下载交叉编译所需源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91OpenSSL%E5%B9%B6%E5%AE%89%E8%A3%85%E5%88%B0NDK"><span class="nav-text">二、交叉编译OpenSSL并安装到NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91Curl%E5%B9%B6%E5%AE%89%E8%A3%85%E5%88%B0NDK"><span class="nav-text">三、交叉编译Curl并安装到NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91Git"><span class="nav-text">四、交叉编译Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%8E%A8%E9%80%81%E5%B9%B6%E6%B5%8B%E8%AF%95"><span class="nav-text">五、推送并测试</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">42.3k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E6%89%80%E9%9C%80%E6%BA%90%E7%A0%81"><span class="nav-text">一、下载交叉编译所需源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91OpenSSL%E5%B9%B6%E5%AE%89%E8%A3%85%E5%88%B0NDK"><span class="nav-text">二、交叉编译OpenSSL并安装到NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91Curl%E5%B9%B6%E5%AE%89%E8%A3%85%E5%88%B0NDK"><span class="nav-text">三、交叉编译Curl并安装到NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91Git"><span class="nav-text">四、交叉编译Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%8E%A8%E9%80%81%E5%B9%B6%E6%B5%8B%E8%AF%95"><span class="nav-text">五、推送并测试</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

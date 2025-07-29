@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            春招: 自我救赎之路 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。||生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"},{"name":"Bzmshang","link":"https://blog.bzmshang.top/","description":"一个热爱教程分享者","avatar":"https://blog.bzmshang.top/image/avatar.jpg"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        春招: 自我救赎之路
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/Xayah.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Xayah</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-03-24 00:05:49</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Jul 29 2025 08:28:38 GMT+0000">2025-07-29 08:28:38</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E9%9A%8F%E6%83%B3/">随想</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>4.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>16 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h1 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h1><ul>
+<li><p>2024-02-27<br>三星投递简历</p>
+</li>
+<li><p>2024-02-27<br>OPPO投递简历</p>
+</li>
+<li><p>2024-03-01<br>VIVO投递简历</p>
+</li>
+<li><p>2024-03-01 11:15<br>VIVO测评</p>
+</li>
+<li><p>2024-03-01<br>米哈游投递简历</p>
+</li>
+<li><p>2024-03-04<br>OPPO重新投递简历</p>
+</li>
+<li><p>2024-03-04<br>华为投递简历</p>
+</li>
+<li><p>2024-03-05<br>字节投递简历</p>
+</li>
+<li><p>2024-03-05<br>小米投递简历</p>
+</li>
+<li><p>2024-03-09 08:00<br>OPPO笔试</p>
+</li>
+<li><p>2024-03-11 15:00<br>小米技术面试一、技术面试二</p>
+</li>
+<li><p>2024-03-12 10:00<br>小米技术面试三</p>
+</li>
+<li><p>2024-03-13 15:00<br>VIVO笔试</p>
+</li>
+<li><p>2024-03-13 19:00<br>华为笔试</p>
+</li>
+<li><p>2024-03-14 15:10<br>OPPO 技术面试</p>
+</li>
+<li><p>2024-03-16 14:50<br>OPPO 综合面试</p>
+</li>
+<li><p>2024-03-17 10:00<br>米哈游笔试</p>
+</li>
+<li><p>2024-03-19 21:30<br>新凯来个性测评</p>
+</li>
+<li><p>2024-03-20 10:00<br>OPPO HR面试</p>
+</li>
+<li><p>2024.03.20 19:00<br>虾皮笔试</p>
+</li>
+<li><p>2024-03-21 10:30<br>新凯来技术面试</p>
+</li>
+<li><p>2024-03-22 15:00<br>优博讯笔试</p>
+</li>
+<li><p>2024-03-23 15:00<br>新凯来综合面试</p>
+</li>
+<li><p>2024-03-24 10:00<br>新凯来电话资面</p>
+</li>
+<li><p>2024-03-26 16:00<br>VIVO线下面试（技术面+HR面）</p>
+</li>
+<li><p>2024-03-27 15:00<br>米哈游一面</p>
+</li>
+<li><p>2024-03-28 15:00<br>字节一面（已申请取消）</p>
+</li>
+<li><p>2024-04-01 15:00<br>米哈游二面</p>
+</li>
+</ul>
+<h1 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h1><h2 id="三星"><a href="#三星" class="headerlink" title="三星"></a>三星</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SRCN-Android Platform开发 工程师 (江苏省·南京市)</span><br><span class="line">需求部门：三星电子（中国）研发中心</span><br><span class="line">职位类别：研发/设计</span><br><span class="line">发布时间：2024-02-27</span><br><span class="line">招聘人数：若干</span><br><span class="line"></span><br><span class="line">岗位职责：</span><br><span class="line">1、负责app framework开发与优化</span><br><span class="line">2、负责从平台层面优化app启动与响应时间、内存与CPU使用、android启动时间等性能优化</span><br><span class="line">3、负责处理android平台的兼容性问题，并支持通过相关认证</span><br><span class="line">4、负责android平台升级，android平台上相关先行技术的研究与验证</span><br><span class="line">5、负责android window system, network, graphic, input, mulitmedia模块开发</span><br><span class="line">6、负责virual gamepad开发和集成相关工作</span><br><span class="line"></span><br><span class="line">任职资格：</span><br><span class="line">1、熟悉计算机相关专业，熟练掌握C/C++/java其中任一门语言</span><br><span class="line">2、熟悉Linux系统及其常用命令，shell/python脚本的编写优先</span><br><span class="line">3、了解HTML，JS， 音频/视频 信号处理， Android 框架工作有接触优先 </span><br><span class="line">4、了解Android System 或者 Android HAL层开发经验者优先</span><br><span class="line">5、具备良好的沟通能力，熟悉算法和数据结构</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-02-27 投递简历，无内推码</li>
+</ul>
+<h2 id="OPPO"><a href="#OPPO" class="headerlink" title="OPPO"></a>OPPO</h2><blockquote>
+<p>OPPO的流程推进效率还是蛮高的，好感度满分</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">安卓应用工程师</span><br><span class="line">武汉市,深圳市,成都市 | 软件类 | 应届生 (2024届春季校园招聘) | 2024-01-15 发布</span><br><span class="line"></span><br><span class="line">岗位职责</span><br><span class="line">方向一：负责相机App需求开发、性能优化、交互优化；</span><br><span class="line">方向二：负责ColorOS系统应用开发与优化；</span><br><span class="line">方向三：负责ColorOSUI组件、资源框架定制、动画&amp;图形框架定制等的开发；</span><br><span class="line">方向四：负责移动互联网应用开发与优化；</span><br><span class="line">方向五：负责IoT客户端产品开发与优化；</span><br><span class="line">方向六：负责新业务的架构设计与开发；</span><br><span class="line">方向七：负责研究手机移动端新技术；</span><br><span class="line">方向八：负责IoT业务前端产品开发；</span><br><span class="line">方向九：负责基础软件平台前端开发。</span><br><span class="line"></span><br><span class="line">任职要求</span><br><span class="line">1.计算机、通信、电子信息、通信工程、软件工程等相关专业；</span><br><span class="line">2.熟悉Java/Kotlin语言；</span><br><span class="line">3.热爱互联网，对互联网产品和技术有浓厚的兴趣；</span><br><span class="line">4.具备优秀的分析问题和解决问题的能力，对解决具有挑战性的问题充满激情；</span><br><span class="line">5.深刻理解算法和数据结构相关知识，并熟练掌握Java编程语言；</span><br><span class="line">6.熟悉TCP/IP，HTTP，HTTPS等网络协议；</span><br><span class="line">7.学习能力强，具有良好的沟通能力和良好的团队合作精神；</span><br><span class="line">我们更希望你：</span><br><span class="line">1.有Android编程语言使用经验；</span><br><span class="line">2.参与过实际项目开发，熟悉软件工程开发流程；</span><br><span class="line">3.有计算机领域相关的编程大赛获奖经历。</span><br><span class="line"></span><br><span class="line">学历要求：本科及以上</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-02-27 投递简历，无内推码</li>
+<li>2024-03-04 参加校园宣讲会，拿到内推码重新投递简历</li>
+<li>2024-03-08 性格测评，邀请笔试</li>
+<li>2024-03-09 笔试</li>
+<li>2024-03-13 邀请专业面试</li>
+<li>2024-03-14 专业面试，邀请综合复试</li>
+<li>2024-03-16 综合复试</li>
+<li>2024-03-18 邀请HR面试</li>
+<li>2024-03-20 HR面试，结束30min后查状态码：PASS</li>
+<li>2024-03-22 官网进度更新：Offer排序中</li>
+<li>2024-03-25 OC</li>
+<li>2024-03-26 录用意向沟通会</li>
+</ul>
+<h2 id="VIVO"><a href="#VIVO" class="headerlink" title="VIVO"></a>VIVO</h2><blockquote>
+<p>VIVO的邮件会被Gmail视为垃圾邮件，难绷</p>
+</blockquote>
+<ul>
+<li>2024-03-01 投递简历，无内推码，参加行测</li>
+<li>2024-03-12 邀请笔试</li>
+<li>2024-03-13 笔试</li>
+<li>2024-03-15 邀请线下面试</li>
+<li>2024-03-27 技术面试+HR面试</li>
+<li>2024-04-03 感谢信</li>
+</ul>
+<h2 id="米哈游"><a href="#米哈游" class="headerlink" title="米哈游"></a>米哈游</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">移动客户端开发（Android）</span><br><span class="line">上海 | 程序&amp;技术类 | 全职 | 2024春招</span><br><span class="line"></span><br><span class="line">工作职责</span><br><span class="line">1. 负责米哈游旗下产品移动端的开发与维护；</span><br><span class="line">2. 负责移动端基础模块组件的开发与维护；</span><br><span class="line">3. 负责移动端研发质量和效率优化工具的开发与维护；</span><br><span class="line">4. 负责移动端研发体系平台能力建设；</span><br><span class="line">5. 负责移动端新技术的调研和落地。</span><br><span class="line"></span><br><span class="line">任职要求</span><br><span class="line">1. 统招本科及以上学历，计算机及相关专业；</span><br><span class="line">2. 具备扎实的数据结构、算法、操作系统、软件工程、设计模式、计算机网络等领域内专业知识；</span><br><span class="line">3. 热爱计算机科学和互联网技术，对移动产品有浓厚兴趣；</span><br><span class="line">4. 热爱编程，对技术和代码有追求，具备良好的学习能力、沟通能力、主动分析及解决问题能力，具有团队合作精神。</span><br><span class="line"></span><br><span class="line">加分项</span><br><span class="line">1. 有开源项目贡献者或 ACM 比赛经验者优先；</span><br><span class="line">2. 对 iOS/Android 其中一个平台的应用开发有了解，有实际项目的开发经历或实习经历优先。</span><br><span class="line"></span><br><span class="line">投递说明</span><br><span class="line">IM 团队介绍：大型协同效率套件，米哈游核心工业化管线重要协作工具，为米哈游员工提供全球化一站式协作服务，包括 IM、文档、音视频、日历、开放能力、Admin 管理后台、等多个业务模块。并根据游戏行业研发特点，和米哈游管线协作方式，定义 Workspace、Project Mode 等能力，在效率工具领域领先其他产品。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-01 投递简历，有内推码</li>
+<li>2024-03-15 邀请笔试</li>
+<li>2024-03-17 笔试</li>
+<li>2024-03-19 邀请面试</li>
+<li>2024-03-27 面试</li>
+<li>2024-03-28 邀请复试</li>
+<li>2024-04-01 复试</li>
+<li>2024-04-12 邮件询问HR进度，回复“目前处于还处在待定的阶段”</li>
+<li>2024-05-13 感谢信</li>
+</ul>
+<h2 id="华为"><a href="#华为" class="headerlink" title="华为"></a>华为</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">软件开发工程师 - 应用软件开发工程师</span><br><span class="line"></span><br><span class="line">岗位职责</span><br><span class="line">1、在这里，您可以接触最前沿的软件领域技术，参与开发业界最优秀的手机、平板、可穿戴、智能家居、车载等全品类终端精品；</span><br><span class="line">2、在这里，您可以创作极致用户体验的应用APP，围绕鸿蒙生态从事HarmonyOS应用软件研发，以最快的速度看到您贡献的代码被成千上万人使用；</span><br><span class="line">3、在这里，您可以接触到业内先进的开发模式与开发工具，与前辈们进行平等的沟通交流，快速成长。</span><br><span class="line"></span><br><span class="line">岗位要求</span><br><span class="line">1、计算机、通信、软件工程等相关专业本科及以上学历；</span><br><span class="line">2、对终端产品软件开发充满激情；</span><br><span class="line">3、热爱编程，基础扎实，熟悉掌握JAVA/C/C++编程语言，有良好的编程习惯。</span><br><span class="line"></span><br><span class="line">工作地点</span><br><span class="line">中国\上海-上海中国\北京-北京中国\四川-成都中国\山东-济南中国\广东-东莞中国\广东-深圳中国\江苏-南京中国\江苏-苏州中国\浙江-杭州中国\湖北-武汉中国\湖南-长沙中国\陕西-西安</span><br><span class="line"></span><br><span class="line">意向部门</span><br><span class="line">第一意向部门 - 光产品线 - 湖北武汉</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-04 投递简历，将简历编号发给了武汉光产品线HR，提交电子设计大赛国一证书申请免机试</li>
+<li>2024-03-08 HR回复不符合条件</li>
+<li>2024-03-12 官网进度更新</li>
+<li>2024-03-13 笔试（多半是挂了或者光产品线没HC了）</li>
+</ul>
+<h2 id="字节跳动"><a href="#字节跳动" class="headerlink" title="字节跳动"></a>字节跳动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">客户端开发工程师-Flow | 杭州 | 正式 | 研发 - 客户端 | 2024校招全职补录 | 职位 ID：A238115</span><br><span class="line"></span><br><span class="line">职位描述</span><br><span class="line">团队介绍：字节跳动Flow产品研发团队，专注研究AI智能化相关业务落地，目前落地豆包、Cici 等 APP，以及对应的Bot 开发平台等AI智能化创新产品，业务和团队均处于快速发展期，成长空间大，欢迎各位同学加入！</span><br><span class="line"></span><br><span class="line">1、负责Android/iOS客户端研发，编写高质量代码；</span><br><span class="line">2、设计良好的代码结构，对程序进行优化，满足产品体验。</span><br><span class="line"></span><br><span class="line">职位要求</span><br><span class="line">1、2024届获得本科及以上学历，计算机相关专业；</span><br><span class="line">2、熟悉Java/Kotlin/Objective-C/Swift/C++中的至少一门语言；</span><br><span class="line">3、有良好的编程习惯，代码结构清晰，命名规范；</span><br><span class="line">4、能够独立思考产品中的技术架构和实现，以及未来的扩展性，给出合理的解决方案；</span><br><span class="line">5、有优秀的调试和解决问题能力，逻辑思维清晰严谨；</span><br><span class="line">6、良好的沟通能力，严谨的工作态度与高质量意识，良好的抗压能力，乐于协作。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-05 投递简历，有内推码</li>
+<li>2024-03-15 官网进度更新：评估中</li>
+<li>2024-03-19 官网进度更新：面试中，HR电话约面，邮件邀请面试</li>
+<li>2024-03-28 思考了很久，最终还是决定联系HR取消面试</li>
+</ul>
+<h2 id="小米"><a href="#小米" class="headerlink" title="小米"></a>小米</h2><blockquote>
+<p>小米的产品从初中到大学购买了如此之多，也堪堪算是多年的老粉了，因此尽管其风评差劲，也仍带着滤镜投递小米，非常感谢小米能够最先给到面试机会，前三面流程推进很快，而且面试体验也很好，但三面过后小米的流程之混乱，效率之低下，实属寒心。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Android开发工程师（可接受Java方向）-澎湃OS</span><br><span class="line">北京市、南京市 | 校招 | 正式 | 软件研发类 | 2024届春季校招计划</span><br><span class="line"></span><br><span class="line">职位描述</span><br><span class="line">1.参与小米跨端智联模块的设计与开发；</span><br><span class="line">2.能按时、独立、高质量地完成工作，确保相关代码逻辑的健壮性与正确性；</span><br><span class="line">3.独立完成部分系统的系统分析以及系统设计文档的撰写；</span><br><span class="line">4.维护、升级和优化现有系统，并能够快速定位并及时修复软件缺陷。</span><br><span class="line"></span><br><span class="line">职位要求</span><br><span class="line">1.具备良好的Java编程能力，熟悉常用的算法及数据结构；</span><br><span class="line">2.了解Android系统开发技术，具有android开发经验优先；</span><br><span class="line">3.具备良好的分析、解决问题的能力以及学习能力；</span><br><span class="line">4.具备良好的工作态度、沟通技巧以及团队协作精神。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-05 投递简历，有内推码</li>
+<li>2024-03-07 官网进度更新：评估中</li>
+<li>2024-03-08 官网进度更新：面试中，邀请面试</li>
+<li>2024-03-11 技术面试一、技术面试二，中途无休约2.5小时，邀请面试</li>
+<li>2024-03-12 技术面试三</li>
+<li>2024-03-20 HR电话问薪以及其它个人信息，以安排后续HR面试，申请添加微信。</li>
+<li>2024-03-20 官网进度更新：转移至其他职位 - 流程终止 - 转移至其他职位</li>
+<li>2024-03-20 官网进度更新：被转移至：Android研发工程师，从校招-正式转为了社招-全职，微信询问HR，答曰“没事，是校招”</li>
+<li>2024-03-29 微信询问HR进度，未回复</li>
+<li>2024-04-06 HR回复称3月20号的是预沟通，也是会挂人的，难绷</li>
+</ul>
+<h2 id="虾皮"><a href="#虾皮" class="headerlink" title="虾皮"></a>虾皮</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">（24届春招）Android开发工程师</span><br><span class="line"></span><br><span class="line">职位描述：</span><br><span class="line">1、开发互联网应用或框架，编写高质量、整洁简单、可维护性的代码，构建可重复使用的代码以及公共库；</span><br><span class="line">2、构建新的移动端应用，对现有Bug进行快速修复，不断优化现有产品，提高用户体验；</span><br><span class="line">3、学习和研究新的移动端技术和框架，快速运用到应用开发中；</span><br><span class="line">4、根据策划和产品部门的需求，完成需求分析并进行对应的功能设计；</span><br><span class="line">5、根据工作需要，设计并完成各种辅助工具的开发。</span><br><span class="line"></span><br><span class="line">任职资格：</span><br><span class="line">1、2024届本科及以上学历，计算机软件相关专业；</span><br><span class="line">2、掌握至少一种编程语言，包括但不限于Java、C、C++；</span><br><span class="line">3、热爱编码，对移动端产品有浓厚的兴趣，有求知欲，热爱学习新知识，对于创新以及解决具有挑战性问题充满激情；</span><br><span class="line">4、优秀的逻辑思维能力、学习能力和沟通能力，有客户端项目经验的同学优先。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-07 投递简历，有内推码</li>
+<li>2024-03-18 邀请笔试</li>
+<li>2024-03-20 笔试</li>
+<li>2024-03-28 HR电话约面，申请终止流程</li>
+</ul>
+<h2 id="新凯来"><a href="#新凯来" class="headerlink" title="新凯来"></a>新凯来</h2><ul>
+<li>2024-03-13 BOSS直聘上HR申请查看简历，邀请面试（需要提交简历、《深圳市新凯来技术有限公司职位申请登记表》、《新凯来知识产权和商业秘密保护承诺书》）</li>
+<li>2024-03-18 HR申请添加微信，回复邮件并提交简历、《深圳市新凯来技术有限公司职位申请登记表》、《新凯来知识产权和商业秘密保护承诺书》</li>
+<li>2024-03-20 HR通过微信邀请技术面试</li>
+<li>2024-03-21 腾讯会议技术面试</li>
+<li>2024-03-22 HR通过微信邀请综合面试</li>
+<li>2024-03-23 腾讯会议综合面试</li>
+<li>2024-03-24 电话资面，告知10天左右反馈审批结果</li>
+</ul>
+<h2 id="交通银行"><a href="#交通银行" class="headerlink" title="交通银行"></a>交通银行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">软件开发工程师（成都）</span><br><span class="line"></span><br><span class="line">职位信息</span><br><span class="line">招聘部门：交通银行四川省分行-软件开发团队</span><br><span class="line">工作地点：四川省 成都市 </span><br><span class="line">截止时间：2024-04-14</span><br><span class="line"></span><br><span class="line">职位描述</span><br><span class="line">从事软件开发、应用架构设计、系统架构设计等相关工作，主要包括但不限于：</span><br><span class="line">1.开展业务需求调研和分析，应用架构方案设计以及需求实现；承担计算机应用系统的开发任务，编写和完善技术文档，并参与后续测试、投产、运行维护及推广等相关工作；</span><br><span class="line">2.根据应用架构和技术发展规划，参与推进全行重点项目的规划设计、评审及实施；</span><br><span class="line">3.参与网络运行情况的监控管理，研究并制定网络设备方案，完成相关软硬件产品的配置和管理工作；</span><br><span class="line">4.跟踪基础架构（小型机、PC服务器、存储、AIX、Linux操作系统等）、云计算等相关的新兴技术，参与系统架构规划及设计、相关技术标准研制和日常管理工作；</span><br><span class="line">5.跟踪国内外银行业务计算机应用系统软件和计算机技术发展趋势，持续提高技术水平和产品创新能力。</span><br><span class="line"></span><br><span class="line">职位要求</span><br><span class="line">1.本科及以上学历、学位应届毕业生，计算机科学与技术、软件工程、电子信息工程等金融科技类专业及其他理、工、农、医类专业毕业者优先；</span><br><span class="line">2.较好的计算机专业基础，具备计算机和金融等复合型专业背景者优先；</span><br><span class="line">3.具有较好的英语听说读写能力，须通过大学英语四级（CET4）考试（成绩在425分及以上），或提供具备相应外语能力的资格证明；</span><br><span class="line">4.具有较强的综合分析能力、沟通协调能力和文字表达能力；具有良好的逻辑思维能力及稳定的心理素质，良好的责任感和团队合作精神；</span><br><span class="line">5.身体健康，品行端正，无任何违法违规违纪行为；</span><br><span class="line">6.符合交通银行招录回避及履职回避规定。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2024-03-13 （总行）投递简历，误操作导致投递被放弃</li>
+<li>2024-03-18 （交通银行四川省分行） 投递简历</li>
+<li>2024-03-19 漏接四川成都电话：171******60</li>
+<li>2024-04-26 心理测评</li>
+<li>2024-05-07 邀请参加一面，放弃参加</li>
+</ul>
+<h2 id="优博讯"><a href="#优博讯" class="headerlink" title="优博讯"></a>优博讯</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">校园招聘-Android系统开发工程师</span><br><span class="line"></span><br><span class="line">毕业要求：2024届</span><br><span class="line"></span><br><span class="line">投递时间：2024年3月1日-2024年5月31日</span><br><span class="line"></span><br><span class="line">岗位职责</span><br><span class="line">1、负责智能手持终端PDA或POS产品Android Framework相关的设计、开发、调试、测试等；</span><br><span class="line">2、负责Android系统SDK及UI的开发维护；</span><br><span class="line">3、负责基于Android操作系统的软件平台研究、开发与优化工作，并在Android平台完成产品软件的高质量交付。</span><br><span class="line">4、分析市场需求，完成软件需求分析并及时交付高质量软件。</span><br><span class="line"></span><br><span class="line">岗位要求</span><br><span class="line">1、本科或硕士学历，电子信息类、计算机类、自动化类相关专业；</span><br><span class="line">2、熟悉Java/C++/C语言，熟悉Android系统工作原理，熟悉Android框架、Android系统库；</span><br><span class="line">3、优秀的学习能力，沟通能力，严谨的逻辑思维，能够快速响应需求；</span><br><span class="line">4、有责任心，抗压力强，有良好的团队合作意识。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2024-03-08 牛客网HR申请查看简历，通过初筛</li>
+<li>2024-03-22 邮箱邀请笔试，完成笔试</li>
+</ul>
+
+                </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                春招: 自我救赎之路
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2024/03/24/春招-自我救赎之路/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">Xayah</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2024-03-24 00:05</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E9%9A%8F%E6%83%B3/">随想</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/11/23/STM32F103VBT6-%E9%97%AA%E7%83%81%E4%B8%80%E7%9B%8FLED%E7%81%AF/"
+                                   title="STM32F103VBT6: 闪烁一盏LED灯"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">STM32F103VBT6: 闪烁一盏LED灯</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Timeline"><span class="nav-text">Timeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95"><span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%98%9F"><span class="nav-text">三星</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OPPO"><span class="nav-text">OPPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIVO"><span class="nav-text">VIVO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%B3%E5%93%88%E6%B8%B8"><span class="nav-text">米哈游</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8E%E4%B8%BA"><span class="nav-text">华为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8"><span class="nav-text">字节跳动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B1%B3"><span class="nav-text">小米</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%BE%E7%9A%AE"><span class="nav-text">虾皮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%87%AF%E6%9D%A5"><span class="nav-text">新凯来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E9%80%9A%E9%93%B6%E8%A1%8C"><span class="nav-text">交通银行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8D%9A%E8%AE%AF"><span class="nav-text">优博讯</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">42.3k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Timeline"><span class="nav-text">Timeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95"><span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%98%9F"><span class="nav-text">三星</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OPPO"><span class="nav-text">OPPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIVO"><span class="nav-text">VIVO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%B3%E5%93%88%E6%B8%B8"><span class="nav-text">米哈游</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8E%E4%B8%BA"><span class="nav-text">华为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8"><span class="nav-text">字节跳动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B1%B3"><span class="nav-text">小米</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%BE%E7%9A%AE"><span class="nav-text">虾皮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%87%AF%E6%9D%A5"><span class="nav-text">新凯来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E9%80%9A%E9%93%B6%E8%A1%8C"><span class="nav-text">交通银行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8D%9A%E8%AE%AF"><span class="nav-text">优博讯</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

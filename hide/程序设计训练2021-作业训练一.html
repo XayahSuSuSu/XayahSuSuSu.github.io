@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xayah">
+    
+    <title>
+        
+            程序设计训练2021-作业训练一 |
+        
+        AcmeZone
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"acmezone.top","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"AcmeZone","author":"Xayah","avatar":"/images/Xayah.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","links":"/links","unlock-music":"/unlock-music","boot-repacker":"/boot-repacker"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"这世界上有多少人，就有多少道。莫问前程，各行各道。同道为亲，道不同不相为谋。||生如长河，渡船千艘，唯自渡方是真渡。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/XayahSuSuSu?tab=repositories","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null,"telegram":"https://t.me/XayahSuSuSu"}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","feed":{"type":"atom","path":"atom.xml","limit":20},"mathjax":{"tags":"none","single_dollars":true,"cjk_width":0.9,"normal_width":0.6,"append_css":true,"every_page":false},"source_data":{"links":[{"name":"B1ue1nWh1te","link":"https://www.seaeye.cn/","description":"深海的个人主页","avatar":"https://img.seaeye.cn/img/seaeye/portrait.jpg"},{"name":"贰猹的小窝","link":"https://noionion.top/","description":"用这生命中的每一秒，给自己一个不后悔的未来","avatar":"https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg"},{"name":"御网尚书的小宇宙","link":"https://www.siteweb.cn/","description":"愿以赤子之心，共建网络空间安全","avatar":"https://www.hack-gov.com.cn/img/friend_404.gif"},{"name":"Bzmshang","link":"https://blog.bzmshang.top/","description":"一个热爱教程分享者","avatar":"https://blog.bzmshang.top/image/avatar.jpg"}]},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="song"
+        id="1811118551"
+        fixed="true"
+        autoplay="false">
+    </meting-js>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               AcmeZone
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                
+                                友链
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/unlock-music"
+                            >
+                                
+                                音乐解锁
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/boot-repacker"
+                            >
+                                
+                                BOOT编辑
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >友链</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/unlock-music"
+                    >音乐解锁</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/boot-repacker"
+                    >BOOT编辑</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="page-template-container border-box keep-container ">
+        <!-- page top -->
+        
+
+        <!-- page bottom -->
+        <div class="page-template-bottom border-box">
+            <!-- use page template -->
+            
+
+            <!-- page content -->
+            <div class="page-content border-box keep-markdown-body ">
+                
+                    <h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><h6 id="一、众数"><a href="#一、众数" class="headerlink" title="一、众数"></a><a href="#%E4%BC%97%E6%95%B0">一、众数</a></h6><h6 id="二、错误的里程表"><a href="#二、错误的里程表" class="headerlink" title="二、错误的里程表"></a><a href="#%E9%94%99%E8%AF%AF%E7%9A%84%E9%87%8C%E7%A8%8B%E8%A1%A8">二、错误的里程表</a></h6><h6 id="三、拳王阿里"><a href="#三、拳王阿里" class="headerlink" title="三、拳王阿里"></a><a href="#%E6%8B%B3%E7%8E%8B%E9%98%BF%E9%87%8C">三、拳王阿里</a></h6><h6 id="四、欧洲冠军联赛"><a href="#四、欧洲冠军联赛" class="headerlink" title="四、欧洲冠军联赛"></a><a href="#%E6%AC%A7%E6%B4%B2%E5%86%A0%E5%86%9B%E8%81%94%E8%B5%9B">四、欧洲冠军联赛</a></h6><h6 id="五、合法的括号串"><a href="#五、合法的括号串" class="headerlink" title="五、合法的括号串"></a><a href="#%E5%90%88%E6%B3%95%E7%9A%84%E6%8B%AC%E5%8F%B7%E4%B8%B2">五、合法的括号串</a></h6><h6 id="六、世界杯来了"><a href="#六、世界杯来了" class="headerlink" title="六、世界杯来了"></a><a href="#%E4%B8%96%E7%95%8C%E6%9D%AF%E6%9D%A5%E4%BA%86">六、世界杯来了</a></h6><h6 id="七、F1方程式冠军"><a href="#七、F1方程式冠军" class="headerlink" title="七、F1方程式冠军"></a><a href="#F1%E6%96%B9%E7%A8%8B%E5%BC%8F%E5%86%A0%E5%86%9B">七、F1方程式冠军</a></h6><h6 id="八、买房与选房"><a href="#八、买房与选房" class="headerlink" title="八、买房与选房"></a><a href="#%E4%B9%B0%E6%88%BF%E4%B8%8E%E9%80%89%E6%88%BF">八、买房与选房</a></h6><h6 id="九、二叉树遍历，从前序、中序到后序"><a href="#九、二叉树遍历，从前序、中序到后序" class="headerlink" title="九、二叉树遍历，从前序、中序到后序"></a><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%EF%BC%8C%E4%BB%8E%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E5%88%B0%E5%90%8E%E5%BA%8F">九、二叉树遍历，从前序、中序到后序</a></h6><h6 id="十、内存管理"><a href="#十、内存管理" class="headerlink" title="十、内存管理"></a><a href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">十、内存管理</a></h6><h6 id="十一、平均方差"><a href="#十一、平均方差" class="headerlink" title="十一、平均方差"></a><a href="#%E5%B9%B3%E5%9D%87%E6%96%B9%E5%B7%AE">十一、平均方差</a></h6><h6 id="十二、IP地址"><a href="#十二、IP地址" class="headerlink" title="十二、IP地址"></a><a href="#IP%E5%9C%B0%E5%9D%80">十二、IP地址</a></h6><h6 id="十三、开关与灯"><a href="#十三、开关与灯" class="headerlink" title="十三、开关与灯"></a><a href="#%E5%BC%80%E5%85%B3%E4%B8%8E%E7%81%AF">十三、开关与灯</a></h6><h6 id="十四、可删除的点"><a href="#十四、可删除的点" class="headerlink" title="十四、可删除的点"></a><a href="#%E5%8F%AF%E5%88%A0%E9%99%A4%E7%9A%84%E7%82%B9">十四、可删除的点</a></h6><h6 id="十五、字符串反转3"><a href="#十五、字符串反转3" class="headerlink" title="十五、字符串反转3"></a><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC3">十五、字符串反转3</a></h6><h6 id="十六、n，还是n"><a href="#十六、n，还是n" class="headerlink" title="十六、n，还是n"></a><a href="#n%EF%BC%8C%E8%BF%98%E6%98%AFn">十六、n，还是n</a></h6><h6 id="十七、字符串排序"><a href="#十七、字符串排序" class="headerlink" title="十七、字符串排序"></a><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F">十七、字符串排序</a></h6><h6 id="十八、三角形的面积"><a href="#十八、三角形的面积" class="headerlink" title="十八、三角形的面积"></a><a href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF">十八、三角形的面积</a></h6><h6 id="十九、循环数"><a href="#十九、循环数" class="headerlink" title="十九、循环数"></a><a href="#%E5%BE%AA%E7%8E%AF%E6%95%B0">十九、循环数</a></h6><h6 id="二十、电能消耗"><a href="#二十、电能消耗" class="headerlink" title="二十、电能消耗"></a><a href="#%E7%94%B5%E8%83%BD%E6%B6%88%E8%80%97">二十、电能消耗</a></h6><h6 id="二十一、计算校验码"><a href="#二十一、计算校验码" class="headerlink" title="二十一、计算校验码"></a><a href="#%E8%AE%A1%E7%AE%97%E6%A0%A1%E9%AA%8C%E7%A0%81">二十一、计算校验码</a></h6><h1 id="众数"><a href="#众数" class="headerlink" title="众数"></a>众数</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】"><a href="#【问题描述】" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;一组数据中出现最多的数，称为众数。比如</p>
+<p>&emsp;&emsp;1 2 3 3</p>
+<p>&emsp;&emsp;众数为3。一组数据中也可能有多个众数，以最先出现的作为众数。比如</p>
+<p>&emsp;&emsp;2 2 3 3</p>
+<p>&emsp;&emsp;众数为2。</p>
+<p>&emsp;&emsp;问题是一组按升序排好的数据，指出它的众数。</p>
+<h2 id="【输入形式】"><a href="#【输入形式】" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据（不超过100组测试数据）。</p>
+<p>&emsp;&emsp;每组测试数据占两行，第一行是正整数N：表示这组测试数据中数据项数。</p>
+<p>&emsp;&emsp;第二行是N个用空格隔开的正整数，表示这组测试数据的数据元素。每个数据元素都不大于10000。</p>
+<p>&emsp;&emsp;N=0，表示输入结束，并且不需要处理。</p>
+<p>&emsp;&emsp;40%的测试数据N 1 ≤N≤ 10；</p>
+<p>&emsp;&emsp;30%的测试数据N 10 &lt; N≤ 100；</p>
+<p>&emsp;&emsp;20%的测试数据N 100 &lt; N≤ 1000；</p>
+<p>&emsp;&emsp;10%的测试数据N 1000 &lt; N≤ 10000；</p>
+<h2 id="【输出形式】"><a href="#【输出形式】" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一行包含一个正整数：对应的众数</p>
+<h2 id="【样例输入】"><a href="#【样例输入】" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>4
+1 2 3 3
+4
+2 2 3 3
+0
+</code></pre>
+<h2 id="【样例输出】"><a href="#【样例输出】" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>3
+2
+</code></pre>
+<h2 id="【思路】"><a href="#【思路】" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】"><a href="#【代码（C-）】" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    while (cin &gt;&gt; n &amp;&amp; n != 0) &#123;</span><br><span class="line">        int before;</span><br><span class="line">        int value, countBefore = 0, countNow = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            int now;</span><br><span class="line">            cin &gt;&gt; now;</span><br><span class="line">            if (i == 0) &#123;</span><br><span class="line">                value = now;</span><br><span class="line">                countNow = 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (now == before) &#123;</span><br><span class="line">                    countNow++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    countNow = 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (countNow &gt; countBefore) &#123;</span><br><span class="line">                value = now;</span><br><span class="line">                countBefore = countNow;</span><br><span class="line">            &#125;</span><br><span class="line">            before = now;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="错误的里程表"><a href="#错误的里程表" class="headerlink" title="错误的里程表"></a>错误的里程表</h1><blockquote>
+<p>类型：数学</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-1"><a href="#【问题描述】-1" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;三月八日，小明买了台新车。但很快小明发现汽车的里程表有问题：里程表上每一位都不显示数字3和数字8，也就是说直接从数字2跳到数字4，直接从数字7跳到数字9。小明纳闷：这车到底行驶里程是多少。</p>
+<p>&emsp;&emsp;现在，小明向你求助：根据里程表显示的数字，给出真实的行驶里程。</p>
+<h2 id="【输入形式】-1"><a href="#【输入形式】-1" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入有多组测试数据。</p>
+<p>&emsp;&emsp;输入第一行正整数T，表示有多少组测试数据。</p>
+<p>&emsp;&emsp;后面有T行，每行一个非负整数，表示里程表显示数字，里面不含有数字3和8。该数字不超过10位。</p>
+<p>&emsp;&emsp;40%的测试数据组数T  10≤T≤ 102；</p>
+<p>&emsp;&emsp;30%的测试数据组数T  102≤T≤ 103；</p>
+<p>&emsp;&emsp;20%的测试数据组数T  103≤T≤ 104；</p>
+<p>&emsp;&emsp;10%的测试数据组数T  104≤T≤ 105；</p>
+<h2 id="【输出形式】-1"><a href="#【输出形式】-1" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一个整数占一行：真实的行程里程。</p>
+<h2 id="【样例输入】-1"><a href="#【样例输入】-1" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>6
+0
+1
+12
+159
+111224459
+124567976
+</code></pre>
+<h2 id="【样例输出】-1"><a href="#【样例输出】-1" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>0
+1
+10
+103
+19212007
+21913077
+</code></pre>
+<h2 id="【思路】-1"><a href="#【思路】-1" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-1"><a href="#【代码（C-）】-1" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    long long int n, count, result;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for (long long int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        long long int m;</span><br><span class="line">        cin &gt;&gt; m;</span><br><span class="line">        result = m;</span><br><span class="line">        count = 0;</span><br><span class="line">        long long int length = -1;</span><br><span class="line">        long long int prev = 0;</span><br><span class="line">        do &#123;</span><br><span class="line">            long long int each = m % 10;</span><br><span class="line">            length++;</span><br><span class="line">            for (long long int j = 1; j &lt;= each; ++j) &#123;</span><br><span class="line">                if (j == 3 || j == 8) count += pow(10, length);</span><br><span class="line">                else count += prev;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = 8 * prev + 2 * (long long int) pow(10, length);</span><br><span class="line">            m /= 10;</span><br><span class="line">        &#125; while (m != 0);</span><br><span class="line">        cout &lt;&lt; result - count &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="拳王阿里"><a href="#拳王阿里" class="headerlink" title="拳王阿里"></a>拳王阿里</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-2"><a href="#【问题描述】-2" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;阿里是上个世纪美国最著名的拳击手，阿里在20年的时间里多次获得重量级拳王称号。不过不幸的是，他在之后患上了帕金森氏病。他参加了许多比赛，多到连自己都数不清了。</p>
+<p>&emsp;&emsp;有这么一段时间，他总是参加各种不同的比赛，以至于他自己也不知道从第一场比赛开始到最后一场比赛结束到底用了多长时间。他只记得比赛的第一天是星期几（S)，最后一场比赛的最后一天是星期几(E)。他还记得比赛的总天数（包括第一和最后一天）不少于L天，也不多于R天。给定S和E，能否唯一确定参加比赛总天数(包含该段时间内比赛间的间隔天数)？</p>
+<h2 id="【输入形式】-2"><a href="#【输入形式】-2" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入的第一行包含一个整数T，代表测试数据的组数。接下来是 T 组数据。每组数据仅有一行，首先包含两个字符串S和E，然后包含两个整数L和R。</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 1 ≤ T ≤ 10,000        1 ≤ L ≤ R ≤ 100</p>
+<p>&emsp;&emsp;&emsp;&emsp;● S, E ∈ {“monday”,“tuesday”,“wednesday”,“thursday”,“friday”,“saturday”, “sunday”}</p>
+<h2 id="【输出形式】-2"><a href="#【输出形式】-2" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组数据：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 如果不存在满足条件的天数，输出一行“impossible”；</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 如果存在多个满足条件的天数，输出一行“many”；</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 否则，输出一行，包含一个整数，代表唯一满足条件的天数。</p>
+<h2 id="【样例输入】-2"><a href="#【样例输入】-2" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>3
+saturday sunday 2 4 
+monday wednesday 1 20 
+saturday sunday 3 5
+</code></pre>
+<h2 id="【样例输出】-2"><a href="#【样例输出】-2" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>2
+many
+impossible
+</code></pre>
+<h2 id="【思路】-2"><a href="#【思路】-2" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-2"><a href="#【代码（C-）】-2" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int getIndex(string &amp;mS) &#123;</span><br><span class="line">    if (mS == &quot;monday&quot;)</span><br><span class="line">        return 0;</span><br><span class="line">    else if (mS == &quot;tuesday&quot;)</span><br><span class="line">        return 1;</span><br><span class="line">    else if (mS == &quot;wednesday&quot;)</span><br><span class="line">        return 2;</span><br><span class="line">    else if (mS == &quot;thursday&quot;)</span><br><span class="line">        return 3;</span><br><span class="line">    else if (mS == &quot;friday&quot;)</span><br><span class="line">        return 4;</span><br><span class="line">    else if (mS == &quot;saturday&quot;)</span><br><span class="line">        return 5;</span><br><span class="line">    else if (mS == &quot;sunday&quot;)</span><br><span class="line">        return 6;</span><br><span class="line">    else</span><br><span class="line">        return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int getMin(int s, int e) &#123;</span><br><span class="line">    int minCount = 1;</span><br><span class="line">    while (s != e) &#123;</span><br><span class="line">        s = (s + 1) % 7;</span><br><span class="line">        minCount++;</span><br><span class="line">    &#125;</span><br><span class="line">    return minCount;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    for (int i = 0; i &lt; T; ++i) &#123;</span><br><span class="line">        string S, E;</span><br><span class="line">        int s, e, l, r;</span><br><span class="line">        cin &gt;&gt; S &gt;&gt; E &gt;&gt; l &gt;&gt; r;</span><br><span class="line">        s = getIndex(S);</span><br><span class="line">        e = getIndex(E);</span><br><span class="line">//        cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">//        cout &lt;&lt; &quot;e: &quot; &lt;&lt; e &lt;&lt; endl;</span><br><span class="line">        int min = getMin(s, e);</span><br><span class="line">        if (min &gt; r) cout &lt;&lt; &quot;impossible&quot; &lt;&lt; endl;</span><br><span class="line">        else &#123;</span><br><span class="line">            while (min &lt;= r) &#123;</span><br><span class="line">                if (min &gt;= l) break;</span><br><span class="line">                else min += 7;</span><br><span class="line">            &#125;</span><br><span class="line">            if (min &gt; r) cout &lt;&lt; &quot;impossible&quot; &lt;&lt; endl;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (min + 7 &lt;= r)cout &lt;&lt; &quot;many&quot; &lt;&lt; endl;</span><br><span class="line">                else cout &lt;&lt; min &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="欧洲冠军联赛"><a href="#欧洲冠军联赛" class="headerlink" title="欧洲冠军联赛"></a>欧洲冠军联赛</h1><blockquote>
+<p>类型：排序</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-3"><a href="#【问题描述】-3" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;欧洲冠军联赛常被誉为全世界最具影响力的俱乐部级赛事。在比赛的小组赛阶段，欧洲的各个足球俱乐部被分为八个小组，每个小组中四支球队。每个小组中的球队按照如下规则排序：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 球队会根据比赛结果获得积分。一场比赛的双方被称为主队和客队。如果其中一方进球数多于另一方，那么进球较多的一方获得3 分，另一方获得0 分。如果双方打成平手，则各得1分。</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 球队的净胜球数是其进球数减去失球数（不考虑该球队在比赛中作为主队还是客队）。</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 积分较高的球队排名更加靠前。</p>
+<p>&emsp;&emsp;&emsp;&emsp;●  如果两支球队积分相同，那么净胜球数较多的球队排名靠前。</p>
+<p>&emsp;&emsp;小组的各队伍进行循环赛，即每两支球队之间进行两场比赛，双方交替作为主队。给定一个小组内12 场比赛的结果，请求出小组的出线队伍：即排名第一和第二的两支球队。</p>
+<p>&emsp;&emsp;保证答案唯一。</p>
+<h2 id="【输入形式】-3"><a href="#【输入形式】-3" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入的第一行包含一个整数T，代表测试数据的组数。接下来是 T 组数据。</p>
+<p>&emsp;&emsp;每组数据共有12 行，每行描述一场比赛，格式为：“主队队名主队进球数vs. 客队进球数客队队名”，其中“主队队名”和“客队队名”为字符串，“主队进球数”和“客队进球数”为两球队在本场比赛中各自的进球数量。    </p>
+<p>&emsp;&emsp;&emsp;&emsp;● 1 ≤ T ≤ 50</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 球队队名仅包含小写英文字母</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 球队队名长度不超过10 个字符</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 0 ≤ 进球数 ≤ 100</p>
+<h2 id="【输出形式】-3"><a href="#【输出形式】-3" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组数据，输出一行，包含两个字符串，代表排名第一和第二的球队的队名。</p>
+<h2 id="【样例输入】-3"><a href="#【样例输入】-3" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>2
+manutd 8 vs. 2 arsenal 
+lyon 1 vs. 2 manutd 
+fcbarca 0 vs. 0 lyon 
+fcbarca 5 vs. 1 arsenal 
+manutd 3 vs. 1 fcbarca 
+arsenal 6 vs. 0 lyon 
+arsenal 0 vs. 0 manutd 
+manutd 4 vs. 2 lyon 
+arsenal 2 vs. 2 fcbarca 
+lyon 0 vs. 3 fcbarca 
+lyon 1 vs. 0 arsenal
+fcbarca 0 vs. 1 manutd
+a 3 vs. 0 b 
+a 0 vs. 0 c 
+a 0 vs. 0 d 
+b 0 vs. 0 a 
+b 4 vs. 0 c 
+b 0 vs. 0 d 
+c 0 vs. 0 a 
+c 0 vs. 0 b 
+c 1 vs. 0 d 
+d 3 vs. 0 a 
+d 0 vs. 0 b 
+d 0 vs. 0 c
+</code></pre>
+<h2 id="【样例输出】-3"><a href="#【样例输出】-3" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>manutd fcbarca 
+d b
+</code></pre>
+<h2 id="【思路】-3"><a href="#【思路】-3" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-3"><a href="#【代码（C-）】-3" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct Team &#123;</span><br><span class="line">    string name = &quot;-1&quot;;</span><br><span class="line">    int scoreGet = 0;</span><br><span class="line">    int scoreLose = 0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void addTeam(string &amp;s, Team *team) &#123;</span><br><span class="line">    for (int i = 0; i &lt; 4; ++i) &#123;</span><br><span class="line">        if (s != team[i].name) &#123;</span><br><span class="line">            if (team[i].name == &quot;-1&quot;) &#123;</span><br><span class="line">                team[i].name = s;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else break;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bool cmp(Team a, Team b) &#123;</span><br><span class="line">    if (a.scoreGet != b.scoreGet)</span><br><span class="line">        return a.scoreGet &gt; b.scoreGet;</span><br><span class="line">    else</span><br><span class="line">        return a.scoreLose &gt; b.scoreLose;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        string teamLeft[12], teamRight[12], shit;</span><br><span class="line">        Team teamArr[4];</span><br><span class="line">        int scoreLeft[12], scoreRight[12];</span><br><span class="line">        for (int j = 0; j &lt; 12; ++j) &#123;</span><br><span class="line">            cin &gt;&gt; teamLeft[j] &gt;&gt; scoreLeft[j] &gt;&gt; shit &gt;&gt; scoreRight[j] &gt;&gt; teamRight[j];</span><br><span class="line">            addTeam(teamLeft[j], teamArr);</span><br><span class="line">            addTeam(teamRight[j], teamArr);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; 4; ++j) &#123;</span><br><span class="line">            for (int k = 0; k &lt; 12; ++k) &#123;</span><br><span class="line">                if (teamLeft[k] == teamArr[j].name) &#123;</span><br><span class="line">                    if (scoreLeft[k] &gt; scoreRight[k])</span><br><span class="line">                        teamArr[j].scoreGet += 3;</span><br><span class="line">                    else if (scoreLeft[k] == scoreRight[k])</span><br><span class="line">                        teamArr[j].scoreGet += 1;</span><br><span class="line">                    teamArr[j].scoreLose += scoreLeft[k] - scoreRight[k];</span><br><span class="line">                &#125;</span><br><span class="line">                if (teamRight[k] == teamArr[j].name) &#123;</span><br><span class="line">                    if (scoreLeft[k] &lt; scoreRight[k])</span><br><span class="line">                        teamArr[j].scoreGet += 3;</span><br><span class="line">                    else if (scoreLeft[k] == scoreRight[k])</span><br><span class="line">                        teamArr[j].scoreGet += 1;</span><br><span class="line">                    teamArr[j].scoreLose += scoreRight[k] - scoreLeft[k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(teamArr, teamArr + 4, cmp);</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; teamArr[0].name &lt;&lt; &quot; &quot; &lt;&lt; teamArr[1].name &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="合法的括号串"><a href="#合法的括号串" class="headerlink" title="合法的括号串"></a>合法的括号串</h1><blockquote>
+<p>类型：线性表</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-4"><a href="#【问题描述】-4" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;一个合法的括号串，是指只包含括号的串，如果满足如下条件：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● （1）&lt;&gt; () [] {} 这四对括号是合法的；</p>
+<p>&emsp;&emsp;&emsp;&emsp;● （2）如果r是合法括号串，则&lt; r &gt; ( r ) [ r ] { r }也是；</p>
+<p>&emsp;&emsp;&emsp;&emsp;● （3）如果r，s是合法括号串，则rs也是；</p>
+<p>&emsp;&emsp;所以&lt;&lt;&gt;&gt; , [&lt;&gt;{}(())],[({&lt;&gt;})]是合法的括号串，而)(,[( ])就不是。</p>
+<h2 id="【输入形式】-4"><a href="#【输入形式】-4" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入第一行正整数t (10 ≤ n ≤ 100)，表示有多少组测试数据。</p>
+<p>&emsp;&emsp;后面有t行，每行一个只包含8种括号符号的括号串。</p>
+<p>&emsp;&emsp;40%的括号串的长度L 2 ≤ L≤ 20；</p>
+<p>&emsp;&emsp;30%的括号串的长度L 2 ≤ L≤ 200；</p>
+<p>&emsp;&emsp;20%的括号串的长度L 2 ≤ L≤ 2000；</p>
+<p>&emsp;&emsp;10%的括号串的长度L 2 ≤ L≤ 20000；</p>
+<h2 id="【输出形式】-4"><a href="#【输出形式】-4" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，如果括号串是合法的，输出”Yes”（输出没有引号）占一行，否则，输出”No”（输出没有引号）占一行。</p>
+<h2 id="【样例输入】-4"><a href="#【样例输入】-4" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>6
+&lt;&lt;&gt;&gt; 
+)(
+[&lt;&gt;&#123;&#125;(())]
+[(&#123;&lt;&gt;&#125;)]
+[(])
+&lt;([&#123;
+</code></pre>
+<h2 id="【样例输出】-4"><a href="#【样例输出】-4" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>Yes
+No
+Yes
+Yes
+No
+No
+</code></pre>
+<h2 id="【思路】-4"><a href="#【思路】-4" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-4"><a href="#【代码（C-）】-4" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        string in;</span><br><span class="line">        stringstream sstrem;</span><br><span class="line">        char c;</span><br><span class="line">        stack&lt;char&gt; s;</span><br><span class="line">        cin &gt;&gt; in;</span><br><span class="line">        sstrem &lt;&lt; in;</span><br><span class="line">        while (sstrem &gt;&gt; c) &#123;</span><br><span class="line">            if (!s.empty())</span><br><span class="line">                if (s.top() == &#x27;&lt;&#x27; &amp;&amp; c == &#x27;&gt;&#x27; || s.top() == &#x27;(&#x27; &amp;&amp; c == &#x27;)&#x27; || s.top() == &#x27;[&#x27; &amp;&amp; c == &#x27;]&#x27; ||</span><br><span class="line">                    s.top() == &#x27;&#123;&#x27; &amp;&amp; c == &#x27;&#125;&#x27;)</span><br><span class="line">                    s.pop();</span><br><span class="line">                else</span><br><span class="line">                    s.push(c);</span><br><span class="line">            else</span><br><span class="line">                s.push(c);</span><br><span class="line">        &#125;</span><br><span class="line">        if (!s.empty())</span><br><span class="line">            cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;</span><br><span class="line">        else</span><br><span class="line">            cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="世界杯来了"><a href="#世界杯来了" class="headerlink" title="世界杯来了"></a>世界杯来了</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-5"><a href="#【问题描述】-5" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;2018年俄罗斯世界杯结束了，法国获得冠军，全世界球迷度过了一个非常愉快的夏天。作为中国球迷，不能总是看别人踢球，这不福利来了，根据FIFA（国际足联）及全体成员协会的一致决定，2118年世界杯将在中国举办，作为东道主，中国队将无需参加预选赛而直接参加决赛阶段的比赛。</p>
+<p>&emsp;&emsp;比赛规则如下：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 总共n（n为偶数）个球队参加比赛</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 按照分组赛积分排名，前n/2的球队进入淘汰赛</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 积分排名的规则如下：球队获胜得3分，平局得1分，失利得0分，按照积分递减、净胜球递减以及进球数递减方式排名</p>
+<p>&emsp;&emsp;编写一个程序，根据给出的参赛队伍名单和所有比赛的结果，找出成功进入淘汰赛阶段的球队名单。</p>
+<h2 id="【输入形式】-5"><a href="#【输入形式】-5" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;第一行输入包含唯一整数n(1&lt;=n&lt;=50)，参加世界杯决赛的球队数量。接下来的n行是各球队的名字，为长度不超过30个字符的英文字符。接下来的n*(n-1)/2行，每行格式name1-name2 num1:num2（0&lt;=num1, num2&lt;=100），表示对阵球队及比分. </p>
+<h2 id="【输出形式】-5"><a href="#【输出形式】-5" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输入n/2行，表示进入淘汰赛阶段的球队，按照字典序进行排列，每个球队名字占一行。</p>
+<h2 id="【样例输入】-5"><a href="#【样例输入】-5" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>4
+A
+B
+C
+D
+A-B 1:1
+A-C 2:2
+A-D 1:0
+B-C 1:0
+B-D 0:3
+C-D 0:3
+</code></pre>
+<h2 id="【样例输出】-5"><a href="#【样例输出】-5" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>A
+D
+</code></pre>
+<h2 id="【思路】-5"><a href="#【思路】-5" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-5"><a href="#【代码（C-）】-5" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct Team &#123;</span><br><span class="line">    string name;</span><br><span class="line">    int score = 0;</span><br><span class="line">    int inOut = 0;</span><br><span class="line">    int in = 0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">bool cmp(Team a, Team b) &#123;</span><br><span class="line">    if (a.score != b.score)</span><br><span class="line">        return a.score &gt; b.score;</span><br><span class="line">    else if (a.inOut != b.inOut)</span><br><span class="line">        return a.inOut &gt; b.inOut;</span><br><span class="line">    else if (a.in != b.in)</span><br><span class="line">        return a.in &gt; b.in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool cmp2(Team A, Team B) &#123;</span><br><span class="line">    return A.name &lt; B.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    Team team[n];</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; team[i].name;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; n * (n - 1) / 2; ++i) &#123;</span><br><span class="line">        string t, s;</span><br><span class="line">        cin &gt;&gt; t &gt;&gt; s;</span><br><span class="line">        string teamLeft = t.substr(0, t.find(&#x27;-&#x27;));</span><br><span class="line">        string teamRight = t.substr(t.find(&#x27;-&#x27;) + 1, t.size());</span><br><span class="line">        int inLeft = stoi(s.substr(0, s.find(&#x27;:&#x27;)));</span><br><span class="line">        int inRight = stoi(s.substr(s.find(&#x27;:&#x27;) + 1, s.size()));</span><br><span class="line">        for (int j = 0; j &lt; n; ++j) &#123;</span><br><span class="line">            if (teamLeft == team[j].name) &#123;</span><br><span class="line">                if (inLeft &gt; inRight)</span><br><span class="line">                    team[j].score += 3;</span><br><span class="line">                else if (inLeft == inRight)</span><br><span class="line">                    team[j].score += 1;</span><br><span class="line">                team[j].in += inLeft;</span><br><span class="line">                team[j].inOut += inLeft - inRight;</span><br><span class="line">            &#125;</span><br><span class="line">            if (teamRight == team[j].name) &#123;</span><br><span class="line">                if (inLeft &lt; inRight)</span><br><span class="line">                    team[j].score += 3;</span><br><span class="line">                else if (inLeft == inRight)</span><br><span class="line">                    team[j].score += 1;</span><br><span class="line">                team[j].in += inRight;</span><br><span class="line">                team[j].inOut += inRight - inLeft;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(team, team + n, cmp);</span><br><span class="line">    sort(team, team + n / 2, cmp2);</span><br><span class="line">//    cout &lt;&lt; team[0].name &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    for (int j = 0; j &lt; n / 2; ++j) &#123;</span><br><span class="line">//        cout &lt;&lt; team[j].name &lt;&lt; &quot; &quot; &lt;&lt; team[j].score &lt;&lt; &quot; &quot; &lt;&lt; team[j].inOut &lt;&lt; &quot; &quot; &lt;&lt; team[j].in &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; team[j].name &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="F1方程式冠军"><a href="#F1方程式冠军" class="headerlink" title="F1方程式冠军"></a>F1方程式冠军</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-6"><a href="#【问题描述】-6" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;一级方程式F1锦标赛由一系列称为大奖赛的分站赛组成。每一场比赛的车手都根据他们的最后位置获得积分。只有前10名车手按以下顺序获得分数：25、18、15、12、10、8、6、4、2、1。在锦标赛结束时，得分最多的车手是冠军。如果有平分，则冠军是赢的最多的人（即排位第一）。如果还是平分，则选择得到排位第二最多的人，依此类推，直到没有更多的排位进行比较。</p>
+<p>&emsp;&emsp;后来又提出了另一个得分制度，其中冠军是赢的最多的。如果有平手，冠军是得分最多的。如果仍然存在平手，则按原来的得分制度进行，即比较第二、第三、第四、…排位的次数。</p>
+<p>&emsp;&emsp;在本赛季，你会得到所有比赛的结果，你将根据两个得分系统来分别确定冠军。数据保证两套系统都能得到唯一的冠军。</p>
+<h2 id="【输入形式】-6"><a href="#【输入形式】-6" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;第一行一个整数t（1&lt;=t&lt;=20），t是分站赛的场次数。之后是每个分站赛的最终排位情况，每个的第一行一个整数n(1&lt;=n&lt;=100)表示排位车手人数，之后n行按排位列出车手的名字，排位从第一到最后，车手的名字为长度不超过50的英文字符，大小写区分。</p>
+<h2 id="【输出形式】-6"><a href="#【输出形式】-6" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出为两行，第一行为按照原始规则确定的冠军，第二行是按照可选规则确定的冠军。</p>
+<h2 id="【样例输入】-6"><a href="#【样例输入】-6" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>3
+3
+apple
+banana
+pear
+2
+pear
+banana
+2
+apple
+banana
+</code></pre>
+<h2 id="【样例输出】-6"><a href="#【样例输出】-6" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>banana
+apple
+</code></pre>
+<h2 id="【思路】-6"><a href="#【思路】-6" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-6"><a href="#【代码（C-）】-6" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct Player &#123;</span><br><span class="line">    string name = &quot;-1&quot;;</span><br><span class="line">    int score = 0;</span><br><span class="line">    int rank[100] = &#123;0&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int countScore(int mRank) &#123;</span><br><span class="line">    if (mRank &gt; 10)</span><br><span class="line">        return 0;</span><br><span class="line">    else if (mRank == 1)</span><br><span class="line">        return 25;</span><br><span class="line">    else if (mRank == 2)</span><br><span class="line">        return 18;</span><br><span class="line">    else if (mRank == 3)</span><br><span class="line">        return 15;</span><br><span class="line">    else if (mRank == 4)</span><br><span class="line">        return 12;</span><br><span class="line">    else if (mRank == 5)</span><br><span class="line">        return 10;</span><br><span class="line">    else if (mRank == 6)</span><br><span class="line">        return 8;</span><br><span class="line">    else if (mRank == 7)</span><br><span class="line">        return 6;</span><br><span class="line">    else if (mRank == 8)</span><br><span class="line">        return 4;</span><br><span class="line">    else if (mRank == 9)</span><br><span class="line">        return 2;</span><br><span class="line">    else if (mRank == 10)</span><br><span class="line">        return 1;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void countPlayer(string &amp;name, int rank, Player *player) &#123;</span><br><span class="line">    for (int i = 0; i &lt; 100; ++i) &#123;</span><br><span class="line">        if (name != player[i].name) &#123;</span><br><span class="line">            if (player[i].name == &quot;-1&quot;) &#123;</span><br><span class="line">                player[i].name = name;</span><br><span class="line">                player[i].score += countScore(rank);</span><br><span class="line">                player[i].rank[rank - 1] += 1;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            player[i].score += countScore(rank);</span><br><span class="line">            player[i].rank[rank - 1] += 1;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool cmp(Player a, Player b) &#123;</span><br><span class="line">    if (a.score != b.score)</span><br><span class="line">        return a.score &gt; b.score;</span><br><span class="line">    else</span><br><span class="line">        for (int i = 0; i &lt; 100; ++i) &#123;</span><br><span class="line">            if (a.rank[i] != b.rank[i])</span><br><span class="line">                return a.rank[i] &gt; b.rank[i];</span><br><span class="line">        &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool cmp2(Player a, Player b) &#123;</span><br><span class="line">    if (a.rank[0] != b.rank[0])</span><br><span class="line">        return a.rank[0] &gt; b.rank[0];</span><br><span class="line">    else if (a.score != b.score)</span><br><span class="line">        return a.score &gt; b.score;</span><br><span class="line">    else</span><br><span class="line">        for (int i = 1; i &lt; 100; ++i) &#123;</span><br><span class="line">            if (a.rank[i] != b.rank[i])</span><br><span class="line">                return a.rank[i] &gt; b.rank[i];</span><br><span class="line">        &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    Player player[100];</span><br><span class="line">    for (int i = 0; i &lt; t; ++i) &#123;</span><br><span class="line">        int n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line">        for (int j = 0; j &lt; n; ++j) &#123;</span><br><span class="line">            string s;</span><br><span class="line">            cin &gt;&gt; s;</span><br><span class="line">            countPlayer(s, j + 1, player);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(player, player + 100, cmp);</span><br><span class="line">    cout &lt;&lt; player[0].name &lt;&lt; endl;</span><br><span class="line">    sort(player, player + 100, cmp2);</span><br><span class="line">    cout &lt;&lt; player[0].name &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="买房与选房"><a href="#买房与选房" class="headerlink" title="买房与选房"></a>买房与选房</h1><blockquote>
+<p>类型：排序</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-7"><a href="#【问题描述】-7" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;在 X 国许多一线城市住房非常紧张，政府部门制定了相关的政策，重点满足住房刚性需求（住房面积为0，社保缴纳必须超过2年），然后才能照顾改善性需求（住房面积大于0）。</p>
+<p>&emsp;&emsp;具体的原则为：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 对于刚性需求，缴纳社保月数多者优先</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 对于改善性需求，现有自有住房面积小者优先</p>
+<p>&emsp;&emsp;由于房源有限，为公平起见，开发商在不违背上述原则下特意指定同等条件下申报时间同时作为排队的条件，时间越早优先级越高。</p>
+<p>&emsp;&emsp;最近有一批新楼盘准备开盘，总共有 m （≤1000）套房，所有的网上申报工作都已经完成并保存到二进制文件house.bin中，申请者提交了自己的基本材料，格式为：身份证号（18位，加1位空字符’\0’，共19位）、社保缴纳月数、自有住房面积、申报时间(格式为：MM-DD-YYYY，10位字符串，加1位空字符’\0’，共11位)，社保缴纳月数、自有住房面积均为整数，文件最后为总报名人数 n（≤105）。</p>
+<p>&emsp;&emsp;申请者可以通过身份证号查询最终的结果。</p>
+<h2 id="【输入形式】-7"><a href="#【输入形式】-7" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入的第一行为两个正整数 m（≤1000）和 T （ T ≤ n ），分别表示本次开盘的楼盘可供申请的套数以及查询的组数</p>
+<p>&emsp;&emsp;接下来的 T 行，每行为一个18位的字符串，表示需要查询的身份证号</p>
+<h2 id="【输出形式】-7"><a href="#【输出形式】-7" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出为 T 行，对应每个查询的输出结果：</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 1. 申请者不符合购房条件或排位超出了所推出的房源数量不能中签，则输出”Sorry”;</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 2. 申请者符合购房条件，且该名次人数为1人，则直接输出一个整数，表示选房顺序号;</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 3. 申请者符合购房条件，且该名次人数有多人，同时人数不大于所剩房源数量，则直接输出用空格分隔的两个整数，表示选房顺序号区间;</p>
+<p>&emsp;&emsp;&emsp;&emsp;● 4. 申请者符合购房条件，且该名次人数有多人，同时人数大于所剩房源数量，则输出用/分隔两个整数，如 A/B，表示 B 人中选 A 人，选房顺序为排名倒数 A 名范围。</p>
+<h2 id="【样例输入】-7"><a href="#【样例输入】-7" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>9 6
+350102200609166049
+350102200609163286
+250342323545313434
+130502201805070787
+110101196003074525
+430102201102181455
+</code></pre>
+<h2 id="【样例输出】-7"><a href="#【样例输出】-7" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>2
+3 4
+Sorry
+6
+2/3
+Sorry
+</code></pre>
+<h2 id="【代码框架】"><a href="#【代码框架】" class="headerlink" title="【代码框架】"></a>【代码框架】</h2><p><strong>建议复制以下代码框架， 在此基础上完成本题需求。此建议不是必须，你可以忽略。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct people &#123;</span><br><span class="line">    char id[19];                  /* 身份证号码 */</span><br><span class="line">    int social;                     /* 社保缴纳月数 */</span><br><span class="line">    int area;                       /* 现有住房面积 */</span><br><span class="line">    char date[11];              /* 申报日期 */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">people *getMess(int &amp;n);</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    people *person;          /* 指向所有报名人的基本资料首地址，通过调用函数getMess获取 */</span><br><span class="line">    int n;                            /* n为报名人数，通过调用函数getMess获取 */</span><br><span class="line">    person = getMess(n);</span><br><span class="line"></span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">people *getMess(int &amp;n) &#123;            /* 将文件数据读入内存 */</span><br><span class="line">    FILE *fp;</span><br><span class="line">    fp = fopen(&quot;house.bin&quot;, &quot;rb&quot;);</span><br><span class="line">    fseek(fp, -1 * (long) sizeof(int), 2);</span><br><span class="line">    fread(&amp;n, sizeof(int), 1, fp);</span><br><span class="line">    rewind(fp);</span><br><span class="line">    people *tmp = new people[n];</span><br><span class="line">    fread(tmp, sizeof(people), n, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    return tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="【思路】-7"><a href="#【思路】-7" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-7"><a href="#【代码（C-）】-7" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct people &#123;</span><br><span class="line">    char id[19];                  /* 身份证号码 */</span><br><span class="line">    int social;                     /* 社保缴纳月数 */</span><br><span class="line">    int area;                       /* 现有住房面积 */</span><br><span class="line">    char date[11];              /* 申报日期 */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct People &#123;</span><br><span class="line">    people p;</span><br><span class="line">    int rankAcutally = 0; // 实际排行</span><br><span class="line">    int rank = 0; // 带重排名</span><br><span class="line">    long long int time = 0; // 日期</span><br><span class="line">    int count = 1; // 同排名人数</span><br><span class="line">    int index = 1; // 同排名索引</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">people *getMess(int &amp;n) &#123;            /* 将文件数据读入内存 */</span><br><span class="line">    FILE *fp;</span><br><span class="line">    fp = fopen(&quot;house.bin&quot;, &quot;rb&quot;);</span><br><span class="line">    fseek(fp, -1 * (long) sizeof(int), 2);</span><br><span class="line">    fread(&amp;n, sizeof(int), 1, fp);</span><br><span class="line">    rewind(fp);</span><br><span class="line">    auto *tmp = new people[n];</span><br><span class="line">    fread(tmp, sizeof(people), n, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    return tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool cmp(People a, People b) &#123;</span><br><span class="line">    if (a.p.area == 0 &amp;&amp; a.p.social &gt; 24 &amp;&amp; b.p.area != 0)</span><br><span class="line">        return true;</span><br><span class="line">    else if (a.p.area != 0 &amp;&amp; (b.p.area == 0 &amp;&amp; b.p.social &lt;= 24))</span><br><span class="line">        return true;</span><br><span class="line">    else if (a.p.area == 0 &amp;&amp; a.p.social &gt; 24 &amp;&amp; b.p.area == 0 &amp;&amp; b.p.social &lt;= 24)</span><br><span class="line">        return true;</span><br><span class="line">    else if (a.p.area == 0 &amp;&amp; b.p.area == 0) &#123;</span><br><span class="line">        if (a.p.social != b.p.social)</span><br><span class="line">            return a.p.social &gt; b.p.social;</span><br><span class="line">        else if (a.time != b.time)</span><br><span class="line">            return a.time &lt; b.time;</span><br><span class="line">    &#125; else if (a.p.area != 0 &amp;&amp; b.p.area != 0) &#123;</span><br><span class="line">        if (a.p.area != b.p.area)</span><br><span class="line">            return a.p.area &lt; b.p.area;</span><br><span class="line">        else if (a.time != b.time)</span><br><span class="line">            return a.time &lt; b.time;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">People findById(string &amp;id, People *p, int n) &#123;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        if (id == p[i].p.id)</span><br><span class="line">            return p[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return p[0];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    people *persons;          /* 指向所有报名人的基本资料首地址，通过调用函数getMess获取 */</span><br><span class="line">    int n;                            /* n为报名人数，通过调用函数getMess获取 */</span><br><span class="line">    persons = getMess(n);</span><br><span class="line">//    int n = 14;</span><br><span class="line">//    ifstream in(&quot;test.txt&quot;);</span><br><span class="line">//    people persons[n];</span><br><span class="line">//    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">//        in &gt;&gt; persons[i].id &gt;&gt; persons[i].social &gt;&gt; persons[i].area &gt;&gt; persons[i].date;</span><br><span class="line">//    &#125;</span><br><span class="line">    People person[n];</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        person[i].p = persons[i];</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        string s = person[i].p.date;</span><br><span class="line">        string m = s.substr(0, s.find(&#x27;-&#x27;));</span><br><span class="line">        string d = s.substr(s.find(&#x27;-&#x27;) + 1, s.find(&#x27;-&#x27;, s.find(&#x27;-&#x27;) + 1) - s.find(&#x27;-&#x27;) - 1);</span><br><span class="line">        string y = s.substr(s.find(&#x27;-&#x27;, s.find(&#x27;-&#x27;) + 1) + 1, s.length() - (s.find(&#x27;-&#x27;) + 1 + 1));</span><br><span class="line">        stringstream sstrem;</span><br><span class="line">        sstrem &lt;&lt; y &lt;&lt; m &lt;&lt; d;</span><br><span class="line">        sstrem &gt;&gt; person[i].time;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(person, person + n, cmp);</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        person[i].rankAcutally = i + 1;</span><br><span class="line">        if (i == 0)</span><br><span class="line">            person[i].rank = i + 1;</span><br><span class="line">        else &#123;</span><br><span class="line">            if ((person[i].p.social == person[i - 1].p.social &amp;&amp; person[i].p.area == person[i - 1].p.area &amp;&amp;</span><br><span class="line">                 person[i].time == person[i - 1].time) ||</span><br><span class="line">                (person[i].p.area != 0 &amp;&amp; person[i - 1].p.area != 0 &amp;&amp;</span><br><span class="line">                 person[i].time == person[i - 1].time)) &#123;</span><br><span class="line">                person[i].rank = person[i - 1].rank;</span><br><span class="line">                person[i].count = person[i - 1].count + 1;</span><br><span class="line">                for (int j = 0; j &lt; person[i].count; ++j) &#123;</span><br><span class="line">                    person[i - j].index = person[i].count - j;</span><br><span class="line">                    person[i - j].count = person[i].count;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else person[i].rank = person[i - 1].rank + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">//    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">//        cout &lt;&lt; person[i].p.id &lt;&lt; &quot; &quot; &lt;&lt; person[i].p.social &lt;&lt; &quot; &quot; &lt;&lt; person[i].p.area &lt;&lt; &quot; &quot; &lt;&lt; person[i].p.date &lt;&lt; &quot; &quot;</span><br><span class="line">//             &lt;&lt; person[i].rankAcutally &lt;&lt; &quot; &quot; &lt;&lt; person[i].rank &lt;&lt; &quot; &quot; &lt;&lt; person[i].count &lt;&lt; &quot; &quot; &lt;&lt; person[i].index</span><br><span class="line">//             &lt;&lt; endl;</span><br><span class="line">//    &#125;</span><br><span class="line">    int m, T;</span><br><span class="line">    cin &gt;&gt; m &gt;&gt; T;</span><br><span class="line">    for (int i = 0; i &lt; T; ++i) &#123;</span><br><span class="line">        string id;</span><br><span class="line">        cin &gt;&gt; id;</span><br><span class="line">        People p = findById(id, person, n);</span><br><span class="line">        int tail = p.rankAcutally - p.index + p.count; // 当前rank里最后一个人的实际排名</span><br><span class="line">        int head = p.rankAcutally - p.index + 1; // 当前rank里第一个人的实际排名</span><br><span class="line">        if (p.p.area == 0 &amp;&amp; p.p.social &lt;= 24) &#123;</span><br><span class="line">            cout &lt;&lt; &quot;Sorry&quot; &lt;&lt; endl;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (tail &lt;= m) &#123;</span><br><span class="line">                if (p.count == 1) &#123;</span><br><span class="line">                    cout &lt;&lt; p.rankAcutally &lt;&lt; endl;</span><br><span class="line">                &#125; else cout &lt;&lt; p.rankAcutally - p.index + 1 &lt;&lt; &quot; &quot; &lt;&lt; head + p.count - 1 &lt;&lt; endl;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (head &lt;= m) &#123;</span><br><span class="line">                    cout &lt;&lt; m - head + 1 &lt;&lt; &quot;/&quot; &lt;&lt; p.count &lt;&lt; endl;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    cout &lt;&lt; &quot;Sorry&quot; &lt;&lt; endl;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二叉树遍历，从前序、中序到后序"><a href="#二叉树遍历，从前序、中序到后序" class="headerlink" title="二叉树遍历，从前序、中序到后序"></a>二叉树遍历，从前序、中序到后序</h1><blockquote>
+<p>类型：树</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-8"><a href="#【问题描述】-8" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;二叉树是一种非常重要的数据结构，非常多其他数据结构都是基于二叉树的基础演变而来的。对于二叉树，深度遍历有前序、中序以及后序三种遍历方法。</p>
+<p>&emsp;&emsp;三种基本的遍历思想为：</p>
+<p>&emsp;&emsp;前序遍历：根结点 —&gt; 左子树 —&gt; 右子树</p>
+<p>&emsp;&emsp;中序遍历：左子树—&gt; 根结点 —&gt; 右子树</p>
+<p>&emsp;&emsp;后序遍历：左子树 —&gt; 右子树 —&gt; 根结点</p>
+<p>&emsp;&emsp;比如，求以下二叉树的各种遍历</p>
+
+
+<p>&emsp;&emsp;前序遍历：1  2  4  5  7  8  3  6 </p>
+<p>&emsp;&emsp;中序遍历：4  2  7  5  8  1  3  6</p>
+<p>&emsp;&emsp;后序遍历：4  7  8  5  2  6  3  1</p>
+<p>&emsp;&emsp;需要你编写程序解决的问题是：已知一个二叉树的前序遍历和中序遍历的结果，给出该二叉树的后序遍历的结果。</p>
+<h2 id="【输入形式】-8"><a href="#【输入形式】-8" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据，每组测试数据三行，每组测试数据第一行只有一个正整数n，表示二叉树节点的数目，n=0意味着输入结束并且不需要处理。</p>
+<p>&emsp;&emsp;每组测试数据第二行是二叉树的前序遍历的结果，是一个长度为n的字符串，每个节点由一个字符表示，字符是大小写英文字母及10个数字,不同的节点用不同的字符表示，也即无论前序遍历和中序遍历的字符串中没有重复的字符。</p>
+<p>&emsp;&emsp;每组测试数据第二行是二叉树的中序遍历的结果，也是一个长度为n的字符串。</p>
+<p>&emsp;&emsp;40%的测试数据1 ≤ n≤ 10；</p>
+<p>&emsp;&emsp;30%的测试数据1 ≤ n≤ 20；</p>
+<p>&emsp;&emsp;20%的测试数据1 ≤ n≤ 40；</p>
+<p>&emsp;&emsp;10%的测试数据1 ≤ n≤ 62；</p>
+<h2 id="【输出形式】-8"><a href="#【输出形式】-8" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一行，是一个长度为n的字符串，表示二叉树后序遍历的结果。</p>
+<h2 id="【样例输入】-8"><a href="#【样例输入】-8" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>8
+12457836
+42758136
+4
+abcd
+abcd
+4
+abcd
+dcba
+0
+</code></pre>
+<h2 id="【样例输出】-8"><a href="#【样例输出】-8" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>47852631
+dcba
+dcba
+</code></pre>
+<h2 id="【思路】-8"><a href="#【思路】-8" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-8"><a href="#【代码（C-）】-8" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int getIndex(char c, const char *ca, int n) &#123;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        if (c == ca[i])</span><br><span class="line">            return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int getLeftSurplus(char c, const char *ca, int limitLeftIndex, int limitRightIndex) &#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for (int i = limitLeftIndex; i &lt; limitRightIndex; ++i) &#123;</span><br><span class="line">        if (c == ca[i])</span><br><span class="line">            return count;</span><br><span class="line">        else if (ca[i] != &#x27;*&#x27;)</span><br><span class="line">            count++;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int getRightSurplus(char c, const char *ca, int limitLeftIndex, int limitRightIndex) &#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for (int i = limitRightIndex - 1; i &gt;= limitLeftIndex; --i) &#123;</span><br><span class="line">        if (c == ca[i])</span><br><span class="line">            return count;</span><br><span class="line">        else if (ca[i] != &#x27;*&#x27;)</span><br><span class="line">            count++;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int count = 0;</span><br><span class="line"></span><br><span class="line">char getNextChar(char c, char *ca, int n) &#123;</span><br><span class="line">    count++;</span><br><span class="line">    return ca[count];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void getBack(char c, char *mid, char *fore, int limitLeftIndex, int limitRightIndex, int n) &#123;</span><br><span class="line">    int left = getLeftSurplus(c, mid, limitLeftIndex, limitRightIndex);</span><br><span class="line">    int right = getRightSurplus(c, mid, limitLeftIndex, limitRightIndex);</span><br><span class="line">    int mIndex;</span><br><span class="line">    char mNextChar;</span><br><span class="line">    if (left &gt; 0) &#123;</span><br><span class="line">        mIndex = getIndex(c, mid, n);</span><br><span class="line">        mNextChar = getNextChar(c, fore, n);</span><br><span class="line">        getBack(mNextChar, mid, fore, limitLeftIndex, mIndex, n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (right &gt; 0) &#123;</span><br><span class="line">        mIndex = getIndex(c, mid, n);</span><br><span class="line">        mNextChar = getNextChar(c, fore, n);</span><br><span class="line">        getBack(mNextChar, mid, fore, mIndex + 1, limitRightIndex, n);</span><br><span class="line">    &#125;</span><br><span class="line">    left = getLeftSurplus(c, mid, limitLeftIndex, limitRightIndex);</span><br><span class="line">    right = getRightSurplus(c, mid, limitLeftIndex, limitRightIndex);</span><br><span class="line">    if (left == 0 &amp;&amp;</span><br><span class="line">        right == 0) &#123;</span><br><span class="line">        cout &lt;&lt; c;</span><br><span class="line">        mid[getIndex(c, mid, n)] = &#x27;*&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    while (cin &gt;&gt; n &amp;&amp; n != 0) &#123;</span><br><span class="line">        char fore[n], mid[n];</span><br><span class="line">        cin.sync();</span><br><span class="line">        for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">            cin &gt;&gt; fore[i];</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">            cin &gt;&gt; mid[i];</span><br><span class="line">        &#125;</span><br><span class="line">        count = 0;</span><br><span class="line">        getBack(fore[0], mid, fore, 0, n, n);</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><blockquote>
+<p>类型：字符串，模拟</p>
+<p>难度：3</p>
+</blockquote>
+<h2 id="【问题描述】-9"><a href="#【问题描述】-9" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;离第一个操作系统HNU-OS发布已经没有多少时间了，但它的一些组件还没有完成，内存管理器就是其中之一。根据开发人员的计划，在第一个版本中，内存管理器将非常简单和直观。它将支持三个操作： </p>
+<p>&emsp;&emsp;&emsp;&emsp;● alloc n —— 分配n个字节内存，返回已分配块的正整数标识符x(x初始值为0，每次分配增长1)</p>
+<p>&emsp;&emsp;&emsp;&emsp;● erase x —— 删除标识符x所在的块</p>
+<p>&emsp;&emsp;&emsp;&emsp;● defragment —— 整理空余内存碎片，将所有块尽量靠近内存的开始位置，并保持各自的顺序</p>
+<p>&emsp;&emsp;在此情况下，内存模型非常简单，它是一个m字节的序列，为了方便起见，从第一个字节到第m字节进行编号。</p>
+<p>&emsp;&emsp;第一个操作alloc n有一个参数n，表示被分配的内存块大小。在处理此操作时，内存中将分配n个连续字节的空闲块。 如果这些块的数量超过一个，则优先选择最接近内存开始(即第一个字节)的块。 所有这些字节都被标记为非空闲，内存管理器返回一个32位整数数字令牌，代表该块的标识符。 如果不可能分配这样大小的空闲块，则返回NULL。</p>
+<p>&emsp;&emsp;第二个操作erase x以x为参数，表示某个块的标识符。此操作释放系统内存，将此块的字节标记为空闲以供进一步使用。 如果此标识符没有指向先前分配的块(该块尚未被释放)，则返回ILLEGAL_ERASE_ARGUMENT。</p>
+<p>&emsp;&emsp;最后一个操作defragment没有任何参数，只会使占用的内存部分更接近内存的开始，而不会更改它们各自的顺序。 </p>
+<p>&emsp;&emsp;在当前的实现中，将使用从1开始的连续整数作为标识符。每个成功的alloc操作过程都应该返回接下来的编号。不成功的alloc操作不影响计数。 </p>
+<p>&emsp;&emsp;编写内存管理器的实现，为每个alloc命令输出返回的值，为所有失败的erase命令输出ILLEGAL_ERASE_ARGUMENT。 </p>
+<h2 id="【输入形式】-9"><a href="#【输入形式】-9" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入数据的第一行包含两个正整数t和m（1&lt;=t&lt;=500, 1&lt;=m&lt;=105)，其中t表示需要内存管理器来处理的操作个数，m表示有效的内存字节大小。接下来的t行每一行代表一个操作。</p>
+<h2 id="【输出形式】-9"><a href="#【输出形式】-9" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出有多行，每行或者是alloc操作的结果，或者是失败的erase操作的结果ILLEGAL_ERASE_ARGUMENT。其顺序与输入的操作次序一致。</p>
+<h2 id="【样例输入】-9"><a href="#【样例输入】-9" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>6 10
+alloc 5
+alloc 3
+erase 1
+alloc 6
+defragment
+alloc 6
+</code></pre>
+<h2 id="【样例输出】-9"><a href="#【样例输出】-9" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>1
+2
+NULL
+3
+</code></pre>
+<h2 id="【思路】-9"><a href="#【思路】-9" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-9"><a href="#【代码（C-）】-9" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int count = 1;</span><br><span class="line"></span><br><span class="line">void doAction(const string &amp;a, int f, int moy[][2], int m, int &amp;cPtr) &#123;</span><br><span class="line">    if (a == &quot;alloc&quot;) &#123;</span><br><span class="line">        int tmpCount = 0;</span><br><span class="line">        for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">            cPtr = i;</span><br><span class="line">            if (moy[i][0] == 0) &#123;</span><br><span class="line">                tmpCount++;</span><br><span class="line">            &#125; else if (moy[i][0] != 0) &#123;</span><br><span class="line">                if (tmpCount &gt;= f) &#123;</span><br><span class="line">                    cPtr = cPtr - tmpCount + 1;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                tmpCount = 0;</span><br><span class="line">            &#125;</span><br><span class="line">            if (tmpCount &gt;= f) &#123;</span><br><span class="line">                cPtr = cPtr - tmpCount + 1;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            cPtr = -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if (cPtr == -1) &#123;</span><br><span class="line">            cout &lt;&lt; &quot;NULL&quot; &lt;&lt; endl;</span><br><span class="line">            return;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int endPos = cPtr + f;</span><br><span class="line">            for (int i = cPtr; i &lt; endPos; ++i) &#123;</span><br><span class="line">                moy[i][0] = 1;</span><br><span class="line">                moy[i][1] = count;</span><br><span class="line">                cPtr = i;</span><br><span class="line">            &#125;</span><br><span class="line">            cPtr += 1;</span><br><span class="line">            cout &lt;&lt; count++ &lt;&lt; endl;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else if (a == &quot;erase&quot;) &#123;</span><br><span class="line">        bool isFound = false;</span><br><span class="line">        for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">            if (moy[i][1] == f) &#123;</span><br><span class="line">                moy[i][0] = 0;</span><br><span class="line">                moy[i][1] = 0;</span><br><span class="line">                isFound = true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!isFound) &#123;</span><br><span class="line">            cout &lt;&lt; &quot;ILLEGAL_ERASE_ARGUMENT&quot; &lt;&lt; endl;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = 0; i &lt; m - 1; ++i) &#123;</span><br><span class="line">            for (int j = 0; j &lt; m - i - 1; ++j) &#123;</span><br><span class="line">                if (moy[j][0] &lt; moy[j + 1][0]) &#123;</span><br><span class="line">                    int tmp1 = moy[j + 1][0];</span><br><span class="line">                    int tmp2 = moy[j + 1][1];</span><br><span class="line">                    moy[j + 1][0] = moy[j][0];</span><br><span class="line">                    moy[j + 1][1] = moy[j][1];</span><br><span class="line">                    moy[j][0] = tmp1;</span><br><span class="line">                    moy[j][1] = tmp2;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">            if (moy[i][0] != 0)</span><br><span class="line">                cPtr = i;</span><br><span class="line">        &#125;</span><br><span class="line">        cPtr += 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int t, m;</span><br><span class="line">    cin &gt;&gt; t &gt;&gt; m;</span><br><span class="line">    int memory[m][2];</span><br><span class="line">    for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">        memory[i][0] = 0;</span><br><span class="line">        memory[i][1] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    int currPtr = 0;</span><br><span class="line">    for (int i = 0; i &lt; t; ++i) &#123;</span><br><span class="line">        string action;</span><br><span class="line">        int flag = -1;</span><br><span class="line">        cin &gt;&gt; action;</span><br><span class="line">        if (action == &quot;alloc&quot; || action == &quot;erase&quot;)</span><br><span class="line">            cin &gt;&gt; flag;</span><br><span class="line">//        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">//            cout &lt;&lt; memory[j][0] &lt;&lt; &quot; &quot;;</span><br><span class="line">//        &#125;</span><br><span class="line">//        cout &lt;&lt; endl;</span><br><span class="line">//        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">//            cout &lt;&lt; memory[j][1] &lt;&lt; &quot; &quot;;</span><br><span class="line">//        &#125;</span><br><span class="line">//        cout &lt;&lt; endl;</span><br><span class="line">        doAction(action, flag, memory, m, currPtr);</span><br><span class="line">//        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">//            cout &lt;&lt; memory[j][0] &lt;&lt; &quot; &quot;;</span><br><span class="line">//        &#125;</span><br><span class="line">//        cout &lt;&lt; endl;</span><br><span class="line">//        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">//            cout &lt;&lt; memory[j][1] &lt;&lt; &quot; &quot;;</span><br><span class="line">//        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="平均方差"><a href="#平均方差" class="headerlink" title="平均方差"></a>平均方差</h1><blockquote>
+<p>类型：数学</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-10"><a href="#【问题描述】-10" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;一个数列的平均方差是指数列中的每个元素与数列的平均值的差的平方和的平均值，比如下面数列：</p>
+<p>&emsp;&emsp;&emsp;&emsp;1 2 3 4 5 6 7</p>
+<p>&emsp;&emsp;其平均值为4，每个元素与平均值的差的平方为</p>
+<p>&emsp;&emsp;&emsp;&emsp;9 4 1 0 1 4 9</p>
+<p>&emsp;&emsp;其平方和为28，所以该数列的平均方差为4。</p>
+<p>&emsp;&emsp;对给定的数列，求出其平均方差。</p>
+<h2 id="【输入形式】-10"><a href="#【输入形式】-10" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据。</p>
+<p>&emsp;&emsp;每组测试数据第一行是一个正整数N，表示数列中元素个数，接下来一行N个用空格分隔开的正整数，表示数列的N个元素，每个元素的值都是不大于500的正整数。</p>
+<p>&emsp;&emsp;N=0表示输入结束，并且不需要处理。</p>
+<p>&emsp;&emsp;40%的数列元素个数N 1 ≤ N≤ 10；</p>
+<p>&emsp;&emsp;30%的数列元素个数N 1 ≤ N≤ 100；</p>
+<p>&emsp;&emsp;20%的数列元素个数N 1 ≤ N≤ 1000；</p>
+<p>&emsp;&emsp;10%的数列元素个数N 1 ≤ N≤ 10000；</p>
+<h2 id="【输出形式】-10"><a href="#【输出形式】-10" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一个整数：平均方差。平均方差不是整数的，输出其向下取整的整数。比如平均方差是4.5，输出4。</p>
+<h2 id="【样例输入】-10"><a href="#【样例输入】-10" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>7
+1 2 3 4 5 6 7
+4
+1 2 3 4
+0
+</code></pre>
+<h2 id="【样例输出】-10"><a href="#【样例输出】-10" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>4
+1
+</code></pre>
+<h2 id="【思路】-10"><a href="#【思路】-10" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-10"><a href="#【代码（C-）】-10" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int N;</span><br><span class="line">    while (cin &gt;&gt; N &amp;&amp; N != 0) &#123;</span><br><span class="line">        double num[N];</span><br><span class="line">        double sum = 0;</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            cin &gt;&gt; num[i];</span><br><span class="line">            sum += num[i];</span><br><span class="line">        &#125;</span><br><span class="line">        double average = sum / N;</span><br><span class="line">        double variance[N];</span><br><span class="line">        double sumVariance = 0;</span><br><span class="line">        for (int i = 0; i &lt; N; ++i) &#123;</span><br><span class="line">            variance[i] = pow(abs(num[i] - average), 2);</span><br><span class="line">            sumVariance += variance[i];</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; (int) sumVariance / N &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-11"><a href="#【问题描述】-11" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;一个IP地址由32位二进制的数组成，比如：</p>
+<p>&emsp;&emsp;11111111111111111111111100000000</p>
+<p>&emsp;&emsp;为了便于记忆，我们将8个二进制位用一个十进制数表示，一个IP地址由四个十进制数表示，上述的IP地址表示为：</p>
+<p>&emsp;&emsp;255.255.255.0</p>
+<p>&emsp;&emsp;现在给你一个上述形式的IP地址，请回答IP地址的32个二进制位中，有多少位是1。</p>
+<p>&emsp;&emsp;如IP地址为255.255.255.0，其中24位是1。</p>
+<h2 id="【输入形式】-11"><a href="#【输入形式】-11" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据。</p>
+<p>&emsp;&emsp;测试数据第一行是一个正整数T，表示测试数据组数。</p>
+<p>&emsp;&emsp;每组测试数据是一个IP地址，形式为：</p>
+<p>&emsp;&emsp;IP1.IP2.IP3.IP4</p>
+<p>&emsp;&emsp;其中0 ≤IP1,IP2,IP3,IP4≤ 255,用十进制表示。每个IP地址不保证是实用IP地址。</p>
+<p>&emsp;&emsp;40%的测试数据组数T  10≤T≤ 102；</p>
+<p>&emsp;&emsp;30%的测试数据组数T  102≤T≤ 103；</p>
+<p>&emsp;&emsp;20%的测试数据组数T  103≤T≤ 104；</p>
+<p>&emsp;&emsp;10%的测试数据组数T  104≤T≤ 105；</p>
+<h2 id="【输出形式】-11"><a href="#【输出形式】-11" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每个IP地址，输出一行包含一个非负整数：该IP地址的32个二进制位中，1的位数。</p>
+<h2 id="【样例输入】-11"><a href="#【样例输入】-11" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>5
+255.255.255.0
+127.0.0.1
+0.0.0.1
+1.2.3.4
+0.0.0.0
+</code></pre>
+<h2 id="【样例输出】-11"><a href="#【样例输出】-11" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>24
+8
+1
+5
+0
+</code></pre>
+<p>提示：样例中32位的IP地址为：</p>
+<p>&emsp;&emsp;11111111111111111111111100000000</p>
+<p>&emsp;&emsp;01111111000000000000000000000001</p>
+<p>&emsp;&emsp;00000000000000000000000000000001</p>
+<p>&emsp;&emsp;00000001000000100000001100000100</p>
+<p>&emsp;&emsp;00000000000000000000000000000000</p>
+<h2 id="【思路】-11"><a href="#【思路】-11" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-11"><a href="#【代码（C-）】-11" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    string IP;</span><br><span class="line">    for (int i = 0; i &lt; T; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; IP;</span><br><span class="line">        stringstream sstream;</span><br><span class="line">        stringstream eachIP;</span><br><span class="line">        stringstream binary;</span><br><span class="line">        stringstream endBinary;</span><br><span class="line">        sstream &lt;&lt; IP;</span><br><span class="line">        sstream &lt;&lt; &#x27;.&#x27;;</span><br><span class="line">        char a;</span><br><span class="line">        int count = 0;</span><br><span class="line">        while (sstream &gt;&gt; a) &#123;</span><br><span class="line">            if (a != &#x27;.&#x27;) &#123;</span><br><span class="line">                eachIP &lt;&lt; a;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int intIP;</span><br><span class="line">                eachIP &gt;&gt; intIP;</span><br><span class="line">                eachIP.clear();</span><br><span class="line">                while (intIP != 0) &#123;</span><br><span class="line">                    binary &lt;&lt; intIP % 2;</span><br><span class="line">                    intIP /= 2;</span><br><span class="line">                &#125;</span><br><span class="line">                string tmp;</span><br><span class="line">                binary &gt;&gt; tmp;</span><br><span class="line">                endBinary &lt;&lt; tmp;</span><br><span class="line">                binary.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        string end;</span><br><span class="line">        endBinary &gt;&gt; end;</span><br><span class="line">        for (int j = 0; j &lt; end.size(); ++j) &#123;</span><br><span class="line">            if (end[j] == &#x27;1&#x27;)</span><br><span class="line">                count++;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; count &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="开关与灯"><a href="#开关与灯" class="headerlink" title="开关与灯"></a>开关与灯</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】-12"><a href="#【问题描述】-12" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;给定n个开关和m个灯，第i个开关只能打开部分灯。矩阵a包含n行m列，当aij=1时表示开关i可以打开灯j，否则aij=0。</p>
+<p>&emsp;&emsp;开始时所有的m个灯都是关着的。</p>
+<p>&emsp;&emsp;开关只能从状态”关”到”开”。这意味着，对于每个可以打开某个灯的开关，无论你按多少次，这个灯都是开的。</p>
+<p>&emsp;&emsp;确保当你按下所有开关时，所有的灯都能打开，考虑是否可以忽略其中某个开关也能打开所有的灯。</p>
+<p>&emsp;&emsp;你的任务是确定是否存在这样的开关可以忽略，而使用其余的n-1个开关来打开所有m个灯。</p>
+<h2 id="【输入形式】-12"><a href="#【输入形式】-12" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入第1行包含两个整数n和m(1&lt;=n, m&lt;=2000)，表示开关的数量和灯的数量。</p>
+<p>&emsp;&emsp;接下来的n行，每行包含m个字符，字符aij=1时表示开关i可以打开灯j，否则aij=0。</p>
+<h2 id="【输出形式】-12"><a href="#【输出形式】-12" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;如果存在这样的可以忽略的开关，而使用其他n-1个开关打开所有的m个灯，输出”YES”，否则输出”NO”。</p>
+<h2 id="【样例输入】-12"><a href="#【样例输入】-12" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>4 5
+10101
+01000
+00111
+10000
+</code></pre>
+<h2 id="【样例输出】-12"><a href="#【样例输出】-12" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>YES
+</code></pre>
+<h2 id="【思路】-12"><a href="#【思路】-12" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-12"><a href="#【代码（C-）】-12" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int m, n;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    int button[n][m];</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        string tmp;</span><br><span class="line">        cin &gt;&gt; tmp;</span><br><span class="line">        for (int j = 0; j &lt; tmp.size(); ++j) &#123;</span><br><span class="line">            button[i][j] = tmp[j] - 48;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">//    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">//        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">//            cout &lt;&lt; button[i][j] &lt;&lt; &quot; &quot;;</span><br><span class="line">//        &#125;</span><br><span class="line">//        cout &lt;&lt; endl;</span><br><span class="line">//    &#125;</span><br><span class="line">    int flag = 0;</span><br><span class="line">    int end[m];</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        flag = 0;</span><br><span class="line">        for (int j = 0; j &lt; m; ++j) &#123;</span><br><span class="line">            end[j] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; n; ++j) &#123;</span><br><span class="line">            if (j != i) &#123;</span><br><span class="line">                for (int k = 0; k &lt; m; ++k) &#123;</span><br><span class="line">                    if (button[j][k] == 1)</span><br><span class="line">                        end[k] = 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int l = 0; l &lt; m; ++l) &#123;</span><br><span class="line">            if (end[l] == 1)</span><br><span class="line">                flag++;</span><br><span class="line">        &#125;</span><br><span class="line">        if (flag == m)</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    if (flag == m) &#123;</span><br><span class="line">        cout &lt;&lt; &quot;YES&quot;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        cout &lt;&lt; &quot;NO&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="可删除的点"><a href="#可删除的点" class="headerlink" title="可删除的点"></a>可删除的点</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：1</p>
+</blockquote>
+<h2 id="【问题描述】-13"><a href="#【问题描述】-13" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;平面上有n个不同的点，没有在Y轴的点，检查是否存在这样一个点，将其删除后其余所有的点均位于Y轴的同一边。</p>
+<h2 id="【输入形式】-13"><a href="#【输入形式】-13" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入第一行包含一个正整数n(2&lt;=n&lt;=105)。</p>
+<p>&emsp;&emsp;接下来的n行，包含所有点的坐标，第i行包含两个整数xi和yi(|xi|、|yi|&lt;=109，xi&lt;&gt;0)。</p>
+<h2 id="【输出形式】-13"><a href="#【输出形式】-13" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;如果存在这样的点，则输入”Yes”，否则输出”No”。</p>
+<h2 id="【样例输入】-13"><a href="#【样例输入】-13" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>3
+1 1
+-1 -1
+2 -1
+</code></pre>
+<h2 id="【样例输出】-13"><a href="#【样例输出】-13" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>Yes
+</code></pre>
+<h2 id="【思路】-13"><a href="#【思路】-13" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-13"><a href="#【代码（C-）】-13" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    long long int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    long long int coordinate[n][2];</span><br><span class="line">    for (long long int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; coordinate[i][0] &gt;&gt; coordinate[i][1];</span><br><span class="line">    &#125;</span><br><span class="line">    long long int z = 0, f = 0;</span><br><span class="line">    for (long long int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        if (coordinate[i][0] &gt; 0)</span><br><span class="line">            z++;</span><br><span class="line">        else</span><br><span class="line">            f++;</span><br><span class="line">    &#125;</span><br><span class="line">    if (z == 1 || f == 1 || z == 0 || f == 0)</span><br><span class="line">        cout &lt;&lt; &quot;Yes&quot;;</span><br><span class="line">    else</span><br><span class="line">        cout &lt;&lt; &quot;No&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串反转3"><a href="#字符串反转3" class="headerlink" title="字符串反转3"></a>字符串反转3</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-14"><a href="#【问题描述】-14" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;给出一个字符串，请将其每个单词反转后输出。</p>
+<h2 id="【输入形式】-14"><a href="#【输入形式】-14" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入第一行为一个正整数N，表示测试用例数，接下来的N行，每行一个字符串。</p>
+<h2 id="【输出形式】-14"><a href="#【输出形式】-14" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出N行，每行对应一个反转后的字符串。</p>
+<h2 id="【样例输入】-14"><a href="#【样例输入】-14" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>3
+olleh !dlrow
+m&#39;I morf .unh
+I ekil .tae
+</code></pre>
+<h2 id="【样例输出】-14"><a href="#【样例输出】-14" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>hello world!
+I&#39;m from hnu.
+I like eat.
+</code></pre>
+<h2 id="【思路】-14"><a href="#【思路】-14" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-14"><a href="#【代码（C-）】-14" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    string N;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cout.tie(nullptr);</span><br><span class="line">    getline(cin, N);</span><br><span class="line">    stack&lt;char&gt; s;</span><br><span class="line">    for (int i = 0; i &lt; stoi(N); ++i) &#123;</span><br><span class="line">        string in;</span><br><span class="line">        getline(cin, in);</span><br><span class="line">        in += &#x27; &#x27;;</span><br><span class="line">        for (char &amp;j : in) &#123;</span><br><span class="line">            if (j != &#x27; &#x27;) &#123;</span><br><span class="line">                s.push(j);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while (!s.empty()) &#123;</span><br><span class="line">                    cout &lt;&lt; s.top();</span><br><span class="line">                    s.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                cout &lt;&lt; &quot; &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="n，还是n"><a href="#n，还是n" class="headerlink" title="n，还是n"></a>n，还是n</h1><blockquote>
+<p>类型：字符串</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-15"><a href="#【问题描述】-15" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;输出包含 n 或者是 n 的倍数的所有数</p>
+<h2 id="【输入形式】-15"><a href="#【输入形式】-15" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;正整数 m,n （0&lt;m，n&lt;1000000）</p>
+<h2 id="【输出形式】-15"><a href="#【输出形式】-15" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;从小到大排列的不大于 m 的特殊正整数（包含n，或者是n的倍数）。</p>
+<h2 id="【样例输入1】"><a href="#【样例输入1】" class="headerlink" title="【样例输入1】"></a>【样例输入1】</h2><pre><code>20 7
+</code></pre>
+<h2 id="【样例输出1】"><a href="#【样例输出1】" class="headerlink" title="【样例输出1】"></a>【样例输出1】</h2><pre><code>7 14 17
+</code></pre>
+<h2 id="【样例输入2】"><a href="#【样例输入2】" class="headerlink" title="【样例输入2】"></a>【样例输入2】</h2><pre><code>200 11
+</code></pre>
+<h2 id="【样例输出2】"><a href="#【样例输出2】" class="headerlink" title="【样例输出2】"></a>【样例输出2】</h2><pre><code>11 22 33 44 55 66 77 88 99 110 111 112 113 114 115 116 117 118 119 121 132 143 154 165 176 187 198
+</code></pre>
+<h2 id="【思路】-15"><a href="#【思路】-15" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-15"><a href="#【代码（C-）】-15" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int m, n;</span><br><span class="line">    cin &gt;&gt; m &gt;&gt; n;</span><br><span class="line">    for (int i = 1; i &lt;= m; ++i) &#123;</span><br><span class="line">        if (i % n == 0) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            string num = to_string(i);</span><br><span class="line">            string sn = to_string(n);</span><br><span class="line">            int index = num.find(sn, 0);</span><br><span class="line">            if (index &gt; -1 &amp;&amp; index &lt; num.size()) &#123;</span><br><span class="line">                cout &lt;&lt; i &lt;&lt; &quot; &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串排序"><a href="#字符串排序" class="headerlink" title="字符串排序"></a>字符串排序</h1><blockquote>
+<p>类型：字符串，排序</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-16"><a href="#【问题描述】-16" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;定义一个字符串的无序度为所有位置后面的字母比该位置的字母小的总数之和。比如”DAABEC’’这个字符串的无序度是5，因为D后面有4个位置比它小（AABC），E后面有1个比它小（C），其它位置后面没有比自己小的。” AACEDGG “的无序度为1（E后面有一个D比它小）。” ZWQM “的无序度为6，每个位置后面所有的字母都比它小。</p>
+<p>&emsp;&emsp;现在你的任务是给定一些字符串（只由大写字母组成），把他们按照无序度从小到大排序，如果无序度一样，那么就按照输入的相对顺序排序。</p>
+<h2 id="【输入形式】-16"><a href="#【输入形式】-16" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;单组测试数据。</p>
+<p>&emsp;&emsp;第一行有两个整数n(0 &lt; n &lt;= 50)和m (0 &lt; m &lt;= 100)，分别表示输入的字符串的长度和字符串的个数。</p>
+<p>&emsp;&emsp;接下来m行，每一行包含一个长度为n的字符串，只由大写字母组成。</p>
+<h2 id="【输出形式】-16"><a href="#【输出形式】-16" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;输出m行，表示排序之后的字符串。</p>
+<h2 id="【样例输入】-15"><a href="#【样例输入】-15" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>10 6
+AACATGAAGG
+TTTTGGCCAA
+TTTGGCCAAA
+GATCAGATTT
+CCCGGGGGGA
+ATCGATGCAT
+</code></pre>
+<h2 id="【样例输出】-15"><a href="#【样例输出】-15" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>CCCGGGGGGA
+AACATGAAGG
+GATCAGATTT
+ATCGATGCAT
+TTTTGGCCAA
+TTTGGCCAAA
+</code></pre>
+<h2 id="【思路】-16"><a href="#【思路】-16" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-16"><a href="#【代码（C-）】-16" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct String &#123;</span><br><span class="line">    string s;</span><br><span class="line">    int d = 0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">bool cmp(const String &amp;a, const String &amp;b) &#123;</span><br><span class="line">    if (a.d != b.d)</span><br><span class="line">        return a.d &lt; b.d;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    String mS[m];</span><br><span class="line">    for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; mS[i].s;</span><br><span class="line">        for (int j = 0; j &lt; n; ++j) &#123;</span><br><span class="line">            for (int k = j + 1; k &lt; n; ++k) &#123;</span><br><span class="line">                if (mS[i].s[j] &gt; mS[i].s[k])</span><br><span class="line">                    mS[i].d++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(mS, mS + m, cmp);</span><br><span class="line">    for (int i = 0; i &lt; m; ++i) &#123;</span><br><span class="line">        cout &lt;&lt; mS[i].s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三角形的面积"><a href="#三角形的面积" class="headerlink" title="三角形的面积"></a>三角形的面积</h1><blockquote>
+<p>类型：数学，模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-17"><a href="#【问题描述】-17" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;已知三角形的三个顶点的坐标，求该三角形的面积。</p>
+<h2 id="【输入形式】-17"><a href="#【输入形式】-17" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;有多组测试数据。</p>
+<p>&emsp;&emsp;每组测试数据占一行，6个用空格分隔开的浮点数：x1,y1,x2,y2,x3,y3。表示三角形三个顶点的坐标。</p>
+<p>&emsp;&emsp;一行6个0（形如0 0 0 0 0 0），表示输入结束，并且不需要处理。</p>
+<p>&emsp;&emsp;40%的顶点坐标 -10 ≤ xi,yi≤ 10；i=1,2,3</p>
+<p>&emsp;&emsp;30%的顶点坐标 -100 ≤ xi,yi≤ 100；i=1,2,3</p>
+<p>&emsp;&emsp;20%的顶点坐标 -1000 ≤ xi,yi≤ 1000；i=1,2,3</p>
+<p>&emsp;&emsp;10%的顶点坐标 -10000 ≤ xi,yi≤ 10000；i=1,2,3</p>
+<h2 id="【输出形式】-17"><a href="#【输出形式】-17" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出对应三角形面积，保留小数点后6位。</p>
+<h2 id="【样例输入】-16"><a href="#【样例输入】-16" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>1 2 3 4 -2 8
+0 0 0 1 1 0
+0 0 0 0 0 0
+</code></pre>
+<h2 id="【样例输出】-16"><a href="#【样例输出】-16" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>9.000000
+0.500000
+</code></pre>
+<h2 id="【思路】-17"><a href="#【思路】-17" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-17"><a href="#【代码（C-）】-17" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;iomanip&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    double n[6];</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        bool isEnd = true;</span><br><span class="line">        for (double &amp;i : n) &#123;</span><br><span class="line">            cin &gt;&gt; i;</span><br><span class="line">            if (i != 0) &#123;</span><br><span class="line">                isEnd = false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (isEnd)</span><br><span class="line">            break;</span><br><span class="line">        double a = n[2] - n[0];</span><br><span class="line">        double b = n[4] - n[0];</span><br><span class="line">        double c = n[3] - n[1];</span><br><span class="line">        double d = n[5] - n[1];</span><br><span class="line">        cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; fabs(a * d - b * c) / 2 &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="循环数"><a href="#循环数" class="headerlink" title="循环数"></a>循环数</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-18"><a href="#【问题描述】-18" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;循环数是n位长度的整数，当乘以从1到n的任何整数时，产生原始数字的“循环”。也就是说，如果考虑最后一个数字之后的数字“绕”回到第一个数字，两个数字中的数字序列将是相同的，尽管它们可能从不同的位置开始。例如，数字142857是循环的，如下表所示： </p>
+<p>&emsp;&emsp;142857 *1 = 142857<br>&emsp;&emsp;142857 *2 = 285714<br>&emsp;&emsp;142857 *3 = 428571<br>&emsp;&emsp;142857 *4 = 571428<br>&emsp;&emsp;142857 *5 = 714285<br>&emsp;&emsp;142857 *6 = 857142 </p>
+<p>&emsp;&emsp;编写一个程序来确定数字是否是循环数。</p>
+<h2 id="【输入形式】-18"><a href="#【输入形式】-18" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入一个数，长度在2到60位之间(请注意，前面的零不应该被删除，它们被认为是确定n的大小和计数的一部分，因此，“01”是一个两位数的数字，与“1”是一个一位数的数字不同。) 。</p>
+<h2 id="【输出形式】-18"><a href="#【输出形式】-18" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每个输入，输出一行(Yes或No)标识它是否是循环数。</p>
+<h2 id="【样例输入】-17"><a href="#【样例输入】-17" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>142857
+</code></pre>
+<h2 id="【样例输出】-17"><a href="#【样例输出】-17" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>Yes
+</code></pre>
+<h2 id="【思路】-18"><a href="#【思路】-18" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-18"><a href="#【代码（C-）】-18" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">string newCount(const string &amp;s, int n) &#123;</span><br><span class="line">    int maxLength = s.size() + to_string(n).size();</span><br><span class="line">    int nS[maxLength];</span><br><span class="line">    for (int i = 0; i &lt; maxLength; ++i) &#123;</span><br><span class="line">        nS[i] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    int count = 0;</span><br><span class="line">    while (n != 0) &#123;</span><br><span class="line">        int tail = n % 10;</span><br><span class="line">        for (int i = maxLength - 1 - count; i &gt; 0; --i) &#123;</span><br><span class="line">            int c = (s[i - to_string(n).size()] - 48) * tail;</span><br><span class="line">            nS[i] += c % 10;</span><br><span class="line">            nS[i - 1] += c / 10;</span><br><span class="line">            if (nS[i] &gt; 9) &#123;</span><br><span class="line">                int tmp = nS[i];</span><br><span class="line">                nS[i] = tmp % 10;</span><br><span class="line">                nS[i - 1] += tmp / 10;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        n /= 10;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    string out;</span><br><span class="line">    for (int i = 0; i &lt; maxLength; ++i) &#123;</span><br><span class="line">        out += nS[i] + 48;</span><br><span class="line">    &#125;</span><br><span class="line">    return out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    string n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    string newN = n + n;</span><br><span class="line">    bool isRight = true;</span><br><span class="line">    for (int i = 1; i &lt; n.size(); ++i) &#123;</span><br><span class="line">        int nSize = n.size();</span><br><span class="line">        if (n[0] == &#x27;0&#x27; &amp;&amp; nSize == 2) &#123;</span><br><span class="line">            isRight = false;</span><br><span class="line">            break;;</span><br><span class="line">        &#125;</span><br><span class="line">        string outN = newCount(newN, i);</span><br><span class="line">        if (outN.find(n) &gt; newN.size()) &#123;</span><br><span class="line">            isRight = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (isRight)</span><br><span class="line">        cout &lt;&lt; &quot;Yes&quot;;</span><br><span class="line">    else</span><br><span class="line">        cout &lt;&lt; &quot;No&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="电能消耗"><a href="#电能消耗" class="headerlink" title="电能消耗"></a>电能消耗</h1><blockquote>
+<p>类型：模拟</p>
+<p>难度：2</p>
+</blockquote>
+<h2 id="【问题描述】-19"><a href="#【问题描述】-19" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;汤姆对他最喜欢的笔记本电脑的耗电量很感兴趣。他的笔记本电脑有三种模式。在正常模式下，笔记本电脑每分钟消耗P1瓦。在汤姆最后一次移动鼠标或触摸键盘后的T1分钟，屏幕保护程序启动，每分钟的功耗变化为P2瓦。最后，从屏幕保护程序启动到T2分钟后，笔记本电脑切换到“睡眠”模式，每分钟消耗P3瓦。 当笔记本电脑处于第二或第三模式时，如果汤姆移动鼠标或触摸键盘，则切换到第一种(正常)模式。 汤姆使用笔记本电脑工作的时间可以分为n个时间间期[l1, r1]、[l2, r2]、…、[ln, rn]。在每个间期，汤姆连续移动鼠标并按下键盘。 在间期之间，汤姆什么都不做。请找出在间期[l1, rn]笔记本电脑的总耗电量。</p>
+<h2 id="【输入形式】-19"><a href="#【输入形式】-19" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;第一行包含6个整数n、P1、P2、P3、T1、T2(1&lt;=n&lt;=100，0&lt;=P1、P2、P3&lt;=100，1&lt;=T1、T2&lt;=60)。接下来的n行包含了汤姆工作的期间，第i行是两个用空格分隔的整数li和ri(0&lt;=li&lt;=ri&lt;=1440, 当i&lt;n时ri&lt;li+1）, 表示工作期间的开始时间和结束时间。</p>
+<h2 id="【输出形式】-19"><a href="#【输出形式】-19" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp; 输出总的耗电量。</p>
+<h2 id="【样例输入】-18"><a href="#【样例输入】-18" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>2 8 4 2 5 10
+20 30
+50 100
+</code></pre>
+<h2 id="【样例输出】-18"><a href="#【样例输出】-18" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>570
+</code></pre>
+<h2 id="【思路】-19"><a href="#【思路】-19" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-19"><a href="#【代码（C-）】-19" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, p1, p2, p3, t1, t2;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; p1 &gt;&gt; p2 &gt;&gt; p3 &gt;&gt; t1 &gt;&gt; t2;</span><br><span class="line">    int timeStart[n];</span><br><span class="line">    int timeEnd[n];</span><br><span class="line">    int p = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; timeStart[i] &gt;&gt; timeEnd[i];</span><br><span class="line">        p += (timeEnd[i] - timeStart[i]) * p1;</span><br><span class="line">        if (i &gt; 0) &#123;</span><br><span class="line">            int surplus = timeStart[i] - timeEnd[i - 1];</span><br><span class="line">            if (surplus &gt; t1) &#123;</span><br><span class="line">                p += t1 * p1;</span><br><span class="line">                surplus -= t1;</span><br><span class="line">                if (surplus &gt; t2) &#123;</span><br><span class="line">                    p += t2 * p2;</span><br><span class="line">                    surplus -= t2;</span><br><span class="line">                    if (surplus &gt; 0) &#123;</span><br><span class="line">                        p += surplus * p3;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    p += surplus * p2;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                p += surplus * p1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; p;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="计算校验码"><a href="#计算校验码" class="headerlink" title="计算校验码"></a>计算校验码</h1><blockquote>
+<p>类型：字符串，模拟</p>
+<p>难度：4</p>
+</blockquote>
+<h2 id="【问题描述】-20"><a href="#【问题描述】-20" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>&emsp;&emsp;传送一个B（B≤16）进制的数值N时，最后加上一个一位（B进制的）校验码，使得N加上校验位后能被B-1整除。比如十进制的数值12310，其校验码就是3，因为十进制数值123310能被9整除。16进制的数7816，其校验码为0，因为16进制的78016是15的倍数。超过十进制后，用字母a表示10，字母b表示11，字母c表示12，字母d表示13，字母e表示14，字母f表示15。</p>
+<p>&emsp;&emsp;告诉你进制B，以及一个B进制的正整数N，要求你计算正整数N在B进制下的校验码。</p>
+<h2 id="【输入形式】-20"><a href="#【输入形式】-20" class="headerlink" title="【输入形式】"></a>【输入形式】</h2><p>&emsp;&emsp;输入第一行正整数t (10 ≤ n ≤ 100)，表示有多少组测试数据。</p>
+<p>&emsp;&emsp;后面有t行，每行两个正整数B，N（2≤ B≤16），中间用一个空格隔开，B是10进制整数，N用B进制形式表示。测试数据保证没有非法的B进制数N（也即N中每一位都是在0到B-1之间，没有前导0）。</p>
+<p>&emsp;&emsp;40%的测试数据N的位数L 1 ≤ L≤ 10；</p>
+<p>&emsp;&emsp;30%的测试数据N的位数L 1 ≤ L≤ 102；</p>
+<p>&emsp;&emsp;20%的测试数据N的位数L 1 ≤ L≤ 103；</p>
+<p>&emsp;&emsp;10%的测试数据N的位数L 1 ≤ L≤ 104；</p>
+<h2 id="【输出形式】-20"><a href="#【输出形式】-20" class="headerlink" title="【输出形式】"></a>【输出形式】</h2><p>&emsp;&emsp;对于每组测试数据，输出一位占一行：正整数N在B进制下的校验码。（如果校验码可以为B-1，也可以为0，输出0）。</p>
+<h2 id="【样例输入】-19"><a href="#【样例输入】-19" class="headerlink" title="【样例输入】"></a>【样例输入】</h2><pre><code>4
+10 123
+16 78
+16 1234321
+12 ab
+</code></pre>
+<h2 id="【样例输出】-19"><a href="#【样例输出】-19" class="headerlink" title="【样例输出】"></a>【样例输出】</h2><pre><code>3
+0
+e
+1
+</code></pre>
+<h2 id="【思路】-20"><a href="#【思路】-20" class="headerlink" title="【思路】"></a>【思路】</h2><p>施工中…</p>
+<h2 id="【代码（C-）】-20"><a href="#【代码（C-）】-20" class="headerlink" title="【代码（C++）】"></a>【代码（C++）】</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">string newCount(const string &amp;s, int n) &#123;</span><br><span class="line">    int maxLength = s.size() + to_string(n).size();</span><br><span class="line">    int nS[maxLength];</span><br><span class="line">    for (int i = 0; i &lt; maxLength; ++i) &#123;</span><br><span class="line">        nS[i] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    int count = 0;</span><br><span class="line">    while (n != 0) &#123;</span><br><span class="line">        int tail = n % 10;</span><br><span class="line">        for (int i = maxLength - 1 - count; i &gt; 0; --i) &#123;</span><br><span class="line">            int c = (s[i - to_string(n).size()] - 48) * tail;</span><br><span class="line">            nS[i] += c % 10;</span><br><span class="line">            nS[i - 1] += c / 10;</span><br><span class="line">            if (nS[i] &gt; 9) &#123;</span><br><span class="line">                int tmp = nS[i];</span><br><span class="line">                nS[i] = tmp % 10;</span><br><span class="line">                nS[i - 1] += tmp / 10;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        n /= 10;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    string out;</span><br><span class="line">    for (int i = 0; i &lt; maxLength; ++i) &#123;</span><br><span class="line">        out += nS[i] + 48;</span><br><span class="line">    &#125;</span><br><span class="line">    return out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    for (int i = 0; i &lt; t; ++i) &#123;</span><br><span class="line">        string N;</span><br><span class="line">        int B;</span><br><span class="line">        cin &gt;&gt; B &gt;&gt; N;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (char j : N) &#123;</span><br><span class="line">            if (j == &#x27;a&#x27;)</span><br><span class="line">                count += 10;</span><br><span class="line">            else if (j == &#x27;b&#x27;)</span><br><span class="line">                count += 11;</span><br><span class="line">            else if (j == &#x27;c&#x27;)</span><br><span class="line">                count += 12;</span><br><span class="line">            else if (j == &#x27;d&#x27;)</span><br><span class="line">                count += 13;</span><br><span class="line">            else if (j == &#x27;e&#x27;)</span><br><span class="line">                count += 14;</span><br><span class="line">            else if (j == &#x27;f&#x27;)</span><br><span class="line">                count += 15;</span><br><span class="line">            else</span><br><span class="line">                count += (j - 48);</span><br><span class="line">        &#125;</span><br><span class="line">        int code = (B - 1 - count % (B - 1)) % (B - 1);</span><br><span class="line">        if (code == 10)</span><br><span class="line">            cout &lt;&lt; &#x27;a&#x27; &lt;&lt; endl;</span><br><span class="line">        else if (code == 11)</span><br><span class="line">            cout &lt;&lt; &#x27;b&#x27; &lt;&lt; endl;</span><br><span class="line">        else if (code == 12)</span><br><span class="line">            cout &lt;&lt; &#x27;c&#x27; &lt;&lt; endl;</span><br><span class="line">        else if (code == 13)</span><br><span class="line">            cout &lt;&lt; &#x27;d&#x27; &lt;&lt; endl;</span><br><span class="line">        else if (code == 14)</span><br><span class="line">            cout &lt;&lt; &#x27;e&#x27; &lt;&lt; endl;</span><br><span class="line">        else if (code == 15)</span><br><span class="line">            cout &lt;&lt; &#x27;f&#x27; &lt;&lt; endl;</span><br><span class="line">        else</span><br><span class="line">            cout &lt;&lt; code &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                
+            </div>
+
+            <!-- comment plugin -->
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Xayah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">42.3k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.1.0/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>
