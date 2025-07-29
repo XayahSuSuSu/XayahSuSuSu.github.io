@@ -19,8 +19,10 @@ jobs:
           node-version: 22
 
       - name: Build
-        run:
-          npm install -g hexo-cli && npm install && hexo generate
+        run: |
+          npm install -g hexo-cli yarn
+          yarn install
+          hexo generate
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
